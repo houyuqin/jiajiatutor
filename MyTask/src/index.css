@@ -1,0 +1,541 @@
+@import '~antd/dist/antd.css';
+*{
+    padding: 0;
+    margin: 0;
+}
+ul,li{
+    list-style: none;
+}
+
+html,body{
+	width:100%;
+	height:100%;
+}
+body{
+    background-color:#eee;
+}
+/* 曹加 */
+p{
+    margin:0;
+    padding:0;
+}
+/* 曹加 */
+#root{
+    overflow: hidden;
+    height: 100%;
+}
+/*header*/
+/*main*/
+/* #user{
+    height: 200px;
+    width: 100%;
+    background-color:red;   
+}
+.wer{
+    height: 200px;
+    width: 100%;  
+    background-color:rgb(36, 32, 32);   
+} */
+/* .cxia{
+    width: 100%;
+    height: 100%;
+    margin-top:-200px;
+    float: left;
+    z-index: -1;
+} */
+.cmain{
+    height: 100%;
+}
+.cxia{
+    width: 100%;
+    height: 130%;
+}
+
+.clogin{
+    border-radius:8px;
+    box-shadow:5px 5px 5px #000;
+    width: 190px;
+    height: 60px;
+    font-size: 20px;
+    color: rgb(61, 59, 59);
+    font-weight: bold;
+    margin-top: 125%;
+    border:none;
+    margin-left: 17px;
+    float: left;
+    background-color: rgb(183, 235, 62);
+    z-index: 1000;
+}
+.clogon{
+    border-radius:8px;
+    box-shadow:5px 5px 5px #000;
+    width: 190px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(61, 59, 59);
+    border:none;
+    margin-left: 7px;
+    margin-top: 125%;
+    float: left;
+    background-color: cornflowerblue;
+    z-index: 100;
+}
+.ccname{
+    padding-top: 50px;
+}
+.cback{
+    width: 100%;
+    height: 100%;
+    background-color:rgb(115, 176, 211);
+   
+}
+.cdeng{
+    border-radius:8px;
+    box-shadow:2px 2px 2px rgb(187, 184, 184);
+    width: 200px;
+    height: 50px;
+    margin-top: 35px;
+    margin-left: 100px;
+    border-radius: 7px;
+    border: none;
+    color: rgb(29, 37, 110);
+    font-size: 18px;
+    background-color: rgb(101, 160, 197);
+    float: left;
+}
+.cdeng1{
+    border-radius:8px;
+    box-shadow:2px 2px 2px rgb(187, 184, 184);
+    width: 200px;
+    height: 50px;
+    margin-top: 15px;
+    margin-left: 100px;
+    border-radius: 7px;
+    border: none;
+    color: rgb(29, 37, 110);
+    font-size: 18px;
+    background-color: rgb(101, 160, 197);
+    float: left;
+}
+.czhu{
+    font-size:18px;
+    color:rgb(101, 160, 197);
+    margin-top: 50px;
+    margin-left: 20px;
+    float: left;
+}
+
+/*header*/
+/*main*/
+#user{
+    height: 200px;
+    width: 100%;
+    background-color:red;   
+}
+.wer{
+    height: 200px;
+    width: 100%;  
+    background-color:rgb(36, 32, 32);   
+}
+.cteall{
+    width: 100%;
+    height: 100%;
+    /* background: url('./img/zhouzhou.png') center center / cover no-repeat ; */
+}
+.cshang{
+    height: 100%;
+    width: 100%;
+    background: url('./img/zhouzhou.png') center center / cover no-repeat ;
+    padding-top: 5%;
+    padding-left: 4px;
+}
+.cshang img{
+    float: left;
+}
+.cteuser{
+    
+    font-size: 22px;
+    float: left;
+}
+.cteuser1{
+    margin-top:10px;
+    margin-left: 40px;
+    font-size: 22px;
+    float: left;
+}
+.ctexing{
+    margin-top:50px;
+    margin-left: -130px;
+    font-size: 18px;
+    float: left;
+}
+.ctezuo{
+    
+    margin-left:-37px;
+   
+    line-height: 250px;
+    border-radius:8px;
+    box-shadow:5px 5px 5px rgb(145, 142, 142);
+    color: black;
+    height: 40%;
+    width: 40%;
+     margin-top: 80px;
+
+    background-color: rgb(206, 195, 97);
+    text-align:center;
+    font-size: 22px;
+    z-index: 100;
+    float: left;
+}
+.cteyou{
+    margin-top: 110px;
+    margin-left: 120px;
+    border-radius:8px;
+    box-shadow:5px 5px 5px rgb(129, 125, 125);
+    height: 40%;
+    width: 40%;   
+    color: black;
+    line-height: 250px;
+    text-align:center;
+    font-size: 22px;
+    background: rgb(104, 192, 119);
+    z-index: 100;
+    float: left;
+}
+.cbu{
+    width: 100%;
+    height: 100%;
+    background-color:#fafaf8;
+}
+/* .cbu1{
+    width: 96%;
+    height: 97%;
+    padding-top: 20px;
+    padding-left: 10px;
+    background-color: #eee;
+} */
+.cbu2{
+    width:80%;
+    text-align:center;
+    font-size: 23px;
+    float: left;
+}
+.cbu3{
+    color: black;
+    font-size: 20px;
+    padding-bottom: 15px;
+    margin-top: 70px;
+    border-bottom: 1px solid rgb(204, 202, 202);
+}
+.cbu4{
+    color: black;
+    font-size: 20px;
+    margin-top: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgb(204, 202, 202);
+}
+.cbu44{
+    color: black;
+    font-size: 20px;
+    margin-top: 10px;
+}
+.cbu444{
+    width: 100%;
+    color: black;
+    font-size: 20px;
+    margin-top: 10px;
+}
+.cren1{
+    margin-left: 10px;
+    width:65%;
+    height: 35px;
+    padding-left: 3px;
+    border: 1px solid rgb(204, 202, 202);
+    border-radius:7px;
+    box-shadow:2px 2px 2px rgb(129, 125, 125);
+}
+.cren22{
+    margin-top: 30px;
+    margin-left: 10px;
+    width:90%;
+    height: 200px;   
+    padding-left: 3px;
+    border-radius:7px;
+    box-shadow:2px 2px 2px rgb(129, 125, 125);
+}
+.cren2{
+    margin-left: 40px;
+    width:80%;
+    height: 130px;   
+    padding-left: 3px;
+    border-radius:7px;
+    box-shadow:2px 2px 2px rgb(129, 125, 125);
+}
+.cbuan{
+    width: 70px;
+    height: 35px;
+    margin-top:15px;
+    margin-left: 70%;
+    border-radius:7px;
+    background-color: rgb(125, 179, 201);
+    font-size: 18px;
+    border:none;
+    float: left;
+}
+.cgaii{
+    margin-top: 15px;
+    margin-left: 2%;
+    width: 95%;
+    height: 200px;
+    font-size: 18px;
+    border-radius:7px;
+    border: 1px solid rgb(177, 174, 174);
+    background: rgb(233, 229, 229);
+    box-shadow:2px 2px 2px rgb(129, 125, 125);
+    padding-left: 10px;
+    color: black;
+}
+.cgai1{
+    width: 80%;
+    float: left;
+}
+.cgai11{
+    margin-top: 20px;
+    font-size: 20px;
+    width: 80%;
+    float: left;
+}
+.cgai1 p{
+    margin-top: 4px;
+    float: left;
+}
+.cgai2{
+    margin-top: 10px;
+    margin-left: 280px;
+    font-size: 40px;
+}
+/*header*/
+/*main*/
+#user{
+    height: 200px;
+    width: 100%;
+    background-color:red;   
+}
+.wer{
+    height: 200px;
+    width: 100%;  
+    background-color:rgb(36, 32, 32);   
+}
+
+
+
+
+.stdminenavbar img{
+    width: 20px;
+    height: 20px;
+    float: left;
+}
+.stdminetopdiv{
+    width: 100%;
+    height: 100px;
+    border-bottom:1px solid gainsboro ;
+}
+.stdminetopdiv0{
+    width: 60px;
+    height: 60px;
+    margin: 25px;
+    float: left;
+    border-radius:30px;
+    overflow: hidden;
+}
+.stdminetopdiv0 img{
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+}
+.stdminetopdiv1{
+    margin: 40px 0px 0px 10px;
+    float: left;
+    font-size: 20px;
+}
+
+.stdminebody ul{
+    width: 100%;
+    height: 400px;
+    padding: 30px 40px;  
+}
+.stdminebody li{
+    height: 60px;
+}
+.stdminebody img{
+    width: 40px;
+    height: 40px;
+}
+.stdminebody span{
+    font-size: 18px;
+    padding-left: 20px;
+    color: black;
+}
+
+
+.stdmineshezhidiv{
+    padding: 0px 30px;
+}
+.stdmineshezhidiv img{
+    width: 40px;
+    height: 40px;
+}
+.stdmineshezhidiv li{
+    height: 60px;
+}
+.stdminetopdiv2{
+    float: left;
+    font-size: 18px;
+    margin: 25px 0px 0px 30px;
+}
+.stdminetopdiv3{
+    float: right;
+    font-size: 16px;
+    margin: 25px 10px 0px 0px;
+    color: rgb(153, 147, 147);
+}
+.stdminetopdiv4{
+    float: right;
+    font-size: 16px;
+    margin: 25px 10px 0px 0px;
+    color: rgb(153, 147, 147);
+}
+.stdmineshezhibutton{
+    width:200px;
+    height:50px;
+    border-radius:5px;
+    border:1px solid #a3c6d9;
+    padding:0;
+    margin:0px 0px 0px 105px;
+    position:absolute;
+    bottom:10px;
+    color: red;
+    background-color:#a3c6d9;
+}
+.stdminebody1 ul{
+    width: 90%;
+    height: 300px;
+    margin: 50px 20px;
+    padding: 0px 0px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.stdminebody1 li{
+    height: 60px;
+    padding-top: 20px;
+    border-bottom: 1px solid gainsboro;
+}
+.stdminebody1 img{
+    width: 40px;
+    height: 40px;
+}
+.stdminebody1 span{
+    font-size: 18px;
+    padding-left: 20px;
+    color: black;
+}
+.wodeshoucangdiv{
+    width: 370px;
+    height: 200px;
+    background-color: white;
+    border-radius: 10px;
+    opacity: 0.8;
+    margin:20px 0px 0px 25px;
+    padding: 10px;
+}
+.wodedingdandiv{
+    width: 370px;
+    height: 100px;
+    background-color: white;
+    border-radius: 10px;
+    opacity: 0.8;
+    margin:10px 0px 0px 20px;
+    padding: 10px;
+}
+.wodeshoucangdiv1{
+    width: 370px;
+    height: 80px;
+    background-color: white;
+    border-radius: 10px;
+    margin:10px 0px 0px 20px;
+    padding: 10px 0px 0px 10px;
+    overflow: scroll;
+}
+.stdminepingjiabutton{
+    width:100px;
+    height:40px;
+    border-radius:5px;
+    border:1px solid #a9c3a0;
+    padding:0;
+    margin:0px 0px 0px 105px;
+    background-color:#a9c3a0;
+}
+.stdmineyonghufankuibutton{
+    width:250px;
+    height:40px;
+    border-radius:5px;
+    border:1px solid rgb(250, 198, 101);
+    margin:15px 0px 0px 80px;
+    background-color:rgb(250, 198, 101);
+    font-size: 18px;
+    color: rgb(250, 248, 248);
+}
+.zba
+{
+    height: 680px;
+    width: 100%;
+    padding-top: 20px;
+    padding-left: 30px;
+    background-color: rgb(120, 163, 192); 
+   /* background: url('./img/.jpg') center center / cover no-repeat ; */
+}
+.zzba{
+    height: 620px;
+    width: 90%;
+    background-color: rgb(255, 255, 255);
+    padding-top: 20px;
+    padding-left: 8px;
+}
+.zaa
+{
+    margin-top: 60px;
+    background: url('./img/z2.gif') center center / cover no-repeat ;
+}
+
+.zbor{
+    border: 2px blue solid;
+}
+.zfont{
+    
+    font-size: 23px;
+    margin-left: 20px;
+  line-height: 120px;
+}
+.zfont a{
+    color: 	#5d93c0;
+    
+
+}
+/* //消息框 */
+.zmess{
+    font-size: 20px;
+    color:black;
+    margin-left: 20px;
+    line-height: 300% ;
+}
+/* 我的练习 */
+
+.zit a{
+    color: rgb(143, 138, 138);
+}
+/* 我的作业 */
+.zheader{
+    /* background: url('./img/15.png') center center / cover no-repeat ; */
+}

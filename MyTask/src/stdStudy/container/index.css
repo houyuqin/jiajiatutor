@@ -1,0 +1,40 @@
+.zba
+{
+    height: 680px;
+    width: 100%;
+   
+    background: url('../img/zhouzhou.png') center center / cover no-repeat ;
+}
+.zaa
+{
+    background: url('../img/2.gif') center center / cover no-repeat ;
+}
+
+.zbor{
+    border: 2px blue solid;
+}
+.zfont{
+    font-size: 23px;
+    margin-left: 20px;
+  line-height: 120px;
+}
+.zfont a{
+    color: 	#5d93c0;
+
+}
+/* //消息框 */
+.zmess{
+    font-size: 20px;
+    color:black;
+    margin-left: 20px;
+    line-height: 300% ;
+}
+/* 我的练习 */
+
+.zit a{
+    color: black;
+}
+/* 我的作业 */
+.zheader{
+    background: url('../../img/15.png') center center / cover no-repeat ;
+}
