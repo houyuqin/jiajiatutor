@@ -53,6 +53,9 @@ export default class Vedio extends Component {
             this.setState({
                 data:res.data
             })  
+        })
+        .then(()=>{
+            console.log(this.state.data)
         });
 
         AsyncStorage.getItem('user')
@@ -92,8 +95,8 @@ export default class Vedio extends Component {
                                 }}
                             >
                                 <Video 
-                                    source={require('../../assets/vedio/ch1.mp4')}
-                                    // source={item.vedio}
+                                    // source={require('../../assets/vedio/ch1.mp4')}
+                                    source={{uri:'http://148.70.183.184:8000/vedio'+item.vedio}}
                                     style={{width:'100%',height:400*s}}
                                     paused={true}
                                     volume={0} 

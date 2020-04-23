@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Dimensions, Image, ScrollView } from 'react-native'
+import { Text, View, StyleSheet, Dimensions, Image, ScrollView, AsyncStorage,ToastAndroid } from 'react-native'
 import { Icon, Button } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
 
@@ -20,7 +20,11 @@ export default class GoodTea extends Component {
             this.setState({
                 data:res
             })  
-        });
+        })
+        .then(()=>{
+            console.log(this.state.data)
+        })
+        
     }
     selecttea=(phone)=>{
         // let std = window.location.search.split('=')[1];
@@ -69,8 +73,8 @@ export default class GoodTea extends Component {
                     {
                         this.state.data.map(item=>(
                             <View style={styles.one}>
-                                {/* <Image source={item.teatouxiang} style={styles.tea}/>    */}
-                                <Image source={require('../../assets/hyq/000.png')} style={styles.tea}/>   
+                                {/* <Image source={require(item.teatouxiang)} style={styles.tea}/>    */}
+                                <Image  source={{uri:'http://148.70.183.184:8000/images/'+item.teatouxiang}} style={styles.tea}></Image>   
                                 <View style={{paddingTop:20*s}}>
                                     <Text style={styles.tch}>姓名：{item.wusername}</Text>
                                     <Text style={styles.tch}>性别：{item.wsex}</Text>

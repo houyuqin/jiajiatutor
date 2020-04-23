@@ -26,8 +26,8 @@ export default class Player0 extends Component {
         return (
             <View>
                 <Video 
-                    source={require('../../assets/vedio/ch1.mp4')}
-                    // source={this.state.src}
+                    // source={require('../../assets/vedio/ch1.mp4')}
+                    source={{uri:this.state.src}}  
                     style={{width:'100%',height:'100%'}}
                     muted={false}
                     repeat={true} 
