@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import {StyleSheet,View,Text, Image, BackHandler,ToastAndroid, AsyncStorage } from 'react-native';
-import {Router, Overlay, Scene, Tabs, Drawer, Lightbox, Modal, Actions} from 'react-native-router-flux';
+import {Router, Overlay, Scene, Tabs, Lightbox, Modal, Actions} from 'react-native-router-flux';
 import { Icon } from '@ant-design/react-native';
 import SplashScreen from 'react-native-splash-screen';
 import Home from './src/home/Home';
@@ -10,13 +10,13 @@ import TeaMine from './src/teaMine/TeaMine';
 import Login from './src/component/Login';
 import Register from './src/component/Register';
 import SwiperPage from './src/common/SwiperPage';
-// import Ad from './src/home/container/Ad';
-// import Buy from './src/home/container/Buy';
-// import Course from './src/home/container/Course';
-// import GoodTea from './src/home/container/GoodTea';
-// import Player0 from './src/home/container/Player0';
-// import Question from './src/home/container/Question';
-// import Vedio from './src/home/container/Vedio';
+import Ad from './src/home/Ad';
+import Course from './src/home/Course';
+import GoodTea from './src/home/GoodTea';
+import Player0 from './src/home/Player0';
+import Question from './src/home/Question';
+import Vedio from './src/home/Vedio';
+import Buy from './src/home/Buy';
 
 console.disableYellowBox = true;
 
@@ -101,9 +101,11 @@ const App = () => {
 								tabBarStyle={{backgroundColor:'#ccc'}}
 							>
 								{/* Home栏 */}
-								<Scene key='homePage'
+								<Scene 
+									key='homePage'
 									title='首页'
 									hideNavBar
+									// hideTabBar
 									icon={
 										({focused})=><Icon 
 											color={focused?'red':'blue'} 
@@ -111,15 +113,14 @@ const App = () => {
 										/>
 									}
 								>
-									<Scene key='home' component={Home}/>
-									{/* <Scene key='ad' component={Ad}/>
-									<Scene key='buy' component={Buy}/>
-									<Scene key='course' component={Course}/>
-									<Scene key='goodtea' component={GoodTea}/>
-									<Scene key='myplay' component={Myplay}/>
-									<Scene key='player0' component={Player0}/>
-									<Scene key='question' component={Question}/>
-									<Scene key='vedio' component={Vedio}/> */}
+									<Scene key='home'  component={Home}/>
+									<Scene key='ad' hideTabBar component={Ad} />
+									<Scene key='course' hideTabBar component={Course}/>
+									<Scene key='question' hideTabBar component={Question}/>
+									<Scene key='goodtea' hideTabBar component={GoodTea}/>
+									<Scene key='buy' hideTabBar component={Buy}/>
+									<Scene key='player' hideTabBar component={Player0}/>
+									<Scene key='vedio' hideTabBar component={Vedio}/>
 								</Scene>
 								{/* 学习 */}
 								<Scene 
