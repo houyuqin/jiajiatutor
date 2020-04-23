@@ -171,7 +171,7 @@ const App = () => {
 								{/* 用户中心 */}
 								<Scene 
 									key='userPage'
-									hideNavBar
+									// hideNavBar
 									// hideDrawerButton
 									icon={({focused})=>
 										<Icon 
@@ -184,78 +184,78 @@ const App = () => {
 										key='stdmine' 
 										title='个人中心' 
 										component={StdMine}
-										// titleTextColor='white'
-										// navigationBarStyle={{backgroundColor:'#5d93c0'}}
-										// renderLeftButton={<View></View>}
-										// renderRightButton={
-										// 	<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.tongzhi()}/>
-										// }
-										// titleStyle={{flex:1,textAlign:'center',color:'white',backgroundColor:'#5d93c0'}}
+										titleTextColor='white'
+										navigationBarStyle={{backgroundColor:'#5d93c0'}}
+										renderLeftButton={<View></View>}
+										renderRightButton={
+											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.tongzhi()}/>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white',backgroundColor:'#5d93c0'}}
 									/>
 									<Scene 
 										key='wwodeshoucang' 
 										title='我的收藏' 
-										// navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{backgroundColor:'#708090'}}
 										component={WWodeshoucang}
-										// renderLeftButton={
-										// 	<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-										// }
-										// titleStyle={{flex:1,textAlign:'center',color:'white'}}
-										// renderRightButton={
-										// 	<View></View>
-										// }
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
 									/>
 									<Scene 
 										key='wwodedingdan' 
 										title='我的订单' 
-										// navigationBarStyle={{backgroundColor:'#708090'}}
-										// renderLeftButton={
-										// 	<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-										// }
-										// titleStyle={{flex:1,textAlign:'center',color:'white'}}
-										// renderRightButton={
-										// 	<View></View>
-										// }
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
 										component={WWodedingdan}
 									/>
 									<Scene 
 										key='wwodejiaoshi' 
-										// title='我的教师' 
-										// navigationBarStyle={{backgroundColor:'#708090'}}
-										// renderLeftButton={
-										// 	<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-										// }
-										// titleStyle={{flex:1,textAlign:'center',color:'white'}}
-										// renderRightButton={
-										// 	<View></View>
-										// }
+										title='我的教师' 
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
 										component={WWodejiaoshi}
 									/>
 									
 									<Scene 
 										key='wzuoyepingjiaqingkuang' 
 										title='作业评价情况' 
-										// navigationBarStyle={{backgroundColor:'#708090'}}
-										// renderLeftButton={
-										// 	<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-										// }
-										// titleStyle={{flex:1,textAlign:'center',color:'white'}}
-										// renderRightButton={
-										// 	<View></View>
-										// }
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
 										component={Wjiaoshipingjia}
 									/>
 									<Scene 
 										key='wyijianfankui' 
 										title='意见反馈' 
-										// navigationBarStyle={{backgroundColor:'#708090'}}
-										// renderLeftButton={
-										// 	<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-										// }
-										// titleStyle={{flex:1,textAlign:'center',color:'white'}}
-										// renderRightButton={
-										// 	<View></View>
-										// }
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
 										component={Wyijianfankui}
 									/>
 									<Scene
@@ -275,13 +275,13 @@ const App = () => {
 										title='通知'
 										component={tongzhi}
 										navigationBarStyle={{backgroundColor:'#708090'}}
-										// renderLeftButton={
-										// 	<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-										// }
-										// titleStyle={{flex:1,textAlign:'center',color:'white'}}
-										// renderRightButton={
-										// 	<View></View>
-										// }
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
 									/>
 								</Scene>
 								
