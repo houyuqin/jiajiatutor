@@ -1,39 +1,40 @@
 import React, { Component } from 'react'
-import { NavBar, Icon, Tabs, Carousel, Button } from 'antd-mobile';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
-
-const tabs2 = [
+import { Text, View, StyleSheet, FlatList, Dimensions, ImageBackground, Image, TouchableOpacity, Alert } from 'react-native'
+import { Tabs } from '@ant-design/react-native';
+import { Actions } from 'react-native-router-flux';
+let ni = ''
+const num = []
+const tabs = [
     { title: '未完成' },
     { title: '已完成' },
-
 ];
-const id1 = 1;
-let ni = ''
-const num=[]
-export default class AppHome extends Component {
+const { width, scale } = Dimensions.get('window');
+const s = width / 640;
+export default class Homework extends Component {
+
     constructor() {
         super();
         this.state = {
-            data: [],
             data1: [],
+            data: [],
             nicheng: [],
-            teap:[]
+            teap: []
         }
     }
     componentDidMount() {
-        var stdp=window.location.search.split('=')[1];
-        fetch(`http://148.70.183.184:8006/stdmine/${stdp}`,{
+        var stdp = 44444444444
+        fetch(`http://148.70.183.184:8006/stdmine/${stdp}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain; charset=UTF-8'
             },
-        }).then((res)=>res.json())
-        .then((res)=>{
-            this.setState({nicheng:res.data})
-            ni=this.state.nicheng[0].wusername
-        })
-      
-        fetch(`http://148.70.183.184:8000/selecttea/${stdp}`,{
+        }).then((res) => res.json())
+            .then((res) => {
+                this.setState({ nicheng: res.data })
+                ni = this.state.nicheng[0].wusername
+            })
+        
+        fetch(`http://148.70.183.184:8000/selecttea/${stdp}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain; charset=UTF-8'
@@ -42,26 +43,27 @@ export default class AppHome extends Component {
             .then((res) => res.json())
             .then((res) => {
                 this.setState({ teap: res.data });
-                for (var index in this.state.teap){
-                  
-                     num[index]=this.state.teap[index]
+                for (var index in this.state.teap) {
+
+                    num[index] = this.state.teap[index]
                 }
-                for(var index in num){
+                for (var index in num) {
                     fetch(`http://148.70.183.184:8005/taskfabu/${num[index].teaphone}`, {
-                                method: 'GET',
-                                headers: {
-                                    'Content-Type': 'text/plain; charset=UTF-8'
-                                },
-                            })
-                                .then((res) => res.json())
-                                .then((res) => {
-                                   for(var index in res.data)
-                                   {
-                                    this.setState({ data: [...this.state.data, res.data[index]] })
-                                   }
-                                })
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'text/plain; charset=UTF-8'
+                        },
+                    })
+                        .then((res) => res.json())
+                        .then((res) => {
+                            //console.log(res)
+                            for (var index in res.data) {
+                                this.setState({ data: [...this.state.data, res.data[index]] })
+                            }
+                        })
                 }
-        })    
+            })
+        
         fetch(`http://148.70.183.184:8005/tasks/${stdp}`, {
             method: 'GET',
             headers: {
@@ -72,9 +74,9 @@ export default class AppHome extends Component {
             .then((res) => {
                 this.setState({ data1: res.data });
             })
+        
 
-
-        var usr = window.location.search.split('=')[1];
+        var usr = 44444444444;
         fetch(`http://148.70.183.184:8006/stdmine/${usr}`, {
             method: 'GET',
             headers: {
@@ -83,13 +85,13 @@ export default class AppHome extends Component {
         })
             .then((res) => res.json())
             .then((res) => {
-                this.setState({nicheng: res.data})
-              
+                this.setState({ nicheng: res.data })
+
             })
 
-    }
+     }
     componentDidUpdate(){
-        var stdp=window.location.search.split('=')[1];
+        var stdp = 44444444444;
         fetch(`http://148.70.183.184:8005/tasks/${stdp}`, {
             method: 'GET',
             headers: {
@@ -100,10 +102,11 @@ export default class AppHome extends Component {
             .then((res) => {
                 this.setState({ data1: res.data });
             })
-          
-}
+
+    }
     addCom = (msg) => {
-        var stdp=window.location.search.split('=')[1];
+       
+        var stdp = 44444444444;
         fetch(`http://148.70.183.184:8005/wanchengren/${stdp}`, {
             method: "POST",
             headers: {
@@ -111,7 +114,7 @@ export default class AppHome extends Component {
             },
             body: JSON.stringify(ni)
         }).then((res) => {
-           
+            Alert.alert('任务已完成')
         });
         fetch(`http://148.70.183.184:8005/taskwancheng/${stdp}`, {
             method: "POST",
@@ -120,7 +123,7 @@ export default class AppHome extends Component {
             },
             body: JSON.stringify(this.state.data[msg])
         }).then((res) => {
-            alert('此任务已完成并提交！')
+          
         });
         // var id = this.state.data[msg].id
         // fetch(`http://148.70.183.184:8005/taskt/${stdp}`, {
@@ -136,21 +139,21 @@ export default class AppHome extends Component {
 
     }
     display = () => {
-        alert('您的此项任务已完成，若要永久删除请按删除键！')
+        Alert.alert('您的此项任务已完成，若要永久删除请按删除键！')
     }
-    dele = (msg) => {
-        var id = this.state.data[msg].id
-        fetch(`http://148.70.183.184:8005/taskt/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                alert('任务删除成功!')
-            })
-    }
+    // dele = (msg) => {
+    //     var id = this.state.data[msg].id
+    //     fetch(`http://148.70.183.184:8005/taskt/${id}`, {
+    //         method: 'DELETE',
+    //         headers: {
+    //             'Content-Type': 'text/plain; charset=UTF-8'
+    //         },
+    //     })
+    //         .then((res) => res.json())
+    //         .then((res) => {
+    //             Alert.alert('任务删除成功!')
+    //         })
+    // }
     dele1 = (msg) => {
         var id = this.state.data1[msg].id
 
@@ -162,7 +165,7 @@ export default class AppHome extends Component {
         })
             .then((res) => res.json())
             .then((res) => {
-                alert('任务永久删除成功!')
+                Alert.alert('任务永久删除成功!')
             })
     }
     show = (msg) => {
@@ -179,54 +182,157 @@ export default class AppHome extends Component {
         });
         id1 = this.state.data1[msg].content;
     }
+
+ 
     render() {
+
         return (
-            <div>
+            <View style={{ flex: 1 }}>
+                <Tabs tabs={tabs}>
+                    <View>
+                        <FlatList
+                            data={this.state.data}
+                            renderItem={({ item, index }) => (
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <View style={styles.uncom}>
+                                        <ImageBackground source={require('../../../assets/zx/z7.jpg')} style={styles.img}>
+                                            <View><Text style={styles.renwu1}>任务{index+1}</Text></View>
+                                            <View><Text style={styles.renwu2}>题目：{item.title}</Text></View>
+                                            <View><Text style={styles.renwu2}>科目类型:{item.kemu}</Text></View>
+                                            <View><Text style={styles.renwu2}>完成时间:{item.endtime}</Text></View>
+                                            <View><Text style={styles.renwu2}>发布教师:{item.author}</Text></View>
+                                            <View style={{ flex: 1., flexDirection: 'row' }}>
+                                                <TouchableOpacity  onPress={() => this.addCom(index)}>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Image style={styles.img1} source={require('../../../assets/zx/z5.png')}></Image>
+                                                        <Text style={styles.fon}>完成</Text>
+                                                    </View>
+                                                </TouchableOpacity>
 
-                <NavBar
-                    style={{ backgroundColor: '#708090', color: 'white' }}
-                    leftContent={[
-                        <Link to='/'><div style={{ color: 'white', marginRight: '16px' }} ><img src={require('../../img/z2.png')} style={{ width: '20px', height: '20px', color: 'white' }}></img></div></Link>
-                    ]}
-                >我的作业</NavBar>
-                <Tabs tabs={tabs2}
-                    initialPage={0}
-                    tabBarActiveTextColor='rgb(63, 204, 203)'
-                    tabBarUnderlineStyle={{ border: '2px solid rgb(63, 204, 203)' }}
-                >
-                    <div className='zheader'>
-                        {this.state.data.map((item, idx) => (
-                            <div style={{ height: '270px', width: '96%', marginLeft:'6px',marginTop:'18px',paddingTop:'3px',paddingLeft:'5px',border:'1px solid #3fcccb',borderRadius:'8px',boxShadow: '3px 3px 2px rgb(174, 177, 179)'}}>
-                                <div style={{ width: '97%', height: '253px', float: 'left', overflow: 'auto' }} className='zho'>
-                                    <h2 style={{fontSize:'25px'}}>任务{idx + 1}&nbsp;&nbsp; <h4 style={{fontSize:'21px',marginTop:'20px',marginLeft:'5px',color:'rgb(128, 124, 124)'}}>题目:&nbsp;{item.title}</h4> </h2>
-                                    <p style={{ marginTop:'-7px',marginLeft:'5px',marginBottom:'5px',fontSize: '20px', color: 'rgb(128, 124, 124)' }}>科目类型：{item.kemu}</p>
-                                    <p style={{ marginTop:'-5px',marginLeft:'5px',marginBottom:'5px',fontSize: '20px', color: 'rgb(128, 124, 124)' }}>完成时间：{item.time}</p>
-                                    <p style={{ fontSize: '20px',marginLeft:'5px', color: 'rgb(128, 124, 124)' }}>发布教师：{item.author}</p>
-                                    <Button style={{ width:'130px',height:'40px',marginLeft:'60%',marginTop:'10px',border:"1px solid rgb(243, 241, 241)",float:'left'}}><Link to={'/taskt/' + item.id} style={{ color: 'rgb(43, 41, 41)',backgroudColor:'#3fcccb'}}>查看详情>></Link></Button>
-                                    <div style={{ float: "left", marginTop:'-25px',height: '40px', width: '70px', marginLeft: 30 }}><img src={require('../../img/z5.png')} style={{ height: 25, width: 25 ,float:'left'}} onClick={() => this.addCom(idx)}></img><p style={{float:'left',marginLeft:'5px'}}>完成</p></div>
-                                    <div style={{ float: "left", marginTop:'-25px',height: '40px', width: '70px', marginLeft: 10 }}><img src={require('../../img/z7.png')} style={{ height: 25, width: 25 ,float:'left'}} onClick={() => this.dele(idx)}></img><p style={{float:'left',marginLeft:'5px'}}>删除</p></div>
-                                </div>
-                                
-                            </div>
-                        ))}
-                    </div>
-                    <div >
-                        {this.state.data1.map((item, idx) => (
-                            <div style={{ height: '50px',  width: '96%', marginLeft:'6px',marginTop:'10px',border:'1px solid #3fcccb',borderRadius:'8px',boxShadow: '3px 3px 2px rgb(174, 177, 179)'}}>
-                                <div style={{ width: '45%', height: '40px', float: 'left', overflow: 'hidden', color: 'black' }} >
-                                    <p style={{ fontSize: '25px', color: 'black' }}>{item.id}----{item.title}</p>
+                                                {/* <TouchableOpacity onPress={() => this.dele(index)}>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Image style={styles.img2} source={require('../../img/z7.png')}></Image>
+                                                        <Text style={styles.fon}>删除</Text>
+                                                    </View>
+                                                </TouchableOpacity> */}
+                                                <TouchableOpacity  style={styles.btn} onPress={() => {Actions.content({'contentId':item.id})}}><View style={styles.btn1}><Text style={styles.xiangqing}>查看详情>></Text></View></TouchableOpacity>
+                                            </View>
+                                        </ImageBackground>
 
-                                </div>
-                                <div style={{ width: '30%', height: '60px', float: 'left' }}>
-                                    <Button style={{}}><Link to={'/tasks/' + item.id} style={{ color: 'green' }}>查看全文</Link></Button>
-                                </div>
-                                <div style={{ float: "left", height: '40px', width: '30px', paddingTop: '17px', marginLeft: 20 }}><img src={require('../../img/z6.png')} style={{ height: 25, width: 25 }} onClick={() => this.display()}></img></div>
-                                <div style={{ float: "left", height: '40px', width: '30px', paddingTop: '17px', marginLeft: 10 }}><img src={require('../../img/z7.png')} style={{ height: 25, width: 25 }} onClick={() => this.dele1(idx)}></img></div>
-                            </div>
-                        ))}
-                    </div>
+                                    </View>
+                                </View>
+
+                            )}
+                        ></FlatList>
+                    </View>
+                    <View style={{ flex: 1 }}>
+                        <View>
+                            <FlatList
+                                data={this.state.data1}
+                                renderItem={({ item, index }) => (
+                                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                        <View style={styles.ccbox}>
+                                            <View style={{width:'50%'}}><Text style={{fontSize:28}}>{item.id}----{item.title}</Text></View>
+                                            <View style={{width:'30%'}}><TouchableOpacity style={styles.ccbtn} onPress={() => Actions.contents({'contentId':item.id})}><View><Text style={styles.xiangqing}>查看详情>></Text></View></TouchableOpacity></View>
+                                            <View style={{width:'10%'}}><TouchableOpacity onPress={() => this.display()}><Image style={styles.ccimg} source={require('../../../assets/zx/z6.png')}></Image></TouchableOpacity></View>
+                                            <View style={{width:'5%'}}><TouchableOpacity onPress={() => this.dele1(index)}><Image style={styles.ccimg} source={require('../../../assets/zx/z7.png')}></Image></TouchableOpacity></View>
+                                        </View>
+                                    </View>
+
+                                )}
+                            ></FlatList>
+                        </View>
+                    </View>
                 </Tabs>
-            </div>
-        )
+
+            </View >
+        );
     }
 }
+
+const styles = StyleSheet.create({
+
+    img: {
+        width: '100%',
+        height: 355 * s,
+        resizeMode: 'stretch'
+    },
+    uncom: {
+        width: '95%',
+        height: 370 * s,
+        marginTop: 30 * s,
+        borderWidth: 3,
+        borderColor: '#3fcccb',
+        borderRadius: 10,
+    },
+    renwu1: {
+        fontSize: 27,
+        paddingLeft: 40 * s,
+        marginTop: 20 * s
+    },
+    renwu2: {
+        fontSize: 20,
+        paddingLeft: 60 * s,
+        marginTop: 6
+    },
+    img1: {
+        width: 45 * s,
+        height: 45 * s,
+        resizeMode: 'stretch',
+        marginTop: 25 * s,
+        marginLeft: 50 * s
+    },
+    img2: {
+        width: 45 * s,
+        height: 45 * s,
+        resizeMode: 'stretch',
+        marginTop: 25 * s,
+        marginLeft: 40 * s
+    },
+    btn: {
+        width: 180 * s,
+        height: 60 * s,
+        borderRadius: 15 * s,
+        // backgroundColor:'#BCEE68',
+        marginLeft: '10%',
+        marginTop: 15 * s,
+
+    },
+    btn1: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+    },
+    xiangqing: {
+        fontSize: 18,
+        //color:'white',   
+    },
+    fon: {
+        fontSize: 22,
+        marginTop: 25 * s,
+        marginLeft: 9 * s
+    },
+    // 设置完成款里面的样式
+    ccbox: {
+        flexDirection: 'row',
+        borderColor: '#3fcccb',
+        borderWidth: 3,
+        borderRadius: 10,
+        height: 80 * s,
+        width: '97%',
+        marginTop: 10 * s,
+        alignItems:'center'
+    },
+    ccimg:{
+        width:40*s,
+        height:40*s
+    },
+    ccbtn:{
+        // width: 180 * s,
+        // height: 60 * s,
+        // borderRadius: 15 * s,
+        // // backgroundColor:'#BCEE68',
+        // marginLeft: '10%',
+        // marginTop: 15 * s,
+    }
+})

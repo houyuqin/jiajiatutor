@@ -1,36 +1,56 @@
 import React, { Component } from 'react'
-import { NavBar, Icon, Tabs, Carousel,Button } from 'antd-mobile';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
-
-
+import { Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity,Alert } from 'react-native'
+import { Icon, Carousel, DatePicker, List, Provider, TextareaItem } from '@ant-design/react-native'
+const { width } = Dimensions.get('window');
+const s = width / 640;
 export default class Content extends Component {
-  constructor(){
-    super();
-    this.state={
-      data:[]
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      content:''
     }
   }
 
   componentDidMount() {
-    let id = this.props.match.params.id
-  
-   
-    fetch(`http://148.70.183.184:8005/taskt/${id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'text/plain; charset=UTF-8'
-        },
-    })
-        .then((res) => res.json())
-        .then((res) => {
-            this.setState({ data:res.data.splice(res.data.length-1,1) })
-         console.log(res.data.splice(res.data.length-1,1))
-        })
 
-}
-add=()=>{
-  var aa=this.daan.value;
-  var id1=this.props.match.params.id;
+    fetch(`http://148.70.183.184:8005/taskt/${this.props.contentId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'text/plain; charset=UTF-8'
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+
+        this.setState({ data: res.data.splice(res.data.length - 1, 1) })
+        //console.log(res.data.splice(res.data.length - 1, 1))
+      })
+
+  }
+  componentDidUpdate(){
+    fetch(`http://148.70.183.184:8005/taskt/${this.props.contentId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'text/plain; charset=UTF-8'
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+
+        this.setState({ data: res.data.splice(res.data.length - 1, 1) })
+        console.log(res.data.splice(res.data.length - 1, 1))
+      })
+
+  }
+  change=(e)=>{
+   this.setState({
+     content:e
+   })
+  }
+  add=()=>{
+  var aa=this.state.content;
+  var id1=this.props.contentId;
 
   console.log(JSON.stringify(aa))
   fetch(`http://148.70.183.184:8005/daan/${id1}`, {
@@ -40,45 +60,79 @@ add=()=>{
     },
     body: JSON.stringify(aa)
   }).then(function(response) {
-    // do sth
-   
-    alert('您的答案提交成功！')
-  
-    
-  });   
-  
-
-
  
+    Alert.alert('您的答案提交成功！')
+
+
+  });   
 }
-    render() {
-    
-        return (
-        <div>
-            <NavBar
-                    style={{ backgroundColor: '#708090', color: 'white' }}
-                    leftContent={[
-                        <Link to='/homework'><div style={{ color: 'white', marginRight: '16px' }} ><img src={require('../../img/z2.png')} style={{ width: '20px', height: '20px', color: 'white' }}></img></div></Link>
-                    ]}
-                >查看全文</NavBar>
-   {
-      this.state.data.map((item,idx)=>(
-        <div style={{border:'2px solid  rgb(177, 174, 174)',borderRadius:'7px',fontSize:'25px',paddingLeft:'5px',color:'grey',}}><p style={{fontSize:'27px'}}>题目：{item.title}</p><p style={{fontSize:'25px'}}>内容：<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.content}</p>
-       <div style={{color:'grey',marginTop:'20px',marginBottom:'5px',fontWeight:'bolder'}}><p>我的答案：{item.zuoye} </p></div>
-        </div>
-       
-      ))
-    }
-    
-          
-    <div className="cbu44">   
-                       <p style={{color:'grey',fontSize:'24px',marginTop:'27px',marginLeft:'7px',marginBottom:'8px',fontWeight:'bolder'}}>重新提交答案:</p> 
-                        <textarea name="task" cols="40" rows="5" className="cren2" ref={i=>this.daan=i}></textarea>      
-                    </div>
-            
-                    <input type="submit" value="提交" className="cbuan" onClick={()=>this.add()}/>
-        </div>
-        
-        )
-    }
+  render() {
+    return (
+      <View>
+
+        <FlatList
+          data={this.state.data}
+          renderItem={({ item, index }) => (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <View style={styles.box}>
+                <Text style={styles.font}>题目：{item.title}</Text>
+                <Text style={styles.font}>内容：</Text>
+                <Text style={styles.font}> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{item.content}</Text>
+                <Text style={styles.font}>我的答案：{item.zuoye == ' ' ?'“还未提交，请提交”': item.zuoye  }</Text>
+              </View>
+              <View style={styles.box1}>
+                <Text style={styles.font}>提交答案:</Text>
+                <View style={{marginTop:20*s}}>
+                <TextareaItem
+                 rows={6}
+                 placeholder="在此输入我的计答案"
+                 placeholderTextColor='#8B7E66'
+                 onChange={this.change}
+                 style={{ paddingVertical: 5 }}
+                ></TextareaItem>
+                </View>
+              
+                  <TouchableOpacity style={styles.tijiao} onPress={()=>this.add()}><View><Text>提交</Text></View></TouchableOpacity>
+              
+              </View>
+            </View>
+          )}
+        ></FlatList>
+      </View>
+    )
+  }
 }
+const styles = StyleSheet.create({
+  box:
+  {
+    width: '90%',
+    borderColor: 'red',
+    borderWidth: 2,
+    borderRadius: 10 * s,
+    paddingTop: 20 * s,
+    paddingBottom: 10 * s
+  },
+  font: {
+    fontSize: 28
+  },
+  box1:{
+    width:'80%',
+    marginTop:30*s
+  },
+  tijiao:{
+    width:70*s,
+    height:40*s,
+    backgroundColor:'rgb(125, 179, 201)',
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:10*s,
+    marginTop:30*s,
+    marginLeft:'85%'
+  }
+})
+
+
+
+
+
+

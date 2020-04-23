@@ -1,50 +1,107 @@
 import React, { Component } from 'react'
-import { NavBar, Icon, Tabs, Carousel,Button } from 'antd-mobile';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
-
-
+import { Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity,Alert } from 'react-native'
+import { Icon, Carousel, DatePicker, List, Provider, TextareaItem } from '@ant-design/react-native'
+const { width } = Dimensions.get('window');
+const s = width / 640;
 export default class Content extends Component {
-  constructor(){
-    super();
-    this.state={
-      data:[]
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      content:''
     }
   }
-  componentDidMount() {
-    let id = this.props.match.params.id
 
-    fetch(`http://148.70.183.184:8005/chakan/${id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'text/plain; charset=UTF-8'
-        },
+  componentDidMount() {
+  
+    fetch(`http://148.70.183.184:8005/chakan/${this.props.contentId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'text/plain; charset=UTF-8'
+      },
     })
-        .then((res) => res.json())
-        .then((res) => {
-          console.log(res.data)
-            this.setState({ data: res.data.splice(res.data.length-1,1)})
-            
-        })
- 
+      .then((res) => res.json())
+      .then((res) => {
+
+        this.setState({ data: res.data.splice(res.data.length - 1, 1) })
+        //console.log(res.data.splice(res.data.length - 1, 1))
+      })
+
+  }
+  componentDidUpdate(){
+    fetch(`http://148.70.183.184:8005/chakan/${this.props.contentId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'text/plain; charset=UTF-8'
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+
+        this.setState({ data: res.data.splice(res.data.length - 1, 1) })
+        console.log(res.data.splice(res.data.length - 1, 1))
+      })
+
+  }
+
+
+  render() {
+    return (
+      <View>
+
+        <FlatList
+          data={this.state.data}
+          renderItem={({ item, index }) => (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <View style={styles.box}>
+                <Text style={styles.font}>题目：{item.title}</Text>
+                <Text style={styles.font}>内容：</Text>
+                <Text style={styles.font}> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{item.content}</Text>
+                <Text style={styles.font1}>我的答案：{item.zuoye == ' ' ?'“还未提交，请提交”': item.zuoye  }</Text>
+              </View>
+           
+            </View>
+          )}
+        ></FlatList>
+      </View>
+    )
+  }
 }
-    render() {
-    
-        return (
-        <div>
-            <NavBar
-                    style={{ backgroundColor: '#708090', color: 'white' }}
-                    leftContent={[
-                        <Link to='/homework'><div style={{ color: 'white', marginRight: '16px' }} ><img src={require('../../img/z2.png')} style={{ width: '20px', height: '20px', color: 'white' }}></img></div></Link>
-                    ]}
-                >查看全文</NavBar>
-   {
-      this.state.data.map((item,idx)=>(
-        <div style={{width:'96%',marginLeft:'7px',marginTop:'15px',paddingLeft:'4px',borderRadius:'8px',boxShadow: '3px 3px 2px rgb(174, 177, 179)',border:'1px solid rgb(177, 174, 174)',fontSize:'25px'}}><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.content}</p>
-         <div style={{color:'grey',marginTop:'30px',fontWeight:'bolder',marginBottom:'20px'}}>我的答案：<p style={{marginLeft:'25px',fontWeight:'200'}}>{item.zuoye}</p></div></div>
-       
-      ))
-    }
-        </div>
-        )
-    }
-}
+const styles = StyleSheet.create({
+  box:
+  {
+    width: '90%',
+    borderColor: 'red',
+    borderWidth: 2,
+    borderRadius: 10 * s,
+    paddingTop: 20 * s,
+    paddingBottom: 10 * s
+  },
+  font: {
+    fontSize: 28
+  },
+  font1: {
+    fontSize: 28,
+    marginTop:30*s
+  },
+  box1:{
+    width:'80%',
+    marginTop:30*s
+  },
+  tijiao:{
+    width:70*s,
+    height:40*s,
+    backgroundColor:'rgb(125, 179, 201)',
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:10*s,
+    marginTop:30*s,
+    marginLeft:'85%'
+  }
+})
+
+
+
+
+
+

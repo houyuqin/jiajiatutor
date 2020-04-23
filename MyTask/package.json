@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons-react-native": "1.0.2",
     "@ant-design/react-native": "^3.2.2",
+    "@react-native-community/viewpager": "^3.3.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-button": "^2.4.0",
@@ -22,6 +23,7 @@
     "react-native-splash-screen": "^3.2.0",
     "react-native-swiper": "^1.6.0-nightly.5",
     "react-native-vector-icons": "^6.6.0",
+    "react-native-video": "^4.4.5",
     "react-native-webview": "^8.1.2"
   },
   "devDependencies": {
