@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { NavBar ,Icon} from 'antd-mobile';
-import { Link } from 'react-router-dom';
+import { Text, View ,Dimensions, ScrollView} from 'react-native'
+const {width} = Dimensions.get('window');
+const s = width/640;
 
-let wusername='';
+let wusername = '';
 export default class Jiaoshipingjia extends Component {
     constructor(){
         super();
@@ -12,57 +13,39 @@ export default class Jiaoshipingjia extends Component {
         }
     }
     componentDidMount(){
-        fetch('http://148.70.183.184:8005/tasks', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-            })
+        fetch('http://148.70.183.184:8005/tasks')
             .then((res) => res.json())
             .then((res) => {
-                this.setState({data:res.data})
-              
-            })    
-
-
-        let id=window.location.search.split('=')[1];
-           
-        fetch(`http://148.70.183.184:8006/stdmine/${id}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'text/plain; charset=UTF-8'
-                    },
-                    })
-                    .then((res) => res.json())
-                    .then((res) => {
-                        this.setState({data1:res.data})
-                        wusername= this.state.data1[0].wusername;
-                    })
-        
+                this.setState({data:res.data}) 
+            })   
+        //学生登录的手机号 
+        fetch('http://148.70.183.184:8006/stdmine/13513467682')
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({data1:res.data})
+                wusername= this.state.data1[0].wusername;
+            })  
     }
     render() {
         return (
-            <div style={{backgroundColor:'#fafaf8',height:'100%',}}>
-                <NavBar
-                style={{backgroundColor:'#708090',color:'white'}}
-                icon={<Link to='/'><Icon style={{color:'black'}} type="left" /></Link>}
-                >作业评价情况</NavBar>
-                <div style={{height:'640px',overflow:'scroll'}}>
-                        {
-                            this.state.data.map((item)=>(
-                                <div style={{fontSize:'18px',padding:'20px'}} key={item.wphonenumber}>
-                                    <p style={{marginLeft:'0px'}}>教师：{item.author}</p>
-                                    <p style={{marginLeft:'0px'}}>评价内容：{item.pingjia}</p>
-                                    <div style={{borderLeftStyle:'solid',paddingLeft:'5px'}}>
-                                    <p style={{color:'red'}}>@{wusername}</p>
-                                    <p style={{fontSize:'15px'}}>提交了任务名为 <span style={{color:'red',fontSize:'15px'}}>{item.title}</span> 的任务作业</p>
-                                    <p style={{float:'right',color:'gray',fontSize:'15px'}}>{item.time}</p>
-                                    </div>
-                                </div>
-                            ))
-                        }
-                </div>
-            </div>
+            <ScrollView>
+                 {
+                    this.state.data.map((item)=>(
+                        <View style={{width:610*s,fontSize:18,padding:10*s,margin:12*s,borderRadius:10*s,backgroundColor:'white'}} key={item.wphonenumber}>
+                            <Text>教师：{item.author}</Text>
+                            <Text style={{wordWrap:'break-word'}}>评价内容：{item.pingjia}</Text>
+                            <Text></Text>
+                            <View style={{borderLeftWidth:5*s,paddingLeft:5*s}}><Text style={{color:'red'}}>@{wusername}</Text></View>
+                            <View style={{borderLeftStyle:'solid',paddingLeft:5*s,borderLeftWidth:5*s,flexDirection:'row'}}>
+                                <Text style={{fontSize:15}}>提交了任务名为</Text>
+                                <Text style={{color:'red',fontSize:15}}>{item.title}</Text> 
+                                <Text>的任务作业</Text>
+                            </View>
+                            <Text style={{color:'gray',fontSize:15,marginLeft:300*s}}>{item.time}</Text>
+                        </View>
+                    ))
+                }
+            </ScrollView>
         )
     }
 }

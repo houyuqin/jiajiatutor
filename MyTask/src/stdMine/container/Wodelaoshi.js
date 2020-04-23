@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {HashRouter as Router,Route,Link} from 'react-router-dom';
-import { NavBar,Icon } from 'antd-mobile';
-
+import { Text, View, Dimensions, Image,TouchableOpacity, ToastAndroid, ScrollView, StyleSheet } from 'react-native'
+const {width} = Dimensions.get('window');
+const s = width/640;
 var num= [];
 
 export default class Wodelaoshi extends Component {
@@ -14,13 +14,9 @@ export default class Wodelaoshi extends Component {
         }
     }
     componentDidMount(){
-        var id=window.location.search.split('=')[1];
-        fetch(`http://148.70.183.184:8000/selecttea/${id}`,{
-            method: 'GET',
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-        })
+        // var id=window.location.search.split('=')[1];
+        // 13513467682是学生登录的手机号
+        fetch('http://148.70.183.184:8000/selecttea/13513467682')
             .then((res) => res.json())
             .then((res) => {
                 this.setState({ data1: res.data });
@@ -28,101 +24,77 @@ export default class Wodelaoshi extends Component {
                     num[index]=val.teaphone
                     return num
                 })
-                num.forEach((val,idx)=>{
-                  
-                    fetch(`http://148.70.183.184:8006/teamine/${val}`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'text/plain; charset=UTF-8'
-                        },
-                    })
+                let filterarr = num.filter((value,index) => {
+                    return num.indexOf(value) === index
+                })
+                filterarr.forEach((val,_idx)=>{
+                    fetch(`http://148.70.183.184:8006/teamine/${val}`)
                         .then((res) => res.json())
                         .then((res) => {
-                            res.data.forEach((val,idx)=>{        
-                                this.setState({data:[...this.state.data,val]})
-                              
+                            res.data.forEach((val,_idx)=>{   
+                                this.setState({
+                                    data:[...this.state.data,val]
+                                })   
                             })
                         })
                 })
         })  
     }
-    // componentDidUpdate(){
-    //     var id=window.location.search.split('=')[1];
-
-    //     fetch(`http://148.70.183.184:8000/selecttea/${id}`,{
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'text/plain; charset=UTF-8'
-    //         },
-    //     })
-    //         .then((res) => res.json())
-    //         .then((res) => {
-    //             this.setState({
-    //                 data1: res.data 
-    //             });
-    //             this.state.data1.forEach((val,index)=>{
-    //                 num[index]=val.teaphone
-    //                 return num
-    //             })
-                
-    //             num.forEach((val,idx)=>{
-                  
-    //                 fetch(`http://148.70.183.184:8006/teamine/${val}`, {
-    //                     method: 'GET',
-    //                     headers: {
-    //                         'Content-Type': 'text/plain; charset=UTF-8'
-    //                     },
-    //                 })
-    //                     .then((res) => res.json())
-    //                     .then((res) => {
-    //                         res.data.forEach((val,idx)=>{      
-    //                             this.setState({data:[...this.state.data,val]})
-                              
-    //                         })
-    //                     })
-    //             })
-    //     })  
-    // }
     deleteshipin=(idx)=>{
-        var id=window.location.search.split('=')[1];
-        fetch(`http://148.70.183.184:8000/deltea/${id}`,{
+        //学生手机号
+        fetch('http://148.70.183.184:8000/deltea/13513467682',{
            method: 'DELETE',
-           headers: {
-            'Content-Type': 'text/plain; charset=UTF-8'
-            },
-            body:JSON.stringify({teaphone:idx})
+           body:JSON.stringify({stdphone:'13513467682',teaphone:idx})
         })
-        .then((res) => res.json())
-        .then((res) => {
-            alert('任务删除成功!')
-        })
-       
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+            })
+
+        ToastAndroid.show('删除成功！',100);
     } 
- 
     render() {
         return (
-            <div>
-                <NavBar
-                style={{backgroundColor:'#708090',color:'white'}}
-                icon={<Link to='/'><Icon style={{color:'black'}} type="left" /></Link>}
-                >我的教师</NavBar>
-                <div>
-                    {
-                        this.state.data.map((item)=>(
-                                <div style={{width: '390px',height: '100px',backgroundColor: 'white', borderRadius: '10px',opacity:' 0.8',margin:'10px 0px 10px 10px'}} key={item.wphonenumber}>
-                                    <div style={{width:'250px',height:'50px',margin:'0px 0px 0px 10px'}}>
-                                        <img style={{width:'50px',height:'60px',margin:'20px 0px 0px 0px',float:'left'}} src={'./'+item.teatouxiang}></img>
-                                        <span style={{padding:'20px 0px 0px 12px',fontSize:'18px',color:'black',float:'left'}}>{item.wusername}</span>
-                                        <span style={{padding:'22px 0px 0px 12px',fontSize:'15px',color:'black',float:'left'}}>{item.zhiwei}</span>
-                                        <span style={{margin:'0px 0px 0px 10px',fontSize:'15px',color:'black',float:'left'}}>手机号：{item.wphonenumber}</span>
-                                        <span style={{margin:'0px 0px 0px 10px',fontSize:'15px',color:'black',float:'left'}}>毕业于：{item.biyexuexiao}</span>
-                                    </div>
-                                    <button onClick={()=>this.deleteshipin(item.wphonenumber)} style={{width:'50px',height:'30px',backgroundColor:'white',border:'1px solid gray',borderRadius:'5px',float:'right',margin:'0px 10px 10px 0px'}}>移除</button>
-                                </div>
-                        ))
-                    }
-                </div>
-            </div>
+            <ScrollView>
+                {
+                    this.state.data.map((item)=>(
+                        <View style={styles.listcontent} key={item.wphonenumber}>
+                            <Image style={{width:100*s,height:110*s,marginLeft:10*s}} source={item.teatouxiang}/>
+                            <View>
+                                <View style={{flexDirection:'row',marginLeft:20*s}}>
+                                    <Text style={{fontSize:19,color:'black'}}>{item.wusername}</Text>
+                                    <Text style={{fontSize:15,color:'black',marginTop:5*s,marginLeft:5*s}}>{item.zhiwei}</Text>
+                                </View>
+                                <Text style={{fontSize:15,color:'black',marginLeft:20*s}}>手机号：{item.wphonenumber}</Text>
+                                <Text style={{fontSize:15,color:'black',marginLeft:20*s}}>毕业于：{item.biyexuexiao}</Text>
+                            </View>
+                            <TouchableOpacity  style={styles.buttoncontent} onPress={()=>this.deleteshipin(item.wphonenumber)}>
+                                <Text style={{fontSize:17,color:'white'}}>移除</Text>
+                            </TouchableOpacity>
+                        </View>
+                    ))
+                }
+            </ScrollView>
         )
     }
 }
+const styles = StyleSheet.create({
+    listcontent:{
+        width: 610*s,
+        height: 150*s,
+        backgroundColor: 'white', 
+        borderRadius: 10*s,
+        margin:10*s,
+        padding:10*s,
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    buttoncontent:{
+        marginLeft:100*s,
+        marginTop:-100*s,
+        width:80*s,
+        alignItems:'center',
+        backgroundColor:'#708090',
+        borderRadius:10*s
+    }
+})

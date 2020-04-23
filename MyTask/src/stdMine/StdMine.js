@@ -1,48 +1,128 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, Dimensions, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
+import { Icon, WhiteSpace } from '@ant-design/react-native';
+import { Actions } from 'react-native-router-flux';
+
+const {width} = Dimensions.get('window');
+const s = width/640;
 
 export default class StdMine extends Component {
+    constructor(){
+        super();
+        this.state={
+            data:[],
+            wusername:'',
+            imageUrl:''
+        }
+    }
+    componentDidMount(){
+        fetch('http://148.70.183.184:8006/stdmine/13513467682')
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({data:res.data}) 
+                if (this.state.data[0].wusername == '') {
+                    this.setState({
+                        wusername:'我的昵称'
+                    })
+                }else{
+                    this.setState({
+                        wusername:this.state.data[0].wusername
+                    })
+                }
+            })
+    }
+    componentDidUpdate(){
+        fetch('http://148.70.183.184:8006/stdmine/13513467682')
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({data:res.data}) 
+                if (this.state.data[0].wusername == '') {
+                    this.setState({
+                        wusername:'我的昵称'
+                    })
+                }else{
+                    this.setState({
+                        wusername:this.state.data[0].wusername
+                    })
+                }
+            })
+    }
+
+    wexitapp = ()=>{
+        // Actions.login();
+        // AsyncStorage.removeItem('user');
+        // AsyncStorage.clear();
+        console.log(111);
+    }
     render() {
         return (
-            <View>
-                <Text> StdMine </Text>
-            </View>
+            <ScrollView>
+                <View style={{backgroundColor:'#5d93c0',height:150*s,marginTop:2*s,flexDirection:'row',alignItems:'center'}}>
+                   <View style={{width:100*s,height:100*s,borderRadius:50*s,overflow:'hidden',marginLeft:20*s}}>
+                        <Image source={require('../../assets/wjy/img/w头像女孩.png')} style={{width:100*s,height:100*s}}/>
+                    </View>
+                    <Text style={{width:150*s,height:40*s,fontSize:18,marginLeft:35*s}}>{this.state.wusername}</Text>
+                    <TouchableOpacity onPress={()=>Actions.wshezhi()} style={{width:130*s,height:30*s,borderRadius:15*s,borderWidth:1,marginLeft:160*s,alignItems:'center',justifyContent:'center'}}>
+                        <Text style={{fontSize:15}}>编辑资料</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.bigview}>
+                    <View style={styles.wview}>
+                        <Image source={require('../../assets/wjy/img/w个人名片.png')} style={[styles.wlist,{backgroundColor:'#CCCCFF',height:50*s}]}/>
+                        <TouchableOpacity onPress={()=>Actions.wgerenziliao()}><Text style={styles.context}>个人名片</Text></TouchableOpacity>
+                    </View>
+                    <View style={styles.wview}>
+                        <Image source={require('../../assets/wjy/img/w我的收藏.png')} style={styles.wlist}/>
+                        <TouchableOpacity onPress={()=>Actions.wwodeshoucang()}><Text style={styles.context}>我的收藏</Text></TouchableOpacity>
+                    </View>
+                    <View style={styles.wview}>
+                        <Image source={require('../../assets/wjy/img/w我的订单.png')} style={styles.wlist}/>
+                        <TouchableOpacity onPress={()=>Actions.wwodedingdan()}><Text style={styles.context}>我的订单</Text></TouchableOpacity>
+                    </View>
+                    <View style={styles.wview}>
+                        <Image source={require('../../assets/wjy/img/教师.png')} style={styles.wlist}/>
+                        <TouchableOpacity onPress={()=>Actions.wwodejiaoshi()}><Text style={styles.context}>我的教师</Text></TouchableOpacity>
+                    </View>
+                    <View style={styles.wview}>
+                        <Image source={require('../../assets/wjy/img/w评价.png')} style={styles.wlist}/>
+                        <TouchableOpacity onPress={()=>Actions.wzuoyepingjiaqingkuang()}><Text style={styles.context}>作业评价情况</Text></TouchableOpacity>
+                    </View>
+                    <View style={styles.wview}>
+                        <Image source={require('../../assets/wjy/img/w用户反馈.png')} style={styles.wlist}/>
+                        <TouchableOpacity onPress={()=>Actions.wyijianfankui()}><Text style={styles.context}>意见反馈</Text></TouchableOpacity>
+                    </View>
+                    <View style={styles.wview}>
+                        <Image source={require('../../assets/wjy/img/w退出登录.png')} style={styles.wlist}/>
+                        <TouchableOpacity onPress={()=>this.wexitapp()}><Text style={styles.context}>退出登录</Text></TouchableOpacity>
+                    </View>
+                </View>
+            </ScrollView>
         )
     }
 }
 
-// import React, { Component } from 'react'
-// import {HashRouter as Router,Route,Switch} from 'react-router-dom';
-// import Shezhi from './container/shezhi'
-// import StdMine from './container/stdmine'
-// import Tongzhi from './container/tongzhi'
-// import Gerenziliao from './container/Gerenziliao';
-// import Wodeshoucang from './container/Wodeshoucang';
-// import Wodedingdan from './container/Wodedingdan';
-// import Jiaoshipingjia from './container/Jiaoshipingjia';
-// import Yonghufankui from './container/Yonghufankui';
-// import Wodelaoshi from './container/Wodelaoshi'
-
-// export default class tiaozhuan extends Component {
-//     render() {
-//         return (
-//             <Router>
-//                 <div style={{height:'100%'}}>
-//                     <Switch>
-//                         <Route exact path='/' component={StdMine}></Route>
-//                         <Route path='/stdmineshezhi' component={Shezhi}></Route>
-//                         <Route path='/tongzhi' component={Tongzhi}></Route>
-//                         <Route path='/gerenziliao' component={Gerenziliao}></Route>
-//                         <Route path='/wodeshoucang' component={Wodeshoucang}></Route>
-
-//                         <Route path='/wodelaoshi' component={Wodelaoshi}></Route>
-                        
-//                         <Route path='/wodedingdan' component={Wodedingdan}></Route>
-//                         <Route path='/jiaoshipingjia' component={Jiaoshipingjia}></Route>
-//                         <Route path='/yonghufankui/:id' component={Yonghufankui}></Route>
-//                     </Switch>
-//                 </div>
-//             </Router>
-//         )
-//     }
-// }
+const styles = StyleSheet.create({
+    bigview:{
+        width:600*s,
+        marginLeft:40*s,
+        flex:1,
+        borderLeftWidth:3*s,
+        height:811*s,
+    },
+    wlist:{
+        width:60*s,
+        height:60*s
+    },
+    wview:{
+        flexDirection:'row',
+        width:350*s,
+        justifyContent:'center',
+        height:100*s,
+        alignItems:'center'
+    },
+    context:{
+        width:230*s,
+        fontSize:20,
+        marginLeft:25*s
+    }
+})

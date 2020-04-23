@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { NavBar ,Icon} from 'antd-mobile';
-import logo from "../../img/caoqian.png"
-
+import { Text, View, TouchableOpacity,Dimensions, StyleSheet, ScrollView, ToastAndroid } from 'react-native'
+const {width} = Dimensions.get('window');
+const s = width/640;
 export default class tongzhi extends Component {
     constructor(){
         super();
         this.state={
-            data:[{content:'未收到任何消息'}]
+            data:[]
         }
     }
     componentDidMount(){
@@ -27,59 +27,50 @@ export default class tongzhi extends Component {
             })
         })
     }
-    rtn = ()=>{
-        this.props.history.push('/');
-    };
-    del=(id0)=>{
-        let a={id:id0}
+    del=(idx)=>{
         fetch('http://148.70.183.184:8000/inforuserdel',{
             method:"DELETE",
             headers:{
-                'Accept':'application/json',
-                'Content-Type': 'text/plain',
+                'Content-Type': 'text/plain; charset=UTF-8'
             },
-            body:JSON.stringify(a)
-        })
-        .then((res)=>{ 
-            if(res.status === 200){
-                return res.json();
-            }else{
-                
-            }
-        })
-        .then((data)=>{
-            console.log(data);
-        }).catch((err)=>{
-            console.log(err);
-        });
+            body:JSON.stringify({id:idx})
+        })  
+        ToastAndroid.show('删除成功！',100);
     }
     render() {
         return (
-            <div style={{width:'100%',height:'100%'}}>
-                <NavBar
-                style={{backgroundColor:'#5d93c0'}}
-                icon={<Icon style={{color:'black'}} type="left" 
-                onClick={this.rtn}/>}
-                >消息通知</NavBar>
-
+            <ScrollView>
                 {
                     this.state.data.map((item)=>(
-                        <div 
-                        key={item}
-                        style={{width:'100%',paddingLeft:'10px',height:'50px',marginTop:'10px',borderBottom:'1px solid #5d93c0',fontSize:20,float:'left'}}>
-                            {item.content}
-                            
-                            <button onClick={()=>this.del(item.id)}
-                            style={{width:'120px',height:'40px',backgroundColor:'#5d93c0',border:'none',color:'white',borderRadius:'8px',float:'right',marginRight:5}}
-                            >
-                                已读删除
-                            </button>
-                        </div>
+                        <View style={styles.viewcontent}>
+                            <Text style={{width:480*s,wordWrap:'break-all'}}>{item.content}</Text>
+                            <TouchableOpacity style={styles.contentbutton} onPress={()=>this.del(item.id)}>
+                                <Text style={{color:'white'}}>已读删除</Text>
+                            </TouchableOpacity>
+                        </View>
                     ))
                 }
-
-                
-            </div>
+            </ScrollView>
         )
     }
 }
+const styles = StyleSheet.create({
+    viewcontent:{
+        fontSize:20,
+        flexDirection:'row',
+        justifyContent:'center',
+        margin:10*s,
+        backgroundColor:'white',
+        borderRadius:10*s
+    },
+    contentbutton:{
+        width:100*s,
+        marginTop:5*s,
+        marginLeft:10*s,
+        height:30*s,
+        backgroundColor:'#5d93c0',
+        borderRadius:8*s,
+        justifyContent:'center',
+        alignItems:'center'
+    }
+})

@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import { NavBar ,Icon} from 'antd-mobile';
-import { Link } from 'react-router-dom';
-import { Tabs, Badge } from 'antd-mobile';
+import { Text, View, TouchableOpacity, Dimensions, ToastAndroid, StyleSheet, ScrollView} from 'react-native'
+import { Tabs } from '@ant-design/react-native';
 
-const tabs = [
-    { title: <Badge>未支付</Badge> },
-    { title: <Badge>已支付</Badge> },
+const wtabs = [
+    { title: '未支付' },
+    { title: '已支付' },
 ];
+const {width} = Dimensions.get('window');
+const s = width/640;
 
+//实现已有订单无法再添加
 export default class Wodedingdan extends Component {
     constructor(){
         super();
@@ -17,48 +19,28 @@ export default class Wodedingdan extends Component {
         }
     }
     componentDidMount(){   
-        fetch('http://148.70.183.184:8000/tobuy', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-            })
+        fetch('http://148.70.183.184:8000/tobuy')
             .then((res) => res.json())
             .then((res) => {
                 this.setState({data:res.data})
             })
-        fetch('http://148.70.183.184:8000/bought', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'text/plain; charset=UTF-8'
-                },
-                })
-                .then((res) => res.json())
-                .then((res) => {
-                    this.setState({data1:res.data})
-                })
+        fetch('http://148.70.183.184:8000/bought')
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({data1:res.data})
+            })
     }
-    componentDidUpdate(){   
-        fetch('http://148.70.183.184:8000/tobuy', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-            })
+    componentDidUpdate(){
+        fetch('http://148.70.183.184:8000/tobuy')
             .then((res) => res.json())
             .then((res) => {
                 this.setState({data:res.data})
             })
-        fetch('http://148.70.183.184:8000/bought', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'text/plain; charset=UTF-8'
-                },
-                })
-                .then((res) => res.json())
-                .then((res) => {
-                    this.setState({data1:res.data})
-                })
+        fetch('http://148.70.183.184:8000/bought')
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({data1:res.data})
+            })
     }
     del=(time)=>{
         fetch('http://148.70.183.184:8000/tobuy', {
@@ -68,6 +50,7 @@ export default class Wodedingdan extends Component {
                 },
                 body:JSON.stringify({time:time})
                 })
+        ToastAndroid.show('删除成功！',100);
     }
     del1=(time)=>{
         fetch('http://148.70.183.184:8000/bought', {
@@ -77,47 +60,49 @@ export default class Wodedingdan extends Component {
                 },
                 body:JSON.stringify({time:time})
                 })
+        ToastAndroid.show('删除成功！',100);
     }
     render() {
         return (
-            <div style={{height:'100%',overflow:'hidden',backgroundColor:'#fafaf8'}}>
-                <NavBar
-                style={{backgroundColor:'#708090',color:'white'}}
-                icon={<Link to='/'><Icon style={{color:'black'}} type="left" /></Link>}
-                >我的订单</NavBar>
-                <Tabs tabs={tabs}
-                style={{height:'100%'}}
-                >
-                    <div style={{overflowY:'scroll',height:'100%',paddingTop:'10px'}}>
+            <View  style={{flex:1}}>                    
+                <Tabs tabs={wtabs}>
+                    <ScrollView>
                         {
-                                this.state.data.map((item)=>(
-                                    <div className='wodedingdandiv' key={item.time}>
-                                        <p style={{fontSize:'15px',color:'black'}}>科目：{item.class}</p>
-                                        <p>价格：{'￥'+item.price}</p>
-                                        <p>订单时间：{item.time}</p>
-                                        <button onClick={()=>this.del(item.time)}>删除</button>
-                                    </div>
-                                  
-                                ))
+                            this.state.data.map((item)=>(
+                                <View style={styles.viewcontent} key={item.time}>
+                                    <Text style={{fontSize:17,color:'black'}}>科目：{item.class}</Text>
+                                    <Text>价格：{'￥'+item.price}</Text>
+                                    <Text>订单时间：{item.time}</Text>
+                                    <TouchableOpacity onPress={()=>this.del(item.time)} style={{marginLeft:500*s,marginTop:-100*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text  style={{fontSize:17,color:'white'}}>删除</Text></TouchableOpacity>
+                                </View>  
+                            ))
                         }
-                    </div>
-                    <div style={{overflowY:'scroll',height:'100%',paddingTop:'10px'}}>
+                    </ScrollView>
+                    <ScrollView>
                         {
-                                this.state.data1.map((item)=>(
-                                    <div className='wodedingdandiv' key={item.time}>
-                                        <p style={{fontSize:'15px',color:'black'}}>科目：{item.class}</p>
-                                        <p>价格：{'￥'+item.price}</p>
-                                        <p>订单时间：{item.time}</p>
-                                        <button onClick={()=>this.del1(item.time)}>删除</button>
-                                        
-                                    </div>
-                                  
-                                ))
+                            this.state.data1.map((item)=>(
+                                <View style={styles.viewcontent} key={item.time}>
+                                    <Text style={{fontSize:17,color:'black'}}>科目：{item.class}</Text>
+                                    <Text>价格：{'￥'+item.price}</Text>
+                                    <Text>订单时间：{item.time}</Text>
+                                    <TouchableOpacity onPress={()=>this.del1(item.time)} style={{marginLeft:500*s,marginTop:-100*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text style={{fontSize:17,color:'white'}}>删除</Text></TouchableOpacity>
+                                </View>    
+                            ))
                         }
-                    </div>
-                
+                    </ScrollView>
                 </Tabs>
-            </div>
+            </View>
         )
     }
 }
+const styles = StyleSheet.create({
+    viewcontent:{
+        width:610*s,
+        height:120*s,
+        backgroundColor:'white',
+        borderRadius:10*s,
+        opacity:0.8,
+        margin:10*s,
+        padding:10*s
+    }
+})
