@@ -75,7 +75,6 @@ export default class Gerenziliao extends Component {
                 }
             })
     }
-  
     render() {
         return (
             <View>

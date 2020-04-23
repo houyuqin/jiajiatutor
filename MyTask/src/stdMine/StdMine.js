@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, Dimensions, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
-import { Icon, WhiteSpace } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
-
 const {width} = Dimensions.get('window');
 const s = width/640;
-
 export default class StdMine extends Component {
     constructor(){
         super();
@@ -31,23 +28,6 @@ export default class StdMine extends Component {
                 }
             })
     }
-    componentDidUpdate(){
-        fetch('http://148.70.183.184:8006/stdmine/13513467682')
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({data:res.data}) 
-                if (this.state.data[0].wusername == '') {
-                    this.setState({
-                        wusername:'我的昵称'
-                    })
-                }else{
-                    this.setState({
-                        wusername:this.state.data[0].wusername
-                    })
-                }
-            })
-    }
-
     wexitapp = ()=>{
         // Actions.login();
         // AsyncStorage.removeItem('user');
@@ -100,7 +80,6 @@ export default class StdMine extends Component {
         )
     }
 }
-
 const styles = StyleSheet.create({
     bigview:{
         width:600*s,

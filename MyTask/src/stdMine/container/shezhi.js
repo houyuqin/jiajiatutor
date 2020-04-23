@@ -51,14 +51,14 @@ export default class shezhi extends Component {
             .then((res) => {
                 this.setState({data:res.data[0]})
                 this.setState({
+                    wtouxiang:this.state.data.stdtouxiang,
                     wusername:this.state.data.wusername,
                     wsex:this.state.data.wsex,
                     weixinnumber:this.state.data.weixinnumber,
                     wclass:this.state.data.wclass,
                     wschool:this.state.data.wschool,
                 })
-            })  
-             
+            })   
     }
    
     takephoto = ()=>{
@@ -74,15 +74,6 @@ export default class shezhi extends Component {
                 this.setState({
                     imageUrl:source
                 })
-                console.log(this.state.imageUrl);
-                // // console.log(this.state.imageUrl.uri);
-                // let formData = new FormData();
-                // let file = {uri:response.path,type:'multipart/form-data',name:'image.png'} ;
-                // formData.append('images', file);
-                // // console.log(formData);
-                // this.setState({
-                //     wtouxiang:formData
-                // })
             }   
         });   
     }
@@ -122,7 +113,7 @@ export default class shezhi extends Component {
                         <Text style={{fontSize:18}}>头像</Text>
                         <TouchableOpacity onPress={()=> this.takephoto()} style={styles.buttontouxiang}>
                             <ImageBackground style={{width:100*s,height:100*s}} source={require('../../../assets/wjy/img/w头像女孩.png')}>
-                                <Image style={{width:100*s,height:100*s}}  source={{uri:'http://148.70.183.184/bigProject/xiangmu/images/000.png'}}/>
+                                <Image style={{width:100*s,height:100*s}}  source={{uri:'http://148.70.183.184/bigProject/xiangmu/images/111.jpg'}}/>
                             </ImageBackground>
                             <Text style={styles.genghuantouxiang}>更换头像</Text>
                         </TouchableOpacity>

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Text, View ,Dimensions, ScrollView} from 'react-native'
 const {width} = Dimensions.get('window');
 const s = width/640;
-
 let wusername = '';
 export default class Jiaoshipingjia extends Component {
     constructor(){
