@@ -14,7 +14,7 @@ export default class Content extends Component {
 
   componentDidMount() {
   
-    fetch(`http://148.70.183.184:8005/chakan/${this.props.contentId}`, {
+    fetch(`http://148.70.183.184:8005/xiangqing/${this.props.contentId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'text/plain; charset=UTF-8'
@@ -28,21 +28,7 @@ export default class Content extends Component {
       })
 
   }
-  componentDidUpdate(){
-    fetch(`http://148.70.183.184:8005/chakan/${this.props.contentId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'text/plain; charset=UTF-8'
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-
-        this.setState({ data: res.data.splice(res.data.length - 1, 1) })
-        console.log(res.data.splice(res.data.length - 1, 1))
-      })
-
-  }
+ 
 
 
   render() {
@@ -57,7 +43,10 @@ export default class Content extends Component {
                 <Text style={styles.font}>题目：{item.title}</Text>
                 <Text style={styles.font}>内容：</Text>
                 <Text style={styles.font}> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{item.content}</Text>
-                <Text style={styles.font1}>我的答案：{item.zuoye == ' ' ?'“还未提交，请提交”': item.zuoye  }</Text>
+                <Text style={styles.font1}>我的答案：</Text>
+                <Text style={styles.font}> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{item.daan}</Text>
+                <Text style={styles.font1}>教师评语：</Text>
+                <Text style={styles.font}> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{item.pingjia==null?'还未评价':item.pingjia}</Text>
               </View>
            
             </View>
@@ -75,7 +64,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10 * s,
     paddingTop: 20 * s,
-    paddingBottom: 10 * s
+    paddingBottom: 10 * s,
+    backgroundColor:'white'
   },
   font: {
     fontSize: 28

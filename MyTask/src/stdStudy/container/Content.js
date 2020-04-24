@@ -14,7 +14,7 @@ export default class Content extends Component {
 
   componentDidMount() {
 
-    fetch(`http://148.70.183.184:8005/taskt/${this.props.contentId}`, {
+    fetch(`http://148.70.183.184:8005/unxiangqing/${this.props.contentId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'text/plain; charset=UTF-8'
@@ -22,14 +22,13 @@ export default class Content extends Component {
     })
       .then((res) => res.json())
       .then((res) => {
-
         this.setState({ data: res.data.splice(res.data.length - 1, 1) })
-        //console.log(res.data.splice(res.data.length - 1, 1))
       })
 
   }
-  componentDidUpdate(){
-    fetch(`http://148.70.183.184:8005/taskt/${this.props.contentId}`, {
+  componentDidUpdate() {
+
+    fetch(`http://148.70.183.184:8005/unxiangqing/${this.props.contentId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'text/plain; charset=UTF-8'
@@ -37,12 +36,25 @@ export default class Content extends Component {
     })
       .then((res) => res.json())
       .then((res) => {
-
         this.setState({ data: res.data.splice(res.data.length - 1, 1) })
-        console.log(res.data.splice(res.data.length - 1, 1))
       })
 
   }
+  // componentDidUpdate(){
+  //   fetch(`http://148.70.183.184:8005/taskt/${this.props.contentId}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'text/plain; charset=UTF-8'
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+
+  //       this.setState({ data: res.data.splice(res.data.length - 1, 1) })
+  //       console.log(res.data.splice(res.data.length - 1, 1))
+  //     })
+
+  // }
   change=(e)=>{
    this.setState({
      content:e
@@ -51,8 +63,6 @@ export default class Content extends Component {
   add=()=>{
   var aa=this.state.content;
   var id1=this.props.contentId;
-
-  console.log(JSON.stringify(aa))
   fetch(`http://148.70.183.184:8005/daan/${id1}`, {
     method: "POST",
     headers: {
@@ -61,7 +71,7 @@ export default class Content extends Component {
     body: JSON.stringify(aa)
   }).then(function(response) {
  
-    Alert.alert('您的答案提交成功！')
+    Alert.alert('您的答案提交成功！,若要提交作业请返回上一页提交!')
 
 
   });   
@@ -73,12 +83,13 @@ export default class Content extends Component {
         <FlatList
           data={this.state.data}
           renderItem={({ item, index }) => (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <View style={styles.box}>
                 <Text style={styles.font}>题目：{item.title}</Text>
                 <Text style={styles.font}>内容：</Text>
                 <Text style={styles.font}> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{item.content}</Text>
-                <Text style={styles.font}>我的答案：{item.zuoye == ' ' ?'“还未提交，请提交”': item.zuoye  }</Text>
+                <Text style={{marginTop:20*s,fontSize:26}}>我的答案：</Text>
+                <Text style={styles.font}>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{item.daan == undefined ?'还未提交，请提交': item.daan }</Text>
               </View>
               <View style={styles.box1}>
                 <Text style={styles.font}>提交答案:</Text>
@@ -105,12 +116,14 @@ export default class Content extends Component {
 const styles = StyleSheet.create({
   box:
   {
+    marginTop:20*s,
     width: '90%',
-    borderColor: 'red',
+    borderColor: 'rgb(125, 179, 201)',
     borderWidth: 2,
     borderRadius: 10 * s,
     paddingTop: 20 * s,
-    paddingBottom: 10 * s
+    paddingBottom: 10 * s,
+    backgroundColor:'white'
   },
   font: {
     fontSize: 28

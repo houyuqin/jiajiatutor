@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, FlatList, Dimensions, ImageBackground, Image, TouchableOpacity, Alert } from 'react-native'
+import { Text, View, StyleSheet, FlatList, Dimensions, ImageBackground, Image, AsyncStorage, TouchableOpacity, Alert } from 'react-native'
 import { Tabs } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
 let ni = ''
@@ -17,147 +17,138 @@ export default class Homework extends Component {
         this.state = {
             data1: [],
             data: [],
-            nicheng: [],
-            teap: []
+
+            teap: [],
+            stdp: '',
+            submit: '',
+            name: ''
         }
     }
     componentDidMount() {
-        var stdp = 44444444444
-        fetch(`http://148.70.183.184:8006/stdmine/${stdp}`, {
+        AsyncStorage.getItem('std', (err, result) => {
+            this.setState({ stdp: JSON.parse(result) })
+            //获取未完成作业
+            fetch(`http://148.70.183.184:8005/uncom/${this.state.stdp}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'text/plain; charset=UTF-8'
+                },
+            }).then((res) => res.json())
+                .then((res) => {
+                    this.setState({ data: res.data })
+
+                })
+            //获取已经完成作业
+            fetch(`http://148.70.183.184:8005/com/${this.state.stdp}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'text/plain; charset=UTF-8'
+                },
+            }).then((res) => res.json())
+                .then((res) => {
+                    this.setState({ data1: res.data })
+                })
+        })
+    }
+
+
+
+    addCom = (id) => {
+
+        //获取全部内容
+        fetch(`http://148.70.183.184:8005/unxiangqing/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain; charset=UTF-8'
             },
         }).then((res) => res.json())
             .then((res) => {
-                this.setState({ nicheng: res.data })
-                ni = this.state.nicheng[0].wusername
-            })
-        
-        fetch(`http://148.70.183.184:8000/selecttea/${stdp}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ teap: res.data });
-                for (var index in this.state.teap) {
-
-                    num[index] = this.state.teap[index]
+                this.setState({ submit: res.data })
+                if (this.state.submit[0].daan == null) {
+                    Alert.alert('您还未提交答案，请提交！')
                 }
-                for (var index in num) {
-                    fetch(`http://148.70.183.184:8005/taskfabu/${num[index].teaphone}`, {
-                        method: 'GET',
+                else {
+
+                    fetch(`http://148.70.183.184:8005/delcom/${id}`, {
+                        method: 'DELETE',
                         headers: {
                             'Content-Type': 'text/plain; charset=UTF-8'
                         },
                     })
                         .then((res) => res.json())
                         .then((res) => {
-                            //console.log(res)
-                            for (var index in res.data) {
-                                this.setState({ data: [...this.state.data, res.data[index]] })
-                            }
+                            AsyncStorage.getItem('std', (err, result) => {
+                                this.setState({ stdp: JSON.parse(result) })
+                                fetch(`http://148.70.183.184:8005/uncom/${this.state.stdp}`, {
+                                    method: 'GET',
+                                    headers: {
+                                        'Content-Type': 'text/plain; charset=UTF-8'
+                                    },
+                                }).then((res) => res.json())
+                                    .then((res) => {
+                                        this.setState({ data: res.data })
+                                        Alert.alert('您的作业提交成功!')
+                                    })
+
+                                //获取名称
+                                fetch(`http://148.70.183.184:8006/stdmine/${this.state.stdp}`, {
+                                    method: 'GET',
+                                    headers: {
+                                        'Content-Type': 'text/plain; charset=UTF-8'
+                                    },
+                                }).then((res) => res.json())
+                                    .then((res) => {
+
+                                        this.setState({ name: res.data[0].wusername })
+                                        console.log(this.state.name)
+
+                                        this.state.submit[0].name = this.state.name
+                                        //将全部内容加到已完成表中
+                                        fetch("http://148.70.183.184:8005/complete", {
+                                            method: "POST",
+                                            headers: {
+                                                'Content-Type': 'text/plain; charset=UTF-8'
+                                            },
+                                            body: JSON.stringify(this.state.submit[0])
+                                        }).then((res) => {
+
+                                        })
+
+                                         //获取已经完成作业
+                                fetch(`http://148.70.183.184:8005/com/${this.state.stdp}`, {
+                                    method: 'GET',
+                                    headers: {
+                                        'Content-Type': 'text/plain; charset=UTF-8'
+                                    },
+                                }).then((res) => res.json())
+                                    .then((res) => {
+                                        this.setState({ data1: res.data })
+                                    })
+                                    })
+
+
+
+                               
+                            })
                         })
+                   
                 }
             })
-        
-        fetch(`http://148.70.183.184:8005/tasks/${stdp}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ data1: res.data });
-            })
-        
 
-        var usr = 44444444444;
-        fetch(`http://148.70.183.184:8006/stdmine/${usr}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ nicheng: res.data })
 
-            })
 
-     }
-    componentDidUpdate(){
-        var stdp = 44444444444;
-        fetch(`http://148.70.183.184:8005/tasks/${stdp}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ data1: res.data });
-            })
 
-    }
-    addCom = (msg) => {
-       
-        var stdp = 44444444444;
-        fetch(`http://148.70.183.184:8005/wanchengren/${stdp}`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-            body: JSON.stringify(ni)
-        }).then((res) => {
-            Alert.alert('任务已完成')
-        });
-        fetch(`http://148.70.183.184:8005/taskwancheng/${stdp}`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-            body: JSON.stringify(this.state.data[msg])
-        }).then((res) => {
-          
-        });
-        // var id = this.state.data[msg].id
-        // fetch(`http://148.70.183.184:8005/taskt/${stdp}`, {
-        //     method: 'DELETE',
-        //     headers: {
-        //         'Content-Type': 'text/plain; charset=UTF-8'
-        //     },
-        // })
-        //     .then((res) => res.json())
-        //     .then((res) => {
 
-        //     })
+
 
     }
     display = () => {
         Alert.alert('您的此项任务已完成，若要永久删除请按删除键！')
     }
-    // dele = (msg) => {
-    //     var id = this.state.data[msg].id
-    //     fetch(`http://148.70.183.184:8005/taskt/${id}`, {
-    //         method: 'DELETE',
-    //         headers: {
-    //             'Content-Type': 'text/plain; charset=UTF-8'
-    //         },
-    //     })
-    //         .then((res) => res.json())
-    //         .then((res) => {
-    //             Alert.alert('任务删除成功!')
-    //         })
-    // }
-    dele1 = (msg) => {
-        var id = this.state.data1[msg].id
 
-        fetch(`http://148.70.183.184:8005/tasks/${id}`, {
+    dele1 = (id) => {
+        console.log(id)
+        fetch(`http://148.70.183.184:8005/del/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'text/plain; charset=UTF-8'
@@ -165,25 +156,24 @@ export default class Homework extends Component {
         })
             .then((res) => res.json())
             .then((res) => {
-                Alert.alert('任务永久删除成功!')
+                AsyncStorage.getItem('std', (err, result) => {
+                    this.setState({ stdp: JSON.parse(result) })
+                    fetch(`http://148.70.183.184:8005/com/${this.state.stdp}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'text/plain; charset=UTF-8'
+                        },
+                    }).then((res) => res.json())
+                        .then((res) => {
+                            this.setState({ data1: res.data })
+                            Alert.alert('任务永久删除成功！')
+                        })
+                })
             })
     }
-    show = (msg) => {
-        var id1 = this.state.data1[msg].id
 
-        fetch(`http://148.70.183.184:8005/tasks/${id1}`, {
-            method: "GET",
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-            body: JSON.stringify(this.state.data[msg])
-        }).then((res) => {
 
-        });
-        id1 = this.state.data1[msg].content;
-    }
 
- 
     render() {
 
         return (
@@ -196,26 +186,19 @@ export default class Homework extends Component {
                                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                     <View style={styles.uncom}>
                                         <ImageBackground source={require('../../../assets/zx/z7.jpg')} style={styles.img}>
-                                            <View><Text style={styles.renwu1}>任务{index+1}</Text></View>
+                                            <View><Text style={styles.renwu1}>任务{item.id}</Text></View>
                                             <View><Text style={styles.renwu2}>题目：{item.title}</Text></View>
                                             <View><Text style={styles.renwu2}>科目类型:{item.kemu}</Text></View>
-                                            <View><Text style={styles.renwu2}>完成时间:{item.endtime}</Text></View>
+                                            <View><Text style={styles.renwu2}>完成时间:{new Date(item.endtime).getFullYear() + '-' + (new Date(item.endtime).getMonth() + 1) + '-' + new Date(item.endtime).getDate() + ' ' + new Date(item.endtime).getHours() + ':' + new Date(item.endtime).getMinutes() + ':' + new Date(item.endtime).getSeconds()}</Text></View>
                                             <View><Text style={styles.renwu2}>发布教师:{item.author}</Text></View>
                                             <View style={{ flex: 1., flexDirection: 'row' }}>
-                                                <TouchableOpacity  onPress={() => this.addCom(index)}>
+                                                <TouchableOpacity onPress={() => this.addCom(item.id)}>
                                                     <View style={{ flexDirection: 'row' }}>
-                                                        <Image style={styles.img1} source={require('../../../assets/zx/z5.png')}></Image>
-                                                        <Text style={styles.fon}>完成</Text>
+                                                        <Image style={styles.img1} source={require('../../../assets/zx/submit.png')}></Image>
+                                                        <Text style={styles.fon}>提交</Text>
                                                     </View>
                                                 </TouchableOpacity>
-
-                                                {/* <TouchableOpacity onPress={() => this.dele(index)}>
-                                                    <View style={{ flexDirection: 'row' }}>
-                                                        <Image style={styles.img2} source={require('../../img/z7.png')}></Image>
-                                                        <Text style={styles.fon}>删除</Text>
-                                                    </View>
-                                                </TouchableOpacity> */}
-                                                <TouchableOpacity  style={styles.btn} onPress={() => {Actions.content({'contentId':item.id})}}><View style={styles.btn1}><Text style={styles.xiangqing}>查看详情>></Text></View></TouchableOpacity>
+                                                <TouchableOpacity style={styles.btn} onPress={() => { Actions.content({ 'contentId': item.id }) }}><View style={styles.btn1}><Text style={styles.xiangqing}>查看详情>></Text></View></TouchableOpacity>
                                             </View>
                                         </ImageBackground>
 
@@ -226,22 +209,22 @@ export default class Homework extends Component {
                         ></FlatList>
                     </View>
                     <View style={{ flex: 1 }}>
-                        <View>
-                            <FlatList
-                                data={this.state.data1}
-                                renderItem={({ item, index }) => (
-                                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                        <View style={styles.ccbox}>
-                                            <View style={{width:'50%'}}><Text style={{fontSize:28}}>{item.id}----{item.title}</Text></View>
-                                            <View style={{width:'30%'}}><TouchableOpacity style={styles.ccbtn} onPress={() => Actions.contents({'contentId':item.id})}><View><Text style={styles.xiangqing}>查看详情>></Text></View></TouchableOpacity></View>
-                                            <View style={{width:'10%'}}><TouchableOpacity onPress={() => this.display()}><Image style={styles.ccimg} source={require('../../../assets/zx/z6.png')}></Image></TouchableOpacity></View>
-                                            <View style={{width:'5%'}}><TouchableOpacity onPress={() => this.dele1(index)}><Image style={styles.ccimg} source={require('../../../assets/zx/z7.png')}></Image></TouchableOpacity></View>
-                                        </View>
-                                    </View>
 
-                                )}
-                            ></FlatList>
-                        </View>
+                        <FlatList
+                            data={this.state.data1}
+                            renderItem={({ item, index }) => (
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <View style={styles.ccbox}>
+                                        <View style={{ width: '50%' }}><Text style={{ fontSize: 28 }}>{item.id}----{item.title}</Text></View>
+                                        <View style={{ width: '30%' }}><TouchableOpacity style={styles.ccbtn} onPress={() => Actions.contents({ 'contentId': item.id })}><View><Text style={styles.xiangqing}>查看详情>></Text></View></TouchableOpacity></View>
+                                        <View style={{ width: '10%' }}><TouchableOpacity onPress={() => this.display()}><Image style={styles.ccimg} source={require('../../../assets/zx/z6.png')}></Image></TouchableOpacity></View>
+                                        <View style={{ width: '5%' }}><TouchableOpacity onPress={() => this.dele1(item.id)}><Image style={styles.ccimg} source={require('../../../assets/zx/z7.png')}></Image></TouchableOpacity></View>
+                                    </View>
+                                </View>
+
+                            )}
+                        ></FlatList>
+
                     </View>
                 </Tabs>
 
@@ -276,11 +259,11 @@ const styles = StyleSheet.create({
         marginTop: 6
     },
     img1: {
-        width: 45 * s,
-        height: 45 * s,
+        width: 35 * s,
+        height: 35 * s,
         resizeMode: 'stretch',
         marginTop: 25 * s,
-        marginLeft: 50 * s
+        marginLeft: 80 * s
     },
     img2: {
         width: 45 * s,
@@ -304,11 +287,11 @@ const styles = StyleSheet.create({
         flex: 1
     },
     xiangqing: {
-        fontSize: 18,
+        fontSize: 20,
         //color:'white',   
     },
     fon: {
-        fontSize: 22,
+        fontSize: 20,
         marginTop: 25 * s,
         marginLeft: 9 * s
     },
@@ -321,13 +304,13 @@ const styles = StyleSheet.create({
         height: 80 * s,
         width: '97%',
         marginTop: 10 * s,
-        alignItems:'center'
+        alignItems: 'center'
     },
-    ccimg:{
-        width:40*s,
-        height:40*s
+    ccimg: {
+        width: 40 * s,
+        height: 40 * s
     },
-    ccbtn:{
+    ccbtn: {
         // width: 180 * s,
         // height: 60 * s,
         // borderRadius: 15 * s,

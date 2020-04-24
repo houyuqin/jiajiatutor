@@ -18,6 +18,8 @@ import NaviBar from 'react-native-pure-navigation-bar';
 import { Actions } from 'react-native-router-flux';
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
+const std = [];
+
 export default class TeaStudy extends Component {
     constructor() {
         super()
@@ -28,14 +30,17 @@ export default class TeaStudy extends Component {
             endtime: '',
             name: '',
             content: '',
-            value:new Date(),
-            value1:undefined
+            value: new Date(),
+            value1: undefined,
+            std: [],
+            me: ''
+
         }
         this.onChange = value => {
             this.setState({ value });
         };
         this.onChange1 = value => {
-            this.setState({ value1:value });
+            this.setState({ value1: value });
         };
     }
 
@@ -60,53 +65,81 @@ export default class TeaStudy extends Component {
             content: e
         })
     }
-
-
     componentDidMount() {
-        var me = 18231868912;
-        let today = new Date(),
-
-            time0 = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
-                + '   ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-
-        this.setState({
-            time: time0,
-            value:new Date()
-        });
-
-        fetch(`http://148.70.183.184:8006/teamine/${me}`)
-            .then(res => res.json())
-            .then(res => {
-                this.setState({
-                    name: res.data[0].wusername
+        AsyncStorage.getItem('tea', (err, result) => {
+            this.setState({ me: JSON.parse(result) })
+            fetch(`http://148.70.183.184:8006/teamine/${this.state.me}`)
+                .then(res => res.json())
+                .then(res => {
+                    this.setState({
+                        name: res.data[0].wusername
+                    })
                 })
-            })
+        })
     }
 
     fabu = () => {
-        var a = {};
-        a.kemu = this.state.kemu;
-        a.title = this.state.title;
-        a.time = this.state.value;
-        a.author = this.state.name;
-        a.content = this.state.content;
-        a.userphone = 18231868912;
-        a.endtime = this.state.value1;
-        fetch("http://148.70.183.184:8005/taskt", {
-            method: "POST",
-            headers: {
-               'Content-Type': 'text/plain; charset=UTF-8'
-            },
-            body: JSON.stringify(a)
-          }).then((res)=>{
-            Alert.alert('您的任务发布完毕！')
-          }
-          )
+        AsyncStorage.getItem('tea', (err, result) => {
+            this.setState({ me: JSON.parse(result) })
+            var a = {
+                kemu: this.state.kemu,
+                title: this.state.title,
+                time: this.state.value,
+                author: this.state.name,
+                content: this.state.content,
+                userphone: this.state.me,
+                endtime: this.state.value1
+            };
+            var b = {
+                kemu: this.state.kemu,
+                title: this.state.title,
+                time: this.state.value,
+                author: this.state.name,
+                content: this.state.content,
+                userphone: this.state.me,
+                endtime: this.state.value1
+            }
+            if (a.kemu == undefined || a.title == undefined || a.endtime == undefined || a.content == '') {
+                Alert.alert('您输入的信息不完善，请重新输入！')
+            }
+            else {
+
+                //查看哪些学生选择了我同时学生未完成表里添加内容
+                fetch(`http://148.70.183.184:8000/selectstd/${this.state.me}`)
+                    .then(res => res.json())
+                    .then(res => {
+                        for (var index in res.data) {
+                            b.usr = res.data[index].stdphone
+                            fetch("http://148.70.183.184:8005/uncomplete", {
+                                        method: "POST",
+                                        headers: {
+                                            'Content-Type': 'text/plain; charset=UTF-8'
+                                        },
+                                        body: JSON.stringify(b)
+                                    }).then((res) => {
+
+                                    })
+                        }
+
+
+                    })
+                //教师表里加入信息
+                fetch("http://148.70.183.184:8005/taskt", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'text/plain; charset=UTF-8'
+                    },
+                    body: JSON.stringify(a)
+                }).then((res) => {
+                    Alert.alert('您的任务发布完毕！')
+                })
+
+            }
+        })
     }
     render() {
         return (
             <View>
-
                 <NaviBar
                     style={{ color: 'white', backgroundColor: 'black' }}
                     backgroundColor='black'
@@ -137,34 +170,34 @@ export default class TeaStudy extends Component {
                                 />
                             </View>
                         </View>
-                          <Provider >
+                        <Provider >
                             <View  >
                                 <List>
                                     <DatePicker
                                         value={this.state.value}
                                         onChange={this.onChange}
                                     >
-                                        <List.Item arrow="horizontal" style={{marginLeft:-15*s,height:50*s,marginTop:25*s}}>发布时间:</List.Item>
+                                        <List.Item arrow="horizontal" style={{ marginLeft: -15 * s, height: 50 * s, marginTop: 25 * s }}>发布时间:</List.Item>
                                     </DatePicker>
                                 </List>
                             </View>
-                       
+
                             <View>
                                 <List>
                                     <DatePicker
                                         value={this.state.value1}
-                                   
+                                        minDate={new Date()}
                                         onChange={this.onChange1}
-                                
+
                                     >
-                                        <List.Item arrow="horizontal" style={{marginLeft:-15*s,height:50*s,marginTop:25*s}}>截止时间:</List.Item>
+                                        <List.Item arrow="horizontal" style={{ marginLeft: -15 * s, height: 50 * s, marginTop: 25 * s }}>截止时间:</List.Item>
                                     </DatePicker>
                                 </List>
                             </View>
                         </Provider>
 
 
-                       
+
                         <View style={{ width: '90%', height: 70 * s, marginTop: 25 * s, borderBottomColor: 'rgb(204, 202, 202)', flexDirection: 'row', }}>
                             <Text style={{ fontSize: 17 }}>发布人:{this.state.name}</Text>
                         </View>

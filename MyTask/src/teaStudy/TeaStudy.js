@@ -21,57 +21,25 @@ export default class TeaStudy extends Component {
         super()
         this.state={
             data:'',
-            name:''
+            name:'',
+            me:''
         }
     }
     componentDidMount(){
-        var me=18231868912;
+        AsyncStorage.getItem('tea', (err, result) => {
+            this.setState({ me: JSON.parse(result) })
        
-        fetch(`http://148.70.183.184:8006/teamine/${me}`)
+        fetch(`http://148.70.183.184:8006/teamine/${this.state.me}`)
         .then(res=>res.json())
         .then(res=>{
             this.setState({
                 name:res.data[0].wusername
             })
         })
-        
+    })
         
     }
-    // componentDidMount() {
-    //     var usr=18231868912
-    //        fetch(`http://148.70.183.184:8006/teamine/${usr}`,{
-    //         method: 'GET',
-    //             headers: {
-    //                 'Content-Type': 'text/plain; charset=UTF-8'
-    //             },
-    //         })
-    //             .then((res) => res.json())
-    //             .then((res) => {
-                
-    //                 this.setState({ data: res.data });
-    //                 console.log(this.state.data[0].teatouxiang)
-    //                 console.log(this.state.data[0].wusername)
-    //                if(!this.state.data[0].teatouxiang&&!this.state.data[0].wusername){
-    //                 src='../../assets/cq/780.jpg'
-    //                 username='未设置'
-    //                }
-    //                else if(this.state.data[0].teatouxiang&&!this.state.data[0].wusername)
-    //                {
-    //                 src='./'+this.state.data[0].teatouxiang
-    //                 username='未设置'
-    //                }
-    //                else if(!this.state.data[0].teatouxiang&&this.state.data[0].wusername)
-    //                {
-    //                 src='../../assets/cq/780.jpg'
-    //                 username=this.state.data[0].wusername
-    //                }
-    //                else
-    //                {
-    //                 src='./'+this.state.data[0].teatouxiang
-    //                 username=this.state.data[0].wusername
-    //                }
-    //             })
-    // }
+
     render() {
         return (
             <ImageBackground style={{ flex: 1 }}

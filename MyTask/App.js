@@ -116,7 +116,6 @@ const App = () => {
 								{/* 学习 */}
 								<Scene 
 									key='goodsPage'
-									hideNavBar
 									title='学习'
 									icon={
 										({focused})=><Icon 
@@ -130,42 +129,42 @@ const App = () => {
 									<Scene key='jihua'
 										title='学习计划'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={jihua} ></Scene>
 									<Scene key='Myjihua'
 										title='我的计划'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={Myjihua} ></Scene>
 									<Scene key='jihuacontent'
 										title='计划内容'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={Jihuacontent} ></Scene>
 									<Scene key='homework'
 										title='我的作业'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={Homework} ></Scene>
 									<Scene key='lianxi'
 										title='自我练习'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={MyStudy} ></Scene>
 									<Scene key='video'
 										title='我的视频'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={Video} ></Scene>
 									<Scene key='content'
 										title='查看详情'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={Contentstd} ></Scene>
 									<Scene key='contents'
 										title='查看详情'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={Contents} ></Scene>
 								</Scene>
 								{/* 用户中心 */}

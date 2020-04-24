@@ -24,14 +24,15 @@ export default class TeaStudy extends Component {
         super(props);
         this.state = {
             data: [],
-            pingjia: ''
+            pingjia: '',
+            id:''
         }
 
     }
     componentDidMount() {
         let id = this.props.id
-
-        fetch(`http://148.70.183.184:8005/chakan/${id}`, {
+        this.setState({id:this.props.id})
+        fetch(`http://148.70.183.184:8005/pinxiangqing/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain; charset=UTF-8'
@@ -40,13 +41,13 @@ export default class TeaStudy extends Component {
             .then((res) => res.json())
             .then((res) => {
                 this.setState({ data: res.data })
-
             })
 
     }
     componentUpdate() {
         let id = this.props.id
-        fetch(`http://148.70.183.184:8005/tasks/${id}`, {
+
+        fetch(`http://148.70.183.184:8005/pinxiangqing/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain; charset=UTF-8'
@@ -55,7 +56,6 @@ export default class TeaStudy extends Component {
             .then((res) => res.json())
             .then((res) => {
                 this.setState({ data: res.data })
-
             })
 
     }
@@ -71,18 +71,31 @@ export default class TeaStudy extends Component {
     tijiao=()=>{
         let aa=this.state.pingjia
         let id1 = this.props.id
-    fetch(`http://148.70.183.184:8005/pingjia/${id1}`, {
+    if(this.state.pingjia=='')
+    {Alert.alert('请输入评价！')}
+    else{
+        fetch(`http://148.70.183.184:8005/pingjia/${id1}`, {
       method: "POST",
       headers: {
          'Content-Type': 'text/plain; charset=UTF-8'
       },
       body: JSON.stringify(aa)
-    }).then(function(response) {
-      // do sth
-     
-      Alert.alert('您的评论提交成功！若要永久删除请按下方删除键！')
-      
-    });   
+    }).then((res) => res.json())
+    .then((res) => {
+        fetch(`http://148.70.183.184:8005/pinxiangqing/${this.state.id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'text/plain; charset=UTF-8'
+            },
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({ data: res.data })
+            })
+
+        Alert.alert('您的评价提交成功')
+    })
+    }
     }
 
     //删除
@@ -119,9 +132,12 @@ export default class TeaStudy extends Component {
                             renderItem={({ item }) => (
                                 <View>
                                     <View style={{ width: '90%', borderColor: 'rgb(204, 202, 202)', borderWidth: 1 }}>
-                                        <Text style={{ fontSize: 22 }}>{item.content}</Text>
+                                    <Text style={{ fontSize: 25, marginTop: 20 * s }}>作业内容：</Text>
+                                        <Text style={{ fontSize: 22 }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.content}</Text>
                                         <Text style={{ fontSize: 25, marginTop: 20 * s }}>学生答案：</Text>
-                                        <Text style={{ fontSize: 22, marginTop: 20 * s }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.zuoye}</Text>
+                                        <Text style={{ fontSize: 22, marginTop: 20 * s }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.daan}</Text>
+                                        <Text style={{ fontSize: 25, marginTop: 20 * s }}>我的评价：</Text>
+                                        <Text style={{ fontSize: 22, marginTop: 20 * s }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.pingjia==null?'还未评价':item.pingjia}</Text>
                                     </View>
                                 </View>
                             )}
@@ -142,11 +158,11 @@ export default class TeaStudy extends Component {
                         </View>
                         <View style={{ flexDirection: 'row', }}>
                             <TouchableOpacity onPress={() => this.tijiao()}>
-                                <Text style={{ width: 75 * s, height: 45 * s, marginTop: 20 * s, marginLeft: 340 * s, borderRadius: 10, paddingLeft: 12 * s, fontSize: 14, color: 'white', paddingTop: 7 * s, backgroundColor: '#2f618b' }}>提交</Text>
+                                <Text style={{ width: 75 * s, height: 45 * s, marginTop: 20 * s, marginLeft: 440 * s, borderRadius: 10, paddingLeft: 12 * s, fontSize: 14, color: 'white', paddingTop: 7 * s, backgroundColor: '#2f618b' }}>提交</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.shanchu()}>
+                            {/* <TouchableOpacity onPress={() => this.shanchu()}>
                                 <Text style={{ width: 75 * s, height: 45 * s, marginTop: 20 * s, marginLeft: 10 * s, borderRadius: 10, paddingLeft: 12 * s, fontSize: 14, color: 'white', paddingTop: 7 * s, backgroundColor: '#2f618b' }}>删除</Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                         </View>
                     </View>
                 </View>

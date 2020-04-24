@@ -22,25 +22,27 @@ export default class TeaStudy extends Component {
         super()
         this.state = {
             data: '',
-            name: ''
+            name: '',
+            stdp: ''
         }
     }
     componentDidMount() {
-        var stdp = 44444444444
-        fetch(`http://148.70.183.184:8006/stdmine/${stdp}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-        }).then((res) => res.json())
-            .then((res) => {
-         
-            this.setState({name:res.data[0].wusername})
-            })
+        AsyncStorage.getItem('std', (err, result) => {
+            this.setState({ stdp: JSON.parse(result) })
+            fetch(`http://148.70.183.184:8006/stdmine/${this.state.stdp}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'text/plain; charset=UTF-8'
+                },
+            }).then((res) => res.json())
+                .then((res) => {
 
+                    this.setState({ name: res.data[0].wusername })
+                })
+        })
 
     }
-   
+
     render() {
         return (
             <ImageBackground style={{ flex: 1 }}
@@ -118,29 +120,29 @@ const styles = StyleSheet.create({
         backgroundColor: '#355586',
         flexDirection: 'row'
     },
-    box2:{
-         width: '90%',
-          height: 140 * s,
-           marginTop: 30 * s, 
-           borderRadius: 20 * s, 
-           elevation: 8, 
-           shadowColor: 'red', 
-           backgroundColor: '#1d3c6a', 
-           flexDirection: 'row' 
-    },
-    box3:{
+    box2: {
         width: '90%',
-         height: 140 * s,
-          marginTop: 30 * s, 
-          borderRadius: 20 * s, 
-          elevation: 8, 
-          shadowColor: 'red', 
-          backgroundColor: '#7D9EC0', 
-          flexDirection: 'row' 
-   },
-    font:{
-        fontSize: 20, 
+        height: 140 * s,
+        marginTop: 30 * s,
+        borderRadius: 20 * s,
+        elevation: 8,
+        shadowColor: 'red',
+        backgroundColor: '#1d3c6a',
+        flexDirection: 'row'
+    },
+    box3: {
+        width: '90%',
+        height: 140 * s,
+        marginTop: 30 * s,
+        borderRadius: 20 * s,
+        elevation: 8,
+        shadowColor: 'red',
+        backgroundColor: '#7D9EC0',
+        flexDirection: 'row'
+    },
+    font: {
+        fontSize: 20,
         marginTop: 50 * s,
-         marginLeft: 30 * s 
+        marginLeft: 30 * s
     }
 })

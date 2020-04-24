@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Dimensions, Image, ScrollView, FlatList, TouchableOpacity,Alert } from 'react-native'
+import { Text, View, StyleSheet, Dimensions, Image, ScrollView, FlatList, AsyncStorage,TouchableOpacity,Alert } from 'react-native'
 import { Icon, Carousel, DatePicker, List, Provider, TextareaItem } from '@ant-design/react-native'
 import { Actions } from 'react-native-router-flux';
 const { width, scale } = Dimensions.get('window');
@@ -12,7 +12,8 @@ export default class Jihua extends Component {
             value1: undefined,
             list: ['2', '3', '4'],
             name:'',
-            text:''
+            text:'',
+            usr:''
         };
         this.onChange = value => {
             this.setState({ value });
@@ -26,8 +27,9 @@ export default class Jihua extends Component {
    this.setState({text:e})
     }
     componentDidMount(){
-        var usr=44444444444
-        fetch(`http://148.70.183.184:8006/stdmine/${usr}`, {
+        AsyncStorage.getItem('std', (err, result) => {
+            this.setState({ usr: JSON.parse(result) })
+        fetch(`http://148.70.183.184:8006/stdmine/${this.state.usr}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain; charset=UTF-8'
@@ -38,11 +40,12 @@ export default class Jihua extends Component {
                    this.setState({name:res.data[0].wusername})
                    
             })
+        })
 
     }
     add=()=>{
        var body={};
-       body.usr=44444444444;
+       body.usr=this.state.usr;
        body.name=this.state.name;
        body.starttime=this.state.value;
        body.endtime=this.state.value1;
@@ -105,7 +108,7 @@ export default class Jihua extends Component {
                         <List>
                             <DatePicker
                                 value={this.state.value1}
-
+                                minDate={new Date()}
                                 onChange={this.onChange1}
 
                             >
@@ -134,7 +137,7 @@ export default class Jihua extends Component {
                     <Image style={{ resizeMode: 'stretch', height: 60 * s, width: 60 * s }} source={require('../../img/z8.png')}></Image>
                 </TouchableOpacity>
                <View style={{justifyContent:'center',alignItems:'center'}}>
-               <TouchableOpacity style={styles.tab} onPress={()=>Actions.Myjihua({'usr':44444444444})}><View><Text style={{fontSize:22}}>查看我的计划>></Text></View></TouchableOpacity>
+               <TouchableOpacity style={styles.tab} onPress={()=>Actions.Myjihua({'usr':this.state.usr})}><View><Text style={{fontSize:22}}>查看我的计划>></Text></View></TouchableOpacity>
                </View>
             </View>
 
