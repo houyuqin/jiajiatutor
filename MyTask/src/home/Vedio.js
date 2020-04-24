@@ -53,19 +53,12 @@ export default class Vedio extends Component {
             this.setState({
                 data:res.data
             })  
-        })
-        .then(()=>{
-            console.log(this.state.data)
         });
 
-        AsyncStorage.getItem('user')
+        AsyncStorage.getItem('std')
         .then(res=>{
-            let user = JSON.parse(res);
-            // console.log(user.username);
-            this.setState({username:user.username});
-        })
-        .then(()=>{
-            console.log(this.state.username);
+            let std = JSON.parse(res);
+            this.setState({username:std});
         });
     }
     render() {

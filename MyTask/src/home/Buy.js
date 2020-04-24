@@ -36,19 +36,12 @@ export default class Buy extends Component {
             this.setState({name:buy.name});
             this.setState({price:buy.price});
             this.setState({vedio:buy.vedio});
-        })
-        .then(()=>{
-            console.log(this.state.vedio);
         });
 
-        AsyncStorage.getItem('user')
+        AsyncStorage.getItem('std')
         .then(res=>{
-            let user = JSON.parse(res);
-            // console.log(user.username);
-            this.setState({username:user.username});
-        })
-        .then(()=>{
-            console.log(this.state.username);
+            let std = JSON.parse(res);
+            this.setState({username:std});
         });
     }
     bought=(time)=>{

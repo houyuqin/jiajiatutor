@@ -48,31 +48,6 @@ export default class Course extends Component {
             console.log(err);
         });
     }
-    // love=(vedio0,price0)=>{
-    //     let class0 =this.props.location.search.split('=')[1];
-    //     let usernum0 = window.location.search.split('=')[1];
-    //     console.log(vedio0,class0,price0,usernum0);
-    //     // let name0 = 'usr';
-    //     let a = {vedio:vedio0,class:class0,price:price0,usernum:usernum0}
-    //     fetch(`http://148.70.183.184:8000/mylove`,{
-    //         method:"POST",
-    //         headers:{
-    //             'Content-Type': 'text/plain; charset=UTF-8',
-    //         },
-    //         body:JSON.stringify(a)
-    //     }).then((res)=>{ 
-    //         if(res.status === 200){
-    //             alert('收藏成功！');
-    //             return res.json(a);
-    //         }else{
-    //             alert('该视频已在收藏列表！');
-    //         }
-    //     }).then((data)=>{
-    //         console.log(data);
-    //     }).catch((err)=>{
-    //         console.log(err);
-    //     });
-    // }
     componentDidMount(){
         AsyncStorage.getItem('kemu')
         .then(res=>{

@@ -10,7 +10,8 @@ export default class GoodTea extends Component {
     constructor(){
         super();
         this.state={
-            data:[]
+            data:[],
+            username:''
         }
     }
     componentDidMount(){
@@ -20,43 +21,29 @@ export default class GoodTea extends Component {
             this.setState({
                 data:res
             })  
-        })
-        .then(()=>{
-            console.log(this.state.data)
-        })
+        });
+        AsyncStorage.getItem('std')
+        .then(res=>{
+            let std = JSON.parse(res);
+            this.setState({username:std});
+        });
         
     }
     selecttea=(phone)=>{
-        // let std = window.location.search.split('=')[1];
-        let std='';
-        AsyncStorage.getItem('user')
-		.then(res=>{
-			let user = JSON.parse(res)
-            console.log(user);
-            std = user;
-			if(!user){
-				alert('您还未登录！')
-			}
-		})
-        console.log(std);
-        let a={stdphone:std,teaphone:phone};
+        let a={stdphone:this.state.username,teaphone:phone};
         fetch("http://148.70.183.184:8000/selectclass",{
             method:"POST",
             headers:{
-                'Content-Type': 'text/plain; charset=UTF-8',
+                'Content-Type': 'text/plain',
             },
             body:JSON.stringify(a)
         }).then((res)=>{ 
             if(res.status === 200){
-                ToastAndroid.show("选择教师成功!",ToastAndroid.SHORT);
+                alert('选择教师成功!');
                 return res.json();
             }else{
-                alert('这有些错误！');
+                alert('您已选择该教师！');
             }
-        }).then((data)=>{
-            console.log(data);
-        }).catch((err)=>{
-            console.log(err);
         });
     }
     render() {

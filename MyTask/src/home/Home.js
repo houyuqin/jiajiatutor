@@ -75,7 +75,6 @@ export default class Home extends Component {
                 {/* 分科 */}
                 <View
                     style={styles.cou}
-                    // onPress={Actions.course()} 
                 >              
                     <TouchableOpacity 
                         style={styles.course}
@@ -83,7 +82,7 @@ export default class Home extends Component {
                     >
                         <Image 
                             source={require('../../assets/hyq/语文.png')}
-                            style={{width:45,height:45,float:'left',marginLeft:10}}
+                            style={{width:60*s,height:60*s,marginLeft:10*s,marginTop:10*s}}
                         />
                         <Text>语文</Text>
                     </TouchableOpacity> 
@@ -93,7 +92,7 @@ export default class Home extends Component {
                     >
                         <Image 
                             source={require('../../assets/hyq/数学.png')}
-                            style={{width:45,height:45,float:'left',marginLeft:10}}
+                            style={{width:60*s,height:60*s,marginLeft:10*s,marginTop:10*s}}
                         />
                         <Text>数学</Text>
                     </TouchableOpacity> 
@@ -103,7 +102,7 @@ export default class Home extends Component {
                     >
                         <Image 
                             source={require('../../assets/hyq/英语.png')}
-                            style={{width:45,height:45,float:'left',marginLeft:10}}
+                            style={{width:60*s,height:60*s,marginLeft:10*s,marginTop:10*s}}
                         />
                         <Text>英语</Text>
                     </TouchableOpacity>
@@ -113,7 +112,7 @@ export default class Home extends Component {
                     >
                         <Image 
                             source={require('../../assets/hyq/物理.png')}
-                            style={{width:45,height:45,float:'left',marginLeft:10}}
+                            style={{width:60*s,height:60*s,marginLeft:10*s,marginTop:10*s}}
                         />
                         <Text>物理</Text>
                     </TouchableOpacity> 
@@ -123,7 +122,7 @@ export default class Home extends Component {
                     >
                         <Image 
                             source={require('../../assets/hyq/化学.png')}
-                            style={{width:45,height:45,float:'left',marginLeft:10}}
+                            style={{width:60*s,height:60*s,marginLeft:10*s,marginTop:10*s}}
                         />
                         <Text>化学</Text>
                     </TouchableOpacity> 
@@ -133,7 +132,7 @@ export default class Home extends Component {
                     >
                         <Image 
                             source={require('../../assets/hyq/生物.png')}
-                            style={{width:45,height:45,float:'left',marginLeft:10}}
+                            style={{width:60*s,height:60*s,marginLeft:10*s,marginTop:20*s}}
                         />
                         <Text>生物</Text>
                     </TouchableOpacity>
@@ -143,7 +142,7 @@ export default class Home extends Component {
                     >
                         <Image 
                             source={require('../../assets/hyq/政治.png')}
-                            style={{width:45,height:45,float:'left',marginLeft:10}}
+                            style={{width:60*s,height:60*s,marginLeft:10*s,marginTop:20*s}}
                         />
                         <Text>政治</Text>
                     </TouchableOpacity> 
@@ -153,7 +152,7 @@ export default class Home extends Component {
                     >
                         <Image 
                             source={require('../../assets/hyq/历史.png')}
-                            style={{width:45,height:45,float:'left',marginLeft:10}}
+                            style={{width:60*s,height:60*s,marginLeft:10*s,marginTop:20*s}}
                         />
                         <Text>历史</Text>
                     </TouchableOpacity> 
@@ -163,7 +162,7 @@ export default class Home extends Component {
                     >
                         <Image 
                             source={require('../../assets/hyq/地理.png')}
-                            style={{width:45,height:45,float:'left',marginLeft:10}}
+                            style={{width:60*s,height:60*s,marginLeft:10*s,marginTop:20*s}}
                         />
                         <Text>地理</Text>
                     </TouchableOpacity> 
@@ -173,7 +172,7 @@ export default class Home extends Component {
                     >
                         <Image 
                             source={require('../../assets/hyq/美术.png')}
-                            style={{width:45,height:45,float:'left',marginLeft:10}}
+                            style={{width:60*s,height:60*s,marginLeft:10*s,marginTop:20*s}}
                         />
                         <Text>美术</Text>
                     </TouchableOpacity> 
@@ -185,7 +184,7 @@ export default class Home extends Component {
                 </TouchableOpacity>
 
                 {/* 推荐 */}
-                <View style={{height:400*s}}>
+                <View style={{height:430*s}}>
                     <Tabs tabs={tabs}> 
                         <View style={styles.ooo}>
                             <View style={{flexDirection:'row'}}>
@@ -246,7 +245,7 @@ const styles = StyleSheet.create({
     },
     title:{
         color: 'white',
-        fontSize:20
+        fontSize:35*s
     },
     cra:{
         width: '100%',
@@ -258,7 +257,7 @@ const styles = StyleSheet.create({
     },
     cou:{
         width:'100%',
-        height: 200*s,
+        height: 230*s,
         paddingTop: 10*s,
         flexDirection: 'row',
         flexWrap: 'wrap',
