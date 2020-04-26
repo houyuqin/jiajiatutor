@@ -10,7 +10,7 @@ import Videotea from './src/teaStudy/Video';
 import TeaTask from './src/teaStudy/TeaTask';
 import Content from './src/teaStudy/Content';
 import StdMine from './src/stdMine/StdMine';
-import TeaMine from './src/teaMine/TeaMine';
+// import TeaMine from './src/teaMine/TeaMine';
 import Login from './src/component/Login';
 import Register from './src/component/Register';
 import SwiperPage from './src/common/SwiperPage';
@@ -30,9 +30,6 @@ import MyStudy from './src/stdStudy/container/Mystudy'
 import Video from './src/stdStudy/container/myVideo'
 import Contentstd from './src/stdStudy/container/Content';
 import Contents from './src/stdStudy/container/Contents';
-// import Give from './src/teaStudy/Give';
-import TeaVideo from './src/teaStudy/Video';
-// import TeaTask from './src/teaStudy/TeaTask';
 import Myjihua from './src/stdStudy/container/Myjihua';
 import Jihuacontent from './src/stdStudy/container/Jihuacontent';
 
@@ -44,6 +41,16 @@ import Wyijianfankui from './src/stdMine/container/Yonghufankui'
 import shezhi from './src/stdMine/container/shezhi';
 import Gerenziliao from './src/stdMine/container/Gerenziliao';
 import tongzhi from './src/stdMine/container/tongzhi';
+
+import TeaMine from './src/teaMine/TeaMine';
+import WFabuzuoye from './src/teaMine/teacher/Fabuzuoye';
+import WWodexuesheng from './src/teaMine/teacher/Wodexuesheng';
+import WXueshengqingkuang from './src/teaMine/teacher/Xueshengqingkuang';
+import WteaGerenziliao from './src/teaMine/teacher/TeaGerenziliao';
+import Wteatongzhi from './src/teaMine/teacher/Teatongzhi';
+import Wyonghufankui from './src/teaMine/teacher/Yonghufankui';
+import Wwodeshouyi from './src/teaMine/teacher/Wodeshouyi';
+import Teashezhi from './src/teaMine/teacher/Teashezhi';
 
 console.disableYellowBox = true;
 const {width} = Dimensions.get('window');
@@ -116,6 +123,7 @@ const App = () => {
 								{/* 学习 */}
 								<Scene 
 									key='goodsPage'
+									hideNavBar
 									title='学习'
 									icon={
 										({focused})=><Icon 
@@ -129,42 +137,42 @@ const App = () => {
 									<Scene key='jihua'
 										title='学习计划'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={jihua} ></Scene>
 									<Scene key='Myjihua'
 										title='我的计划'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Myjihua} ></Scene>
 									<Scene key='jihuacontent'
 										title='计划内容'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Jihuacontent} ></Scene>
 									<Scene key='homework'
 										title='我的作业'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Homework} ></Scene>
 									<Scene key='lianxi'
 										title='自我练习'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={MyStudy} ></Scene>
 									<Scene key='video'
 										title='我的视频'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Video} ></Scene>
 									<Scene key='content'
 										title='查看详情'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Contentstd} ></Scene>
 									<Scene key='contents'
 										title='查看详情'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Contents} ></Scene>
 								</Scene>
 								{/* 用户中心 */}
@@ -341,17 +349,129 @@ const App = () => {
 								{/* 用户中心 */}
 								<Scene 
 									key='userPage'
-									hideNavBar
-									// hideDrawerButton
 									icon={({focused})=>
 										<Icon 
 											color={focused?'red':'blue'} 
 											name='user'/>
 										}
-									title="用户中心"
+									title="我的"
 								>
-								<Scene key='teamine' hideNavBar component={TeaMine} />
-								<Scene key='stdmine' hideNavBar hideTabBar title='我的发布' component={StdMine} />
+									<Scene 
+										key='teamine' 
+										title='个人中心' 
+										component={TeaMine}
+										titleTextColor='white'
+										navigationBarStyle={{backgroundColor:'#5d93c0'}}
+										renderLeftButton={<View></View>}
+										renderRightButton={
+											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.teatongzhi()}/>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white',backgroundColor:'#5d93c0'}}
+									/>
+									{/* <Scene 
+										key='wfabuzuoye' 
+										title='发布作业' 
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										component={WFabuzuoye}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+									/>
+									<Scene 
+										key='wwodeshouyi' 
+										title='我的收益' 
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										component={Wwodeshouyi}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+									/>
+									<Scene 
+										key='wxueshengqingkuang' 
+										title='学生情况' 
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+										component={WXueshengqingkuang}
+									/>
+									<Scene 
+										key='wwodexuesheng' 
+										title='我的学生' 
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+										component={WWodexuesheng}
+									/>
+									
+									<Scene 
+										key='wxueshengzuoye' 
+										title='学生作业' 
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+										component={WXueshengzuoye}
+									/>
+									<Scene 
+										key='wyonghufankui' 
+										title='用户反馈' 
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+										component={Wyonghufankui}
+									/>
+									<Scene
+										key="wteashezhi"
+										title='设置' 
+										hideNavBar
+										component={Teashezhi}
+									/>
+									<Scene
+										key="weaGerenziliao"
+										title='个人资料' 
+										hideNavBar
+										component={WteaGerenziliao}
+									/>
+									<Scene
+										key="wteatongzhi"
+										title='通知'
+										component={Wteatongzhi}
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+									/> */}
 								</Scene>
 								
 							</Tabs>
