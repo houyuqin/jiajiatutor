@@ -11,6 +11,19 @@ export default class Wodeshoucang extends Component {
             loginstd:''
         }
     }
+    componentDidMount(){
+        AsyncStorage.getItem('std')
+        .then((res)=>{
+            this.setState({
+                loginstd:JSON.parse(res)
+            })
+            fetch(`http://148.70.183.184:8000/mylove/${this.state.loginstd}`)
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({data:res.data})
+            })
+        }) 
+    }
     deleteshipin=(idx)=>{
         fetch(`http://148.70.183.184:8000/mylove/${idx}`,{
                 method: 'DELETE',
