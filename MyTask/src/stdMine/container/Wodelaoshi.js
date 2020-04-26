@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Dimensions, Image,TouchableOpacity, ToastAndroid, ScrollView, StyleSheet } from 'react-native'
+import { Text, View, Dimensions, Image,TouchableOpacity, ToastAndroid, ScrollView, StyleSheet,AsyncStorage } from 'react-native'
 const {width} = Dimensions.get('window');
 const s = width/640;
 var num= [];
@@ -10,13 +10,17 @@ export default class Wodelaoshi extends Component {
         this.state = {
             data:[],
             data1:[],
-            data2:[]
+            data2:[],
+            loginstd:''
         }
     }
     componentDidMount(){
-        // var id=window.location.search.split('=')[1];
-        // 13513467682是学生登录的手机号
-        fetch('http://148.70.183.184:8000/selecttea/13513467682')
+        AsyncStorage.getItem('std')
+        .then((res)=>{
+            this.setState({
+                loginstd:JSON.parse(res)
+            })
+            fetch(`http://148.70.183.184:8000/selecttea/${this.state.loginstd}`)
             .then((res) => res.json())
             .then((res) => {
                 this.setState({ data1: res.data });
@@ -27,6 +31,7 @@ export default class Wodelaoshi extends Component {
                 let filterarr = num.filter((value,index) => {
                     return num.indexOf(value) === index
                 })
+                console.log(filterarr)
                 filterarr.forEach((val,_idx)=>{
                     fetch(`http://148.70.183.184:8006/teamine/${val}`)
                         .then((res) => res.json())
@@ -38,19 +43,24 @@ export default class Wodelaoshi extends Component {
                             })
                         })
                 })
-        })  
+            })  
+        }) 
     }
     deleteshipin=(idx)=>{
-        //学生手机号
-        fetch('http://148.70.183.184:8000/deltea/13513467682',{
-           method: 'DELETE',
-           body:JSON.stringify({stdphone:'13513467682',teaphone:idx})
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
+        AsyncStorage.getItem('std')
+        .then((res)=>{
+            this.setState({
+                loginstd:JSON.parse(res)
             })
-
+            fetch(`http://148.70.183.184:8000/deltea/${this.state.loginstd}`,{
+                method: 'DELETE',
+                body:JSON.stringify({stdphone:'13513467682',teaphone:idx})
+                })
+                    .then((res) => res.json())
+                    .then((res) => {
+                        console.log(res);
+                    })
+        }) 
         ToastAndroid.show('删除成功！',100);
     } 
     render() {
@@ -90,7 +100,7 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     buttoncontent:{
-        marginLeft:100*s,
+        marginLeft:160*s,
         marginTop:-100*s,
         width:80*s,
         alignItems:'center',

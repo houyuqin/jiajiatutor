@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Dimensions, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
+import { Text, View, Dimensions, Image, TouchableOpacity, ScrollView, StyleSheet ,AsyncStorage} from 'react-native'
 import { Actions } from 'react-native-router-flux';
 const {width} = Dimensions.get('window');
 const s = width/640;
@@ -9,14 +9,20 @@ export default class StdMine extends Component {
         this.state={
             data:[],
             wusername:'',
-            imageUrl:''
+            imageUrl:'',
+            loginstd:''
         }
     }
     componentDidMount(){
-        fetch('http://148.70.183.184:8006/stdmine/13513467682')
+        AsyncStorage.getItem('std')
+        .then((res)=>{
+            this.setState({
+                loginstd:JSON.parse(res)
+            })
+            fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`)
             .then((res) => res.json())
             .then((res) => {
-                this.setState({data:res.data}) 
+                this.setState({data:res.data})
                 if (this.state.data[0].wusername == '') {
                     this.setState({
                         wusername:'我的昵称'
@@ -27,6 +33,7 @@ export default class StdMine extends Component {
                     })
                 }
             })
+        })
     }
     wexitapp = ()=>{
         Actions.login();

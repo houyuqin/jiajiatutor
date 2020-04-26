@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View,Dimensions, StyleSheet } from 'react-native'
+import { Text, View,Dimensions, StyleSheet,AsyncStorage } from 'react-native'
 import { Icon } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
 const {width} = Dimensions.get('window');
@@ -13,67 +13,74 @@ export default class Gerenziliao extends Component {
             wsex:'',
             wphonenumber:'',
             wclass:'',
-            wschool:''
+            wschool:'',
+            loginstd:''
         }
     }
-    UNSAFE_componentWillMount(){
-        fetch('http://148.70.183.184:8006/stdmine/13513467682',{
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": 'application/json',   
-                "Connection": "close",   
-                "type": "getUserData",   
-            }
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({data:res.data}) 
-                if (this.state.data[0].wusername == '') {
-                    this.setState({
-                        wusername:'(您还没有设置用户名哦)'
-                    })
-                }else{
-                    this.setState({
-                        wusername:this.state.data[0].wusername
-                    })
-                }
-                if (this.state.data[0].wsex == '') {
-                    this.setState({
-                        wsex:'(您还没有设置性别哦)'
-                    })
-                }else{
-                    this.setState({
-                        wsex:this.state.data[0].wsex
-                    })
-                }
-                if (this.state.data[0].wschool == '') {
-                    this.setState({
-                        wschool:'(您还没有设置学校哦)'
-                    })
-                }else{
-                    this.setState({
-                        wschool:this.state.data[0].wschool
-                    })
-                }
-                if (this.state.data[0].wclass == '') {
-                    this.setState({
-                        wclass:'(您还没有设置年级哦)'
-                    })
-                }else{
-                    this.setState({
-                        wclass:this.state.data[0].wclass
-                    })
-                }
-                if (this.state.data[0].wphonenumber == '') {
-                    this.setState({
-                        wphonenumber:'(您还没有设置手机号哦)'
-                    })
-                }else{
-                    this.setState({
-                        wphonenumber:this.state.data[0].wphonenumber
-                    })
+    componentDidMount(){
+        AsyncStorage.getItem('std')
+        .then((res)=>{
+            this.setState({
+                loginstd:JSON.parse(res)
+            })
+            fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`,{
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": 'application/json',   
+                    "Connection": "close",   
+                    "type": "getUserData",   
                 }
             })
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({data:res.data}) 
+                    if (this.state.data[0].wusername == '') {
+                        this.setState({
+                            wusername:'(您还没有设置用户名哦)'
+                        })
+                    }else{
+                        this.setState({
+                            wusername:this.state.data[0].wusername
+                        })
+                    }
+                    if (this.state.data[0].wsex == '') {
+                        this.setState({
+                            wsex:'(您还没有设置性别哦)'
+                        })
+                    }else{
+                        this.setState({
+                            wsex:this.state.data[0].wsex
+                        })
+                    }
+                    if (this.state.data[0].wschool == '') {
+                        this.setState({
+                            wschool:'(您还没有设置学校哦)'
+                        })
+                    }else{
+                        this.setState({
+                            wschool:this.state.data[0].wschool
+                        })
+                    }
+                    if (this.state.data[0].wclass == '') {
+                        this.setState({
+                            wclass:'(您还没有设置年级哦)'
+                        })
+                    }else{
+                        this.setState({
+                            wclass:this.state.data[0].wclass
+                        })
+                    }
+                    if (this.state.data[0].wphonenumber == '') {
+                        this.setState({
+                            wphonenumber:'(您还没有设置手机号哦)'
+                        })
+                    }else{
+                        this.setState({
+                            wphonenumber:this.state.data[0].wphonenumber
+                        })
+                    }
+                })
+        })  
     }
     render() {
         return (

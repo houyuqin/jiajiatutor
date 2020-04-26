@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Dimensions, TouchableOpacity } from 'react-native'
+import { Text, View, Dimensions, TouchableOpacity,AsyncStorage } from 'react-native'
 import { TextareaItem, InputItem } from '@ant-design/react-native';
 const {width} = Dimensions.get('window');
 const s = width/640;
@@ -10,39 +10,39 @@ export default class Yonghufankui extends Component {
         this.state = {
             data:[],
             content:'',
-            phone:'',
-            wusername:''
+            wphonenumber:'',
+            wyouxiangnumber:'',
+            loginstd:''
         }
     }
     showModal = () => {
-        fetch('http://148.70.183.184:8006/stdmine/13513467682')
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({data:res.data}) 
-                if (this.state.data[0].wusername == '') {
-                    this.setState({
-                        wusername:'我的昵称'
-                    })
-                }else{
-                    this.setState({
-                        wusername:this.state.data[0].wusername
-                    })
-                }
-                var a={};
-                a.wusername=this.state.wusername;
-                a.wcontent=this.state.content;
-                a.wphonenumber=this.state.phone;
-                console.log(a);
-                fetch("http://148.70.183.184:8006/return", {
-                    method: "POST",
-                    headers: {
-                    'Content-Type': 'text/plain; charset=UTF-8'
-                    },
-                    body: JSON.stringify(a)
+        AsyncStorage.getItem('std')
+            .then((res)=>{
+                this.setState({
+                    loginstd:JSON.parse(res)
                 })
-                    .then((res)=>res.json)
+                fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({data:res.data}) 
+                    this.setState({
+                        wphonenumber:this.state.data[0].wphonenumber
+                    })
+                    var a={};
+                    a.wyouxiangnumber=this.state.wyouxiangnumber;
+                    a.wcontent=this.state.content;
+                    a.wphonenumber=this.state.wphonenumber;
+                    console.log(a);
+                    fetch("http://148.70.183.184:8006/return", {
+                        method: "POST",
+                        headers: {
+                        'Content-Type': 'text/plain; charset=UTF-8'
+                        },
+                        body: JSON.stringify(a)
+                        })
+                        .then((res)=>res.json)
+                })
             })
-
     }
     render() {
         return (
@@ -63,20 +63,20 @@ export default class Yonghufankui extends Component {
                 <Text style={{fontSize:15,marginLeft:20*s,marginTop:10*s,marginBottom:20*s}}>通过以下方式反馈给我们哦</Text>
                 <InputItem
                     clear
-                    type="phone"
+                    type="text"
                     value={i=>this.wujinyareturn2=i}
                     onChange={value => {
                         this.setState({
-                            phone: value,
+                            wyouxiangnumber: value,
                         });
                     }}
-                    placeholder="请输入手机号"
+                    placeholder="请输入邮箱"
                     placeholderTextColor='#C0C0C0'
-                    style={{borderWidth:2*s,borderColor:'rgb(250,198,101)',backgroundColor:'white'}}
+                    style={{borderWidth:2*s,borderColor:'rgb(250,198,101)',backgroundColor:'white',marginRight:10*s}}
                 >
                     联系方式
                 </InputItem>
-                <TouchableOpacity onPress={()=>this.showModal()} style={{width:400*s,height:100*s,borderRadius:20*s,alignItems:'center',justifyContent:'center',marginTop:30*s,marginLeft:100*s,backgroundColor:'rgb(250,198,101)',borderWidth:2*s,borderColor:'rgb(250,198,101)'}}>
+                <TouchableOpacity onPress={()=>this.showModal()} style={{width:400*s,height:70*s,borderRadius:20*s,alignItems:'center',justifyContent:'center',marginTop:30*s,marginLeft:100*s,backgroundColor:'rgb(250,198,101)',borderWidth:2*s,borderColor:'rgb(250,198,101)'}}>
                     <Text>发送</Text>
                 </TouchableOpacity>
             </View>

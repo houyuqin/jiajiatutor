@@ -43,15 +43,20 @@ export default class shezhi extends Component {
             weixinnumber:'',
             wclass:'',
             wschool:'',
+            loginstd:''
         }
     }
     componentDidMount(){
-        fetch('http://148.70.183.184:8006/stdmine/13513467682')
+        AsyncStorage.getItem('std')
+        .then((res)=>{
+            this.setState({
+                loginstd:JSON.parse(res)
+            })
+            fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`)
             .then((res) => res.json())
             .then((res) => {
                 this.setState({data:res.data[0]})
                 this.setState({
-                    wtouxiang:this.state.data.stdtouxiang,
                     wusername:this.state.data.wusername,
                     wsex:this.state.data.wsex,
                     weixinnumber:this.state.data.weixinnumber,
@@ -59,8 +64,8 @@ export default class shezhi extends Component {
                     wschool:this.state.data.wschool,
                 })
             })   
+        })
     }
-   
     takephoto = ()=>{
         ImagePicker.showImagePicker(options, (response) => {
             if (response.didCancel) {
@@ -85,16 +90,20 @@ export default class shezhi extends Component {
         a.weixinnumber=this.state.txtValue3;
         a.wclass=this.state.txtValue4;
         a.wschool=this.state.txtValue5;
-        // a.stdtouxiang='/home/wujinya/bigproject/xiangmu/images'+this.state.wtouxiang;
-        fetch('http://148.70.183.184:8006/stdmine/13513467682', {
-            method: "POST",
-            headers: {
-               'Content-Type': 'text/plain; charset=UTF-8;multipart/form-data'
-            },
-            body: JSON.stringify(a)
-          })
-            .then(res => res.json());
-
+        AsyncStorage.getItem('std')
+        .then((res)=>{
+            this.setState({
+                loginstd:JSON.parse(res)
+            })
+            fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`,{
+                method: "POST",
+                headers: {
+                'Content-Type': 'text/plain; charset=UTF-8;multipart/form-data'
+                },
+                body: JSON.stringify(a)
+            })
+            .then(res => res.json()); 
+        })
         Actions.pop();
     }
     render() {
@@ -113,7 +122,7 @@ export default class shezhi extends Component {
                         <Text style={{fontSize:18}}>头像</Text>
                         <TouchableOpacity onPress={()=> this.takephoto()} style={styles.buttontouxiang}>
                             <ImageBackground style={{width:100*s,height:100*s}} source={require('../../../assets/wjy/img/w头像女孩.png')}>
-                                <Image style={{width:100*s,height:100*s}}  source={{uri:'http://148.70.183.184/bigProject/xiangmu/images/111.jpg'}}/>
+                                <Image style={{width:100*s,height:100*s}}  source={this.state.imageUrl}/>
                             </ImageBackground>
                             <Text style={styles.genghuantouxiang}>更换头像</Text>
                         </TouchableOpacity>

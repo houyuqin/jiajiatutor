@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, Dimensions, ToastAndroid, StyleSheet, ScrollView} from 'react-native'
+import { Text, View, TouchableOpacity, Dimensions,AsyncStorage, ToastAndroid, StyleSheet, ScrollView} from 'react-native'
 import { Tabs } from '@ant-design/react-native';
-
 const wtabs = [
     { title: '未支付' },
     { title: '已支付' },
 ];
 const {width} = Dimensions.get('window');
 const s = width/640;
-
-//实现已有订单无法再添加
 export default class Wodedingdan extends Component {
     constructor(){
         super();
@@ -18,42 +15,37 @@ export default class Wodedingdan extends Component {
             data1:[]
         }
     }
-    componentDidMount(){   
-        fetch('http://148.70.183.184:8000/tobuy')
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({data:res.data})
+    componentDidMount(){ 
+        AsyncStorage.getItem('std')
+        .then((res)=>{
+            this.setState({
+                loginstd:JSON.parse(res)
             })
-        fetch('http://148.70.183.184:8000/bought')
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({data1:res.data})
-            })
-    }
-    componentDidUpdate(){
-        fetch('http://148.70.183.184:8000/tobuy')
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({data:res.data})
-            })
-        fetch('http://148.70.183.184:8000/bought')
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({data1:res.data})
-            })
+            fetch(`http://148.70.183.184:8000/tobuy/${this.state.loginstd}`)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({data:res.data})
+                })
+            fetch(`http://148.70.183.184:8000/bought/${this.state.loginstd}`)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({data1:res.data})
+                })
+        })  
     }
     del=(time)=>{
-        fetch('http://148.70.183.184:8000/tobuy', {
+        fetch(`http://148.70.183.184:8000/tobuy/${time}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'text/plain; charset=UTF-8'
                 },
                 body:JSON.stringify({time:time})
-                })
+            })
+            .then((res)=>res.json)
         ToastAndroid.show('删除成功！',100);
     }
     del1=(time)=>{
-        fetch('http://148.70.183.184:8000/bought', {
+        fetch(`http://148.70.183.184:8000/bought/${time}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'text/plain; charset=UTF-8'
@@ -73,7 +65,7 @@ export default class Wodedingdan extends Component {
                                     <Text style={{fontSize:17,color:'black'}}>科目：{item.class}</Text>
                                     <Text>价格：{'￥'+item.price}</Text>
                                     <Text>订单时间：{item.time}</Text>
-                                    <TouchableOpacity onPress={()=>this.del(item.time)} style={{marginLeft:500*s,marginTop:-100*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text  style={{fontSize:17,color:'white'}}>删除</Text></TouchableOpacity>
+                                    <TouchableOpacity onPress={()=>this.del(item.time)} style={{marginLeft:500*s,marginTop:-85*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text  style={{fontSize:17,color:'white'}}>删除</Text></TouchableOpacity>
                                 </View>  
                             ))
                         }
