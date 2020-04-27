@@ -104,7 +104,7 @@ export default class Register extends Component {
                         }}>
                             
                             <TextInput 
-                            style={{fontSize:19}}
+                            style={{fontSize:26*s}}
                             placeholder="请输入教师手机号"
 
                             onChangeText={this.userhandle}
@@ -129,7 +129,7 @@ export default class Register extends Component {
                             }}>
                                 
                                 <TextInput 
-                                style={{fontSize:19}}
+                                style={{fontSize:26*s}}
                                 placeholder="请输入验证码"
 
                                 onChangeText={this.userhandle}
@@ -149,7 +149,7 @@ export default class Register extends Component {
                                 justifyContent: 'center'
                             }}
                             onPress={this.login}>
-                            <Text style={{fontSize:20,color:'white',}}>完成</Text>
+                            <Text style={{fontSize:28*s,color:'white',}}>完成</Text>
                         </TouchableOpacity>
                         
                     </View>
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
       width:340*s,
       height:60*s,
       paddingTop:4*s,
-      fontSize:24,
+      fontSize:32*s,
       marginLeft:70*s,
       borderBottomWidth:5,
       
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
       width:230*s,
       height:60*s,
       paddingTop:4*s,
-      fontSize:24,
+      fontSize:32*s,
       borderBottomWidth:5,
       
       marginLeft:14,

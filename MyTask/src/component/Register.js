@@ -406,7 +406,7 @@ export default class Register extends Component {
                                             
                                             <TextInput 
                                             placeholderTextColor='gray'
-                                            style={{fontSize:19}}
+                                            style={{fontSize:26*s}}
                                             placeholder="请输入学生手机号"
                                             onBlur={this.sphone}
                                             onChangeText={this.suserhandle}
@@ -414,7 +414,7 @@ export default class Register extends Component {
                                         </View>
                                     </View>
                                     <View style={{marginLeft:100*s}}>
-                                        <Text style={{fontSize:17,color:'red'}}>{this.state.sredphone}</Text>
+                                        <Text style={{fontSize:24*s,color:'red'}}>{this.state.sredphone}</Text>
                                     </View>
                                     
                                     <View style={{flexDirection: 'row',marginTop:-12*s,}}>
@@ -432,7 +432,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                            style={{fontSize:19}}
+                                            style={{fontSize:26*s}}
                                             placeholder="请输入密码"
                                             placeholderTextColor='gray'
                                             onFocus={this.sfocus}
@@ -465,7 +465,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                            style={{fontSize:19}}
+                                            style={{fontSize:26*s}}
                                             placeholder="请再次输入密码"
                                             placeholderTextColor='gray'
                                             onFocus={this.sfocus1}
@@ -484,13 +484,13 @@ export default class Register extends Component {
                                         </TouchableOpacity>
                                     </View>
                                     <View style={{marginLeft:100*s}}>
-                                        <Text style={{fontSize:17,color:'red'}}>{this.state.sredpwd}</Text>
+                                        <Text style={{fontSize:24*s,color:'red'}}>{this.state.sredpwd}</Text>
                                     </View>
                                     <View style={{flexDirection: 'row',marginTop:-8*s,}}>
                                         <Image style={{marginTop:20*s,width:50*s,height:50*s}} 
                                             source={require('../../assets/cq/yanzheng.png')}/>
                                         <View style={{
-                                            width:'76%',
+                                            width:'50%',
                                             height:70*s,
                                             marginLeft:30*s,
                                             paddingLeft: 10*s,      
@@ -501,14 +501,25 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                            style={{fontSize:19}}
+                                            style={{fontSize:26*s}}
                                             placeholder="请输入验证码"
                                             placeholderTextColor='gray'
 
                                             onChangeText={this.userhandle}
                                             />
                                         </View>
-                                    
+                                        <View style={{
+                                            width:'25%',
+                                            height:70*s,
+                                            marginLeft:7*s,
+                                            backgroundColor:'white',
+                                            flexDirection: 'row',}}
+                                        >
+                                            <Text  style={{marginLeft:5*s,marginTop:-7*s,color:'red',transform:[{skewX: "40deg"},{rotateY:"50deg"}],fontSize:50*s}}>2</Text>
+                                            <Text  style={{fontSize:30*s,marginLeft:5*s,marginTop:4*s,color:'green',transform:[{skewX: "-40deg"},{rotateY:"50deg"}]}}>8</Text>
+                                            <Text  style={{fontSize:50*s,marginLeft:5*s,marginTop:10*s,transform:[{skewX: "140deg"},{rotateY:"50deg"}]}}>6</Text>
+                                            <Text  style={{fontSize:52*s,marginLeft:5*s,color:'blue',marginTop:-4*s,transform:[{skewX: "50deg"},{rotateY:"60deg"}]}}>7</Text>
+                                        </View>
                                     </View>
                                     <TouchableOpacity 
                                         style={{
@@ -522,7 +533,7 @@ export default class Register extends Component {
                                             justifyContent: 'center'
                                         }}
                                         onPress={this.sshow}>
-                                        <Text style={{fontSize:20,color:'white',}}>注册</Text>
+                                        <Text style={{fontSize:28*s,color:'white',}}>注册</Text>
                                     </TouchableOpacity>
                                     
                                 </View>
@@ -544,7 +555,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                                style={{fontSize:19}}
+                                                style={{fontSize:26*s}}
                                                 placeholder="请输入教师手机号"
                                                 onBlur={this.tphone}
                                                 placeholderTextColor='gray'
@@ -553,7 +564,7 @@ export default class Register extends Component {
                                         </View>
                                     </View>
                                     <View style={{marginLeft:100*s}}>
-                                    <Text style={{fontSize:17,color:'red'}}>{this.state.tredphone}</Text>
+                                    <Text style={{fontSize:24*s,color:'red'}}>{this.state.tredphone}</Text>
                                     </View>
                                     <View style={{flexDirection: 'row',marginTop:-12*s,}}>
                                         <Image style={{marginTop:20*s,width:53*s,height:53*s}} 
@@ -570,7 +581,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                                style={{fontSize:19}}
+                                                style={{fontSize:26*s}}
                                                 placeholder="请输入密码"
                                                 placeholderTextColor='gray'
                                                 onFocus={this.tfocus}
@@ -602,7 +613,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                                style={{fontSize:19}}
+                                                style={{fontSize:26*s}}
                                                 placeholder="请再次输入密码"
                                                 placeholderTextColor='gray'
                                                 onFocus={this.tfocus1}
@@ -621,13 +632,13 @@ export default class Register extends Component {
                                         </TouchableOpacity>
                                     </View>
                                     <View style={{marginLeft:100*s}}>
-                                        <Text style={{fontSize:17,color:'red'}}>{this.state.tredpwd}</Text>
+                                        <Text style={{fontSize:24*s,color:'red'}}>{this.state.tredpwd}</Text>
                                     </View>
                                     <View style={{flexDirection: 'row',marginTop:-8*s,}}>
                                         <Image style={{marginTop:20*s,width:50*s,height:50*s}} 
                                             source={require('../../assets/cq/yanzheng.png')}/>
                                         <View style={{
-                                            width:'76%',
+                                            width:'50%',
                                             height:70*s,
                                             marginLeft:30*s,
                                             paddingLeft: 10*s,      
@@ -638,11 +649,23 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                                style={{fontSize:19}}
+                                                style={{fontSize:26*s}}
                                                 placeholder="请输入验证码"
                                                 placeholderTextColor='gray'
                                                 onChangeText={this.userhandle}
                                             />
+                                        </View>
+                                        <View style={{
+                                            width:'25%',
+                                            height:70*s,
+                                            marginLeft:7*s,
+                                            backgroundColor:'white',
+                                            flexDirection: 'row',}}
+                                        >
+                                            <Text  style={{marginLeft:5*s,marginTop:-7*s,color:'red',transform:[{skewX: "40deg"},{rotateY:"50deg"}],fontSize:50*s}}>6</Text>
+                                            <Text  style={{fontSize:30*s,marginLeft:5*s,marginTop:4*s,color:'green',transform:[{skewX: "-40deg"},{rotateY:"50deg"}]}}>9</Text>
+                                            <Text  style={{fontSize:50*s,marginLeft:5*s,marginTop:10*s,transform:[{skewX: "140deg"},{rotateY:"50deg"}]}}>0</Text>
+                                            <Text  style={{fontSize:52*s,marginLeft:5*s,color:'blue',marginTop:-4*s,transform:[{skewX: "50deg"},{rotateY:"60deg"}]}}>3</Text>
                                         </View>
                                     </View>
                                     <TouchableOpacity 
@@ -657,10 +680,10 @@ export default class Register extends Component {
                                             justifyContent: 'center'
                                         }}
                                         onPress={this.tshow}>
-                                        <Text style={{fontSize:20,color:'white',}}>注册</Text>
+                                        <Text style={{fontSize:28*s,color:'white',}}>注册</Text>
                                     </TouchableOpacity>
                                     <View style={{marginLeft:100*s}}>
-                                        <Text style={{fontSize:13,color:'red'}}>{this.state.tredcode}</Text>
+                                        <Text style={{fontSize:24*s,color:'red'}}>{this.state.tredcode}</Text>
                                     </View>
                                 </View>
                             </View>
@@ -697,7 +720,7 @@ const styles = StyleSheet.create({
       width:230*s,
       height:60*s,
       paddingTop:4*s,
-      fontSize:24,
+      fontSize:32*s,
       borderBottomWidth:5,     
       paddingLeft:45*s,
       backgroundColor:'#f6f6f6',
@@ -709,7 +732,7 @@ const styles = StyleSheet.create({
       width:230*s,
       height:60*s,
       paddingTop:4*s,
-      fontSize:24,
+      fontSize:32*s,
       borderBottomWidth:5,
       marginLeft:14,
       paddingLeft:45*s,

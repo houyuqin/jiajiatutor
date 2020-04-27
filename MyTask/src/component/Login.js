@@ -143,10 +143,10 @@ export default class Login extends Component {
     this.setState({tpwd:text})
   }
   sphone = () =>{
-    console.log("我是",this.state.susername.length);
+    // console.log("我是",this.state.susername.length);
     var sphone0 = /^1[34578]\d{9}$/;
-    console.log('我是',this.state.susername);
-    console.log(sphone0.test(this.state.susername));
+    // console.log('我是',this.state.susername);
+    // console.log(sphone0.test(this.state.susername));
     if(this.state.susername && sphone0.exec(this.state.susername) && this.state.susername.length ==11)
     {
       this.setState({
@@ -173,7 +173,7 @@ export default class Login extends Component {
       this.setState({
         tredphone:''
       })
-      console.log('lalla')
+      // console.log('lalla')
     }
    
     else if(this.state.tusername == ''){
@@ -192,11 +192,11 @@ show1 =() => {
       
     var ccm = 0;
     
-    console.log("我是",this.state.std[0]);
+    // console.log("我是",this.state.std[0]);
     for(var i=0;i<this.state.std.length;i++)
     {
         
-        console.log(this.state.std[i].wphonenumber);
+        // console.log(this.state.std[i].wphonenumber);
         if(this.state.susername == this.state.std[i].wphonenumber && this.state.spwd == this.state.std[i].pwd)
         {
             console.log("登录成功");
@@ -225,7 +225,7 @@ show2 = () =>{
     
     for(var i=0;i<this.state.tea.length;i++)
     {
-        console.log(this.state.tea[i].wphonenumber);
+        // console.log(this.state.tea[i].wphonenumber);
         if(this.state.tusername == this.state.tea[i].wphonenumber && this.state.tpwd == this.state.tea[i].pwd)
         {
             console.log("登录成功");
@@ -290,12 +290,12 @@ show2 = () =>{
                           placeholderTextColor='gray'
                           onBlur={this.sphone}
                           onChangeText={this.suserhandle}
-                          style={{fontSize:19}}
+                          style={{fontSize:26*s}}
                         />
                       </View>
                     </View>
                     <View style={{marginLeft:100*s}}>
-                    <Text style={{fontSize:17,color:'red'}}>{this.state.sredphone}</Text>
+                    <Text style={{fontSize:24*s,color:'red'}}>{this.state.sredphone}</Text>
                     </View>
                     
                     
@@ -318,7 +318,7 @@ show2 = () =>{
                           placeholder="请输入学生密码"
                           secureTextEntry={!this.state.imageState}
                           onChangeText={this.spwdhandle}
-                          style={{fontSize:19}}
+                          style={{fontSize:26*s}}
                         />
                         
                       </View>
@@ -332,7 +332,7 @@ show2 = () =>{
                       </TouchableOpacity>
                     </View>
                     <View style={{marginLeft:100*s}}>
-                      <Text style={{fontSize:17,color:'red'}}>{this.state.sredpwd}</Text>
+                      <Text style={{fontSize:24*s,color:'red'}}>{this.state.sredpwd}</Text>
                     </View>
                     <TouchableOpacity 
                         style={{
@@ -346,7 +346,7 @@ show2 = () =>{
                             justifyContent: 'center'
                         }}
                         onPress={this.show1}>
-                        <Text style={{color:'white',fontSize:20}}>登录</Text>
+                        <Text style={{color:'white',fontSize:28*s}}>登录</Text>
                     </TouchableOpacity>
                     
                     <View style={{flexDirection: 'row',marginTop:110*s}}>
@@ -355,14 +355,14 @@ show2 = () =>{
                         <TouchableOpacity 
                           onPress={() => Actions.register()}
                         >
-                          <Text style={{fontSize:18,color:'#2f618b'}}>点击注册</Text>
+                          <Text style={{fontSize:24*s,color:'#2f618b'}}>点击注册</Text>
                         </TouchableOpacity>
                       </View>
                       <View style={{width:'60%',marginTop:20*s}}>
                         <TouchableOpacity 
                           onPress={() => Actions.spassword()}
                         >
-                          <Text style={{fontSize:18,color:'#2f618b'}}>忘记密码?</Text>
+                          <Text style={{fontSize:24*s,color:'#2f618b'}}>忘记密码?</Text>
                         </TouchableOpacity>
                       </View>
                     </View>
@@ -387,7 +387,7 @@ show2 = () =>{
                       }}>
                         
                         <TextInput 
-                          style={{fontSize:19}}
+                          style={{fontSize:26*s}}
                           placeholderTextColor='gray'
                           placeholder="请输入教师手机号"
                           onBlur={this.tphone}
@@ -396,7 +396,7 @@ show2 = () =>{
                       </View>
                     </View>
                     <View style={{marginLeft:100*s}}>
-                    <Text style={{fontSize:17,color:'red'}}>{this.state.tredphone}</Text>
+                    <Text style={{fontSize:24*s,color:'red'}}>{this.state.tredphone}</Text>
                     </View>
                     
                     <View style={{flexDirection: 'row',marginTop:0*s,}}>
@@ -414,7 +414,7 @@ show2 = () =>{
                       }}>
                         
                         <TextInput 
-                          style={{fontSize:19}}
+                          style={{fontSize:26*s}}
                           placeholder="请输入教师密码"
                           placeholderTextColor='gray'
                           secureTextEntry={!this.state.imageState}
@@ -431,7 +431,7 @@ show2 = () =>{
                       </TouchableOpacity>
                     </View>
                     <View style={{marginLeft:100*s}}>
-                    <Text style={{fontSize:17,color:'red'}}>{this.state.tredpwd}</Text>
+                    <Text style={{fontSize:24*s,color:'red'}}>{this.state.tredpwd}</Text>
                     </View>
                     <TouchableOpacity 
                         style={{
@@ -445,7 +445,7 @@ show2 = () =>{
                             justifyContent: 'center'
                         }}
                         onPress={this.show2}>
-                        <Text style={{fontSize:20,color:'white',}}>登录</Text>
+                        <Text style={{fontSize:28*s,color:'white',}}>登录</Text>
                     </TouchableOpacity>
                     <View style={{flexDirection: 'row',marginTop:110*s}}>
                       
@@ -453,14 +453,14 @@ show2 = () =>{
                         <TouchableOpacity 
                           onPress={() => Actions.register()}
                         >
-                          <Text style={{fontSize:18,color:'#2f618b'}}>点击注册</Text>
+                          <Text style={{fontSize:24*s,color:'#2f618b'}}>点击注册</Text>
                         </TouchableOpacity>
                       </View>
                       <View style={{width:'60%',marginTop:20*s}}>
                         <TouchableOpacity 
                           onPress={() => Actions.tpassword()}
                         >
-                          <Text style={{fontSize:18,color:'#2f618b'}}>忘记密码?</Text>
+                          <Text style={{fontSize:24*s,color:'#2f618b'}}>忘记密码?</Text>
                         </TouchableOpacity>
                       </View>
                     </View>
@@ -502,7 +502,7 @@ const styles = StyleSheet.create({
     width:230*s,
     height:60*s,
     paddingTop:4*s,
-    fontSize:24,    
+    fontSize:32*s,    
     borderBottomWidth:5,   
     paddingLeft:45*s,
     backgroundColor:'#f6f6f6',
@@ -514,7 +514,7 @@ const styles = StyleSheet.create({
     width:230*s,
     height:60*s,
     paddingTop:4*s,
-    fontSize:24,      
+    fontSize:32*s,      
     borderBottomWidth:5,   
     marginLeft:14,
     paddingLeft:45*s,

@@ -76,15 +76,15 @@ export default class SwiperPage extends Component {
                     
                         <View  style={{zIndex:200,right:17*s,top:8*s,position:'absolute'}}>
                             <TouchableOpacity onPress={this.cc}>
-                                <Text style={{width:85*s,height:40*s,borderRadius:10,backgroundColor:'#ccc6c6',opacity:0.7}}> 跳过 {this.state.jump1}</Text>
+                                <Text style={{width:95*s,height:50*s,fontSize:24*s,paddingTop:7*s,paddingLeft:5*s,borderRadius:10,backgroundColor:'#ccc6c6',opacity:0.8}}> 跳过 {this.state.jump1}</Text>
                             </TouchableOpacity>
                         </View>
                     
                     
-                    <Image style={{width:'100%',height:'100%',zIndex:100,marginTop:-50*s}} source={require('../../assets/cq/99.jpg')} />
-                    <View style={{width:'100%',height:200*s,backgroundColor:'white',justifyContent:'center',zIndex:100,alignItems:'center',position:'absolute',bottom:0,}}>
-                        <Text style={{fontSize:18,color:'#205e8f'}}>佳+家教</Text>
-                        <Text style={{fontSize:15,color:'#205e8f'}}>开启你的逆袭之旅</Text>
+                    <Image style={{width:'100%',height:1000*s,zIndex:100,marginTop:-10*s}} source={require('../../assets/cq/er.jpg')} />
+                    <View style={{width:'100%',height:150*s,backgroundColor:'white',justifyContent:'center',zIndex:100,alignItems:'center',position:'absolute',bottom:0,}}>
+                        <Text style={{fontSize:30*s,color:'#205e8f'}}>佳+家教</Text>
+                        <Text style={{fontSize:28*s,marginTop:20*s,color:'#205e8f'}}>开启你的逆袭之旅</Text>
                     </View>
                 </View>
                 

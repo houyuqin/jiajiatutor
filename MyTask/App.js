@@ -53,6 +53,7 @@ import Teashezhi from './src/teaMine/teacher/teashezhi';
 
 import Quan from './src/quanzi/Quan';
 import Fabu from './src/quanzi/Fabu';
+import SwiperPage0 from './src/common/SwiperPage0';
 
 import tHome from './src/teaHome/tHome';
 import tContent from './src/teaHome/tContent';
@@ -112,7 +113,7 @@ const App = () => {
 							>
 								{/* Home栏 */}
 								<Scene key='homePage'
-									title='学生首页'
+									title='首页'
 									hideNavBar
 									icon={
 										({focused})=><Icon 
@@ -133,7 +134,7 @@ const App = () => {
 								{/* 学习 */}
 								<Scene 
 									key='goodsPage'
-									//hideNavBar
+									hideNavBar
 									title='学习'
 									icon={
 										({focused})=><Icon 
@@ -221,7 +222,7 @@ const App = () => {
 											color={focused?'red':'blue'} 
 											name='user'/>
 										}
-									title="用户中心"
+									title="我的"
 								>
 								<Scene 
 										key='stdmine' 
@@ -387,8 +388,6 @@ const App = () => {
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={Concat} />
-
-
 								</Scene>
 								{/* 学习 */}
 								<Scene 
@@ -541,7 +540,8 @@ const App = () => {
 							</Tabs>
 						</Scene>
 					</Lightbox>
-					<Scene key="swiperPage" initial={!isLogin} component={SwiperPage}/>
+					<Scene key="swiperPage0" initial={!isLogin} component={SwiperPage0}/>
+					<Scene key="swiperPage"  component={SwiperPage}/>
 					<Scene key="login" component={Login}/>
 					<Scene key="register" component={Register}/>
 					<Scene key="spassword" component={Spassword}/>
