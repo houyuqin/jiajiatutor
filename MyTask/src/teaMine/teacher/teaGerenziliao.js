@@ -4,12 +4,6 @@ import { Icon } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
 const {width} = Dimensions.get('window');
 const s = width/640;
-AsyncStorage.getItem('std')
-        .then((res)=>{
-            this.teaState({
-                loginstd:JSON.parse(res)
-            })
-        })
 export default class TeaGerenziliao extends Component {
     constructor(){
         super();
@@ -22,96 +16,96 @@ export default class TeaGerenziliao extends Component {
             xueli:'',
             wsubject:'',
             biyexuexiao:'',
-            zhiwei:''
+            zhiwei:'',
+            logintea:''
         }
     }
-    UNSAFE_componentWillMount(){
-        fetch('http://148.70.183.184:8006/teamine/${res}',{//具体仓库那个ID号无法查看
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": 'application/json',   
-                "Connection": "close",   
-                "type": "getUserData",   
-            }
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({data:res.data}) 
-                if (this.state.data[0].wusername == '') {
-                    this.setState({
-                        wusername:'(您还没有设置用户名哦)'
-                    })
-                }else{
-                    this.setState({
-                        wusername:this.state.data[0].wusername
-                    })
-                }
-                if (this.state.data[0].wsex == '') {
-                    this.setState({
-                        wsex:'(您还没有设置性别哦)'
-                    })
-                }else{
-                    this.setState({
-                        wsex:this.state.data[0].wsex
-                    })
-                }
-                if (this.state.data[0].age == '') {
-                    this.setState({
-                        age:'(您还没有设置年龄哦)'
-                    })
-                }else{
-                    this.setState({
-                        age:this.state.data[0].age
-                    })
-                }
-                if (this.state.data[0].wphonenumber == '') {
-                    this.setState({
-                        wphonenumber:'(您还没有设置手机号哦)'
-                    })
-                }else{
-                    this.setState({
-                        wphonenumber:this.state.data[0].wphonenumber
-                    })
-                }
-                if (this.state.data[0].xueli == '') {
-                    this.setState({
-                        xueli:'(您还没有设置学历哦)'
-                    })
-                }else{
-                    this.setState({
-                        xueli:this.state.data[0].xueli
-                    })
-                }
-                if (this.state.data[0].wsubject == '') {
-                    this.setState({
-                        wsubject:'(您还没有设置科目哦)'
-                    })
-                }else{
-                    this.setState({
-                        wsubject:this.state.data[0].wsubject
-                    })
-                }
-                if (this.state.data[0].biyexuexiao == '') {
-                    this.setState({
-                        biyexuexiao:'(您还没有设置毕业学校哦)'
-                    })
-                }else{
-                    this.setState({
-                        biyexuexiao:this.state.data[0].biyexuexiao
-                    })
-                }
-                if (this.state.data[0].zhiwei == '') {
-                    this.setState({
-                        zhiwei:'(您还没有设置职位哦)'
-                    })
-                }else{
-                    this.setState({
-                        zhiwei:this.state.data[0].zhiwei
-                    })
-                }
+    componentDidMount(){
+        AsyncStorage.getItem('tea')
+        .then((res)=>{
+            this.setState({
+                logintea:JSON.parse(res)
             })
+            console.log(this.state.logintea)
+            fetch(`http://148.70.183.184:8006/teamine/${this.state.logintea}`)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({data:res.data}) 
+                    if (this.state.data[0].wusername == null) {
+                        this.setState({
+                            wusername:'(您还没有设置用户名哦)'
+                        })
+                    }else{
+                        this.setState({
+                            wusername:this.state.data[0].wusername
+                        })
+                    }
+                    if (this.state.data[0].wsex == null) {
+                        this.setState({
+                            wsex:'(您还没有设置性别哦)'
+                        })
+                    }else{
+                        this.setState({
+                            wsex:this.state.data[0].wsex
+                        })
+                    }
+                    if (this.state.data[0].wage == null) {
+                        this.setState({
+                            age:'(您还没有设置年龄哦)'
+                        })
+                    }else{
+                        this.setState({
+                            age:this.state.data[0].wage
+                        })
+                    }
+                    if (this.state.data[0].wphonenumber == null) {
+                        this.setState({
+                            wphonenumber:'(您还没有设置手机号哦)'
+                        })
+                    }else{
+                        this.setState({
+                            wphonenumber:this.state.data[0].wphonenumber
+                        })
+                    }
+                    if (this.state.data[0].xueli == null) {
+                        this.setState({
+                            xueli:'(您还没有设置学历哦)'
+                        })
+                    }else{
+                        this.setState({
+                            xueli:this.state.data[0].xueli
+                        })
+                    }
+                    if (this.state.data[0].wsubject == null) {
+                        this.setState({
+                            wsubject:'(您还没有设置科目哦)'
+                        })
+                    }else{
+                        this.setState({
+                            wsubject:this.state.data[0].wsubject
+                        })
+                    }
+                    if (this.state.data[0].biyexuexiao == null) {
+                        this.setState({
+                            biyexuexiao:'(您还没有设置毕业学校哦)'
+                        })
+                    }else{
+                        this.setState({
+                            biyexuexiao:this.state.data[0].biyexuexiao
+                        })
+                    }
+                    if (this.state.data[0].zhiwei == null) {
+                        this.setState({
+                            zhiwei:'(您还没有设置职位哦)'
+                        })
+                    }else{
+                        this.setState({
+                            zhiwei:this.state.data[0].zhiwei
+                        })
+                    }
+                })
+        })  
     }
-  
     render() {
         return (
             <View>

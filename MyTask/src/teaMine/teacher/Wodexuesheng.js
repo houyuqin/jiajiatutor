@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Dimensions, Image,TouchableOpacity, ToastAndroid, ScrollView, StyleSheet } from 'react-native'
+import { Text, View, Dimensions, Image,TouchableOpacity, ToastAndroid, ScrollView, StyleSheet ,AsyncStorage} from 'react-native'
 const {width} = Dimensions.get('window');
 const s = width/640;
 var num= [];
@@ -10,71 +10,56 @@ export default class Wodexuesheng extends Component {
         this.state = {
             data:[],
             data1:[],
-            data2:[]
+            logintea:''
         }
     }
     componentDidMount(){
-        // var id=window.location.search.split('=')[1];
-        fetch('http://148.70.183.184:8000/selectstd/${stdp}')//
+        AsyncStorage.getItem('tea')
+        .then((res)=>{
+            this.setState({
+                logintea:JSON.parse(res)
+            })
+            fetch(`http://148.70.183.184:8000/selectstd/${this.state.logintea}`)//
             .then((res) => res.json())
             .then((res) => {
                 this.setState({ data1: res.data });
                 this.state.data1.forEach((val,index)=>{
-                    num[index]=val.teaphone
+                    num[index]=val.stdphone
                     return num
                 })
                 let filterarr = num.filter((value,index) => {
                     return num.indexOf(value) === index
                 })
                 filterarr.forEach((val,_idx)=>{
-                    fetch(`http://148.70.183.184:8006/teamine/${val}`)
+                    fetch(`http://148.70.183.184:8006/stdmine/${val}`)
                         .then((res) => res.json())
                         .then((res) => {
                             res.data.forEach((val,_idx)=>{   
                                 this.setState({
                                     data:[...this.state.data,val]
-                                })   
+                                })  
+
                             })
                         })
                 })
-        })  
-    }
-    componentDidUpdate(){
-        fetch('http://148.70.183.184:8000/selectstd/${stdp}')//
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ data1: res.data });
-                this.state.data1.forEach((val,index)=>{
-                    num[index]=val.teaphone
-                    return num
-                })
-                let filterarr = num.filter((value,index) => {
-                    return num.indexOf(value) === index
-                })
-                filterarr.forEach((val,_idx)=>{
-                    fetch(`http://148.70.183.184:8006/teamine/${val}`)
-                        .then((res) => res.json())
-                        .then((res) => {
-                            res.data.forEach((val,_idx)=>{   
-                                this.setState({
-                                    data:[...this.state.data,val]
-                                })   
-                            })
-                        })
-                })
-        })  
+            })  
+        })
     }
     deleteshipin=(idx)=>{
-        //教师手机号
-        fetch('http://148.70.183.184:8000/selectstd/${stdp}',{//
-           method: 'DELETE',
-           body:JSON.stringify({stdphone:'13513467682',teaphone:idx})
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
+        AsyncStorage.getItem('tea')
+        .then((res)=>{
+            this.setState({
+                logintea:JSON.parse(res)
             })
-
+            fetch(`http://148.70.183.184:8000/delstd/${this.state.logintea}`,{
+                method: 'DELETE',
+                body:JSON.stringify({stdphone:idx})
+                })
+                    .then((res) => res.json())
+                    .then((res) => {
+                        console.log(res);
+                    })
+        }) 
         ToastAndroid.show('删除成功！',100);
     } 
     render() {

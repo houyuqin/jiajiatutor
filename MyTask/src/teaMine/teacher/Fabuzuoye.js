@@ -1,84 +1,63 @@
 import React, { Component } from 'react'
-import {StyleSheet,View,Text, Image, BackHandler,ToastAndroid, AsyncStorage , Dimensions} from 'react-native';
+import {StyleSheet,View,Text, Image, TouchableOpacity,ToastAndroid, AsyncStorage , Dimensions, ScrollView} from 'react-native';
 import {Router, Overlay, Scene, Tabs, Drawer, Lightbox, Modal, Actions} from 'react-native-router-flux';
 import { Icon } from '@ant-design/react-native';
 var num= [];
-
+const {width} = Dimensions.get('window');
+const s = width/640;
 export default class Fabuzuoye extends Component {
     constructor(){
         super();
         this.state = {
             data:[],
-            data1:[]
+            logintea:''
         }
     }
     componentDidMount(){
-        var stdp=window.location.search.split('=')[1];     
-         fetch(`http://148.70.183.184:8005/fabu/${stdp}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                this.setState({ data1: res.data });
+        AsyncStorage.getItem('tea')
+        .then((res)=>{
+            this.setState({
+                logintea:JSON.parse(res)
             })
-        
-    }
-    componentDidUpdate(){
-        var stdp=window.location.search.split('=')[1];     
-        fetch(`http://148.70.183.184:8005/fabu/${stdp}`, {
-           method: 'GET',
-           headers: {
-               'Content-Type': 'text/plain; charset=UTF-8'
-           },
-       })
-           .then((res) => res.json())
-           .then((res) => {
-               this.setState({ data1: res.data });
-           })
-       
-    }
-    del = (id) => {
-      
-        fetch(`http://148.70.183.184:8005/taskt/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-            },
+            fetch(`http://148.70.183.184:8005/fabu/${this.state.logintea}`)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({ 
+                        data: res.data 
+                    });
+                })                
         })
-            .then((res) => res.json())
-            .then((res) => {
-                alert('任务删除成功!')
-            })
+    } 
+    del=(idx)=>{
+        fetch(`http://148.70.183.184:8005/delzuoye/${idx}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'text/plain; charset=UTF-8'
+                },
+                body:JSON.stringify({id:idx})
+                })
+        ToastAndroid.show('删除成功！',100);
     }
     render() {
         return (
-            // <div>
-            //     <NavBar
-            //     style={{backgroundColor:'#708090',color:'white'}}
-            //     icon={<Link to='/'><Icon style={{color:'black'}} type="left" /></Link>}
-            //     >发布的作业</NavBar>
-            //     <div style={{ margin: '15px', padding: '0px 20px', borderStyle: 'dotted ', overflow: 'scroll' }}>
-            //         {this.state.data1.map((item, idx) => (
-
-            //             <div className="cgaii" style={{ height: '180px', }}>
-
-            //                 <div className="cgai1" style={{ width: '80%' }} >
-            //                     <h4>任务编号：{item.id}</h4>
-            //                     <h4>任务题目：{item.title}</h4>
-            //                     <h4>发布时间：{item.time}</h4>
-            //                     <h4>发布科目：{item.kemu}</h4>
-            //                 </div>
-            //                 <div className="cgai2"><Link to={'/fabu/' + item.id} >></Link></div>
-            //                 <Button style={{marginTop:'60px',backgroundColor:'#1E90FF'}} onClick={()=>this.del(item.id)}>删除</Button>
-            //             </div>
-
-            //         ))}
-            //     </div>
-            // </div>
-            <View><Text>123</Text></View>
+            <ScrollView>
+                {
+                    this.state.data.map((item)=>(
+                        <View style={{width:610*s,height:170*s,fontSize:18,padding:10*s,margin:12*s,borderRadius:10*s,backgroundColor:'white'}} key={item.id}>
+                            <Text style={{fontSize:18}}>任务编号：{item.id}</Text>
+                            <Text style={{wordWrap:'break-word'}}>科目：{item.kemu}</Text>
+                            <Text></Text>
+                            <View style={{borderLeftStyle:'solid',paddingLeft:5*s,borderLeftWidth:5*s,flexDirection:'row'}}>
+                                <Text style={{fontSize:15}}>发布了任务名为</Text>
+                                <Text style={{color:'red',fontSize:15}}>{item.title}</Text> 
+                                <Text>的任务作业</Text>
+                            </View>
+                            <Text style={{color:'gray',fontSize:15,marginLeft:300*s}}>{item.endtime}</Text>
+                            <TouchableOpacity onPress={()=>this.del(item.id)} style={{marginLeft:500*s,marginTop:-140*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text style={{fontSize:17,color:'white'}}>删除</Text></TouchableOpacity>
+                        </View>
+                    ))
+                }
+            </ScrollView>
         )
     }
 }

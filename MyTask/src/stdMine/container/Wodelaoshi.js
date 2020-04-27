@@ -54,7 +54,7 @@ export default class Wodelaoshi extends Component {
             })
             fetch(`http://148.70.183.184:8000/deltea/${this.state.loginstd}`,{
                 method: 'DELETE',
-                body:JSON.stringify({stdphone:'13513467682',teaphone:idx})
+                body:JSON.stringify({teaphone:idx})
                 })
                     .then((res) => res.json())
                     .then((res) => {

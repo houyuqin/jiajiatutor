@@ -45,12 +45,11 @@ import tongzhi from './src/stdMine/container/tongzhi';
 import TeaMine from './src/teaMine/TeaMine';
 import WFabuzuoye from './src/teaMine/teacher/Fabuzuoye';
 import WWodexuesheng from './src/teaMine/teacher/Wodexuesheng';
-import WXueshengqingkuang from './src/teaMine/teacher/Xueshengqingkuang';
-import WteaGerenziliao from './src/teaMine/teacher/TeaGerenziliao';
-import Wteatongzhi from './src/teaMine/teacher/Teatongzhi';
-import Wyonghufankui from './src/teaMine/teacher/Yonghufankui';
+import WteaGerenziliao from './src/teaMine/teacher/teaGerenziliao';
+import Wteatongzhi from './src/teaMine/teacher/teatongzhi';
+import Wteayonghufankui from './src/teaMine/teacher/Yonghufankui';
 import Wwodeshouyi from './src/teaMine/teacher/Wodeshouyi';
-import Teashezhi from './src/teaMine/teacher/Teashezhi';
+import Teashezhi from './src/teaMine/teacher/teashezhi';
 
 console.disableYellowBox = true;
 const {width} = Dimensions.get('window');
@@ -364,25 +363,18 @@ const App = () => {
 										navigationBarStyle={{backgroundColor:'#5d93c0'}}
 										renderLeftButton={<View></View>}
 										renderRightButton={
-											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.teatongzhi()}/>
+											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.wteatongzhi()}/>
 										}
 										titleStyle={{flex:1,textAlign:'center',color:'white',backgroundColor:'#5d93c0'}}
 									/>
-									{/* <Scene 
-										key='wfabuzuoye' 
-										title='发布作业' 
-										navigationBarStyle={{backgroundColor:'#708090'}}
-										component={WFabuzuoye}
-										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
-										renderRightButton={
-											<View></View>
-										}
+									<Scene
+										key="wgerenziliao"
+										title='个人资料' 
+										hideNavBar
+										component={WteaGerenziliao}
 									/>
 									<Scene 
-										key='wwodeshouyi' 
+										key='wteawodeshouyi' 
 										title='我的收益' 
 										navigationBarStyle={{backgroundColor:'#708090'}}
 										component={Wwodeshouyi}
@@ -395,20 +387,7 @@ const App = () => {
 										}
 									/>
 									<Scene 
-										key='wxueshengqingkuang' 
-										title='学生情况' 
-										navigationBarStyle={{backgroundColor:'#708090'}}
-										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
-										renderRightButton={
-											<View></View>
-										}
-										component={WXueshengqingkuang}
-									/>
-									<Scene 
-										key='wwodexuesheng' 
+										key='wteawodexuesheng' 
 										title='我的学生' 
 										navigationBarStyle={{backgroundColor:'#708090'}}
 										renderLeftButton={
@@ -420,11 +399,11 @@ const App = () => {
 										}
 										component={WWodexuesheng}
 									/>
-									
 									<Scene 
-										key='wxueshengzuoye' 
-										title='学生作业' 
+										key='wteafabuzuoye' 
+										title='发布作业' 
 										navigationBarStyle={{backgroundColor:'#708090'}}
+										component={WFabuzuoye}
 										renderLeftButton={
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
 										}
@@ -432,11 +411,10 @@ const App = () => {
 										renderRightButton={
 											<View></View>
 										}
-										component={WXueshengzuoye}
 									/>
 									<Scene 
-										key='wyonghufankui' 
-										title='用户反馈' 
+										key='wteayijianfankui' 
+										title='意见反馈' 
 										navigationBarStyle={{backgroundColor:'#708090'}}
 										renderLeftButton={
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
@@ -445,19 +423,13 @@ const App = () => {
 										renderRightButton={
 											<View></View>
 										}
-										component={Wyonghufankui}
+										component={Wteayonghufankui}
 									/>
 									<Scene
 										key="wteashezhi"
 										title='设置' 
 										hideNavBar
 										component={Teashezhi}
-									/>
-									<Scene
-										key="weaGerenziliao"
-										title='个人资料' 
-										hideNavBar
-										component={WteaGerenziliao}
 									/>
 									<Scene
 										key="wteatongzhi"
@@ -471,7 +443,7 @@ const App = () => {
 										renderRightButton={
 											<View></View>
 										}
-									/> */}
+									/>
 								</Scene>
 								
 							</Tabs>

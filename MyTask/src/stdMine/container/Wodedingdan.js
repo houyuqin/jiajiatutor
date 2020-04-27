@@ -12,7 +12,8 @@ export default class Wodedingdan extends Component {
         super();
         this.state = {
             data:[],
-            data1:[]
+            data1:[],
+            loginstd:''
         }
     }
     componentDidMount(){ 

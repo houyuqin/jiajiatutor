@@ -10,16 +10,16 @@ export default class TeaMine extends Component {
             data:[],
             wusername:'',
             imageUrl:'',
-            loginstd:''
+            logintea:''
         }
     }
     componentDidMount(){
-        AsyncStorage.getItem('std')
+        AsyncStorage.getItem('tea')
         .then((res)=>{
             this.setState({
-                loginstd:JSON.parse(res)
+                logintea:JSON.parse(res)
             })
-            fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`)
+            fetch(`http://148.70.183.184:8006/teamine/${this.state.logintea}`)
             .then((res) => res.json())
             .then((res) => {
                 this.setState({data:res.data})
@@ -37,7 +37,7 @@ export default class TeaMine extends Component {
     }
     wexitapp = ()=>{
         Actions.login();
-        // AsyncStorage.removeItem('user');
+        AsyncStorage.removeItem('user');
         // AsyncStorage.clear();
         console.log(111);
     }
@@ -49,7 +49,7 @@ export default class TeaMine extends Component {
                         <Image source={require('../../assets/wjy/img/w头像女孩.png')} style={{width:100*s,height:100*s}}/>
                     </View>
                     <Text style={{width:150*s,height:40*s,fontSize:18,marginLeft:35*s}}>{this.state.wusername}</Text>
-                    <TouchableOpacity onPress={()=>Actions.wshezhi()} style={{width:130*s,height:30*s,borderRadius:15*s,borderWidth:1,marginLeft:160*s,alignItems:'center',justifyContent:'center'}}>
+                    <TouchableOpacity onPress={()=>Actions.wteashezhi()} style={{width:130*s,height:30*s,borderRadius:15*s,borderWidth:1,marginLeft:160*s,alignItems:'center',justifyContent:'center'}}>
                         <Text style={{fontSize:15}}>编辑资料</Text>
                     </TouchableOpacity>
                 </View>
@@ -58,25 +58,22 @@ export default class TeaMine extends Component {
                         <Image source={require('../../assets/wjy/img/w个人名片.png')} style={[styles.wlist,{backgroundColor:'#CCCCFF',height:50*s}]}/>
                         <TouchableOpacity onPress={()=>Actions.wgerenziliao()}><Text style={styles.context}>个人名片</Text></TouchableOpacity>
                     </View>
+                  
                     <View style={styles.wview}>
                         <Image source={require('../../assets/wjy/img/w我的收藏.png')} style={styles.wlist}/>
-                        <TouchableOpacity onPress={()=>Actions.wwodeshoucang()}><Text style={styles.context}>我的收藏</Text></TouchableOpacity>
-                    </View>
-                    <View style={styles.wview}>
-                        <Image source={require('../../assets/wjy/img/w我的订单.png')} style={styles.wlist}/>
-                        <TouchableOpacity onPress={()=>Actions.wwodedingdan()}><Text style={styles.context}>我的订单</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>Actions.wteawodeshouyi()}><Text style={styles.context}>我的收益</Text></TouchableOpacity>
                     </View>
                     <View style={styles.wview}>
                         <Image source={require('../../assets/wjy/img/教师.png')} style={styles.wlist}/>
-                        <TouchableOpacity onPress={()=>Actions.wwodejiaoshi()}><Text style={styles.context}>我的教师</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>Actions.wteawodexuesheng()}><Text style={styles.context}>我的学生</Text></TouchableOpacity>
                     </View>
                     <View style={styles.wview}>
-                        <Image source={require('../../assets/wjy/img/w评价.png')} style={styles.wlist}/>
-                        <TouchableOpacity onPress={()=>Actions.wzuoyepingjiaqingkuang()}><Text style={styles.context}>作业评价情况</Text></TouchableOpacity>
+                        <Image source={require('../../assets/wjy/img/zuoye.png')} style={styles.wlist}/>
+                        <TouchableOpacity onPress={()=>Actions.wteafabuzuoye()}><Text style={styles.context}>发布的作业</Text></TouchableOpacity>
                     </View>
                     <View style={styles.wview}>
                         <Image source={require('../../assets/wjy/img/w用户反馈.png')} style={styles.wlist}/>
-                        <TouchableOpacity onPress={()=>Actions.wyijianfankui()}><Text style={styles.context}>意见反馈</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>Actions.wteayijianfankui()}><Text style={styles.context}>意见反馈</Text></TouchableOpacity>
                     </View>
                     <View style={styles.wview}>
                         <Image source={require('../../assets/wjy/img/w退出登录.png')} style={styles.wlist}/>
@@ -111,38 +108,4 @@ const styles = StyleSheet.create({
         fontSize:20,
         marginLeft:25*s
     }
-})
-
-// import React, { Component } from 'react'
-// import {HashRouter as Router,Route,Switch} from 'react-router-dom';
-// import Shezhi from './container/shezhi'
-// import StdMine from './container/stdmine'
-// import Tongzhi from './container/tongzhi'
-// import Gerenziliao from './container/Gerenziliao';
-// import Wodeshouyi from './container/Wodeshouyi';
-// import Yonghufankui from './container/Yonghufankui';
-// import Wodelaoshi from './container/Wodelaoshi'
-// import Fabuzuoye from './container/Fabuzuoye'
-// import Content from './container/Content'
-
-// export default class tiaozhuan extends Component {
-//     render() {
-//         return (
-//             <Router>
-//                 <div style={{height:'100%'}}>
-//                     <Switch>
-//                         <Route exact path='/' component={StdMine}></Route>
-//                         <Route path='/stdmineshezhi' component={Shezhi}></Route>
-//                         <Route path='/tongzhi' component={Tongzhi}></Route>
-//                         <Route path='/gerenziliao' component={Gerenziliao}></Route>
-//                         <Route path='/wodeshouyi' component={Wodeshouyi}></Route>
-//                         <Route path='/wodelaoshi' component={Wodelaoshi}></Route>
-//                         <Route path='/yonghufankui/:id' component={Yonghufankui}></Route>
-//                         <Route path='/fabuzuoye' component={Fabuzuoye}></Route>  
-//                         <Route path='/fabu/:id' component={Content}></Route>        
-//                     </Switch>
-//                 </div>
-//             </Router>
-//         )
-//     }
-// }
+});

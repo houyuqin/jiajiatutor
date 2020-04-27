@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, Dimensions, ToastAndroid, StyleSheet, ScrollView} from 'react-native'
 import { Tabs } from '@ant-design/react-native';
-
 const wtabs = [
     { title: '我的视频' },
     { title: '收益情况' },
 ];
 const {width} = Dimensions.get('window');
 const s = width/640;
-
-//实现已有订单无法再添加
 export default class Wodeshouyi extends Component {
     constructor(){
         super();
@@ -33,25 +30,29 @@ export default class Wodeshouyi extends Component {
     render() {
         return (
             <View style={{flex:1}}>
-                <Text style={{fontSize:20,color:'black'}}>我的收益：</Text>               
                 <Tabs tabs={wtabs}>
                     <ScrollView>
                         {
                             this.state.data.map((item)=>(
-                                <View style={{marginBottom:'15px'}}>
-                                    <Tsext style={{marginLeft:'20px',fontSize:'20px',color:'black'}}>{item.name}<span style={{float:'right',marginRight:'10px'}}>{'￥'+item.price}</span></Tsext>
-                                    <Player ref="player" videoId="video-1">
-                                        <source src={item.vedio}/>
-                                    </Player>  
-                                    <Text>手机号为
-                                        <span style={{color:'red'}}>{item.usernum.slice(0,3)+'***'+item.usernum.slice(7,11)}</span>
-                                        的用户已购买视频，收益
-                                        <span style={{color:'red'}}>{item.price}</span>
-                                        元</Text>
-                                </View>
+                                <View style={styles.viewcontent} key={item.time}>
+                                    <Text style={{fontSize:18,color:'black'}}>{item.name}:</Text>
+                                    <Text style={{fontSize:18,color:'black'}}>科目：{item.class}</Text>
+                                    <Text>价格：{'￥'+item.price}</Text>
+                                    <TouchableOpacity onPress={()=>this.del(item.time)} style={{marginLeft:510*s,marginTop:-90*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text  style={{fontSize:17,color:'white'}}>删除</Text></TouchableOpacity>
+                                </View>  
                             ))
                         }       
-                        }
+                    </ScrollView>
+                    <ScrollView>
+                        {
+                            this.state.data1.map((item)=>(
+                                <View style={styles.viewcontent} key={item.time}>
+                                    <Text>手机号为{item.usernum}购买的我的{item.class}收益了{item.price}元</Text>
+                                    <Text>{item.time}</Text>
+                                    <TouchableOpacity onPress={()=>this.del1(item.time)} style={{marginLeft:510*s,marginTop:-50*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text style={{fontSize:17,color:'white'}}>删除</Text></TouchableOpacity>
+                                </View>    
+                            ))
+                        }            
                     </ScrollView>
                 </Tabs>
             </View>

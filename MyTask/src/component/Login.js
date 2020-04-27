@@ -49,13 +49,13 @@ export default class Login extends Component {
     }
   } 
   componentDidMount(){     
-    
+    console.log('教师学生账户密码：13345678910 111');
     fetch('http://148.70.183.184:8003/loginn')
         .then((res)=>res.json())
         .then((res)=>{     
             
             for(var i=0;i<res.length;i++){
-                console.log("这是学生端账户密码:",res[i]);
+                
                     this.setState({ 
                         std:[...this.state.std,res[i]]
                         
@@ -69,7 +69,7 @@ export default class Login extends Component {
         .then((res)=>res.json())
         .then((res)=>{                
             for(var i=0;i<res.length;i++){    
-              console.log("这是教师端账户密码:",res[i]);                  
+                               
                 this.setState({
                     tea:[...this.state.tea,res[i]]
                 });

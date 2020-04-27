@@ -2,17 +2,17 @@
 # yarn lockfile v1
 
 
-"@ant-design/icons-react-native@1.0.2", "@ant-design/icons-react-native@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.npm.taobao.org/@ant-design/icons-react-native/download/@ant-design/icons-react-native-1.0.2.tgz#28648eacb808a1fae0ad59d691bbb472a6ffc26e"
-  integrity sha1-KGSOrLgIofrgrVnWkbu0cqb/wm4=
+"@ant-design/icons-react-native@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.npm.taobao.org/@ant-design/icons-react-native/download/@ant-design/icons-react-native-2.0.0.tgz#2574bb5067673151894590c13d2c804f03befa3a"
+  integrity sha1-JXS7UGdnMVGJRZDBPSyATwO++jo=
 
-"@ant-design/react-native@^3.2.2":
-  version "3.2.2"
-  resolved "https://registry.npm.taobao.org/@ant-design/react-native/download/@ant-design/react-native-3.2.2.tgz#b15782f388a815c14226d33da6cf31fb878bd4b7"
-  integrity sha1-sVeC84ioFcFCJtM9ps8x+4eL1Lc=
+"@ant-design/react-native@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.npm.taobao.org/@ant-design/react-native/download/@ant-design/react-native-3.3.0.tgz#ecd1ef6e34f09e21e5969bce60996c5d8eeb01c3"
+  integrity sha1-7NHvbjTwniHllpvOYJlsXY7rAcM=
   dependencies:
-    "@ant-design/icons-react-native" "^1.0.2"
+    "@ant-design/icons-react-native" "^2.0.0"
     "@bang88/react-native-drawer-layout" "^2.0.3"
     "@bang88/react-native-ultimate-listview" "^3.3.0"
     "@react-native-community/viewpager" "^1.1.7"
