@@ -38,6 +38,7 @@ export default class StdMine extends Component {
     wexitapp = ()=>{
         Actions.login();
         AsyncStorage.removeItem('user');
+        AsyncStorage.removeItem('std');
         // AsyncStorage.clear();
         console.log(111);
     }

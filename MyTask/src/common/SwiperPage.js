@@ -54,15 +54,6 @@ export default class SwiperPage extends Component {
         }, 1000);
         
     }
-    // componentDidUpdate(){
-    //     console.log("小白兔",this.state.jump1)
-    //     if(this.state.jump1==0){
-    //         console.log("大白兔",this.state.tea);
-    //         console.log("大白兔",this.state.std);
-    //         this.cc();
-    //     }
-        
-    // }
     cc = () =>{
         clearInterval(ss);
         if(this.state.std)

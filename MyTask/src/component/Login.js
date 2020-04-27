@@ -49,7 +49,7 @@ export default class Login extends Component {
     }
   } 
   componentDidMount(){     
-    console.log('教师学生账户密码：13345678910 111');
+    
     fetch('http://148.70.183.184:8003/loginn')
         .then((res)=>res.json())
         .then((res)=>{     
@@ -281,7 +281,7 @@ show2 = () =>{
                         paddingTop:10*s,  
                         borderBottomColor: '#ccc',
                         borderBottomWidth: 1, 
-                                              
+                        
                       }}>
                         
                         <TextInput 
@@ -289,11 +289,12 @@ show2 = () =>{
                           placeholder="请输入学生手机号"
                           onBlur={this.sphone}
                           onChangeText={this.suserhandle}
+                          style={{fontSize:19}}
                         />
                       </View>
                     </View>
                     <View style={{marginLeft:100*s}}>
-                    <Text style={{fontSize:13,color:'red'}}>{this.state.sredphone}</Text>
+                    <Text style={{fontSize:17,color:'red'}}>{this.state.sredphone}</Text>
                     </View>
                     
                     
@@ -316,6 +317,7 @@ show2 = () =>{
                           placeholder="请输入学生密码"
                           secureTextEntry={!this.state.imageState}
                           onChangeText={this.spwdhandle}
+                          style={{fontSize:19}}
                         />
                         
                       </View>
@@ -329,7 +331,7 @@ show2 = () =>{
                       </TouchableOpacity>
                     </View>
                     <View style={{marginLeft:100*s}}>
-                      <Text style={{fontSize:13,color:'red'}}>{this.state.sredpwd}</Text>
+                      <Text style={{fontSize:17,color:'red'}}>{this.state.sredpwd}</Text>
                     </View>
                     <TouchableOpacity 
                         style={{
@@ -343,7 +345,7 @@ show2 = () =>{
                             justifyContent: 'center'
                         }}
                         onPress={this.show1}>
-                        <Text style={{color:'white',}}>登录</Text>
+                        <Text style={{color:'white',fontSize:20}}>登录</Text>
                     </TouchableOpacity>
                     
                     <View style={{flexDirection: 'row',marginTop:110*s}}>
@@ -352,14 +354,14 @@ show2 = () =>{
                         <TouchableOpacity 
                           onPress={() => Actions.register()}
                         >
-                          <Text style={{color:'#2f618b'}}>点击注册</Text>
+                          <Text style={{fontSize:18,color:'#2f618b'}}>点击注册</Text>
                         </TouchableOpacity>
                       </View>
                       <View style={{width:'60%',marginTop:20*s}}>
                         <TouchableOpacity 
                           onPress={() => Actions.spassword()}
                         >
-                          <Text style={{color:'#2f618b'}}>忘记密码?</Text>
+                          <Text style={{fontSize:18,color:'#2f618b'}}>忘记密码?</Text>
                         </TouchableOpacity>
                       </View>
                     </View>
@@ -384,15 +386,15 @@ show2 = () =>{
                       }}>
                         
                         <TextInput 
-                          
-                          placeholder="请输入教师用户名"
+                          style={{fontSize:19}}
+                          placeholder="请输入教师手机号"
                           onBlur={this.tphone}
                           onChangeText={this.tuserhandle}
                         />
                       </View>
                     </View>
                     <View style={{marginLeft:100*s}}>
-                    <Text style={{fontSize:13,color:'red'}}>{this.state.tredphone}</Text>
+                    <Text style={{fontSize:17,color:'red'}}>{this.state.tredphone}</Text>
                     </View>
                     
                     <View style={{flexDirection: 'row',marginTop:0*s,}}>
@@ -410,7 +412,7 @@ show2 = () =>{
                       }}>
                         
                         <TextInput 
-                          
+                          style={{fontSize:19}}
                           placeholder="请输入教师密码"
                           secureTextEntry={!this.state.imageState}
                           onChangeText={this.tpwdhandle}
@@ -426,7 +428,7 @@ show2 = () =>{
                       </TouchableOpacity>
                     </View>
                     <View style={{marginLeft:100*s}}>
-                    <Text style={{fontSize:13,color:'red'}}>{this.state.tredpwd}</Text>
+                    <Text style={{fontSize:17,color:'red'}}>{this.state.tredpwd}</Text>
                     </View>
                     <TouchableOpacity 
                         style={{
@@ -440,7 +442,7 @@ show2 = () =>{
                             justifyContent: 'center'
                         }}
                         onPress={this.show2}>
-                        <Text style={{color:'white',}}>登录</Text>
+                        <Text style={{fontSize:20,color:'white',}}>登录</Text>
                     </TouchableOpacity>
                     <View style={{flexDirection: 'row',marginTop:110*s}}>
                       
@@ -448,14 +450,14 @@ show2 = () =>{
                         <TouchableOpacity 
                           onPress={() => Actions.register()}
                         >
-                          <Text style={{color:'#2f618b'}}>点击注册</Text>
+                          <Text style={{fontSize:18,color:'#2f618b'}}>点击注册</Text>
                         </TouchableOpacity>
                       </View>
                       <View style={{width:'60%',marginTop:20*s}}>
                         <TouchableOpacity 
                           onPress={() => Actions.tpassword()}
                         >
-                          <Text style={{color:'#2f618b'}}>忘记密码?</Text>
+                          <Text style={{fontSize:18,color:'#2f618b'}}>忘记密码?</Text>
                         </TouchableOpacity>
                       </View>
                     </View>
@@ -496,10 +498,9 @@ const styles = StyleSheet.create({
   xuesheng:{
     width:230*s,
     height:60*s,
-    fontSize:20,
-    
-    borderBottomWidth:5,
-    
+    paddingTop:4*s,
+    fontSize:24,    
+    borderBottomWidth:5,   
     paddingLeft:45*s,
     backgroundColor:'#f6f6f6',
     elevation: 5,
@@ -509,10 +510,9 @@ const styles = StyleSheet.create({
   jiao:{   
     width:230*s,
     height:60*s,
-    fontSize:20,
-    
-    borderBottomWidth:5,
-    
+    paddingTop:4*s,
+    fontSize:24,      
+    borderBottomWidth:5,   
     marginLeft:14,
     paddingLeft:45*s,
     backgroundColor:'#f6f6f6',

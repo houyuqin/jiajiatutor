@@ -63,46 +63,14 @@ export default class Register extends Component {
         console.log(text);
         this.setState({passwordCfm:text})
     }
-    register = () =>{
-        if(this.state.username != '' && this.state.password != '' && this.state.passwordCfm != ''){
-            if(this.state.password != this.state.passwordCfm){
-                ToastAndroid.show('两次输入的密码不一致！', ToastAndroid.SHORT);
-            }
-            else{
-                this.setState({isloading:true})
-                myFetch.post('/register',{
-                    username: this.state.username,
-                    pwd: this.state.password}
-                ).then(res=>{
-                    // 根据返回状态进行判断，正确时跳转首页
-                    if(res.data.token=='qq' || res.data.token=='hh'){
-                        ToastAndroid.show('该账号已存在！', ToastAndroid.SHORT);
-                    }else{
-                    AsyncStorage.setItem('userid',JSON.stringify(res.data))
-                        .then(()=>{
-                            console.log(res)
-                            this.setState({isloading:false});
-                            ToastAndroid.show("注册成功，请登录！",ToastAndroid.SHORT);
-                            Actions.login();
-                        })
-                    }
-                })
-            }
-        }
-        else{
-            ToastAndroid.show('请确认用户名密码不为空！', ToastAndroid.SHORT);
-        }
-    }
+    
+
     render() {
         return (
             <View style={{width:'100%',height:'100%',backgroundColor:'#417bab',}}>
-                {/* <NaviBar 
-                    color='red'
-                    title={'注册'} 
-                    onLeft={() => Actions.login()} 
-                /> */}
+                
                 <TouchableOpacity onPress={Actions.pop}>
-                     <Image style={{width:50*s,height:50*s}} source={require('../../assets/cq/zuo.png')}/>
+                     <Image style={{width:40*s,height:40*s,marginTop:17*s,marginLeft:20*s}} source={require('../../assets/cq/zuo.png')}/>
                 </TouchableOpacity>
                
                 <View style={{width:'100%',height:'100%',flex:1,}} >
@@ -136,7 +104,7 @@ export default class Register extends Component {
                         }}>
                             
                             <TextInput 
-                            
+                            style={{fontSize:19}}
                             placeholder="请输入教师手机号"
 
                             onChangeText={this.userhandle}
@@ -161,7 +129,7 @@ export default class Register extends Component {
                             }}>
                                 
                                 <TextInput 
-                                
+                                style={{fontSize:19}}
                                 placeholder="请输入验证码"
 
                                 onChangeText={this.userhandle}
@@ -181,7 +149,7 @@ export default class Register extends Component {
                                 justifyContent: 'center'
                             }}
                             onPress={this.login}>
-                            <Text style={{color:'white',}}>完成</Text>
+                            <Text style={{fontSize:20,color:'white',}}>完成</Text>
                         </TouchableOpacity>
                         
                     </View>
@@ -219,7 +187,8 @@ const styles = StyleSheet.create({
     xuesheng:{
       width:340*s,
       height:60*s,
-      fontSize:20,
+      paddingTop:4*s,
+      fontSize:24,
       marginLeft:70*s,
       borderBottomWidth:5,
       
@@ -232,8 +201,8 @@ const styles = StyleSheet.create({
     jiao:{   
       width:230*s,
       height:60*s,
-      fontSize:20,
-      
+      paddingTop:4*s,
+      fontSize:24,
       borderBottomWidth:5,
       
       marginLeft:14,

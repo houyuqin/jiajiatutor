@@ -38,6 +38,7 @@ export default class TeaMine extends Component {
     wexitapp = ()=>{
         Actions.login();
         AsyncStorage.removeItem('user');
+        AsyncStorage.removeItem('tea');
         // AsyncStorage.clear();
         console.log(111);
     }

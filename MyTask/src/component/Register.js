@@ -198,7 +198,7 @@ export default class Register extends Component {
             }
             
         }
-        console.log(sss);
+        // console.log(sss);
         if(this.state.susername && sphone0.exec(this.state.susername) && this.state.susername.length ==11 && sss==0)
         {
           this.setState({
@@ -244,7 +244,7 @@ export default class Register extends Component {
             tredphone:'',
             tcheng:1
           })
-          console.log('lalla')
+        //   console.log('lalla')
         }
         else if(ttt!=0)
         {
@@ -317,9 +317,9 @@ export default class Register extends Component {
         var a={};
         if(this.state.scheng == 2)
         {
-                console.log('我完成了')
-                console.log(this.state.susername);
-                console.log(this.state.spwd);
+                // console.log('我完成了')
+                // console.log(this.state.susername);
+                // console.log(this.state.spwd);
                 a.wphonenumber=this.state.susername;        
                 a.pwd=this.state.spwd;
                 a.coo=0;
@@ -342,9 +342,9 @@ export default class Register extends Component {
         var a={};
         if(this.state.tcheng == 2)
         {
-                console.log('我完成了')
-                console.log(this.state.tusername);
-                console.log(this.state.tpwd);
+                // console.log('我完成了')
+                // console.log(this.state.tusername);
+                // console.log(this.state.tpwd);
                 a.wphonenumber=this.state.tusername;        
                 a.pwd=this.state.tpwd;
                 a.coo=1;
@@ -365,46 +365,12 @@ export default class Register extends Component {
                 
         }
     }
-    register = () =>{
-        if(this.state.username != '' && this.state.password != '' && this.state.passwordCfm != ''){
-            if(this.state.password != this.state.passwordCfm){
-                ToastAndroid.show('两次输入的密码不一致！', ToastAndroid.SHORT);
-            }
-            else{
-                this.setState({isloading:true})
-                myFetch.post('/register',{
-                    username: this.state.username,
-                    pwd: this.state.password}
-                ).then(res=>{
-                    // 根据返回状态进行判断，正确时跳转首页
-                    if(res.data.token=='qq' || res.data.token=='hh'){
-                        ToastAndroid.show('该账号已存在！', ToastAndroid.SHORT);
-                    }else{
-                    AsyncStorage.setItem('userid',JSON.stringify(res.data))
-                        .then(()=>{
-                            console.log(res)
-                            this.setState({isloading:false});
-                            ToastAndroid.show("注册成功，请登录！",ToastAndroid.SHORT);
-                            Actions.login();
-                        })
-                    }
-                })
-            }
-        }
-        else{
-            ToastAndroid.show('请确认用户名密码不为空！', ToastAndroid.SHORT);
-        }
-    }
     render() {
         return (
             <View style={{width:'100%',height:'100%',backgroundColor:'#417bab',}}>
-                {/* <NaviBar 
-                    color='red'
-                    title={'注册'} 
-                    onLeft={() => Actions.login()} 
-                /> */}
+                
                 <TouchableOpacity onPress={Actions.pop}>
-                     <Image style={{width:40*s,height:40*s,marginTop:5*s,marginLeft:10*s}} source={require('../../assets/cq/zuo.png')}/>
+                     <Image style={{width:40*s,height:40*s,marginTop:17*s,marginLeft:20*s}} source={require('../../assets/cq/zuo.png')}/>
                 </TouchableOpacity>
                
                 <View style={{width:'100%',height:'100%',flex:1,}} >
@@ -439,7 +405,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                            
+                                            style={{fontSize:19}}
                                             placeholder="请输入学生手机号"
                                             onBlur={this.sphone}
                                             onChangeText={this.suserhandle}
@@ -447,7 +413,7 @@ export default class Register extends Component {
                                         </View>
                                     </View>
                                     <View style={{marginLeft:100*s}}>
-                                        <Text style={{fontSize:13,color:'red'}}>{this.state.sredphone}</Text>
+                                        <Text style={{fontSize:17,color:'red'}}>{this.state.sredphone}</Text>
                                     </View>
                                     
                                     <View style={{flexDirection: 'row',marginTop:-12*s,}}>
@@ -465,7 +431,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                            
+                                            style={{fontSize:19}}
                                             placeholder="请输入密码"
                                             onFocus={this.sfocus}
                                             secureTextEntry={!this.state.imageState}
@@ -497,7 +463,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                            
+                                            style={{fontSize:19}}
                                             placeholder="请再次输入密码"
                                             onFocus={this.sfocus1}
                                             onBlur={this.sbulr}
@@ -515,7 +481,7 @@ export default class Register extends Component {
                                         </TouchableOpacity>
                                     </View>
                                     <View style={{marginLeft:100*s}}>
-                                        <Text style={{fontSize:13,color:'red'}}>{this.state.sredpwd}</Text>
+                                        <Text style={{fontSize:17,color:'red'}}>{this.state.sredpwd}</Text>
                                     </View>
                                     <View style={{flexDirection: 'row',marginTop:-8*s,}}>
                                         <Image style={{marginTop:20*s,width:50*s,height:50*s}} 
@@ -532,7 +498,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                            
+                                            style={{fontSize:19}}
                                             placeholder="请输入验证码"
 
                                             onChangeText={this.userhandle}
@@ -552,7 +518,7 @@ export default class Register extends Component {
                                             justifyContent: 'center'
                                         }}
                                         onPress={this.sshow}>
-                                        <Text style={{color:'white',}}>注册</Text>
+                                        <Text style={{fontSize:20,color:'white',}}>注册</Text>
                                     </TouchableOpacity>
                                     
                                 </View>
@@ -574,7 +540,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                            
+                                             style={{fontSize:19}}
                                             placeholder="请输入教师手机号"
                                             onBlur={this.tphone}
                                             onChangeText={this.tuserhandle}
@@ -582,7 +548,7 @@ export default class Register extends Component {
                                         </View>
                                     </View>
                                     <View style={{marginLeft:100*s}}>
-                                    <Text style={{fontSize:13,color:'red'}}>{this.state.tredphone}</Text>
+                                    <Text style={{fontSize:17,color:'red'}}>{this.state.tredphone}</Text>
                                     </View>
                                     <View style={{flexDirection: 'row',marginTop:-12*s,}}>
                                         <Image style={{marginTop:20*s,width:53*s,height:53*s}} 
@@ -599,7 +565,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                            
+                                             style={{fontSize:19}}
                                             placeholder="请输入密码"
                                             onFocus={this.tfocus}
                                             secureTextEntry={!this.state.imageState}
@@ -630,7 +596,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                            
+                                             style={{fontSize:19}}
                                             placeholder="请再次输入密码"
                                             onFocus={this.tfocus1}
                                             onBlur={this.tbulr}
@@ -648,7 +614,7 @@ export default class Register extends Component {
                                         </TouchableOpacity>
                                     </View>
                                     <View style={{marginLeft:100*s}}>
-                                        <Text style={{fontSize:13,color:'red'}}>{this.state.tredpwd}</Text>
+                                        <Text style={{fontSize:17,color:'red'}}>{this.state.tredpwd}</Text>
                                     </View>
                                     <View style={{flexDirection: 'row',marginTop:-8*s,}}>
                                         <Image style={{marginTop:20*s,width:50*s,height:50*s}} 
@@ -665,7 +631,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                            
+                                             style={{fontSize:19}}
                                             placeholder="请输入验证码"
 
                                             onChangeText={this.userhandle}
@@ -684,7 +650,7 @@ export default class Register extends Component {
                                             justifyContent: 'center'
                                         }}
                                         onPress={this.tshow}>
-                                        <Text style={{color:'white',}}>注册</Text>
+                                        <Text style={{fontSize:20,color:'white',}}>注册</Text>
                                     </TouchableOpacity>
                                     <View style={{marginLeft:100*s}}>
                                         <Text style={{fontSize:13,color:'red'}}>{this.state.tredcode}</Text>
@@ -723,10 +689,9 @@ const styles = StyleSheet.create({
     xuesheng:{
       width:230*s,
       height:60*s,
-      fontSize:20,
-      
-      borderBottomWidth:5,
-      
+      paddingTop:4*s,
+      fontSize:24,
+      borderBottomWidth:5,     
       paddingLeft:45*s,
       backgroundColor:'#f6f6f6',
       elevation: 5,
@@ -736,10 +701,9 @@ const styles = StyleSheet.create({
     jiao:{   
       width:230*s,
       height:60*s,
-      fontSize:20,
-      
+      paddingTop:4*s,
+      fontSize:24,
       borderBottomWidth:5,
-      
       marginLeft:14,
       paddingLeft:45*s,
       backgroundColor:'#f6f6f6',

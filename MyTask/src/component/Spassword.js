@@ -102,7 +102,7 @@ export default class Register extends Component {
                     onLeft={() => Actions.login()} 
                 /> */}
                 <TouchableOpacity onPress={Actions.pop}>
-                     <Image style={{width:50*s,height:50*s}} source={require('../../assets/cq/zuo.png')}/>
+                     <Image style={{width:40*s,height:40*s,marginTop:17*s,marginLeft:20*s}} source={require('../../assets/cq/zuo.png')}/>
                 </TouchableOpacity>
                
                 <View style={{width:'100%',height:'100%',flex:1,}} >
@@ -138,7 +138,7 @@ export default class Register extends Component {
                             <TextInput 
                             
                             placeholder="请输入学生手机号"
-
+                            style={{fontSize:19}}
                             onChangeText={this.userhandle}
                             />
                         </View>
@@ -163,7 +163,7 @@ export default class Register extends Component {
                                 <TextInput 
                                 
                                 placeholder="请输入验证码"
-
+                                style={{fontSize:19}}
                                 onChangeText={this.userhandle}
                                 />
                             </View>
@@ -181,7 +181,7 @@ export default class Register extends Component {
                                 justifyContent: 'center'
                             }}
                             onPress={this.login}>
-                            <Text style={{color:'white',}}>完成</Text>
+                            <Text style={{fontSize:20,color:'white',}}>完成</Text>
                         </TouchableOpacity>
                         
                     </View>
@@ -219,10 +219,10 @@ const styles = StyleSheet.create({
     xuesheng:{
       width:340*s,
       height:60*s,
-      fontSize:20,
+      paddingTop:4*s,
+      fontSize:24,
       marginLeft:70*s,
       borderBottomWidth:5,
-      
       paddingLeft:45*s,
       backgroundColor:'#f6f6f6',
       elevation: 5,
@@ -232,10 +232,9 @@ const styles = StyleSheet.create({
     jiao:{   
       width:230*s,
       height:60*s,
-      fontSize:20,
-      
-      borderBottomWidth:5,
-      
+      paddingTop:4*s,
+      fontSize:24,  
+      borderBottomWidth:5, 
       marginLeft:14,
       paddingLeft:45*s,
       backgroundColor:'#f6f6f6',
