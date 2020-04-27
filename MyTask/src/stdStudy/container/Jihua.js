@@ -78,13 +78,13 @@ export default class Jihua extends Component {
                 <View style={{ height: 320 * s }}>
                     <Carousel autoplay infinite>
                         <View style={styles.lunbo}>
-                            <Image style={styles.lunimg} source={require('../../img/z6.jpg')}></Image>
+                            <Image style={styles.lunimg} source={require('../../../assets/zx/z6.jpg')}></Image>
                         </View>
                         <View style={styles.lunbo}>
-                            <Image style={styles.lunimg} source={require('../../img/z5.jpg')}></Image>
+                            <Image style={styles.lunimg} source={require('../../../assets/zx/z5.jpg')}></Image>
                         </View>
                         <View style={styles.lunbo}>
-                            <Image style={styles.lunimg} source={require('../../img/z4.jpg')}></Image>
+                            <Image style={styles.lunimg} source={require('../../../assets/zx/z4.jpg')}></Image>
                         </View>
                     </Carousel>
                 </View>

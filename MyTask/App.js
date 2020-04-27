@@ -54,6 +54,14 @@ import Teashezhi from './src/teaMine/teacher/teashezhi';
 import Quan from './src/quanzi/Quan';
 import Fabu from './src/quanzi/Fabu';
 
+import tHome from './src/teaHome/tHome';
+import tContent from './src/teaHome/tContent';
+import Zhoumo from './src/teaHome/Zhoumu'
+import Other from './src/teaHome/Other'
+import Jizhao from './src/teaHome/Jizhao'
+import Fujin from './src/teaHome/Fujin'
+import Concat from './src/teaHome/Concat';
+
 console.disableYellowBox = true;
 const {width} = Dimensions.get('window');
 const s = width/640;
@@ -125,7 +133,7 @@ const App = () => {
 								{/* 学习 */}
 								<Scene 
 									key='goodsPage'
-									hideNavBar
+									//hideNavBar
 									title='学习'
 									icon={
 										({focused})=><Icon 
@@ -335,8 +343,8 @@ const App = () => {
 							>
 								{/* Home栏 */}
 								<Scene key='homePage'
-									title='教师首页'
-									hideNavBar
+									title='首页'
+									//hideNavBar
 									icon={
 										({focused})=><Icon 
 											color={focused?'red':'blue'} 
@@ -344,14 +352,43 @@ const App = () => {
 										/>
 									}
 								>
-									<Scene key='home'  component={Home}/>
-									<Scene key='ad' hideTabBar component={Ad} />
-									<Scene key='course' hideTabBar component={Course}/>
-									<Scene key='question' hideTabBar component={Question}/>
-									<Scene key='goodtea' hideTabBar component={GoodTea}/>
-									<Scene key='buy' hideTabBar component={Buy}/>
-									<Scene key='player' hideTabBar component={Player0}/>
-									<Scene key='vedio' hideTabBar component={Vedio}/>
+									<Scene key='thome'
+										title='首页'
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										component={tHome} />
+									<Scene key='tfujin'
+										title='附近家教'
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										component={Fujin} />
+									<Scene key='tzhoumo'
+										title='周末家教'
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										component={Zhoumo} />
+									<Scene key='tjizhao'
+										title='急招家教'
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										component={Jizhao} />
+									<Scene key='jobxiang'
+										title='招聘详情'
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										component={tContent} />
+									<Scene key='tother'
+										title='其他兼职'
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										component={Other} />
+									<Scene key='concat'
+										title='联系我'
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										component={Concat} />
+
+
 								</Scene>
 								{/* 学习 */}
 								<Scene 

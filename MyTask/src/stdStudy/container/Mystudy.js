@@ -33,7 +33,7 @@ export default class Mystudy extends Component {
       data={this.state.data}
       renderItem={({item})=>(
       <View style={styles.box}>
-        <View style={{width:'15%'}}><Image style={styles.img} source={require('../../img/z4.png')}></Image></View>
+        <View style={{width:'15%'}}><Image style={styles.img} source={require('../../../assets/zx/z4.png')}></Image></View>
         <View style={{width:'85%'}}><Text  numberOfLines={1}>{item.title}</Text></View>
       </View>
       )}
