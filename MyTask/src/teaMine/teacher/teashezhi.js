@@ -47,10 +47,17 @@ export default class Teashezhi extends Component {
             wage:'',
             biyexuexiao:'',
             zhiwei:'',
-            logintea:''
+            logintea:'',
+            imageUrl1:''
         }
     }
     componentDidMount(){
+        AsyncStorage.getItem('url')
+        .then((res)=>{
+            this.setState({
+                imageUrl1:JSON.parse(res)
+            })
+        })
         AsyncStorage.getItem('tea')
         .then((res)=>{
             this.setState({
@@ -73,6 +80,14 @@ export default class Teashezhi extends Component {
             })   
         })
     }
+    componentDidUpdate(){
+        AsyncStorage.getItem('url')
+        .then((res)=>{
+            this.setState({
+                imageUrl1:JSON.parse(res)
+            })
+        })
+    }
     takephoto = ()=>{
         ImagePicker.showImagePicker(options, (response) => {
             if (response.didCancel) {
@@ -83,9 +98,10 @@ export default class Teashezhi extends Component {
               console.log('custom:', response.customButton);
             } else {   
                 const source = { uri: response.uri };
-                this.setState({
-                    imageUrl:source
-                })
+                // this.setState({
+                //     imageUrl:source
+                // })
+                AsyncStorage.setItem('url',JSON.stringify(source),()=>{console.log('store success')})
             }      
         });   
     }
@@ -135,7 +151,7 @@ export default class Teashezhi extends Component {
                             <Text style={{fontSize:18}}>头像</Text>
                             <TouchableOpacity onPress={()=> this.takephoto()} style={styles.buttontouxiang}>
                                 <ImageBackground style={{width:80*s,height:80*s}} source={require('../../../assets/wjy/img/w头像女孩.png')}>
-                                    <Image style={{width:80*s,height:80*s}}  source={this.state.imageUrl} />
+                                    <Image style={{width:80*s,height:80*s}}  source={this.state.imageUrl1} />
                                 </ImageBackground>
                                 <Text style={styles.genghuantouxiang}>更换头像</Text>
                             </TouchableOpacity>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Dimensions, Image, TouchableOpacity, ScrollView, StyleSheet ,AsyncStorage} from 'react-native'
+import { Text, View, Dimensions, Image, TouchableOpacity, ScrollView, StyleSheet ,AsyncStorage, ImageBackground} from 'react-native'
 import { Actions } from 'react-native-router-flux';
 const {width} = Dimensions.get('window');
 const s = width/640;
@@ -14,6 +14,13 @@ export default class StdMine extends Component {
         }
     }
     componentDidMount(){
+        AsyncStorage.getItem('url')
+        .then((res)=>{
+            this.setState({
+                imageUrl:JSON.parse(res)
+            })
+            console.log(this.state.imageUrl)
+        })
         AsyncStorage.getItem('std')
         .then((res)=>{
             this.setState({
@@ -35,9 +42,17 @@ export default class StdMine extends Component {
             })
         })
     }
+    componentDidUpdate(){
+        AsyncStorage.getItem('url')
+        .then((res)=>{
+            this.setState({
+                imageUrl:JSON.parse(res)
+            })
+        })
+    }
     wexitapp = ()=>{
         Actions.login();
-        AsyncStorage.removeItem('user');
+        AsyncStorage.removeItem('url');
         AsyncStorage.removeItem('std');
         // AsyncStorage.clear();
         console.log(111);
@@ -47,7 +62,9 @@ export default class StdMine extends Component {
             <ScrollView>
                 <View style={{backgroundColor:'#5d93c0',height:150*s,marginTop:2*s,flexDirection:'row',alignItems:'center'}}>
                    <View style={{width:100*s,height:100*s,borderRadius:50*s,overflow:'hidden',marginLeft:20*s}}>
-                        <Image source={require('../../assets/wjy/img/w头像女孩.png')} style={{width:100*s,height:100*s}}/>
+                        <ImageBackground source={require('../../assets/wjy/img/w头像女孩.png')} style={{width:100*s,height:100*s}}>
+                            <Image style={{width:100*s,height:100*s}}  source={this.state.imageUrl}/>
+                        </ImageBackground>
                     </View>
                     <Text style={{width:150*s,height:40*s,fontSize:18,marginLeft:35*s}}>{this.state.wusername}</Text>
                     <TouchableOpacity onPress={()=>Actions.wshezhi()} style={{width:130*s,height:30*s,borderRadius:15*s,borderWidth:1,marginLeft:160*s,alignItems:'center',justifyContent:'center'}}>

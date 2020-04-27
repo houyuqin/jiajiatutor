@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Dimensions ,TextInput, TouchableOpacity,ImageBackground,Image, StyleSheet} from 'react-native'
+import { Text, View, Dimensions ,TextInput, TouchableOpacity,ImageBackground,Image, StyleSheet,AsyncStorage} from 'react-native'
 import ImagePicker from 'react-native-image-picker';
 import { NoticeBar ,Icon} from '@ant-design/react-native';
 import {Actions} from 'react-native-router-flux';
@@ -47,6 +47,12 @@ export default class shezhi extends Component {
         }
     }
     componentDidMount(){
+        AsyncStorage.getItem('url')
+        .then((res)=>{
+            this.setState({
+                imageUrl:JSON.parse(res)
+            })
+        })
         AsyncStorage.getItem('std')
         .then((res)=>{
             this.setState({
@@ -66,6 +72,14 @@ export default class shezhi extends Component {
             })   
         })
     }
+    componentDidUpdate(){
+        AsyncStorage.getItem('url')
+        .then((res)=>{
+            this.setState({
+                imageUrl:JSON.parse(res)
+            })
+        })
+    }
     takephoto = ()=>{
         ImagePicker.showImagePicker(options, (response) => {
             if (response.didCancel) {
@@ -76,9 +90,11 @@ export default class shezhi extends Component {
               console.log('custom:', response.customButton);
             } else {   
                 const source = { uri: response.uri };
-                this.setState({
-                    imageUrl:source
-                })
+                // this.setState({
+                //     imageUrl:source
+                // })
+                AsyncStorage.setItem('url',JSON.stringify(source),()=>{console.log('store success')})
+
             }   
         });   
     }

@@ -405,6 +405,7 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
+                                            placeholderTextColor='gray'
                                             style={{fontSize:19}}
                                             placeholder="请输入学生手机号"
                                             onBlur={this.sphone}
@@ -433,6 +434,7 @@ export default class Register extends Component {
                                             <TextInput 
                                             style={{fontSize:19}}
                                             placeholder="请输入密码"
+                                            placeholderTextColor='gray'
                                             onFocus={this.sfocus}
                                             secureTextEntry={!this.state.imageState}
                                             onChangeText={this.spwdhandle}
@@ -465,6 +467,7 @@ export default class Register extends Component {
                                             <TextInput 
                                             style={{fontSize:19}}
                                             placeholder="请再次输入密码"
+                                            placeholderTextColor='gray'
                                             onFocus={this.sfocus1}
                                             onBlur={this.sbulr}
                                             secureTextEntry={!this.state.imageState}
@@ -500,6 +503,7 @@ export default class Register extends Component {
                                             <TextInput 
                                             style={{fontSize:19}}
                                             placeholder="请输入验证码"
+                                            placeholderTextColor='gray'
 
                                             onChangeText={this.userhandle}
                                             />
@@ -540,10 +544,11 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                             style={{fontSize:19}}
-                                            placeholder="请输入教师手机号"
-                                            onBlur={this.tphone}
-                                            onChangeText={this.tuserhandle}
+                                                style={{fontSize:19}}
+                                                placeholder="请输入教师手机号"
+                                                onBlur={this.tphone}
+                                                placeholderTextColor='gray'
+                                                onChangeText={this.tuserhandle}
                                             />
                                         </View>
                                     </View>
@@ -565,11 +570,12 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                             style={{fontSize:19}}
-                                            placeholder="请输入密码"
-                                            onFocus={this.tfocus}
-                                            secureTextEntry={!this.state.imageState}
-                                            onChangeText={this.tpwdhandle}
+                                                style={{fontSize:19}}
+                                                placeholder="请输入密码"
+                                                placeholderTextColor='gray'
+                                                onFocus={this.tfocus}
+                                                secureTextEntry={!this.state.imageState}
+                                                onChangeText={this.tpwdhandle}
                                             />
                                         </View>
                                         <TouchableOpacity onPress={this.bi2} style={[{display:this.state.bi2}]}>
@@ -596,12 +602,13 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                             style={{fontSize:19}}
-                                            placeholder="请再次输入密码"
-                                            onFocus={this.tfocus1}
-                                            onBlur={this.tbulr}
-                                            secureTextEntry={!this.state.imageState}
-                                            onChangeText={this.tpwdhandle1}
+                                                style={{fontSize:19}}
+                                                placeholder="请再次输入密码"
+                                                placeholderTextColor='gray'
+                                                onFocus={this.tfocus1}
+                                                onBlur={this.tbulr}
+                                                secureTextEntry={!this.state.imageState}
+                                                onChangeText={this.tpwdhandle1}
                                             />
                                         </View>
                                         <TouchableOpacity onPress={this.bi3} style={[{display:this.state.bi3}]}>
@@ -631,10 +638,10 @@ export default class Register extends Component {
                                         }}>
                                             
                                             <TextInput 
-                                             style={{fontSize:19}}
-                                            placeholder="请输入验证码"
-
-                                            onChangeText={this.userhandle}
+                                                style={{fontSize:19}}
+                                                placeholder="请输入验证码"
+                                                placeholderTextColor='gray'
+                                                onChangeText={this.userhandle}
                                             />
                                         </View>
                                     </View>

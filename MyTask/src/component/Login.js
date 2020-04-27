@@ -287,6 +287,7 @@ show2 = () =>{
                         <TextInput 
                           
                           placeholder="请输入学生手机号"
+                          placeholderTextColor='gray'
                           onBlur={this.sphone}
                           onChangeText={this.suserhandle}
                           style={{fontSize:19}}
@@ -313,7 +314,7 @@ show2 = () =>{
                       }}>
                         
                         <TextInput 
-                          
+                          placeholderTextColor='gray'
                           placeholder="请输入学生密码"
                           secureTextEntry={!this.state.imageState}
                           onChangeText={this.spwdhandle}
@@ -387,6 +388,7 @@ show2 = () =>{
                         
                         <TextInput 
                           style={{fontSize:19}}
+                          placeholderTextColor='gray'
                           placeholder="请输入教师手机号"
                           onBlur={this.tphone}
                           onChangeText={this.tuserhandle}
@@ -414,6 +416,7 @@ show2 = () =>{
                         <TextInput 
                           style={{fontSize:19}}
                           placeholder="请输入教师密码"
+                          placeholderTextColor='gray'
                           secureTextEntry={!this.state.imageState}
                           onChangeText={this.tpwdhandle}
                         />
