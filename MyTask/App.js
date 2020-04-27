@@ -51,6 +51,9 @@ import Wteayonghufankui from './src/teaMine/teacher/Yonghufankui';
 import Wwodeshouyi from './src/teaMine/teacher/Wodeshouyi';
 import Teashezhi from './src/teaMine/teacher/teashezhi';
 
+import Quan from './src/quanzi/Quan';
+import Fabu from './src/quanzi/Fabu';
+
 console.disableYellowBox = true;
 const {width} = Dimensions.get('window');
 const s = width/640;
@@ -173,6 +176,32 @@ const App = () => {
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Contents} ></Scene>
+								</Scene>
+								{/* 圈子 */}
+								<Scene
+									key='quanzi'
+									initial
+									icon={({focused})=>
+										<Icon 
+											color={focused?'red':'blue'} 
+											name='compass'/>
+										}
+									title="圈子"
+								>
+									<Scene key='quan'
+										title='社交圈子'
+										initial
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={Quan} 
+									></Scene>
+									<Scene key='fabu'
+										title='发布动态'
+										hideTabBar
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center',marginLeft:-30 }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={Fabu} 
+									></Scene>
 								</Scene>
 								{/* 用户中心 */}
 								<Scene 
@@ -344,6 +373,32 @@ const App = () => {
 									<Scene key="teacontent" hideNavBar hideTabBar hideDrawerButton component={Content}/>
 									
 									
+								</Scene>
+								{/* 圈子 */}
+								<Scene
+									key='quanzi'
+									initial
+									icon={({focused})=>
+										<Icon 
+											color={focused?'red':'blue'} 
+											name='compass'/>
+										}
+									title="圈子"
+								>
+									<Scene key='quan'
+										title='社交圈子'
+										initial
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={Quan} 
+									></Scene>
+									<Scene key='fabu'
+										title='发布动态'
+										hideTabBar
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center',marginLeft:-30 }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={Fabu} 
+									></Scene>
 								</Scene>
 								{/* 用户中心 */}
 								<Scene 
