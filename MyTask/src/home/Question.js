@@ -196,7 +196,7 @@ export default class Question extends Component{
 const styles = StyleSheet.create({
     nav:{
         width:'100%',
-        height:64*s,
+        height:73*s,
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',
@@ -209,6 +209,7 @@ const styles = StyleSheet.create({
     },
     left:{
         width:'40%',
+        paddingLeft:20*s
     },
     h:{
         height: 50*s,

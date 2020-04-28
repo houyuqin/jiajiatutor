@@ -142,6 +142,9 @@ const App = () => {
 											name="file"
 										/>
 									}
+									renderLeftButton={
+										<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+									}
 									
 								>
 									<Scene key='Stustudy' hideNavBar component={Study}></Scene>
@@ -218,6 +221,10 @@ const App = () => {
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center',marginLeft:-30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Fabu} 
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										
 									></Scene>
 								</Scene>
 								{/* 用户中心 */}
@@ -242,7 +249,7 @@ const App = () => {
 										renderRightButton={
 											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.tongzhi()}/>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white',backgroundColor:'#5d93c0'}}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
 									/>
 									<Scene 
 										key='wwodeshoucang' 
@@ -368,48 +375,76 @@ const App = () => {
 											name="home"
 										/>
 									}
+									
 								>
 									<Scene key='thome'
 										title='首页'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={tHome} />
 									<Scene key='tfujin'
 										title='附近家教'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
-										component={Fujin} />
+										navigationBarStyle={{ backgroundColor: '#708090' }}	
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}									
+										component={Fujin} 
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+									/>
 									<Scene key='tzhoumo'
 										title='周末家教'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
-										component={Zhoumo} />
+										navigationBarStyle={{ backgroundColor: '#708090' }}										
+										component={Zhoumo} 
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										/>
 									<Scene key='tjizhao'
 										title='急招家教'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
-										component={Jizhao} />
+										navigationBarStyle={{ backgroundColor: '#708090' }}										
+										component={Jizhao} 
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+									/>
 									<Scene key='jobxiang'
 										title='招聘详情'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
-										component={tContent} />
+										navigationBarStyle={{ backgroundColor: '#708090' }}										
+										component={tContent} 
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+									/>
 									<Scene key='tother'
 										title='其他兼职'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
-										component={Other} />
+										navigationBarStyle={{ backgroundColor: '#708090' }}										
+										component={Other} 
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+									/>
 									<Scene key='concat'
 										title='联系我'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
-										component={Concat} />
+										navigationBarStyle={{ backgroundColor: '#708090' }}										
+										component={Concat} 
+										renderLeftButton={
+										<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+									}
+									/>
 								</Scene>
 								{/* 学习 */}
 								<Scene 
@@ -428,14 +463,11 @@ const App = () => {
 									<Scene key="give" hideNavBar hideTabBar hideDrawerButton component={Give}/>
 									<Scene key="video" hideNavBar hideTabBar hideDrawerButton component={Videotea}/>
 									<Scene key="teatask" hideNavBar hideTabBar hideDrawerButton component={TeaTask}/>
-									<Scene key="teacontent" hideNavBar hideTabBar hideDrawerButton component={Content}/>
-									
-									
+									<Scene key="teacontent" hideNavBar hideTabBar hideDrawerButton component={Content}/>		
 								</Scene>
 								{/* 圈子 */}
 								<Scene
 									key='quanzi'
-									initial
 									icon={({focused})=>
 										<Icon 
 											color={focused?'red':'blue'} 
@@ -445,7 +477,6 @@ const App = () => {
 								>
 									<Scene key='quan'
 										title='社交圈子'
-										initial
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Quan} 
@@ -456,6 +487,9 @@ const App = () => {
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center',marginLeft:-30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Fabu} 
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
 									></Scene>
 								</Scene>
 								{/* 用户中心 */}
@@ -478,7 +512,7 @@ const App = () => {
 										renderRightButton={
 											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.wteatongzhi()}/>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white',backgroundColor:'#5d93c0'}}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
 									/>
 									<Scene
 										key="wgerenziliao"

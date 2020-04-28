@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     },
     nav:{
         width:'100%',
-        height:64*s,
+        height:73*s,
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',
@@ -186,6 +186,7 @@ const styles = StyleSheet.create({
     },
     left:{
         width:'38%',
+        paddingLeft:20*s
     },
 })
 
