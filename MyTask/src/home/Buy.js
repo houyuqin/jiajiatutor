@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',
-        backgroundColor:'rgb(29, 37, 110)'
+        backgroundColor:'#708090'
     },
     tit:{
         width:'55%',

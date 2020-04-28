@@ -14,7 +14,7 @@ export default class Ad extends Component {
                     style={{
                         width:'100%',
                         height:60*s,
-                        backgroundColor:'rgb(29, 37, 110)',
+                        backgroundColor:'#708090',
                         flexDirection:'row',
                         alignItems:'center',
                         justifyContent:'center'
