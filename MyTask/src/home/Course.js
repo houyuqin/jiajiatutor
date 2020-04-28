@@ -70,14 +70,14 @@ export default class Course extends Component {
     render() {
         return (
             <View>
-                <ScrollView>
+                
                 <View  style={styles.nav}>
                     <Icon name="left" style={styles.left} onPress={Actions.home} />
                     <Text
                         style={styles.tit}
                     >学科课程视频</Text>
                 </View>
-
+                <ScrollView>
                 <View style={{display: 'flex',justifyContent:'space-between'}}>
                     {
                         this.state.data.map(item=>(

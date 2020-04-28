@@ -9,11 +9,11 @@ export default class Ad extends Component {
     render() {
         return (
             <View>
-                <ScrollView>
+                
                 <View
                     style={{
                         width:'100%',
-                        height:60*s,
+                        height:64*s,
                         backgroundColor:'#708090',
                         flexDirection:'row',
                         alignItems:'center',
@@ -23,6 +23,7 @@ export default class Ad extends Component {
                 >
                     <Text style={{color:'white',fontSize:20}}>广告</Text>
                 </View>
+                <ScrollView>
                 <View style={styles.imgs}>
                     <Image source={require('../../assets/hyq/guanggao1.jpg')} 
                         alt=''

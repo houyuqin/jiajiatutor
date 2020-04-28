@@ -64,14 +64,14 @@ export default class Vedio extends Component {
     render() {
         return (
             <View>
-                <ScrollView>
+                
                 <View  style={styles.nav}>
                     <Icon name="left" style={styles.left} onPress={Actions.pop} />
                     <Text
                         style={styles.tit}
                     >优秀视频推荐</Text>
                 </View>
-                
+                <ScrollView>
                 <View>
                 {
                     this.state.data.map(item=>(

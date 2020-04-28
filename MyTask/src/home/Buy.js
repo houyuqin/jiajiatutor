@@ -113,14 +113,14 @@ export default class Buy extends Component {
          +'   '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
         return (
             <View>
-                <ScrollView>
+                
                     <View  style={styles.nav}>
                         <Icon name="left" style={styles.left} onPress={Actions.pop} />
                         <Text
                             style={styles.tit}
                         >购买</Text>
                     </View>
-            
+                <ScrollView>
                     <View style={{width:'100%'}}>
                         <Video 
                             source={this.state.vedio}
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     },
     nav:{
         width:'100%',
-        height:54*s,
+        height:64*s,
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',

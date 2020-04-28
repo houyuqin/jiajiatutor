@@ -32,12 +32,14 @@ export default class Home extends Component {
     render() {
         return (
             <View>
-                <ScrollView>
-                    <View style={styles.tit}>
+                
+                <View style={styles.tit}>
                         <Text style={styles.title}>佳+家教</Text>
-                    </View>
+                </View>
+                <ScrollView>
                 {/* 轮播图 */}
                 <View>
+                
                 <Carousel
                     style={styles.wrapper}
                     selectedIndex={2}
