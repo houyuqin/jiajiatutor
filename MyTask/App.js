@@ -244,7 +244,7 @@ const App = () => {
 										title='个人中心' 
 										component={StdMine}
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{backgroundColor:'#5d93c0'}}
 										renderLeftButton={<View></View>}
 										renderRightButton={
 											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.tongzhi()}/>
@@ -507,7 +507,7 @@ const App = () => {
 										title='个人中心' 
 										component={TeaMine}
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{backgroundColor:'#5d93c0'}}
 										renderLeftButton={<View></View>}
 										renderRightButton={
 											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.wteatongzhi()}/>
