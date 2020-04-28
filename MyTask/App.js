@@ -244,12 +244,12 @@ const App = () => {
 										title='个人中心' 
 										component={StdMine}
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#5d93c0'}}
+										navigationBarStyle={{backgroundColor:'#708090'}}
 										renderLeftButton={<View></View>}
 										renderRightButton={
 											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.tongzhi()}/>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white',backgroundColor:'#5d93c0'}}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
 									/>
 									<Scene 
 										key='wwodeshoucang' 
@@ -442,8 +442,8 @@ const App = () => {
 										navigationBarStyle={{ backgroundColor: '#708090' }}										
 										component={Concat} 
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-										}
+										<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+									}
 									/>
 								</Scene>
 								{/* 学习 */}
@@ -460,19 +460,10 @@ const App = () => {
 									
 								>
 									<Scene key="teastudy" component={TeaStudy}/>
-									<Scene 
-										key="give" 
-										hideNavBar 
-										hideTabBar 
-										hideDrawerButton 
-										component={Give}
-										
-									/>
+									<Scene key="give" hideNavBar hideTabBar hideDrawerButton component={Give}/>
 									<Scene key="video" hideNavBar hideTabBar hideDrawerButton component={Videotea}/>
 									<Scene key="teatask" hideNavBar hideTabBar hideDrawerButton component={TeaTask}/>
-									<Scene key="teacontent" hideNavBar hideTabBar hideDrawerButton component={Content}/>
-									
-									
+									<Scene key="teacontent" hideNavBar hideTabBar hideDrawerButton component={Content}/>		
 								</Scene>
 								{/* 圈子 */}
 								<Scene
@@ -516,12 +507,12 @@ const App = () => {
 										title='个人中心' 
 										component={TeaMine}
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#5d93c0'}}
+										navigationBarStyle={{backgroundColor:'#708090'}}
 										renderLeftButton={<View></View>}
 										renderRightButton={
 											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.wteatongzhi()}/>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white',backgroundColor:'#5d93c0'}}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
 									/>
 									<Scene
 										key="wgerenziliao"
