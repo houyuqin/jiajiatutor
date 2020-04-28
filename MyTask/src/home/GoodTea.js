@@ -60,8 +60,8 @@ export default class GoodTea extends Component {
                     {
                         this.state.data.map(item=>(
                             <View style={styles.one}>
-                                {/* <Image source={require(item.teatouxiang)} style={styles.tea}/>    */}
-                                <Image  source={{uri:'http://148.70.183.184:8000/images/'+item.teatouxiang}} style={styles.tea}></Image>   
+                                <Image source={require('../../assets/hyq/000.png')} style={styles.tea}/>   
+                                {/* <Image  source={{uri:'http://148.70.183.184:8000/images/'+item.teatouxiang}} style={styles.tea}></Image>    */}
                                 <View style={{paddingTop:20*s}}>
                                     <Text style={styles.tch}>姓名：{item.wusername}</Text>
                                     <Text style={styles.tch}>性别：{item.wsex}</Text>
