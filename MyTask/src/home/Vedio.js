@@ -88,7 +88,7 @@ export default class Vedio extends Component {
                                 }}
                             >
                                 <Video 
-                                    // source={require('../../assets/vedio/ch1.mp4')}
+                                    // source={require('../../assets/hyq/ch1.mp4')}
                                     source={{uri:'http://148.70.183.184:8000/vedio'+item.vedio}}
                                     style={{width:'100%',height:400*s}}
                                     paused={true}
