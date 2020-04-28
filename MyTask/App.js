@@ -224,7 +224,7 @@ const App = () => {
 										}
 									title="我的"
 								>
-								<Scene 
+									<Scene 
 										key='stdmine' 
 										title='个人中心' 
 										component={StdMine}
@@ -238,6 +238,7 @@ const App = () => {
 									/>
 									<Scene 
 										key='wwodeshoucang' 
+										hideTabBar
 										title='我的收藏' 
 										navigationBarStyle={{backgroundColor:'#708090'}}
 										component={WWodeshoucang}
@@ -251,6 +252,7 @@ const App = () => {
 									/>
 									<Scene 
 										key='wwodedingdan' 
+										hideTabBar
 										title='我的订单' 
 										navigationBarStyle={{backgroundColor:'#708090'}}
 										renderLeftButton={
@@ -264,7 +266,8 @@ const App = () => {
 									/>
 									<Scene 
 										key='wwodejiaoshi' 
-										title='我的教师' 
+										title='我的教师'
+										hideTabBar 
 										navigationBarStyle={{backgroundColor:'#708090'}}
 										renderLeftButton={
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
@@ -279,6 +282,7 @@ const App = () => {
 									<Scene 
 										key='wzuoyepingjiaqingkuang' 
 										title='作业评价情况' 
+										hideTabBar
 										navigationBarStyle={{backgroundColor:'#708090'}}
 										renderLeftButton={
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
@@ -292,6 +296,7 @@ const App = () => {
 									<Scene 
 										key='wyijianfankui' 
 										title='意见反馈' 
+										hideTabBar
 										navigationBarStyle={{backgroundColor:'#708090'}}
 										renderLeftButton={
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
@@ -305,11 +310,13 @@ const App = () => {
 									<Scene
 										key="wshezhi"
 										title='设置' 
+										hideTabBar
 										hideNavBar
 										component={shezhi}
 									/>
 									<Scene
 										key="wgerenziliao"
+										hideTabBar
 										title='个人资料' 
 										hideNavBar
 										component={Gerenziliao}
@@ -318,6 +325,7 @@ const App = () => {
 										key="tongzhi"
 										title='通知'
 										component={tongzhi}
+										hideTabBar
 										navigationBarStyle={{backgroundColor:'#708090'}}
 										renderLeftButton={
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
