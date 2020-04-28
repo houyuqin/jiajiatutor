@@ -134,7 +134,7 @@ const App = () => {
 								{/* 学习 */}
 								<Scene 
 									key='goodsPage'
-									hideNavBar
+									//hideNavBar
 									title='学习'
 									icon={
 										({focused})=><Icon 
@@ -337,7 +337,7 @@ const App = () => {
 						<Scene key="root">
 							<Tabs 
 								key='tabbar'
-								hideNavBar
+								//hideNavBar
 								activeTintColor="red"
 								inactiveTintColor="blue"
 								tabBarStyle={{backgroundColor:'#ccc'}}

@@ -59,7 +59,7 @@ export default class TeaStudy extends Component {
                         }}>
                             <Image style={{ width: 150 * s, height: 150 * s, marginTop: 70 * s, marginLeft: 40 * s, borderRadius: 75 * s }} source={require('../../../assets/cq/touxiang.png')} />
                             <View style={{ flexDirection: 'column', marginLeft: 40 * s, marginTop: 95 * s }}>
-                                <Text style={{ color: 'white' }}>教师姓名：{this.state.name}</Text>
+                                <Text style={{ color: 'white' }}>学生姓名：{this.state.name}</Text>
                                 <Text style={{ color: 'white', marginTop: 20 * s }}>星级等级：★★★★★</Text>
                             </View>
 
