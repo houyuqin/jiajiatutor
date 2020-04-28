@@ -370,7 +370,7 @@ export default class Register extends Component {
             <View style={{width:'100%',height:'100%',backgroundColor:'#417bab',}}>
                 
                 <TouchableOpacity onPress={Actions.pop}>
-                     <Image style={{width:40*s,height:40*s,marginTop:17*s,marginLeft:20*s}} source={require('../../assets/cq/zuo.png')}/>
+                     <Image style={{width:40*s,height:40*s,marginTop:20*s,marginLeft:20*s}} source={require('../../assets/cq/zuo.png')}/>
                 </TouchableOpacity>
                
                 <View style={{width:'100%',height:'100%',flex:1,}} >

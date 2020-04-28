@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet, ScrollView, Dimensions } from 'react-native'
 import { Icon } from '@ant-design/react-native';
+import { Actions } from 'react-native-router-flux';
 
 const {width,scale} = Dimensions.get('window');
 const s = width / 640;
@@ -13,15 +14,15 @@ export default class Ad extends Component {
                 <View
                     style={{
                         width:'100%',
-                        height:64*s,
+                        height:73*s,
                         backgroundColor:'#708090',
                         flexDirection:'row',
                         alignItems:'center',
-                        justifyContent:'center'
                     }}
 
                 >
-                    <Text style={{color:'white',fontSize:20}}>广告</Text>
+                    <Icon name='left' style={{paddingLeft:20*s}} onPress={Actions.pop}/>
+                    <Text style={{color:'white',fontSize:20,marginLeft:250*s}}>广告</Text>
                 </View>
                 <ScrollView>
                 <View style={styles.imgs}>

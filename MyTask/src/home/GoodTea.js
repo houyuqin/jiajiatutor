@@ -108,10 +108,9 @@ const styles = StyleSheet.create({
     },
     nav:{
         width:'100%',
-        height:64*s,
+        height:73*s,
         flexDirection:'row',
         alignItems:'center',
-        justifyContent:'center',
         backgroundColor:'#708090'
     },
     tit:{
@@ -121,42 +120,6 @@ const styles = StyleSheet.create({
     },
     left:{
         width:'38%',
+        paddingLeft:20*s
     },
-})
-
-
-
-//             <div style={{paddingLeft:10}}>
-//                 {
-//                     this.state.data.map(item=>(
-//                         <div key={item} style={{width:'97%',height:195,paddingTop:'14px',paddingLeft:'15px',marginTop:'25px',borderRadius:'10px',border:'1px solid rgb(174, 177, 179)',boxShadow: '3px 3px 2px rgb(174, 177, 179)'}}>
-                            
-//                             <div style={{height:170}}>
-//                                 <div style={{width:'45%',float:'left'}}>
-//                                 <img src={item.teatouxiang} alt=''
-//                                 style={{width:140,height:165}}/>
-//                                 {/* <img src={item.head} alt=''
-//                                 style={{width:140,height:165}}/> */}
-//                                 </div>
-//                                 <div style={{paddingTop:4,color:'rgb(26, 63, 87)',fontSize:'16px',}}>
-//                                     <p>姓名：{item.wusername} </p>
-//                                     <p>性别：{item.wsex}</p>
-//                                     <p>年龄：{item.wage}岁</p>
-//                                     <p>毕业学院：{item.biyexuexiao}</p>
-//                                     <p>目前职位：{item.zhiwei}</p>
-//                                 </div>
-//                                 <button 
-//                                 onClick={()=>this.selecttea(item.wphonenumber)}
-//                                 style={{width:120,height:40,marginTop:'5px',border:'none',borderRadius:'7px',backgroundColor:'#5d93d0',fontSize:'16px',color:'white'}}>选择教师</button>
-//                              </div>
-//                         </div>
-//                     ))
-//                 }
-//             </div>
-
-
-//         </div>
-//         )
-//         }
-   
-// }
+});

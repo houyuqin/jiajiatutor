@@ -194,10 +194,9 @@ const styles = StyleSheet.create({
     },
     nav:{
         width:'100%',
-        height:64*s,
+        height:73*s,
         flexDirection:'row',
         alignItems:'center',
-        justifyContent:'center',
         backgroundColor:'#708090'
     },
     tit:{
@@ -207,53 +206,6 @@ const styles = StyleSheet.create({
     },
     left:{
         width:'45%',
+        paddingLeft:20*s
     },
-});
-
-
-//     render() {
-//         //let name=this.props.location.search.split('?')[2];
-//         let price=this.props.location.search.split('?')[1];
-//         let src=this.props.location.search.split('?')[3];
-//         let class0=this.props.location.search.split('?')[4];
-//         var today = new Date(),
-//         
-//         return (
-//             <div 
-//             style={{width:'100%'}}>
-//                 <NavBar
-//                 mode="dark"
-//                 icon={<Icon type="left" />}
-//                 onLeftClick={this.rtn}
-//                 >课程购买</NavBar>
-
-//             <div style={{display: 'flex',justifyContent:'space-between',flexWrap:' wrap'}}> 
-            
-//                 <div style={{width:'100%'}}>
-//                 <Player ref="player" videoId="video-1">
-//                             <source src={src}/>
-//                 </Player>
-//                 <h2 style={{marginTop:'10px',marginLeft:'5px',fontSize:20}}>课程科目：{class0}</h2>
-//                 <h2 style={{marginTop:'10px',marginLeft:'5px',fontSize:20}}>订单生成时间：<span ref={i=>this.time=i}>{time}</span></h2>
-//                 <h2 style={{marginTop:'10px',marginLeft:'5px',fontSize:20}}>价钱：￥<span style={{color:'red',fontSize:30}}>{price}</span>元</h2>
-
-//                 <Button onClick={()=>this.tobuy(time,class0,src,price)}
-//                 style={{width:'40%',marginTop:'120px',backgroundColor:'#2a89b1',color:'white',fontWeight:'bold',float:'left',marginLeft:25}}>
-//                     加入购物车
-//                 </Button>
-//                 <Button onClick={()=>this.bought(time,class0,src,price)}
-//                 style={{width:'40%',marginTop:'120px',marginBottom:'40px',backgroundColor:'#2a89b1',color:'white',fontWeight:'bold',float:'left',marginLeft:30,marginRight:25}}>
-//                     直接付款
-//                 </Button>
-
-//                 <h3 style={{marginLeft:'20px',marginTop:'20px',float:'left'}}>第三方支付</h3>
-//                 <img src='./img/qq.jpg' alt='' style={{width:'8%',marginLeft:100,marginTop:'10px',float:'left'}}/>
-//                 <img src='./img/wechat.jpg' alt='' style={{width:'8%',marginLeft:30,marginTop:'10px',float:'left'}}/>
-//                 <img src='./img/zhifubao.jpg' alt='' style={{width:'8%',marginLeft:30,marginTop:'10px',float:'left'}}/>
-//                 </div>
-                
-//             </div>
-//         </View>
-//         )
-//     }
-// }
+})
