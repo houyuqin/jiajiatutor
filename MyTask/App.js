@@ -337,7 +337,7 @@ const App = () => {
 						<Scene key="root">
 							<Tabs 
 								key='tabbar'
-								//hideNavBar
+								hideNavBar
 								activeTintColor="red"
 								inactiveTintColor="blue"
 								tabBarStyle={{backgroundColor:'#ccc'}}
