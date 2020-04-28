@@ -142,6 +142,9 @@ const App = () => {
 											name="file"
 										/>
 									}
+									renderLeftButton={
+										<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+									}
 									
 								>
 									<Scene key='Stustudy' hideNavBar component={Study}></Scene>
@@ -218,6 +221,10 @@ const App = () => {
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center',marginLeft:-30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Fabu} 
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										
 									></Scene>
 								</Scene>
 								{/* 用户中心 */}
