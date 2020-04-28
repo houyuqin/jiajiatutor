@@ -147,41 +147,49 @@ const App = () => {
 									<Scene key='Stustudy' hideNavBar component={Study}></Scene>
 									<Scene key='jihua'
 										title='学习计划'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={jihua} ></Scene>
 									<Scene key='Myjihua'
 										title='我的计划'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Myjihua} ></Scene>
 									<Scene key='jihuacontent'
 										title='计划内容'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Jihuacontent} ></Scene>
 									<Scene key='homework'
 										title='我的作业'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Homework} ></Scene>
 									<Scene key='lianxi'
 										title='自我练习'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={MyStudy} ></Scene>
 									<Scene key='video'
 										title='我的视频'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Video} ></Scene>
 									<Scene key='content'
 										title='查看详情'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Contentstd} ></Scene>
 									<Scene key='contents'
 										title='查看详情'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Contents} ></Scene>
@@ -368,31 +376,37 @@ const App = () => {
 										component={tHome} />
 									<Scene key='tfujin'
 										title='附近家教'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={Fujin} />
 									<Scene key='tzhoumo'
 										title='周末家教'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={Zhoumo} />
 									<Scene key='tjizhao'
 										title='急招家教'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={Jizhao} />
 									<Scene key='jobxiang'
 										title='招聘详情'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={tContent} />
 									<Scene key='tother'
 										title='其他兼职'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={Other} />
 									<Scene key='concat'
 										title='联系我'
+										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										navigationBarStyle={{ backgroundColor: 'rgb(29, 37, 110)' }}
 										component={Concat} />
