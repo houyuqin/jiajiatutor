@@ -5799,6 +5799,11 @@ react-native-pure-navigation-bar@^1.4.9:
   resolved "https://registry.npm.taobao.org/react-native-pure-navigation-bar/download/react-native-pure-navigation-bar-1.4.9.tgz#990d4da090300b57bf643f5e702c5181b62e7ffd"
   integrity sha1-mQ1NoJAwC1e/ZD9ecCxRgbYuf/0=
 
+react-native-radio-master@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npm.taobao.org/react-native-radio-master/download/react-native-radio-master-1.0.1.tgz#a3c375875e5d1130682a3ac72610713e5da163ea"
+  integrity sha1-o8N1h15dETBoKjrHJhBxPl2hY+o=
+
 react-native-router-flux@4.0.6:
   version "4.0.6"
   resolved "https://registry.npm.taobao.org/react-native-router-flux/download/react-native-router-flux-4.0.6.tgz#e4723f5ce89cb5822e0c9bb6d0a8d4de6179eb58"
