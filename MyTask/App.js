@@ -189,7 +189,7 @@ const App = () => {
 								{/* 圈子 */}
 								<Scene
 									key='quanzi'
-									initial
+									// initial
 									icon={({focused})=>
 										<Icon 
 											color={focused?'red':'blue'} 
@@ -199,7 +199,7 @@ const App = () => {
 								>
 									<Scene key='quan'
 										title='社交圈子'
-										initial
+										// initial
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Quan} 
