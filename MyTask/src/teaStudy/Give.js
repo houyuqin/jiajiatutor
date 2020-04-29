@@ -140,13 +140,13 @@ export default class TeaStudy extends Component {
     render() {
         return (
             <View>
-                <NaviBar
+                {/* <NaviBar
                     style={{ color: 'white', backgroundColor: 'black' }}
                     backgroundColor='black'
                     color='white'
                     title={'布置作业'}
                     onLeft={() => Actions.teastudy()}
-                />
+                /> */}
                 <View>
                     <View style={{
                         width: '95%', height: 485 * s, backgroundColor: 'white', marginTop: 20 * s, marginLeft: 15 * s,

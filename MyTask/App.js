@@ -452,7 +452,7 @@ const App = () => {
 								{/* 学习 */}
 								<Scene 
 									key='goodsPage'
-									hideNavBar
+									// hideNavBar
 									title='学习'
 									icon={
 										({focused})=><Icon 
@@ -462,8 +462,28 @@ const App = () => {
 									}
 									
 								>
-									<Scene key="teastudy" component={TeaStudy}/>
-									<Scene key="give" hideNavBar hideTabBar hideDrawerButton component={Give}/>
+									<Scene 
+										key="teastudy" 
+										title='教学'
+										component={TeaStudy}
+										hideNavBar
+									/>
+									<Scene 
+										key='give' 
+										title='布置作业'
+										hideTabBar 
+										hideDrawerButton 
+										titleTextColor='white'
+										navigationBarStyle={{backgroundColor:'#5d93c0'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+										component={Give}
+									/>
 									<Scene key="video" hideNavBar hideTabBar hideDrawerButton component={Videotea}/>
 									<Scene key="teatask" hideNavBar hideTabBar hideDrawerButton component={TeaTask}/>
 									<Scene key="teacontent" hideNavBar hideTabBar hideDrawerButton component={Content}/>		
