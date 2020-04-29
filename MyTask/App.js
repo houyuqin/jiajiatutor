@@ -381,6 +381,9 @@ const App = () => {
 										title='首页'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
+										renderLeftButton={
+											<View></View>
+										}
 										component={tHome} />
 									<Scene key='tfujin'
 										title='附近家教'
