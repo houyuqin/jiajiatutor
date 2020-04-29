@@ -462,19 +462,14 @@ const App = () => {
 									}
 									
 								>
-									<Scene 
-										key="teastudy" 
-										title='教学'
-										component={TeaStudy}
-										hideNavBar
-									/>
+									<Scene key="teastudy" component={TeaStudy} hideNavBar/>
 									<Scene 
 										key='give' 
 										title='布置作业'
 										hideTabBar 
 										hideDrawerButton 
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#5d93c0'}}
+										navigationBarStyle={{backgroundColor:'#708090'}}
 										renderLeftButton={
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
 										}
@@ -484,9 +479,54 @@ const App = () => {
 										}
 										component={Give}
 									/>
-									<Scene key="video" hideNavBar hideTabBar hideDrawerButton component={Videotea}/>
-									<Scene key="teatask" hideNavBar hideTabBar hideDrawerButton component={TeaTask}/>
-									<Scene key="teacontent" hideNavBar hideTabBar hideDrawerButton component={Content}/>		
+									<Scene 
+										key='video'
+										hideTabBar 
+										title='上传视频'
+										hideDrawerButton 
+										component={Videotea}
+										titleTextColor='white'
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+									/>
+									<Scene 
+										key="teatask"  
+										hideTabBar 
+										title="批改作业"
+										hideDrawerButton 
+										component={TeaTask}
+										titleTextColor='white'
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+									/>
+									<Scene 
+										key="teacontent"
+										title="批改作业"  
+										hideTabBar 
+										hideDrawerButton 
+										component={Content}
+										titleTextColor='white'
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+									/>		
 								</Scene>
 								{/* 圈子 */}
 								<Scene

@@ -50,13 +50,13 @@ export default class TeaStudy extends Component {
         return (
             <View>
 
-                <NaviBar
+                {/* <NaviBar
                     style={{ color: 'white', backgroundColor: 'black' }}
                     backgroundColor='black'
                     color='white'
                     title={'批改作业'}
                     onLeft={() => Actions.teastudy()}
-                />
+                /> */}
                 <View>
 
                     <FlatList
