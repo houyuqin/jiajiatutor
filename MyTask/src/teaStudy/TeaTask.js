@@ -48,7 +48,7 @@ export default class TeaStudy extends Component {
     }
     render() {
         return (
-            <View>
+            <View style={{height:'100%',backgroundColor:'#e4e3e3'}}>
 
                 {/* <NaviBar
                     style={{ color: 'white', backgroundColor: 'black' }}
@@ -64,14 +64,14 @@ export default class TeaStudy extends Component {
                         renderItem={({ item, index }) => (
                             <TouchableOpacity onPress={() => Actions.teacontent({ 'id': item.uid })}>
                                 <View style={{
-                                    width: '100%', height: 180 * s, backgroundColor: 'white', marginTop: 20 * s, marginLeft: 15 * s,
+                                    width: '95%', height: 180 * s, backgroundColor: 'white', marginTop: 20 * s, marginLeft: 15 * s,
                                     borderRadius: 10, paddingLeft: 30 * s, flexDirection: 'row'
                                 }}>
                                     <View style={{ width: '90%', height: 180 * s, justifyContent: 'center' }}>
-                                        <Text style={{ fontSize: 22 }}>题目:{item.title}</Text>
-                                        <Text style={{ fontSize: 22 }}>截止时间:{new Date(item.endtime).getFullYear() + '-' + (new Date(item.endtime).getMonth() + 1) + '-' + new Date(item.endtime).getDate() + ' ' + new Date(item.endtime).getHours() + ':' + new Date(item.endtime).getMinutes() + ':' + new Date(item.endtime).getSeconds()}</Text>
-                                        <Text style={{ fontSize: 22 }}>提交人:{item.name}</Text>
-                                        <Text style={{ fontSize: 22 }}>评价状态:{item.pingjia==null?'未评价':'已评价'}</Text>
+                                        <Text style={{ fontSize: 22 }}>题目：</Text>
+                                        <Text style={{ fontSize: 22 }}>截止时间：</Text>
+                                        <Text style={{ fontSize: 22 }}>提交人：</Text>
+                                        <Text style={{ fontSize: 22 }}>评价状态：</Text>
                                     </View>
                                     <View style={{ width: '10%', height: 180 * s, justifyContent: 'center' }}>
                                         <Image style={{ width: 40 * s, height: 40 * s, }} source={require('../../assets/cq/you.png')} />

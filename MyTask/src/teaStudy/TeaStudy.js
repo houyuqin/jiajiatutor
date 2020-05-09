@@ -54,8 +54,8 @@ export default class TeaStudy extends Component {
                     borderRadius:40*s,elevation:10,shadowColor:'black',flexDirection:'row',}}>
                         <Image style={{width:150*s,height:150*s,marginTop:70*s,marginLeft:40*s,borderRadius:75*s}} source={require('../../assets/cq/touxiang.png')}/>
                         <View style={{flexDirection:'column',marginLeft:40*s,marginTop:95*s}}>
-        <Text style={{color:'white'}}>教师姓名：{this.state.name}</Text>
-                            <Text style={{color:'white',marginTop:20*s}}>星级等级：★★★★★</Text>
+        <Text style={{color:'white',fontSize:27*s}}>教师姓名：{this.state.name}</Text>
+                            <Text style={{color:'white',marginTop:20*s,fontSize:27*s}}>星级等级：★★★★★</Text>
                         </View>
                         
                     </View>
@@ -64,20 +64,20 @@ export default class TeaStudy extends Component {
                     <TouchableOpacity onPress={()=>Actions.give()}>
                         <View style={{width:'90%',height:170*s,borderRadius:20*s,elevation:8,shadowColor:'red',backgroundColor:'#b0b2b4',flexDirection:'row'}}>
                             {/* <Image style={{width:160*s,height:50*s,marginTop:50*s,marginLeft:20*s}} source={require('../../assets/cq/bu.jpg')}/> */}
-                            <Text style={{fontSize:20,color:'#1a2f41',marginTop:50*s,marginLeft:30*s}}>布置作业</Text>
+                            <Text style={{fontSize:33*s,color:'#1a2f41',marginTop:50*s,marginLeft:30*s}}>布置作业</Text>
                             <Image style={{width:40*s,height:40*s,marginTop:55*s,marginLeft:270*s}} source={require('../../assets/cq/you.png')}/>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>Actions.teatask()}>
                         <View style={{width:'90%',height:170*s,marginTop:30*s,borderRadius:20*s,elevation:8,shadowColor:'red',backgroundColor:'#355586',flexDirection:'row'}}>
                         {/* <Image style={{width:160*s,height:50*s,marginTop:50*s,marginLeft:20*s}} source={require('../../assets/cq/bu.jpg')}/> */}
-                            <Text style={{fontSize:20,marginTop:50*s,marginLeft:30*s}}>作业批改</Text>
+                            <Text style={{fontSize:33*s,marginTop:50*s,marginLeft:30*s}}>作业批改</Text>
                             <Image style={{width:40*s,height:40*s,marginTop:55*s,marginLeft:270*s}} source={require('../../assets/cq/you.png')}/>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>Actions.video()}>
                         <View style={{width:'90%',height:170*s,marginTop:30*s,borderRadius:20*s,elevation:8,shadowColor:'red',backgroundColor:'#1d3c6a',flexDirection:'row'}}>
-                            <Text style={{fontSize:20,marginTop:50*s,marginLeft:30*s}}>上传视频</Text>
+                            <Text style={{fontSize:33*s,marginTop:50*s,marginLeft:30*s}}>上传视频</Text>
                             <Image style={{width:40*s,height:40*s,marginTop:55*s,marginLeft:270*s}} source={require('../../assets/cq/you.png')}/>
                         </View>
                     </TouchableOpacity>

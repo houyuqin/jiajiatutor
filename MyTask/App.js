@@ -107,20 +107,21 @@ const App = () => {
 							<Tabs 
 								key='tabbar'
 								hideNavBar
-								activeTintColor="red"
-								inactiveTintColor="blue"
-								tabBarStyle={{backgroundColor:'#ccc'}}
+								activeTintColor="#2f618b"
+								inactiveTintColor="#707070"
+								tabBarStyle={{backgroundColor:'#e0e0e0'}}
 							>
 								{/* Home栏 */}
 								<Scene key='homePage'
 									title='首页'
 									hideNavBar
 									icon={
-										({focused})=><Icon 
-											color={focused?'red':'blue'} 
-											name="home"
-										/>
-									}
+										({focused})=><Image 
+										source={focused?require('./assets/cq/cshou1.png'):require('./assets/cq/cshou.png')}
+										style={{width:25,height:25}}
+										
+										  />
+									  }  
 								>
 									<Scene key='home'  component={Home}/>
 									<Scene key='ad' hideTabBar component={Ad} />
@@ -137,11 +138,12 @@ const App = () => {
 									//hideNavBar
 									title='学习'
 									icon={
-										({focused})=><Icon 
-											color={focused?'red':'blue'} 
-											name="file"
-										/>
-									}
+										({focused})=><Image 
+										source={focused?require('./assets/cq/shu1.png'):require('./assets/cq/shu.png')}
+										style={{width:23,height:23}}
+										
+										  />
+									  }
 									renderLeftButton={
 										<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
 									}
@@ -179,7 +181,7 @@ const App = () => {
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={MyStudy} ></Scene>
 									<Scene key='video'
-										title='我的视频'
+										title='上传视频'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
@@ -201,11 +203,13 @@ const App = () => {
 								<Scene
 									key='quanzi'
 									// initial
-									icon={({focused})=>
-										<Icon 
-											color={focused?'red':'blue'} 
-											name='compass'/>
-										}
+									icon={
+										({focused})=><Image 
+										source={focused?require('./assets/cq/quan1.png'):require('./assets/cq/quan.png')}
+										style={{width:35,height:35}}
+										
+										  />
+									  } 
 									title="圈子"
 								>
 									<Scene key='quan'
@@ -232,11 +236,13 @@ const App = () => {
 									key='userPage'
 									// hideNavBar
 									// hideDrawerButton
-									icon={({focused})=>
-										<Icon 
-											color={focused?'red':'blue'} 
-											name='user'/>
-										}
+									icon={
+										({focused})=><Image 
+										source ={focused?require('./assets/cq/wo1.png'):require('./assets/cq/wo.png')}
+										style={{width:25,height:25}}
+										
+										  />
+									  } 
 									title="我的"
 								>
 									<Scene 
@@ -361,20 +367,27 @@ const App = () => {
 							<Tabs 
 								key='tabbar'
 								hideNavBar
-								activeTintColor="red"
-								inactiveTintColor="blue"
-								tabBarStyle={{backgroundColor:'#ccc'}}
+								activeTintColor="#2f618b"
+								inactiveTintColor="#707070"
+								tabBarStyle={{backgroundColor:'#e0e0e0'}}
 							>
 								{/* Home栏 */}
 								<Scene key='homePage'
 									title='首页'
 									//hideNavBar
+									// icon={
+									// 	({focused})=><Icon 
+									// 		color={focused?'#2f618b':'#707070'} 
+									// 		name="home"
+									// 	/>
+									// }
 									icon={
-										({focused})=><Icon 
-											color={focused?'red':'blue'} 
-											name="home"
-										/>
-									}
+										({focused})=><Image 
+										source={focused?require('./assets/cq/cshou1.png'):require('./assets/cq/cshou.png')}
+										style={{width:25,height:25}}
+										
+										  />
+									  }      
 									
 								>
 									<Scene key='thome'
@@ -453,13 +466,14 @@ const App = () => {
 								<Scene 
 									key='goodsPage'
 									// hideNavBar
-									title='学习'
+									title='教学'
 									icon={
-										({focused})=><Icon 
-											color={focused?'red':'blue'} 
-											name="file"
-										/>
-									}
+										({focused})=><Image 
+										source={focused?require('./assets/cq/shu1.png'):require('./assets/cq/shu.png')}
+										style={{width:23,height:23}}
+										
+										  />
+									  } 
 									
 								>
 									<Scene key="teastudy" component={TeaStudy} hideNavBar/>
@@ -480,6 +494,7 @@ const App = () => {
 										component={Give}
 									/>
 									<Scene 
+										
 										key='video'
 										hideTabBar 
 										title='上传视频'
@@ -531,11 +546,13 @@ const App = () => {
 								{/* 圈子 */}
 								<Scene
 									key='quanzi'
-									icon={({focused})=>
-										<Icon 
-											color={focused?'red':'blue'} 
-											name='compass'/>
-										}
+									icon={
+										({focused})=><Image 
+										source={focused?require('./assets/cq/quan1.png'):require('./assets/cq/quan.png')}
+										style={{width:35,height:35}}
+										
+										  />
+									  } 
 									title="圈子"
 								>
 									<Scene key='quan'
@@ -558,11 +575,13 @@ const App = () => {
 								{/* 用户中心 */}
 								<Scene 
 									key='userPage'
-									icon={({focused})=>
-										<Icon 
-											color={focused?'red':'blue'} 
-											name='user'/>
-										}
+									icon={
+										({focused})=><Image 
+										source={focused?require('./assets/cq/wo1.png'):require('./assets/cq/wo.png')}
+										style={{width:25,height:25}}
+										
+										  />
+									  } 
 									title="我的"
 								>
 									<Scene 
