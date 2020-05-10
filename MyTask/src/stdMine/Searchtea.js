@@ -1,5 +1,18 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, Dimensions, TextInput, Button, AsyncStorage } from 'react-native'
+import { 
+    Text, 
+    View, 
+    ScrollView, 
+    StyleSheet, 
+    Dimensions, 
+    TextInput, 
+    Button, 
+    AsyncStorage, 
+    FlatList,
+    TouchableOpacity,
+    Image,
+    ToastAndroid
+} from 'react-native'
 import { List, Radio, } from '@ant-design/react-native';
 
 const {width} = Dimensions.get('window');
@@ -19,7 +32,8 @@ export default class Searchtea extends Component {
             time:'',
             salary:'',
             price:'',
-            request:""
+            request:"",
+            data:''
         }
     }
     getValue2 = (e)=>{
@@ -63,19 +77,56 @@ export default class Searchtea extends Component {
         .then(res=>{
             let std = JSON.parse(res);
             this.setState({std:std});
+        });
+        fetch("http://148.70.183.184:8000/search")
+        .then(res=>res.json())
+        .then(res=>{
+            this.setState({
+                data:res.data
+            })  
         })
-        // .then(res=>{
-        //     console.log(this.state);
-        // });
+        .then(res=>{
+            console.log(this.state.data)
+        });
+
+    }
+    delete=(num)=>{
+        fetch(`http://148.70.183.184:8000/search/${num}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'text/plain; charset=UTF-8'
+                },
+                body:JSON.stringify({id:num})
+            })
+            .then((res)=>{ 
+                if(res.status === 200){
+                    alert('删除成功！');
+                    return res.json();
+                }else{
+                    ToastAndroid('删除失败！',ToastAndroid.SHORT);
+                }
+            })
     }
     submit = ()=>{
         console.log(this.state)
+        let body = {
+            std:this.state.std ,// 定义选中的值，如果为空字符串，则默认不选中
+            name:this.state.name,
+            class:this.state.class,
+            address:this.state.address,
+            kemu:this.state.kemu,
+            sex:this.state.sex,
+            time:this.state.time,
+            salary:this.state.salary,
+            price:this.state.price,
+            request:this.state.request
+        }
         fetch("http://148.70.183.184:8000/search",{
             method:"POST",
             headers:{
                 'Content-Type': 'text/plain; charset=UTF-8',
             },
-            body:JSON.stringify(this.state)
+            body:JSON.stringify(body)
         }).then((res)=>{ 
             if(res.status === 200){
                 alert('提交成功！');
@@ -212,6 +263,44 @@ export default class Searchtea extends Component {
                     title="提交"
                 />
                 <View style={{height:60*s}}></View>
+                <Text style={{fontSize:24*s}}>我发布过的家教信息:</Text>
+                <FlatList
+                    data={this.state.data}
+                    renderItem={({ item }) => (
+                        <View style={{ alignItems: 'center' }} >
+                            <View style={styles.box3}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ width: '12%' }}><View style={styles.zh1}></View></View>
+                                    <View style={styles.zh2}><Text style={{ fontSize: 25, fontWeight: "bold" }}>{item.kemu}</Text></View>
+                                    <View style={styles.zh3}><Text style={{ color: '#00FF00', fontSize: 23 }}>{item.price}/小时</Text></View>
+                                    <TouchableOpacity onPress={()=>this.delete(item.id)}>
+                                        <Text 
+                                        style={{
+                                            fontSize:54*s,
+                                            marginLeft:60*s,
+                                            color:'red'
+                                            }}>
+                                                ×
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{marginLeft:'12%',marginTop:'3%'}}>
+                                    <Text style={styles.zfont}>{item.addrss}</Text>
+                                </View>
+                                <View style={{marginLeft:'12%',marginTop:'3%',flexDirection:'row'}}>
+                                   <View style={{width:'20%'}}><Text style={styles.zfont}>{item.salary}</Text></View>
+                                   <View style={{width:'20%'}}><Text style={styles.zfont}>{item.time}</Text></View>
+                                   <View style={{width:'40%'}}><Text style={styles.zfont}>{item.sex}</Text></View>
+                                   <TouchableOpacity 
+                                    style={{width:'10%',marginTop:-10*s}}  onPress={()=>this.lookfor(item.id)}>
+                                       <Image style={styles.zimg} source={require('../../assets/zx/right.png')} ></Image>
+                                   </TouchableOpacity>
+                                </View>
+                            </View>
+
+                        </View>
+                    )}
+                ></FlatList>
                 </ScrollView>
             </View>
         )
@@ -237,4 +326,36 @@ const styles = StyleSheet.create({
         backgroundColor:'#eee',
         paddingTop:10*s,
     },
+    box3: {
+        height: 190 * s,
+        width: '95%',
+        backgroundColor: 'white',
+        marginTop: 20 * s,
+        borderRadius: 10 * s
+    },
+    zh1: {
+        width: 20 * s,
+        height: 20 * s,
+        borderRadius: 10 * s,
+        backgroundColor: '#00FF00',
+        marginTop: 20 * s,
+        marginLeft: 20 * s,
+
+    },
+    zh2: {
+        width: '50%',
+        marginTop: 10 * s,
+    },
+    zh3: {
+        marginTop: 10 * s
+    },
+    zfont:{
+        fontSize:16,
+        color:'#2F4F4F'
+    },
+    zimg:{
+        width:50*s,
+        height:50*s,
+        resizeMode:'stretch'
+    }
 })

@@ -681,5 +681,24 @@ app.get('/search/:id',async c=>{
         data:ret.rows
     }
 })
+app.delete('/search/:id',async c=>{
+    c.body=JSON.parse(c.body);
+    console.log(c.body);
+    let sql = 'DELETE FROM search WHERE id=$1';
+    let ret = await pgdb.query(sql,[
+        c.param.id
+    ])
+    if(ret.rowCount<=0){
+        c.res.body = {
+            status:-1,
+            errmsg:'can not delete this recoder'
+        }
+    }else{
+        c.res.body = {
+            status:0,
+            data:'ok'
+        }; 
+    }      
+})
 
 app.run(8000);
