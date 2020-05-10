@@ -89,6 +89,10 @@ export default class StdMine extends Component {
                         <TouchableOpacity onPress={()=>Actions.wwodejiaoshi()}><Text style={styles.context}>我的教师</Text></TouchableOpacity>
                     </View>
                     <View style={styles.wview}>
+                        <Image source={require('../../assets/hyq/dingwei.png')} style={styles.wlist}/>
+                        <TouchableOpacity onPress={()=>Actions.searchtea()}><Text style={styles.context}>发布上门家教</Text></TouchableOpacity>
+                    </View>
+                    <View style={styles.wview}>
                         <Image source={require('../../assets/wjy/img/w评价.png')} style={styles.wlist}/>
                         <TouchableOpacity onPress={()=>Actions.wzuoyepingjiaqingkuang()}><Text style={styles.context}>作业评价情况</Text></TouchableOpacity>
                     </View>

@@ -1,32 +1,36 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet,Dimensions, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet,Dimensions, TouchableOpacity, AsyncStorage } from 'react-native'
 import NaviBar from 'react-native-pure-navigation-bar';
 import { Actions } from 'react-native-router-flux';
 import Item from '@ant-design/react-native/lib/list/ListItem';
+import { ThemeProvider } from '@ant-design/react-native/lib/style';
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
 export default class tContent extends Component {
     constructor() {
         super()
         this.state = {
-            data: 
-                { title: '数学家教', price: '17元/小时', location: '不限地点',jiezhang:'日结',qixian:'长期',sex:'男女不限' }
-           
-           
+            data: ''
         }
+    }
+    componentDidMount(){
+        AsyncStorage.getItem('hdetail')
+        .then(res=>{
+            this.setState({data:JSON.parse(res)[0]})
+        });
     }
     render() {
         return (
             <View style={{flex:1}}>
               <View style={{alignItems:'center'}}>
                   <View style={styles.box}>
-                      <View><Text style={styles.hfont}>职位：{this.state.data.title}</Text></View>
-                      <View><Text style={styles.hfont}>价钱：{this.state.data.price}</Text></View>
-                      <View><Text style={styles.hfont}>地点：{this.state.data.location}</Text></View>
-                      <View><Text style={styles.hfont}>结账：{this.state.data.jiezhang}</Text></View>
-                      <View><Text style={styles.hfont}>期限：{this.state.data.qixian}</Text></View>
+                      <View><Text style={styles.hfont}>职位：{this.state.data.kemu}</Text></View>
+                      <View><Text style={styles.hfont}>价钱：{this.state.data.price}/小时</Text></View>
+                      <View><Text style={styles.hfont}>地点：{this.state.data.address}</Text></View>
+                      <View><Text style={styles.hfont}>结账：{this.state.data.salary}</Text></View>
+                      <View><Text style={styles.hfont}>期限：{this.state.data.time}</Text></View>
                       <View><Text style={styles.hfont}>性别要求：{this.state.data.sex}</Text></View>
-                      <View><Text style={styles.hfont}>具体要求：有经验，数学能力强，有耐心</Text></View>
+                      <View><Text style={styles.hfont}>具体要求：{this.state.data.request}</Text></View>
                   </View></View>
                <View style={{flexDirection:'row'}}>
                    <TouchableOpacity onPress={()=>Actions.pop()} style={[styles.tab,{marginLeft:50*s}]}><Text style={styles.font}>返回</Text></TouchableOpacity>

@@ -62,6 +62,7 @@ import Other from './src/teaHome/Other'
 import Jizhao from './src/teaHome/Jizhao'
 import Fujin from './src/teaHome/Fujin'
 import Concat from './src/teaHome/Concat';
+import Searchtea from './src/stdMine/Searchtea';
 
 console.disableYellowBox = true;
 const {width} = Dimensions.get('window');
@@ -299,7 +300,20 @@ const App = () => {
 										}
 										component={WWodejiaoshi}
 									/>
-									
+									<Scene 
+										key='searchtea' 
+										title='寻找家教'
+										hideTabBar 
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+										component={Searchtea}
+									/>
 									<Scene 
 										key='wzuoyepingjiaqingkuang' 
 										title='作业评价情况' 
@@ -678,8 +692,8 @@ const App = () => {
 							</Tabs>
 						</Scene>
 					</Lightbox>
-					<Scene key="swiperPage0" initial={!isLogin} component={SwiperPage0}/>
-					<Scene key="swiperPage"  component={SwiperPage}/>
+					{/* <Scene key="swiperPage0" initial={!isLogin} component={SwiperPage0}/>
+					<Scene key="swiperPage"  component={SwiperPage}/> */}
 					<Scene key="login" component={Login}/>
 					<Scene key="register" component={Register}/>
 					<Scene key="spassword" component={Spassword}/>
