@@ -62,7 +62,7 @@ import Other from './src/teaHome/Other'
 import Jizhao from './src/teaHome/Jizhao'
 import Fujin from './src/teaHome/Fujin'
 import Concat from './src/teaHome/Concat';
-import Searchtea from './src/stdMine/Searchtea';
+import Searchtea from './src/stdMine/container/Searchtea';
 
 console.disableYellowBox = true;
 const {width} = Dimensions.get('window');

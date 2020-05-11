@@ -26,6 +26,7 @@ const options = {
         skipBackup: true  
     }
 };
+
 export default class shezhi extends Component {
     constructor(){
         super();
@@ -43,7 +44,8 @@ export default class shezhi extends Component {
             weixinnumber:'',
             wclass:'',
             wschool:'',
-            loginstd:''
+            loginstd:'',
+            wimage:''
         }
     }
     componentDidMount(){
@@ -72,15 +74,15 @@ export default class shezhi extends Component {
             })   
         })
     }
-    componentDidUpdate(){
-        AsyncStorage.getItem('url')
-        .then((res)=>{
-            this.setState({
-                imageUrl:JSON.parse(res)
-            })
-        })
-    }
+
     takephoto = ()=>{
+        // ImagePicker.openCamera({
+        //     width: 300,
+        //     height: 400,
+        //     cropping: true,
+        //   }).then(image => {
+        //     this.setState({imgUrl:image.path})
+        //   });
         ImagePicker.showImagePicker(options, (response) => {
             if (response.didCancel) {
               return;
@@ -88,14 +90,25 @@ export default class shezhi extends Component {
               console.log('Error:', response.error);
             } else if (response.customButton) {
               console.log('custom:', response.customButton);
-            } else {   
-                const source = { uri: response.uri };
-                // this.setState({
-                //     imageUrl:source
-                // })
-                AsyncStorage.setItem('url',JSON.stringify(source),()=>{console.log('store success')})
-
-            }   
+            } else { 
+                let formData = new FormData();
+                const file={uri: response.uri, type: response.type, name: response.fileName};
+                formData.append("wimages",file);  
+                this.setState({
+                    imageUrl: file.name,
+                })
+                fetch('http://148.70.183.184:8006/wimages', {
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'multipart/form-data',
+                    },
+                    body:JSON.stringify(formData),
+                })
+                    .then(res=>res.json())
+                    .then(res=>{
+                        console.log(res);
+                    })
+            }
         });   
     }
     baocun = ()=>{
@@ -106,6 +119,7 @@ export default class shezhi extends Component {
         a.weixinnumber=this.state.txtValue3;
         a.wclass=this.state.txtValue4;
         a.wschool=this.state.txtValue5;
+        a.stdtouxiang = this.state.imageUrl
         AsyncStorage.getItem('std')
         .then((res)=>{
             this.setState({

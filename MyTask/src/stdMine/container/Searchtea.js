@@ -293,7 +293,7 @@ export default class Searchtea extends Component {
                                    <View style={{width:'40%'}}><Text style={styles.zfont}>{item.sex}</Text></View>
                                    <TouchableOpacity 
                                     style={{width:'10%',marginTop:-10*s}}  onPress={()=>this.lookfor(item.id)}>
-                                       <Image style={styles.zimg} source={require('../../assets/zx/right.png')} ></Image>
+                                       <Image style={styles.zimg} source={require('../../../assets/zx/right.png')} ></Image>
                                    </TouchableOpacity>
                                 </View>
                             </View>
