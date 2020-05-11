@@ -107,14 +107,14 @@ export default class Teashezhi extends Component {
     }
     baocun = ()=>{
         var a={};
-        a.wusername=this.state.txtValue1;
-        a.wsex=this.state.txtValue2;
-        a.wage=this.state.txtValue3;
-        a.weixinnumber=this.state.txtValue4;
-        a.xueli=this.state.txtValue5;
-        a.wsubject=this.state.txtValue6;
-        a.biyexuexiao=this.state.txtValue7;
-        a.zhiwei=this.state.txtValue8;
+        a.wusername=this.state.txtValue1 || this.state.wusername;
+        a.wsex=this.state.txtValue2 || this.state.wsex;
+        a.wage=this.state.txtValue3 || this.state.wage;
+        a.weixinnumber=this.state.txtValue4 || this.state.weixinnumber;
+        a.xueli=this.state.txtValue5 || this.state.xueli;
+        a.wsubject=this.state.txtValue6 || this.state.wsubject;
+        a.biyexuexiao=this.state.txtValue7 || this.state.biyexuexiao;
+        a.zhiwei=this.state.txtValue8 || this.state.zhiwei;
         AsyncStorage.getItem('tea')
         .then((res)=>{
             this.setState({

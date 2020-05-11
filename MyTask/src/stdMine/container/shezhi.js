@@ -76,13 +76,7 @@ export default class shezhi extends Component {
     }
 
     takephoto = ()=>{
-        // ImagePicker.openCamera({
-        //     width: 300,
-        //     height: 400,
-        //     cropping: true,
-        //   }).then(image => {
-        //     this.setState({imgUrl:image.path})
-        //   });
+        var formData = new FormData();
         ImagePicker.showImagePicker(options, (response) => {
             if (response.didCancel) {
               return;
@@ -91,35 +85,27 @@ export default class shezhi extends Component {
             } else if (response.customButton) {
               console.log('custom:', response.customButton);
             } else { 
-                let formData = new FormData();
+                const source={uri:response.uri};
                 const file={uri: response.uri, type: response.type, name: response.fileName};
-                formData.append("wimages",file);  
+                formData.append('image', file);
                 this.setState({
-                    imageUrl: file.name,
+                    imageUrl: source,
                 })
-                fetch('http://148.70.183.184:8006/wimages', {
-                    method:'POST',
-                    headers:{
-                        'Content-Type':'multipart/form-data',
-                    },
-                    body:JSON.stringify(formData),
+                this.setState({
+                    wimage:JSON.stringify(formData)
                 })
-                    .then(res=>res.json())
-                    .then(res=>{
-                        console.log(res);
-                    })
             }
         });   
     }
     baocun = ()=>{
         // AsyncStorage.clear();
         var a={};
-        a.wusername=this.state.txtValue1;
-        a.wsex=this.state.txtValue2;
-        a.weixinnumber=this.state.txtValue3;
-        a.wclass=this.state.txtValue4;
-        a.wschool=this.state.txtValue5;
-        a.stdtouxiang = this.state.imageUrl
+        a.wusername=this.state.txtValue1 || this.state.wusername;
+        a.wsex=this.state.txtValue2 || this.state.wsex;
+        a.weixinnumber=this.state.txtValue3 || this.state.weixinnumber;
+        a.wclass=this.state.txtValue4 || this.state.wclass;
+        a.wschool=this.state.txtValue5 || this.state.wschool;
+        a.stdtouxiang = '123'
         AsyncStorage.getItem('std')
         .then((res)=>{
             this.setState({
