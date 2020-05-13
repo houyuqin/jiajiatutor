@@ -60,7 +60,7 @@ export default class TeaMine extends Component {
     render() {
         return (
             <ScrollView>
-                <View style={{backgroundColor:'#5d93c0',height:150*s,marginTop:2*s,flexDirection:'row',alignItems:'center'}}>
+                <View style={{backgroundColor:'#708090',height:150*s,marginTop:2*s,flexDirection:'row',alignItems:'center'}}>
                    <View style={{width:100*s,height:100*s,borderRadius:50*s,overflow:'hidden',marginLeft:20*s}}>
                         <ImageBackground source={require('../../assets/wjy/img/w头像女孩.png')} style={{width:100*s,height:100*s}}>
                             <Image style={{width:100*s,height:100*s}} source={this.state.imageUrl}/>

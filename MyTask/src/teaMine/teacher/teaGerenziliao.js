@@ -109,8 +109,8 @@ export default class TeaGerenziliao extends Component {
     render() {
         return (
             <View>
-                <View style={{backgroundColor:'rgb(115, 176, 211)',paddingTop:20*s,paddingLeft:15*s}}><Icon name='left' onPress={Actions.pop}/></View>
-                <View style={{height:130*s,backgroundColor:'rgb(115, 176, 211)',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                <View style={{backgroundColor:'#708090',paddingTop:20*s,paddingLeft:15*s}}><Icon name='left' onPress={Actions.pop}/></View>
+                <View style={{height:130*s,backgroundColor:'#708090',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                     <Text style={{fontSize:50,marginTop:5*s,color:'white'}}>个</Text>
                     <Text style={{fontSize:35,marginTop:40*s,marginLeft:20*s,color:'white'}}>人</Text>
                     <Text style={{fontSize:36,marginTop:5*s,marginLeft:20*s,color:'white'}}>资</Text>

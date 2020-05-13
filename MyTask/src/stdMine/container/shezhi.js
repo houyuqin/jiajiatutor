@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Text, View, Dimensions ,TextInput, TouchableOpacity,ImageBackground,Image, StyleSheet,AsyncStorage} from 'react-native'
 import ImagePicker from 'react-native-image-picker';
-import { NoticeBar ,Icon} from '@ant-design/react-native';
+import { NoticeBar ,Icon, InputItem} from '@ant-design/react-native';
 import {Actions} from 'react-native-router-flux';
+import Input from '@ant-design/react-native/lib/input-item/Input';
 
 const {width} = Dimensions.get('window');
 const s = width/640;
@@ -23,13 +24,14 @@ const options = {
     allowsEditing: false, 
     noData: false,
     storageOptions: {
-        skipBackup: true  
+        skipBackup: true,  
+        path:'images'
     }
 };
 
 export default class shezhi extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={ 
             data:[], 
             imageUrl:'',
@@ -86,13 +88,14 @@ export default class shezhi extends Component {
               console.log('custom:', response.customButton);
             } else { 
                 const source={uri:response.uri};
-                const file={uri: response.uri, type: response.type, name: response.fileName};
+                const file={uri: response.uri, type: 'multipart/form-data', name: 'image.png'};
                 formData.append('image', file);
+                console.log(JSON.stringify(formData))
                 this.setState({
                     imageUrl: source,
                 })
                 this.setState({
-                    wimage:JSON.stringify(formData)
+                    wimage:formData
                 })
             }
         });   
@@ -105,7 +108,7 @@ export default class shezhi extends Component {
         a.weixinnumber=this.state.txtValue3 || this.state.weixinnumber;
         a.wclass=this.state.txtValue4 || this.state.wclass;
         a.wschool=this.state.txtValue5 || this.state.wschool;
-        a.stdtouxiang = '123'
+        // a.stdtouxiang = this.state.wimage;
         AsyncStorage.getItem('std')
         .then((res)=>{
             this.setState({
@@ -118,7 +121,14 @@ export default class shezhi extends Component {
                 },
                 body: JSON.stringify(a)
             })
-            .then(res => res.json()); 
+            .then(res => res.text())
+            .then((res)=>{
+                console.log(res+'成功')
+
+            }).catch((error)=>{
+                console.log(error+'失败')
+            })
+
         })
         Actions.pop();
     }
@@ -133,6 +143,8 @@ export default class shezhi extends Component {
                 <NoticeBar marqueeProps={{ loop: true, style: { fontSize: 14, color: 'red' } }}>                    
                     Notice: students, in order to have a better experience, each of the following information is required
                 </NoticeBar>
+                
+
                 <View>
                     <View style={styles.firstlist}>
                         <Text style={{fontSize:18}}>头像</Text>
