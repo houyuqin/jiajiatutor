@@ -46,7 +46,11 @@ target 'MyTask' do
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
-  pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
+
+
+
+
+  pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
 
   target 'MyTaskTests' do
     inherit! :search_paths
