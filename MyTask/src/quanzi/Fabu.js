@@ -132,63 +132,75 @@ export default class Fabu extends Component {
             qiantime:year+'年'+month+'月'+day+'日'+' '+hour+':'+minute
         })
     }
+    fabu = ()=>{
+        console.log('fabu')
+    }
     render() {
         return (
-            <ScrollView>
-                <View style={{alignItems:'center'}}>
-                    <View style={{width:'95%',backgroundColor:'white',padding:10*s,marginTop:10*s,borderBottomWidth:2*s,borderBottomColor:'lightgray',borderTopLeftRadius:20*s,borderTopRightRadius:20*s}}>
-                        <TextareaItem 
-                            placeholder='这一刻的想法...' 
-                            value={i=>this.wujinyareturn1=i} 
-                            onChange={value => {
-                                this.setState({
-                                    content: value,
-                                });
-                            }}
-                            placeholderTextColor='#C0C0C0' 
-                            rows={10} 
-                        />
-                        <View style={{flexDirection:'row',flexWrap:'wrap',width:360*s,marginLeft:20*s}}>
-                            {this._renderImg()}
-                            <TouchableOpacity 
-                                title='照片'
-                                onPress={this.onPressImg}
-                                style={{width:120*s,height:120*s,backgroundColor:'#708090',justifyContent:'center',alignItems:'center'}}
-                            >
-                                <Image style={{width:50*s,height:50*s}} source={require('../../assets/wjy/img/拍照.png')}/>
-                                <Text style={{color:'white',fontSize:16}}>图片/视频</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={{width:'95%'}}>
-                        <View style={styles.listontent}>
-                            <View style={{flexDirection:'row'}}>
-                                <Icon style={{color:'#708090',padding:3*s}} name='environment'/> 
-                                <Text style={{fontSize:18}}>所在位置:</Text>
-                            </View>
-                            <Icon name='right'/>
-                        </View>
-                        <View style={styles.listontent}>
-                            <View style={{flexDirection:'row'}}>
-                                <Icon style={{color:'#708090',padding:3*s}} name='user'/> 
-                                <Text style={{fontSize:18}}>权限:</Text>
-                            </View>
-                            <Icon name='right' onPress={()=>Actions.quanxian()}/>
-                        </View>
-                        <View style={styles.listontent}>
-                            <View style={{flexDirection:'row'}}>
-                                <Icon style={{color:'#708090',padding:3*s}} name='smile'/> 
-                                <Text style={{fontSize:18}}>心情:</Text>
-                            </View>
-                            <Icon name='right' onPress={()=>Actions.wxinqing()}/>
-                        </View>
-                        <View style={styles.listontent1}>
-                            <Text style={{fontSize:18}}>当前发布时间：</Text>
-                        <Text>{this.state.qiantime}</Text>
-                        </View>
-                    </View>
+            <View>
+                <View style={{flexDirection:'row',justifyContent:'space-between',height:75*s,alignItems:'center',backgroundColor:'#708090'}}>
+                    <View style={{marginLeft:15*s}}><Icon name="left" style={{color:'black',color:'lightgray'}} onPress={Actions.pop}/></View>                    
+                    <Text style={{fontSize:19,color:'white'}}>发布动态</Text>
+                    <TouchableOpacity style={styles.fabutext} onPress={()=>this.fabu()}>
+                        <Text style={{color:'white',fontSize:16}}>发布</Text>
+                    </TouchableOpacity>
                 </View>
-            </ScrollView>
+                <ScrollView>
+                    <View style={{alignItems:'center'}}>
+                        <View style={{width:'95%',backgroundColor:'white',padding:10*s,marginTop:10*s,borderBottomWidth:2*s,borderBottomColor:'lightgray',borderTopLeftRadius:20*s,borderTopRightRadius:20*s}}>
+                            <TextareaItem 
+                                placeholder='这一刻的想法...' 
+                                value={i=>this.wujinyareturn1=i} 
+                                onChange={value => {
+                                    this.setState({
+                                        content: value,
+                                    });
+                                }}
+                                placeholderTextColor='#C0C0C0' 
+                                rows={10} 
+                            />
+                            <View style={{flexDirection:'row',flexWrap:'wrap',width:360*s,marginLeft:20*s}}>
+                                {this._renderImg()}
+                                <TouchableOpacity 
+                                    title='照片'
+                                    onPress={this.onPressImg}
+                                    style={{width:120*s,height:120*s,backgroundColor:'#708090',justifyContent:'center',alignItems:'center'}}
+                                >
+                                    <Image style={{width:50*s,height:50*s}} source={require('../../assets/wjy/img/拍照.png')}/>
+                                    <Text style={{color:'white',fontSize:16}}>图片/视频</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={{width:'95%'}}>
+                            <View style={styles.listontent}>
+                                <View style={{flexDirection:'row'}}>
+                                    <Icon style={{color:'#708090',padding:3*s}} name='environment'/> 
+                                    <Text style={{fontSize:18}}>所在位置:</Text>
+                                </View>
+                                <Icon name='right'/>
+                            </View>
+                            <View style={styles.listontent}>
+                                <View style={{flexDirection:'row'}}>
+                                    <Icon style={{color:'#708090',padding:3*s}} name='user'/> 
+                                    <Text style={{fontSize:18}}>权限:</Text>
+                                </View>
+                                <Icon name='right' onPress={()=>Actions.quanxian()}/>
+                            </View>
+                            <View style={styles.listontent}>
+                                <View style={{flexDirection:'row'}}>
+                                    <Icon style={{color:'#708090',padding:3*s}} name='smile'/> 
+                                    <Text style={{fontSize:18}}>心情:</Text>
+                                </View>
+                                <Icon name='right' onPress={()=>Actions.wxinqing()}/>
+                            </View>
+                            <View style={styles.listontent1}>
+                                <Text style={{fontSize:18}}>当前发布时间：</Text>
+                            <Text>{this.state.qiantime}</Text>
+                            </View>
+                        </View>
+                    </View>
+                </ScrollView>
+            </View>
         )
     }
 }
@@ -214,5 +226,12 @@ const styles = StyleSheet.create({
         paddingRight:15*s,
         borderBottomLeftRadius:20*s,
         borderBottomRightRadius:20*s
+    },
+    fabutext:{
+        marginRight:10*s,
+        backgroundColor:'green',
+        borderRadius:15*s,
+        paddingLeft:8*s,
+        paddingRight:8*s,
     }
 });

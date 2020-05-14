@@ -227,13 +227,8 @@ const App = () => {
 									<Scene key='fabu'
 										title='发布动态'
 										hideTabBar
-										titleStyle={{ color: 'white', flex: 1, textAlign: 'center',marginLeft:-30 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}
+										hideNavBar
 										component={Fabu} 
-										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-										}
-										
 									></Scene>
 									<Scene key='quanxian'
 										title='权限'
