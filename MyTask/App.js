@@ -54,6 +54,8 @@ import Teashezhi from './src/teaMine/teacher/teashezhi';
 import Quan from './src/quanzi/Quan';
 import Fabu from './src/quanzi/Fabu';
 import SwiperPage0 from './src/common/SwiperPage0';
+import Wquanxian from './src/quanzi/quanxian'
+import Wxinqing from './src/quanzi/wxinqing'
 
 import tHome from './src/teaHome/tHome';
 import tContent from './src/teaHome/tContent';
@@ -232,6 +234,18 @@ const App = () => {
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
 										}
 										
+									></Scene>
+									<Scene key='quanxian'
+										title='权限'
+										hideTabBar
+										hideNavBar
+										component={Wquanxian}
+									></Scene>
+									<Scene key='wxinqing'
+										title='心情'
+										hideTabBar
+										hideNavBar
+										component={Wxinqing}
 									></Scene>
 								</Scene>
 								{/* 用户中心 */}

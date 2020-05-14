@@ -20,19 +20,6 @@ import { PickerView } from '@ant-design/react-native';
 const {width} = Dimensions.get('window');
 const s = width/640;
 
-const seasons = [
-    [
-      {
-        label: '2015',
-        value: '2015',
-      },
-      {
-        label: '2014',
-        value: '2014',
-      },
-    ],
-];
-
 export default class Fabu extends Component {
     constructor(){
         super(...arguments);
@@ -41,12 +28,11 @@ export default class Fabu extends Component {
             avatarSource:[],
             videoSource:'',
             value: undefined,
+            initId: '',
+            initItem:'',
+            qiantime:'',
         };
-        this.onChange = value => {
-            this.setState({
-              value,
-            });
-        };
+        
     }
 
     onPressImg = () => {
@@ -115,10 +101,10 @@ export default class Fabu extends Component {
     //     });
     // }
     _renderImg = () => {
-        for (let i = 0; i < this.state.avatarSource.length; i++) {
+        for (let i = 0; i < 10; i++) {
             if(this.state.avatarSource[i]){
                 return(
-                    <View style={{flexDirection:'row'}}>
+                    <View style={{flexDirection:'row',flexWrap:'wrap'}}>
                         {
                             this.state.avatarSource.map((item,index)=>(
                                 <Image 
@@ -134,6 +120,17 @@ export default class Fabu extends Component {
                 return null;
             }
         }
+    }
+    componentDidMount(){
+        var date = new Date();
+        var year = date.getFullYear().toString();
+        var month = (date.getMonth()+1).toString();
+        var day = date.getDate().toString();
+        var hour =  date.getHours().toString();
+        var minute = date.getMinutes().toString();
+        this.setState({
+            qiantime:year+'年'+month+'月'+day+'日'+' '+hour+':'+minute
+        })
     }
     render() {
         return (
@@ -164,12 +161,31 @@ export default class Fabu extends Component {
                         </View>
                     </View>
                     <View style={{width:'95%'}}>
-                        <PickerView
-                            onChange={this.onChange}
-                            value={this.state.value}
-                            data={seasons}
-                            cascade={false}
-                        />
+                        <View style={styles.listontent}>
+                            <View style={{flexDirection:'row'}}>
+                                <Icon style={{color:'#708090',padding:3*s}} name='environment'/> 
+                                <Text style={{fontSize:18}}>所在位置:</Text>
+                            </View>
+                            <Icon name='right'/>
+                        </View>
+                        <View style={styles.listontent}>
+                            <View style={{flexDirection:'row'}}>
+                                <Icon style={{color:'#708090',padding:3*s}} name='user'/> 
+                                <Text style={{fontSize:18}}>权限:</Text>
+                            </View>
+                            <Icon name='right' onPress={()=>Actions.quanxian()}/>
+                        </View>
+                        <View style={styles.listontent}>
+                            <View style={{flexDirection:'row'}}>
+                                <Icon style={{color:'#708090',padding:3*s}} name='smile'/> 
+                                <Text style={{fontSize:18}}>心情:</Text>
+                            </View>
+                            <Icon name='right' onPress={()=>Actions.wxinqing()}/>
+                        </View>
+                        <View style={styles.listontent1}>
+                            <Text style={{fontSize:18}}>当前发布时间：</Text>
+                        <Text>{this.state.qiantime}</Text>
+                        </View>
                     </View>
                 </View>
             </ScrollView>
@@ -177,5 +193,26 @@ export default class Fabu extends Component {
     }
 }
 const styles = StyleSheet.create({
-
+    listontent:{
+        flexDirection:'row',
+        width:'100%',
+        height:70*s,
+        backgroundColor:'white',
+        justifyContent:'space-between',
+        alignItems:'center',
+        paddingLeft:15*s,
+        paddingRight:15*s
+    },
+    listontent1:{
+        flexDirection:'row',
+        width:'100%',
+        height:70*s,
+        backgroundColor:'white',
+        justifyContent:'space-between',
+        alignItems:'center',
+        paddingLeft:15*s,
+        paddingRight:15*s,
+        borderBottomLeftRadius:20*s,
+        borderBottomRightRadius:20*s
+    }
 });
