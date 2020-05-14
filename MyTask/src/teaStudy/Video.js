@@ -41,9 +41,7 @@ export default class TeaStudy extends Component {
         this.state = {
             initItem: '',
             initId: '0',
-            avatarSource: {
-                uri: ''
-            },
+            path: null,
             rate: 1,
             volume: 1,
             muted: false,
@@ -65,76 +63,77 @@ export default class TeaStudy extends Component {
         };
     }
 
-       changePausedState(){ //控制按钮显示播放，要显示进度条3秒钟，之后关闭显示
+    changePausedState() { //控制按钮显示播放，要显示进度条3秒钟，之后关闭显示
         this.setState({
-            isPaused: this.state.isPaused?false:true,
+            isPaused: this.state.isPaused ? false : true,
             isVisiblePausedSliderFullScreen: true
         })
         //这个定时调用失去了this指向
         let that = this;
-        setTimeout(function(){
+        setTimeout(function () {
             that.setState({
                 isVisiblePausedSliderFullScreen: false
             })
-        },3000)
+        }, 3000)
     }
-    _changePauseSliderFullState(){ // 单击事件，是否显示 “暂停、进度条、全屏按钮 盒子”
-        let flag = this.state.isVisiblePausedSliderFullScreen?false:true; 
+    _changePauseSliderFullState() { // 单击事件，是否显示 “暂停、进度条、全屏按钮 盒子”
+        let flag = this.state.isVisiblePausedSliderFullScreen ? false : true;
         this.setState({
             isVisiblePausedSliderFullScreen: flag
         })
-         //这个定时调用失去了this指向
-         let that = this;
-         setTimeout(function(){
-             that.setState({
-                 isVisiblePausedSliderFullScreen: false
-             })
-         },3000)
-    } 
-     //格式化音乐播放的时间为0：00。借助onProgress的定时器调用，更新当前时间
+        //这个定时调用失去了this指向
+        let that = this;
+        setTimeout(function () {
+            that.setState({
+                isVisiblePausedSliderFullScreen: false
+            })
+        }, 3000)
+    }
+    //格式化音乐播放的时间为0：00。借助onProgress的定时器调用，更新当前时间
     formatMediaTime(time) {
         let minute = Math.floor(time / 60);
         let second = parseInt(time - minute * 60);
         minute = minute >= 10 ? minute : "0" + minute;
         second = second >= 10 ? second : "0" + second;
         return minute + ":" + second;
-       
+
     }
     //加载视频调用，主要是拿到 “总时间”，并格式化
-    customerOnload(e){
-        let time = e.duration;   
+    customerOnload(e) {
+        let time = e.duration;
         this.setState({
             duration: time
         })
     }
     // 获得当前的，播放时间数，但这个数是0.104，需要处理
-    customerOnprogress(e){
+    customerOnprogress(e) {
         let time = e.currentTime;   // 获取播放视频的秒数       
         this.setState({
             currentTime: time,
             sliderValue: time
-        })           
+        })
     }
     // 移动滑块，改变视频播放进度
-    customerSliderValue(value){  
-        this.player.seek(value);    
+    customerSliderValue(value) {
+        this.player.seek(value);
     }
-    enterFullScreen(){ //1.改变宽高  2.允许进入全屏模式  3.如何配置屏幕旋转,不需要改变进度条盒子的显示和隐藏
+    enterFullScreen() { //1.改变宽高  2.允许进入全屏模式  3.如何配置屏幕旋转,不需要改变进度条盒子的显示和隐藏
         this.setState({
             videoWidth: screenWidth,
-            videoHeight:screenHeight ,
+            videoHeight: screenHeight,
             isFullScreen: true
         })
         // 直接设置方向
-       // Orientation.lockToLandscape();
+        // Orientation.lockToLandscape();
     }
-    _onStartShouldSetResponder(e){
-       // console.log(e);
+    _onStartShouldSetResponder(e) {
+        // console.log(e);
     }
     componentDidMount() {
         var initial = Orientation.getInitialOrientation();
+        //console.log(initial)
         if (initial === 'PORTRAIT') {
-        // console.log('是竖屏');
+            // console.log('是竖屏');
         } else {
             //console.log('如果是横屏，就将其旋转过来');
             Orientation.lockToPortrait();
@@ -143,7 +142,7 @@ export default class TeaStudy extends Component {
     componentDidUpdate() {
         var initial = Orientation.getInitialOrientation();
         if (initial === 'PORTRAIT') {
-        // console.log('是竖屏');
+            // console.log('是竖屏');
         } else {
             //console.log('如果是横屏，就将其旋转过来');
             Orientation.lockToPortrait();
@@ -154,7 +153,7 @@ export default class TeaStudy extends Component {
         this.setState({ initId: data.id, initItem: data.item })
     }
 
- 
+
 
     //拍摄视频
     onPressVideo = () => {
@@ -164,7 +163,7 @@ export default class TeaStudy extends Component {
             takePhotoButtonTitle: '录制视频',
             chooseFromLibraryButtonTitle: '选择视频',
             mediaType: 'video',
-            videoQuality: 'medium' // 视频质量 'low', 'medium', or 'high' on iOS, 'low' or 'high' on Android
+            videoQuality: 'low'// 视频质量 'low', 'medium', or 'high' on iOS, 'low' or 'high' on Android
         };
 
         ImagePicker.showImagePicker(options, (response) => {
@@ -180,7 +179,8 @@ export default class TeaStudy extends Component {
             else {
                 console.log('Response = ', response); // 选择或录取的视频数据对象
                 this.setState({
-                    videoSource: response.uri
+                    videoSource: response.uri,
+                    path: response.path
                 });
 
             }
@@ -190,13 +190,37 @@ export default class TeaStudy extends Component {
 
 
     //上传视频
-    add=()=>{
-    //     var tempParam = 
-    //     {
-    //       name: 'video', filename: 'vid.mp4', data: RNFetchBlob.wrap(this.state.videoSource.uri), type:'video/mp4'
-    // }
-  
-    //     console.log(JSON.stringify(tempParam))
+    add = () => {
+          //console.log(this.state.path)
+          let formData=new FormData()
+          formData.append('mp4',{uri:this.state.videoSource,path:this.state.path,type:'multipart/form-data'})
+          console.log('a')
+          console.log(JSON.stringify(formData))
+          fetch('http://148.70.183.184:8005/upload', {
+            method: 'post',
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            },
+            body: formData
+          }).then(res => {
+            console.log('res', res)
+          }).catch(err => {
+            console.log('err', err)
+          })
+        // RNFetchBlob.fetch('POST', 'http://148.70.183.184:8005/upload', {
+
+
+        //     'Content-Type': 'multipart/form-data'
+        // },
+        //     [
+        //         { name: 'avatar-foo',path:this.state.path, filename:'a.mp4',type:'video/mp4',data:RNFetchBlob.wrap(this.state.videoSource) }
+        //     ]
+        // ).then(res => {
+        //     console.log('res', res)
+        // }).catch(err => {
+        //     console.log('err', err)
+        // })
+
     }
 
     _renderImg = () => {
@@ -231,13 +255,13 @@ export default class TeaStudy extends Component {
                         <Text>{this.formatMediaTime(this.state.duration)}</Text>
                     </View>
                     {/* 全屏按钮 */}
-                    {/* <View>
+                    <View>
                         <TouchableOpacity
                             onPress={this.enterFullScreen}
                         >
                             <Text style={{ backgroundColor: '#00ff00', padding: 5 }}>全屏</Text>
                         </TouchableOpacity>
-                    </View> */}
+                    </View>
 
 
                 </View>
@@ -246,19 +270,19 @@ export default class TeaStudy extends Component {
         let pausedSliderFull = this.state.isVisiblePausedSliderFullScreen ? pausedSliderFullComponent : null;
         if (this.state.videoSource) {
             return (
-             <View style={{alignItems:'center',justifyContent:'center'}}>
-                    <View style={{ width: '80%', height: 300 * s, borderBottomWidth: 1, borderBottomColor: 'rgb(204, 202, 202)',backgroundColor:'red'}}>
-                    {/* <Video source={{ uri: this.state.videoSource }}   // Can be a URL or a local file. */}
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ width: '80%', height: 300 * s, borderBottomWidth: 1, borderBottomColor: 'rgb(204, 202, 202)', backgroundColor: 'red' }}>
+                        {/* <Video source={{ uri: this.state.videoSource }}   // Can be a URL or a local file. */}
                         <TouchableWithoutFeedback
                             onPress={this._changePauseSliderFullState}
                             onResponderMove={this._onStartShouldSetResponder}
-                            
+
                         >
                             <Video source={{ uri: this.state.videoSource }}
                                 ref={(ref) => {
                                     this.player = ref
                                 }}
-                                style={{ width: '100%', height: 300*s, backgroundColor: "#FFC1C1" }}
+                                style={{ width: '100%', height: 300 * s, backgroundColor: "#FFC1C1" }}
                                 allowsExternalPlayback={false} // 不允许导出 或 其他播放器播放
                                 paused={this.state.isPaused} // 控制视频是否播放
                                 resizeMode="cover"
@@ -271,8 +295,8 @@ export default class TeaStudy extends Component {
                         {pausedBtn}
                         {/* 暂停按钮，进度条，全屏按钮 */}
                         {pausedSliderFull}
+                    </View>
                 </View>
-             </View>
             );
         } else {
             return null;
@@ -310,7 +334,7 @@ export default class TeaStudy extends Component {
                                         flexWrap: 'wrap',
                                         alignItems: 'flex-start',
                                         flex: 1,
-                                        backgroundColor: '#ffffff', padding: 3, marginTop: 10,marginBottom:2,
+                                        backgroundColor: '#ffffff', padding: 3, marginTop: 10, marginBottom: 2,
                                         width: '20%'
                                     }}
                                 >

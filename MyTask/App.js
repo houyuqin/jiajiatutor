@@ -213,12 +213,14 @@ const App = () => {
 									  } 
 									title="圈子"
 								>
-									<Scene key='quan'
-										title='社交圈子'
-										// initial
+										<Scene key='quan'
+										title='社交圈'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Quan} 
+										renderRightButton={
+											<Icon size='lg' name="plus-circle" onPress={Actions.fabu}/>
+										}
 									></Scene>
 									<Scene key='fabu'
 										title='发布动态'
@@ -569,11 +571,14 @@ const App = () => {
 									  } 
 									title="圈子"
 								>
-									<Scene key='quan'
-										title='社交圈子'
+										<Scene key='quan'
+										title='社交圈'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Quan} 
+										renderRightButton={
+											<Icon size='lg' name="plus-circle" onPress={Actions.fabu}/>
+										}
 									></Scene>
 									<Scene key='fabu'
 										title='发布动态'

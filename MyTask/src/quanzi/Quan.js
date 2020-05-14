@@ -1,328 +1,299 @@
 import React, { Component } from 'react'
-import { 
-    Text, 
-    View, 
-    ScrollView, 
-    ImageBackground, 
-    Dimensions, 
-    StyleSheet, 
-    Button, 
-    Image, 
-    TextInput, 
+import {
+    Text,
+    View,
+    ScrollView,
+    ImageBackground,
+    Dimensions,
+    StyleSheet,
+    Button,
+    Image,
+    TextInput,
     TouchableOpacity,
-    Lightbox 
+    Lightbox,
+    AsyncStorage,
+    FlatList,
+    Alert
 } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 import { Icon } from '@ant-design/react-native';
+import ImagePicker from 'react-native-image-picker';
+import { InputItem, List } from '@ant-design/react-native';
+const { width } = Dimensions.get('window');
+const s = width / 640;
 
-const {width} = Dimensions.get('window');
-const s = width/640;
-
+//拍照
+const options = {
+    title: '请选择',
+    cancelButtonTitle: '取消',
+    takePhotoButtonTitle: '拍照',
+    chooseFromLibraryButtonTitle: '选择相册',
+    customButtons: [],
+    storageOptions: {
+        skipBackup: true,
+        path: 'images',
+    },
+};
 export default class Quan extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.state={
-            data:'',
-            color1:'blue',
-            color2:'blue',
-            color3:'blue',
-            color4:'blue',
+        this.state = {
+            imageUrl: '',
+            data: [{ name: 'zhangsan', time: '2020-4-27 15:42', content: '222',ping:['哈哈哈哈哈哈','38828']}, { name: 'zhangsan', time: '2020-4-27 15:42', content: '222' }],
+            pinglun: true,
+            value1: '',
+            color1: 'blue',
+            color2: 'blue',
+            color3: 'blue',
+            color4: 'blue',
         }
     }
-    fabu=()=>{
-        console.log(111);
-        Actions.fabu();
+
+    //点击提交评论时触发函数
+    tijiao = (index) => {
+        //console.log(index)
+        if (this.state.value1 === '') {
+            Alert.alert('您还未输入评论，无法提交！')
+        }
+        else {
+            //fetch请求 给响应的id去添加提交内容
+        }
     }
-    message=()=>{
-        console.log('评论');
+//点击评论图标
+add=()=>{
+    Alert.alert('请在下方输入评论！')
+}
+    heart1 = () => {
+        if (this.state.color1 == 'blue') {
+            this.setState({
+                color1: 'red'
+            })
+        } else {
+            this.setState({
+                color1: 'blue'
+            })
+        }
 
     }
-    heart1=()=>{
-        if(this.state.color1=='blue'){
-            this.setState({
-                color1:'red'
-            })
-        }else{
-            this.setState({
-                color1:'blue'
-            })
-        }
-        
+
+    //顶端背景图片的获取
+    componentDidMount() {
+        //AsyncStorage.clear()
+        //页面一加载获取数据进行渲染
+        AsyncStorage.getItem("UID123", (err, result) => {
+            const source = { uri: '' }
+            source.uri = JSON.parse(result)
+            console.log(source.uri)
+            if (source.uri === null) {
+                this.setState({ imageUrl: require('../../assets/zx/bg.jpg') })
+                console.log(this.state.imageUrl)
+            }
+            else {
+                this.setState({ imageUrl: source })
+            }
+        });
     }
-    heart4=()=>{
-        if(this.state.color4=='blue'){
-            this.setState({
-                color4:'red'
-            })
-        }else{
-            this.setState({
-                color4:'blue'
-            })
-        }
-        
+    componentDidUpdate() {
+        //页面更新获取数据进行渲染
+        AsyncStorage.getItem("UID123", (err, result) => {
+            const source = { uri: '' }
+            source.uri = JSON.parse(result)
+            if (source.uri === null) {
+                this.setState({ imageUrl: require('../../assets/zx/bg.jpg') })
+                console.log(this.state.imageUrl)
+            }
+            else {
+                this.setState({ imageUrl: source })
+            }
+        });
     }
-    heart3=()=>{
-        if(this.state.color3=='blue'){
-            this.setState({
-                color3:'red'
-            })
-        }else{
-            this.setState({
-                color3:'blue'
-            })
-        }
-        
-    }
-    heart2=()=>{
-        if(this.state.color2=='blue'){
-            this.setState({
-                color2:'red'
-            })
-        }else{
-            this.setState({
-                color2:'blue'
-            })
-        }
-        
+    //拍照
+    takephoto = () => {
+        ImagePicker.showImagePicker(options, (response) => {
+            if (response.didCancel) {
+                return;
+            } else if (response.error) {
+                console.log('Error:', response.error);
+            } else if (response.customButton) {
+                console.log('custom:', response.customButton);
+            } else {
+                const source = { uri: response.uri };
+                this.setState({
+                    imageUrl: source,
+                }, async () => {
+                    AsyncStorage.setItem("UID123", JSON.stringify(this.state.imageUrl.uri), () => {
+                        AsyncStorage.mergeItem("UID123", JSON.stringify(this.state.imageUrl.uri), () => {
+                        });
+                    })
+                })
+            }
+        });
     }
     render() {
         return (
-            <View>
-                <ImageBackground 
-                    style={{width:'100%',height:970*s}}
-                    source={{uri:'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3653802198,2630879977&fm=26&gp=0.jpg'}}
-                >
-                    <ScrollView>
-                        <View style={styles.tit}>
-                            <View style={styles.btns}>
-                                <Text style={{marginRight:20*s}}>筛选动态：</Text>
-                                <Button
-                                    title='教师'
-                                    onPress={this.tea}
-                                />
-                                <View style={{width:20*s}}></View>
-                                <Button
-                                    title='学生'
-                                    onPress={this.std}
-                                />
-                            </View>
-                            <View>
-                                <Button
-                                    title='发布动态'
-                                    onPress={this.fabu}
-                                />
+            <View style={{ flex: 1 }}>
+                <View style={styles.main}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 0 * s, marginBottom: 40 * s }}>
+                        <TouchableOpacity style={styles.box} onPress={() => this.takephoto()}>
+                            <ImageBackground
+                                style={styles.box4}
+                                source={this.state.imageUrl}>
+
+                                <View style={styles.box2}>
+                                    <Image style={styles.box3} source={require('../../assets/hyq/000.jpg')}></Image>
+                                </View>
+                            </ImageBackground>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+                <FlatList
+                    data={this.state.data}
+                    renderItem={({ item, index }) => (
+                        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                            <View style={styles.rect}>
+                                <View style={styles.mine}>
+                                    <Image
+                                        source={require('../../assets/hyq/000.png')}
+                                        style={{ width: 70 * s, height: 70 * s }}
+                                    />
+                                    <View style={{ paddingTop: 10 * s, paddingLeft: 30 * s }}>
+                                        <Text style={{ fontSize: 22 * s }}>{item.name}</Text>
+                                        <Text>{item.time}</Text>
+                                    </View>
+
+                                </View>
+                                <View style={{ paddingLeft: 130 * s, paddingTop: 10 * s }}>
+                                    <Text style={{ fontSize: 24 * s }}>{item.content}</Text>
+                                </View>
+                                <View style={styles.imgs}>
+                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
+                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
+                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
+                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
+                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
+                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
+                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
+                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
+                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
+                                </View>
+                                <View style={{ flexDirection: 'row', marginLeft: '70%', marginTop: 20 * s }}>
+                                    <TouchableOpacity>
+                                        <Icon
+                                            color={this.state.color1}
+                                            name="heart"
+                                            onPress={() => this.heart1()}
+                                        />
+                                    </TouchableOpacity>
+                                   
+                                    <TouchableOpacity style={{ marginLeft: 20 * s }}>
+                                        <Icon
+                                            color={'blue'}
+                                            name="message"
+                                            onPress={() => this.add(index)}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ width: 350 * s, marginTop: 10 * s, height: 40 * s, marginLeft: 110 * s, flexDirection: 'row', borderColor: '#ddd', borderWidth: 2 }}>
+                                    <View style={{ width: 290 * s, height: 40 * s }}>
+                                        <InputItem
+                                            style={{ marginBottom: 20 * s }}
+                                            onChange={value => {
+                                                this.setState({
+                                                    value1: value,
+                                                });
+                                            }}
+                                            placeholder="请输入评论内容"
+                                        /></View>
+                                    <View style={{ width: 70 * s, height: 40 * s }}>
+                                        <TouchableOpacity onPress={() => this.tijiao(index)} style={{ width: 70 * s, height: 35 * s, backgroundColor: 'orange', alignItems: 'center' }}><Text style={{ color: 'white', fontSize: 15 }}>提交</Text></TouchableOpacity>
+                                    </View>
+                                </View>
                             </View>
                         </View>
-                        <View style={styles.main}>
-                            {/* 一个帖子 */}
-                            <ImageBackground
-                                style={styles.rect}
-                                source={{uri:'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2301793017,3070111468&fm=26&gp=0.jpg'}}
-                            >
-                                <View style={styles.mine}>
-                                    <Image 
-                                        source={require('../../assets/hyq/000.png')}
-                                        style={{width:70*s,height:70*s}}
-                                    />
-                                    <View style={{paddingTop:10*s,paddingLeft:30*s}}>
-                                        <Text style={{fontSize:22*s}}>张三</Text>
-                                        <Text>2020-4-27 15:42</Text>
-                                    </View>
-                                </View>
-                                <View style={{paddingLeft:20*s,paddingTop:10*s}}>
-                                    <Text style={{fontSize:24*s}}>我今天开始准备考研了</Text>
-                                </View>
-                                <View style={styles.imgs}>
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img}/>
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img}/>
-                                </View>
-                                <View style={{flexDirection:'row',marginLeft:'70%'}}>
-                                    <TouchableOpacity>
-                                        <Icon 
-											color={this.state.color1} 
-                                            name="heart"
-                                            onPress={()=>this.heart1()}
-										/>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={{marginLeft:20*s}}>
-                                        <Icon 
-											color={'blue'} 
-                                            name="message"
-                                            onPress={()=>this.message()}
-										/>
-                                    </TouchableOpacity>
-                                </View>
-                            </ImageBackground>
-                            {/* 又一个 */}
-                            <ImageBackground
-                                style={styles.rect}
-                                source={{uri:'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2301793017,3070111468&fm=26&gp=0.jpg'}}
-                            >
-                                <View style={styles.mine}>
-                                    <Image 
-                                        source={require('../../assets/hyq/000.jpg')}
-                                        style={{width:70*s,height:70*s}}
-                                    />
-                                    <View style={{paddingTop:10*s,paddingLeft:30*s}}>
-                                        <Text style={{fontSize:22*s}}>李四</Text>
-                                        <Text>2020-4-27 12:42</Text>
-                                    </View>
-                                </View>
-                                <View style={{paddingLeft:20*s,paddingTop:10*s}}>
-                                    <Text style={{fontSize:24*s}}>小企鹅很漂亮</Text>
-                                </View>
-                                <View style={styles.imgs}>
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img}/>
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img}/>
-                                </View>
-                                <View style={{flexDirection:'row',marginLeft:'70%'}}>
-                                    <TouchableOpacity>
-                                        <Icon 
-											color={this.state.color2} 
-                                            name="heart"
-                                            onPress={()=>this.heart2()}
-										/>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={{marginLeft:20*s}}>
-                                        <Icon 
-											color={'blue'} 
-                                            name="message"
-                                            onPress={()=>this.message()}
-										/>
-                                    </TouchableOpacity>
-                                </View>
-                            </ImageBackground>
-                            <ImageBackground
-                                style={styles.rect}
-                                source={{uri:'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2301793017,3070111468&fm=26&gp=0.jpg'}}
-                            >
-                                <View style={styles.mine}>
-                                    <Image 
-                                        source={require('../../assets/hyq/000.jpg')}
-                                        style={{width:70*s,height:70*s}}
-                                    />
-                                    <View style={{paddingTop:10*s,paddingLeft:30*s}}>
-                                        <Text style={{fontSize:22*s}}>李四</Text>
-                                        <Text>2020-4-27 12:42</Text>
-                                    </View>
-                                </View>
-                                <View style={{paddingLeft:20*s,paddingTop:10*s}}>
-                                    <Text style={{fontSize:24*s}}>小企鹅很漂亮</Text>
-                                </View>
-                                <View style={styles.imgs}>
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img}/>
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img}/>
-                                </View>
-                                <View style={{flexDirection:'row',marginLeft:'70%'}}>
-                                    <TouchableOpacity>
-                                        <Icon 
-											color={this.state.color3} 
-                                            name="heart"
-                                            onPress={()=>this.heart3()}
-										/>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={{marginLeft:20*s}}>
-                                        <Icon 
-											color={'blue'} 
-                                            name="message"
-                                            onPress={()=>this.message()}
-										/>
-                                    </TouchableOpacity>
-                                </View>
-                            </ImageBackground>
-                            <ImageBackground
-                                style={styles.rect}
-                                source={{uri:'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2301793017,3070111468&fm=26&gp=0.jpg'}}
-                            >
-                                <View style={styles.mine}>
-                                    <Image 
-                                        source={require('../../assets/hyq/000.jpg')}
-                                        style={{width:70*s,height:70*s}}
-                                    />
-                                    <View style={{paddingTop:10*s,paddingLeft:30*s}}>
-                                        <Text style={{fontSize:22*s}}>李四</Text>
-                                        <Text>2020-4-27 12:42</Text>
-                                    </View>
-                                </View>
-                                <View style={{paddingLeft:20*s,paddingTop:10*s}}>
-                                    <Text style={{fontSize:24*s}}>小企鹅很漂亮</Text>
-                                </View>
-                                <View style={styles.imgs}>
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img}/>
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img}/>
-                                </View>
-                                <View style={{flexDirection:'row',marginLeft:'70%'}}>
-                                    <TouchableOpacity>
-                                        <Icon 
-											color={this.state.color4} 
-                                            name="heart"
-                                            onPress={()=>this.heart4()}
-										/>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={{marginLeft:20*s}}>
-                                        <Icon 
-											color={'blue'} 
-                                            name="message"
-                                            onPress={()=>this.message()}
-										/>
-                                    </TouchableOpacity>
-                                </View>
-                            </ImageBackground>
-                            
-                        </View>  
-                    </ScrollView>
-                    
-                </ImageBackground>
+                    )}
+                >
+
+                </FlatList>
             </View>
         )
     }
 }
 const styles = StyleSheet.create({
-    imgs:{
-        flexDirection:'row',
-        flexWrap:'wrap',
-        paddingLeft:7*s,
-        paddingRight:20*s
+    imgs: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        paddingLeft: 100 * s,
+        paddingRight: 20 * s
     },
-    img:{
-        width:90*s,
-        height:90*s,
-        marginLeft:10*s,
-        marginTop:10*s
+    img: {
+        width: 100 * s,
+        height: 100 * s,
+        marginLeft: 15 * s,
+        marginTop: 10 * s
     },
-    mine:{
-        width:300*s,
-        height:80*s,
-        flexDirection:'row',
-        flexWrap:'wrap',
-        paddingLeft:20*s
+    mine: {
+        width: 300 * s,
+        height: 80 * s,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        paddingLeft: 20 * s
     },
-    rect:{
-        width:'90%',
-        marginTop:20*s,
+    rect: {
+        width: '90%',
+        marginTop: 20 * s,
         // height:200*s,
-        marginLeft:'10%',
-        paddingBottom:20*s
+        paddingBottom: 20 * s,
     },
-    btns:{
-        width:'80%',
-        height:54*s,
-        flexDirection:'row',
+    btns: {
+        width: '80%',
+        height: 54 * s,
+        flexDirection: 'row',
         // justifyContent:'center',
-        alignItems:'center',
-        paddingLeft:20*s
+        alignItems: 'center',
+        paddingLeft: 20 * s
     },
-    tit:{
-        width:'90%',
-        height:64*s,
-        flexDirection:'row',
-        alignItems:'center',
-        marginLeft:'5%',
-        borderColor:'blue',
-        borderWidth:2*s,
-        borderRadius:20*s
+    tit: {
+        width: '90%',
+        height: 64 * s,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: '5%',
+        borderColor: 'blue',
+        borderWidth: 2 * s,
+        borderRadius: 20 * s
     },
-    main:{
-        width:'100%'
+    main: {
+        width: '100%'
+    },
+    box: {
+        height: 320 * s,
+        width: '100%',
+
+    },
+    box1: {
+        width: 60 * s,
+        height: 60 * s,
+        marginLeft: '88%',
+        marginTop: '-5%'
+
+    },
+    box2: {
+        width: 100 * s,
+        height: 100 * s,
+        marginTop: '40%',
+        marginLeft: '83%',
+        borderRadius: 40 * s
+    },
+    box3: {
+        width: 100 * s,
+        height: 100 * s,
+        borderRadius: 50 * s,
+        resizeMode: 'stretch'
+    },
+    box4: {
+        height: 320 * s,
+        width: '100%',
+        resizeMode: 'stretch'
     }
 })
