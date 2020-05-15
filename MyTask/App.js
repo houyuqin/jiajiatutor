@@ -736,8 +736,8 @@ const App = () => {
 							</Tabs>
 						</Scene>
 					</Lightbox>
-					{/* <Scene key="swiperPage0" initial={!isLogin} component={SwiperPage0}/>
-					<Scene key="swiperPage"  component={SwiperPage}/> */}
+					<Scene key="swiperPage0" initial={!isLogin} component={SwiperPage0}/>
+					<Scene key="swiperPage"  component={SwiperPage}/>
 					<Scene key="login" component={Login}/>
 					<Scene key="register" component={Register}/>
 					<Scene key="spassword" component={Spassword}/>
