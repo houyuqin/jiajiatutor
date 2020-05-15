@@ -220,8 +220,11 @@ const App = () => {
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Quan} 
+										renderLeftButton={
+											<View></View>
+										}
 										renderRightButton={
-											<Icon size='lg' name="plus-circle" onPress={Actions.fabu}/>
+											<Icon size='lg' name="plus-circle" style={{marginRight:10*s}} onPress={Actions.fabu}/>
 										}
 									></Scene>
 									<Scene key='fabu'
