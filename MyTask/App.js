@@ -56,7 +56,7 @@ import Fabu from './src/quanzi/Fabu';
 import SwiperPage0 from './src/common/SwiperPage0';
 import Wquanxian from './src/quanzi/quanxian'
 import Wxinqing from './src/quanzi/wxinqing'
-
+import Wweizhi from './src/quanzi/wweizhi'
 import tHome from './src/teaHome/tHome';
 import tContent from './src/teaHome/tContent';
 import Zhoumo from './src/teaHome/Zhoumu'
@@ -224,7 +224,7 @@ const App = () => {
 											<View></View>
 										}
 										renderRightButton={
-											<Icon size='lg' name="plus-circle" style={{marginRight:10*s}} onPress={Actions.fabu}/>
+											<Icon size='lg' name="plus-circle" style={{marginRight:10*s}} onPress={()=>Actions.fabu()}/>
 										}
 									></Scene>
 									<Scene key='fabu'
@@ -233,17 +233,23 @@ const App = () => {
 										hideNavBar
 										component={Fabu} 
 									></Scene>
-									<Scene key='quanxian'
-										title='权限'
+									<Scene key='wweizhi'
+										title='位置'
 										hideTabBar
 										hideNavBar
-										component={Wquanxian}
+										component={Wweizhi}
 									></Scene>
 									<Scene key='wxinqing'
 										title='心情'
 										hideTabBar
 										hideNavBar
 										component={Wxinqing}
+									></Scene>
+									<Scene key='quanxian'
+										title='权限'
+										hideTabBar
+										hideNavBar
+										component={Wquanxian}
 									></Scene>
 								</Scene>
 								{/* 用户中心 */}

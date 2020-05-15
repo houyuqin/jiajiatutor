@@ -1,22 +1,8 @@
 import React, { Component } from 'react'
-import { 
-    Text, 
-    View, 
-    ScrollView, 
-    ImageBackground, 
-    Dimensions, 
-    StyleSheet, 
-    Button, 
-    Image, 
-    TextInput, 
-    TouchableOpacity,
-    Lightbox, 
-    ToastAndroid
-} from 'react-native';
+import { Text,View, ScrollView,Dimensions, StyleSheet, Image,TouchableOpacity, AsyncStorage} from 'react-native';
 import { TextareaItem, InputItem, Icon } from '@ant-design/react-native';
 import ImagePicker from 'react-native-image-picker';
 import { Actions } from 'react-native-router-flux';
-import { PickerView } from '@ant-design/react-native';
 
 const {width} = Dimensions.get('window');
 const s = width/640;
@@ -25,6 +11,7 @@ export default class Fabu extends Component {
     constructor(){
         super(...arguments);
         this.state={
+            loginstd:'',
             content:'',
             avatarSource:[],
             videoSource:'',
@@ -33,7 +20,11 @@ export default class Fabu extends Component {
             initItem:'',
             qiantime:'',
             clickstate:true,
-            count:0
+            count:0,
+            wxinqing:'',
+            wquanxian:'',
+            quanzi:'',
+            weizhi:''
         };
         
     }
@@ -64,7 +55,6 @@ export default class Fabu extends Component {
                 this.setState({
                     clickstate:true,
                 })
-                console.log('cancel');
             }else if (response.error) {
                 console.log(response.error);
             }else {
@@ -77,7 +67,6 @@ export default class Fabu extends Component {
                     clickstate:false,
                     count:this.state.count+1
                 });
-                console.log(this.state.count)
             }
         });
         
@@ -154,7 +143,25 @@ export default class Fabu extends Component {
             }
         // }
     }
-    componentDidMount(){
+    componentDidMount(){       
+        AsyncStorage.getItem('std')
+            .then((res)=>{
+                this.setState({
+                    loginstd:JSON.parse(res)
+                })
+                var b={}
+                b.wphonenumber=this.state.loginstd
+                fetch('http://148.70.183.184:8006/wquanzi',{
+                    method:'POST',
+                    body:JSON.stringify(b)
+                })
+                    .then(res => res.text())
+                    .then((res)=>{
+                        console.log(res+'成功')
+                    }).catch((error)=>{
+                        console.log(error+'失败')
+                    })
+            })
         var date = new Date();
         var year = date.getFullYear().toString();
         var month = (date.getMonth()+1).toString();
@@ -164,9 +171,129 @@ export default class Fabu extends Component {
         this.setState({
             qiantime:year+'年'+month+'月'+day+'日'+' '+hour+':'+minute
         })
+        AsyncStorage.getItem('dongtaifabu')
+            .then((value)=>{
+                if (value == '1') {
+                    this.setState({
+                        wquanxian:'公开'
+                    })
+                }else if(value == '2'){
+                    this.setState({
+                        wquanxian:'私密'
+                    })
+                }
+                
+            })
+        AsyncStorage.getItem('xinqingfabu')
+            .then((value)=>{
+                if (value == '1') {
+                    this.setState({
+                        wxinqing:'欢喜'
+                    })
+                }else if(value == '2'){
+                    this.setState({
+                        wxinqing:'伤感'
+                    })
+                }else if(value == '3'){
+                    this.setState({
+                        wxinqing:'激动'
+                    })
+                }else if(value == '4'){
+                    this.setState({
+                        wxinqing:'担忧'
+                    })
+                }
+                
+            })
+        AsyncStorage.getItem('weizhifabu')
+            .then((value)=>{
+                if (value == '1') {
+                    this.setState({
+                        weizhi:''
+                    })
+                }else if(value == '2'){
+                    this.setState({
+                        weizhi:'xianshi'
+                    })
+                }
+                
+            })
     }
-    fabu = ()=>{
-        console.log('fabu')
+    componentDidUpdate(){
+        AsyncStorage.getItem('dongtaifabu')
+            .then((value)=>{
+                if (value == '1') {
+                    this.setState({
+                        wquanxian:'公开'
+                    })
+                }else if(value == '2'){
+                    this.setState({
+                        wquanxian:'私密'
+                    })
+                }
+            })
+            AsyncStorage.getItem('xinqingfabu')
+            .then((value)=>{
+                if (value == '1') {
+                    this.setState({
+                        wxinqing:'欢喜'
+                    })
+                }else if(value == '2'){
+                    this.setState({
+                        wxinqing:'伤感'
+                    })
+                }else if(value == '3'){
+                    this.setState({
+                        wxinqing:'激动'
+                    })
+                }else if(value == '4'){
+                    this.setState({
+                        wxinqing:'担忧'
+                    })
+                }
+                
+            })
+        AsyncStorage.getItem('weizhifabu')
+            .then((value)=>{
+                if (value == '1') {
+                    this.setState({
+                        weizhi:''
+                    })
+                }else if(value == '2'){
+                    this.setState({
+                        weizhi:'xianshi'
+                    })
+                }
+                
+            })
+    }
+    fabu = ()=>{ 
+        AsyncStorage.getItem('std')
+            .then((res)=>{
+                this.setState({
+                    loginstd:JSON.parse(res)
+                })
+                var a={};
+                a.wphonenumber = this.state.loginstd;
+                a.content=this.state.content;
+                a.quanxian=this.state.wquanxian;
+                a.wxinqing=this.state.wxinqing;
+                a.wshijian=this.state.qiantime;
+                a.wlocal = '未写'
+                fetch(`http://148.70.183.184:8006/wquanzi/${this.state.loginstd}`,{
+                    method:'POST',
+                    body:JSON.stringify(a)
+                })
+                    .then(res => res.text())
+                    .then((res)=>{
+                        console.log(res+'成功')
+
+                    }).catch((error)=>{
+                        console.log(error+'失败')
+                    })
+
+            })
+        // Actions.pop();
     }
     render() {
         return (
@@ -191,6 +318,7 @@ export default class Fabu extends Component {
                                 }}
                                 placeholderTextColor='#C0C0C0' 
                                 rows={10} 
+                                count={500}
                             />
                             <View style={{flexDirection:'row',flexWrap:'wrap',width:360*s,marginLeft:20*s}}>
                                 {
@@ -214,21 +342,31 @@ export default class Fabu extends Component {
                                     <Icon style={{color:'#708090',padding:3*s}} name='environment'/> 
                                     <Text style={{fontSize:18}}>所在位置:</Text>
                                 </View>
-                                <Icon name='right'/>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text style={{fontSize:17,color:'gray'}}>{this.state.weizhi}</Text>
+                                    <Icon name='right' onPress={()=>Actions.wweizhi()}/>
+                                </View>
                             </View>
                             <View style={styles.listontent}>
                                 <View style={{flexDirection:'row'}}>
                                     <Icon style={{color:'#708090',padding:3*s}} name='user'/> 
                                     <Text style={{fontSize:18}}>权限:</Text>
                                 </View>
-                                <Icon name='right' onPress={()=>Actions.quanxian()}/>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text style={{fontSize:17,color:'gray'}}>{this.state.wquanxian}</Text>
+                                    <Icon name='right' onPress={()=>Actions.quanxian()}/>
+                                </View>
+                                
                             </View>
                             <View style={styles.listontent}>
                                 <View style={{flexDirection:'row'}}>
                                     <Icon style={{color:'#708090',padding:3*s}} name='smile'/> 
                                     <Text style={{fontSize:18}}>心情:</Text>
                                 </View>
-                                <Icon name='right' onPress={()=>Actions.wxinqing()}/>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text style={{fontSize:17,color:'gray'}}>{this.state.wxinqing}</Text>
+                                    <Icon name='right' onPress={()=>Actions.wxinqing()}/>
+                                </View>
                             </View>
                             <View style={styles.listontent1}>
                                 <Text style={{fontSize:18}}>当前发布时间：</Text>
@@ -266,8 +404,6 @@ const styles = StyleSheet.create({
     },
     fabutext:{
         marginRight:10*s,
-        backgroundColor:'green',
-        borderRadius:15*s,
         paddingLeft:8*s,
         paddingRight:8*s,
     }
