@@ -39,7 +39,7 @@ export default class Quan extends Component {
         super();
         this.state = {
             imageUrl: '',
-            data: [{ name: 'zhangsan', time: '2020-4-27 15:42', content: '222',ping:['哈哈哈哈哈哈','38828']}, { name: 'zhangsan', time: '2020-4-27 15:42', content: '222' }],
+            data: [{ name: 'zhangsan', time: '2020-5-27 15:42', content: '222',num:3, ping: ['哈哈哈哈哈哈', '38828', 'shshhs', 'hello'] }, { name: 'zhangsan', time: '2020-4-27 15:42', content: '222' }],
             pinglun: true,
             value1: '',
             color1: 'blue',
@@ -59,10 +59,10 @@ export default class Quan extends Component {
             //fetch请求 给响应的id去添加提交内容
         }
     }
-//点击评论图标
-add=()=>{
-    Alert.alert('请在下方输入评论！')
-}
+    //点击评论图标
+    add = () => {
+        Alert.alert('请在下方输入评论！')
+    }
     heart1 = () => {
         if (this.state.color1 == 'blue') {
             this.setState({
@@ -76,6 +76,23 @@ add=()=>{
 
     }
 
+    //点击评论区内容出现选择框
+    show=()=>{
+        Alert.alert('删除','是否要删除',
+  [
+    {text:"确认删除", onPress:this.del},
+    {text:"取消", onPress:this.opntion2Selected},
+  
+  ]
+);
+    }
+
+    //删除评论区内容
+    del=()=>{
+        //fetch接口进行删除
+        Alert.alert('删除成功')
+    }
+
     //顶端背景图片的获取
     componentDidMount() {
         //AsyncStorage.clear()
@@ -86,7 +103,7 @@ add=()=>{
             console.log(source.uri)
             if (source.uri === null) {
                 this.setState({ imageUrl: require('../../assets/zx/bg.jpg') })
-                console.log(this.state.imageUrl)
+               // console.log(this.state.imageUrl)
             }
             else {
                 this.setState({ imageUrl: source })
@@ -100,7 +117,7 @@ add=()=>{
             source.uri = JSON.parse(result)
             if (source.uri === null) {
                 this.setState({ imageUrl: require('../../assets/zx/bg.jpg') })
-                console.log(this.state.imageUrl)
+               // console.log(this.state.imageUrl)
             }
             else {
                 this.setState({ imageUrl: source })
@@ -177,7 +194,7 @@ add=()=>{
                                     <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
                                     <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
                                 </View>
-                                <View style={{ flexDirection: 'row', marginLeft: '70%', marginTop: 20 * s }}>
+                                <View style={{ flexDirection: 'row', marginLeft: '65%', marginTop: 20 * s }}>
                                     <TouchableOpacity>
                                         <Icon
                                             color={this.state.color1}
@@ -185,7 +202,7 @@ add=()=>{
                                             onPress={() => this.heart1()}
                                         />
                                     </TouchableOpacity>
-                                   
+<View style={{marginLeft:3*s}}><Text>{item.num==null?0:item.num}</Text></View>
                                     <TouchableOpacity style={{ marginLeft: 20 * s }}>
                                         <Icon
                                             color={'blue'}
@@ -194,6 +211,18 @@ add=()=>{
                                         />
                                     </TouchableOpacity>
                                 </View>
+                                {item.ping == null ? null :
+                                    <FlatList
+                                        data={item.ping}
+                                        renderItem={({ item }) => (
+                                            <TouchableOpacity style={{ marginLeft: 130 * s, flexDirection: 'row', marginTop: 6 * s }} onPress={this.show}>
+                                             
+                                                    <Image style={{ width: 20 * s, height: 20 * s, marginTop: 3 * s }} source={require('../../assets/zx/ping.png')}></Image>
+                                                    <Text style={{ marginLeft: 8 * s }}>{item}</Text>
+                                               
+                                            </TouchableOpacity>
+                                        )}
+                                    ></FlatList>}
                                 <View style={{ width: 350 * s, marginTop: 10 * s, height: 40 * s, marginLeft: 110 * s, flexDirection: 'row', borderColor: '#ddd', borderWidth: 2 }}>
                                     <View style={{ width: 290 * s, height: 40 * s }}>
                                         <InputItem
