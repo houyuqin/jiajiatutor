@@ -10,7 +10,8 @@ import {
     Image, 
     TextInput, 
     TouchableOpacity,
-    Lightbox 
+    Lightbox, 
+    ToastAndroid
 } from 'react-native';
 import { TextareaItem, InputItem, Icon } from '@ant-design/react-native';
 import ImagePicker from 'react-native-image-picker';
@@ -31,6 +32,8 @@ export default class Fabu extends Component {
             initId: '',
             initItem:'',
             qiantime:'',
+            clickstate:true,
+            count:0
         };
         
     }
@@ -55,8 +58,12 @@ export default class Fabu extends Component {
                 skipBackup: true   // 如果true，该照片将不会备份到iCloud
             }
         };
+
         ImagePicker.showImagePicker(options, (response) => {
             if (response.didCancel) {
+                this.setState({
+                    clickstate:true,
+                })
                 console.log('cancel');
             }else if (response.error) {
                 console.log(response.error);
@@ -66,10 +73,14 @@ export default class Fabu extends Component {
                 // You can also display the image using data:
                 // let source = { uri: 'data:image/jpeg;base64,' + response.data };
                 this.setState({
-                    avatarSource: [...this.state.avatarSource,source]
+                    avatarSource: [...this.state.avatarSource,source],
+                    clickstate:false,
+                    count:this.state.count+1
                 });
+                console.log(this.state.count)
             }
         });
+        
     }
  
     // onPressVideo = () => {
@@ -101,25 +112,47 @@ export default class Fabu extends Component {
     //     });
     // }
     _renderImg = () => {
-        for (let i = 0; i < 10; i++) {
-            if(this.state.avatarSource[i]){
+        // for (let i = 0; i < 10; i++) {
+        //     console.log(this.state.avatarSource[i])
+            if(this.state.count<9){
                 return(
                     <View style={{flexDirection:'row',flexWrap:'wrap'}}>
                         {
                             this.state.avatarSource.map((item,index)=>(
-                                <Image 
-                                    source={{uri:item.uri}} 
-                                    style={{width:120*s, height:120*s}} 
-                                />
+                                <View style={{flexDirection:'row',flexWrap:'wrap'}}>
+                                    <Image 
+                                        source={{uri:item.uri}} 
+                                        style={{width:120*s, height:120*s}} 
+                                    />
+                                </View>
                             ))
                         }
-                        
+                        <TouchableOpacity 
+                            title='照片'
+                            onPress={this.onPressImg}
+                            style={{width:120*s,height:120*s,backgroundColor:'#708090',justifyContent:'center',alignItems:'center'}}
+                        >
+                            <Text style={{color:'white',fontSize:40}}>+</Text>
+                        </TouchableOpacity>
                     </View>
                 );
             }else{
-                return null;
+                return(
+                    <View style={{flexDirection:'row',flexWrap:'wrap'}}>
+                        {
+                            this.state.avatarSource.map((item,index)=>(
+                                <View style={{flexDirection:'row',flexWrap:'wrap'}}>
+                                    <Image 
+                                        source={{uri:item.uri}} 
+                                        style={{width:120*s, height:120*s}} 
+                                    />
+                                </View>
+                            ))
+                        }
+                    </View>
+                );
             }
-        }
+        // }
     }
     componentDidMount(){
         var date = new Date();
@@ -147,7 +180,7 @@ export default class Fabu extends Component {
                 </View>
                 <ScrollView>
                     <View style={{alignItems:'center'}}>
-                        <View style={{width:'95%',backgroundColor:'white',padding:10*s,marginTop:10*s,borderBottomWidth:2*s,borderBottomColor:'lightgray',borderTopLeftRadius:20*s,borderTopRightRadius:20*s}}>
+                        <View style={{width:'95%',backgroundColor:'white',padding:10*s,marginTop:10*s,borderTopLeftRadius:20*s,borderTopRightRadius:20*s}}>
                             <TextareaItem 
                                 placeholder='这一刻的想法...' 
                                 value={i=>this.wujinyareturn1=i} 
@@ -160,15 +193,19 @@ export default class Fabu extends Component {
                                 rows={10} 
                             />
                             <View style={{flexDirection:'row',flexWrap:'wrap',width:360*s,marginLeft:20*s}}>
-                                {this._renderImg()}
-                                <TouchableOpacity 
-                                    title='照片'
-                                    onPress={this.onPressImg}
-                                    style={{width:120*s,height:120*s,backgroundColor:'#708090',justifyContent:'center',alignItems:'center'}}
-                                >
-                                    <Image style={{width:50*s,height:50*s}} source={require('../../assets/wjy/img/拍照.png')}/>
-                                    <Text style={{color:'white',fontSize:16}}>图片/视频</Text>
-                                </TouchableOpacity>
+                                {
+                                    this.state.clickstate?
+                                    <TouchableOpacity 
+                                        title='照片'
+                                        onPress={this.onPressImg}
+                                        style={{width:120*s,height:120*s,backgroundColor:'#708090',justifyContent:'center',alignItems:'center'}}
+                                    >
+                                        <Image style={{width:50*s,height:50*s}} source={require('../../assets/wjy/img/拍照.png')}/>
+                                        <Text style={{color:'white',fontSize:16}}>图片/视频</Text>
+                                    </TouchableOpacity>:
+                                    <View>{this._renderImg()}</View>
+                                }
+                                
                             </View>
                         </View>
                         <View style={{width:'95%'}}>
