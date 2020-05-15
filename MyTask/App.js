@@ -51,12 +51,12 @@ import Wteayonghufankui from './src/teaMine/teacher/Yonghufankui';
 import Wwodeshouyi from './src/teaMine/teacher/Wodeshouyi';
 import Teashezhi from './src/teaMine/teacher/teashezhi';
 
-import Quan from './src/quanzi/Quan';
-import Fabu from './src/quanzi/Fabu';
+import teaQuan from './src/teaQuan/Quan';
+import teaFabu from './src/teaQuan/Fabu';
 import SwiperPage0 from './src/common/SwiperPage0';
-import Wquanxian from './src/quanzi/quanxian'
-import Wxinqing from './src/quanzi/wxinqing'
-import Wweizhi from './src/quanzi/wweizhi'
+import tWquanxian from './src/teaQuan/quanxian'
+import tWxinqing from './src/teaQuan/wxinqing'
+import tWweizhi from './src/teaQuan/wweizhi'
 import tHome from './src/teaHome/tHome';
 import tContent from './src/teaHome/tContent';
 import Zhoumo from './src/teaHome/Zhoumu'
@@ -65,6 +65,12 @@ import Jizhao from './src/teaHome/Jizhao'
 import Fujin from './src/teaHome/Fujin'
 import Concat from './src/teaHome/Concat';
 import Searchtea from './src/stdMine/container/Searchtea';
+
+import stuQuan from './src/stuQuan/Quan';
+import stuFabu from './src/stuQuan/Fabu';
+import sWquanxian from './src/stuQuan/quanxian'
+import sWxinqing from './src/stuQuan/wxinqing'
+import sWweizhi from './src/stuQuan/wweizhi'
 
 console.disableYellowBox = true;
 const {width} = Dimensions.get('window');
@@ -215,41 +221,41 @@ const App = () => {
 									  } 
 									title="圈子"
 								>
-										<Scene key='quan'
+										<Scene key='stuquan'
 										title='社交圈'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
-										component={Quan} 
+										component={stuQuan} 
 										renderLeftButton={
 											<View></View>
 										}
 										renderRightButton={
-											<Icon size='lg' name="plus-circle" style={{marginRight:10*s}} onPress={()=>Actions.fabu()}/>
+											<Icon size='lg' name="plus-circle" style={{marginRight:10*s}} onPress={()=>Actions.stufabu()}/>
 										}
 									></Scene>
-									<Scene key='fabu'
+									<Scene key='stufabu'
 										title='发布动态'
 										hideTabBar
 										hideNavBar
-										component={Fabu} 
+										component={stuFabu} 
 									></Scene>
-									<Scene key='wweizhi'
+									<Scene key='swweizhi'
 										title='位置'
 										hideTabBar
 										hideNavBar
-										component={Wweizhi}
+										component={sWweizhi}
 									></Scene>
-									<Scene key='wxinqing'
+									<Scene key='swxinqing'
 										title='心情'
 										hideTabBar
 										hideNavBar
-										component={Wxinqing}
+										component={sWxinqing}
 									></Scene>
-									<Scene key='quanxian'
+									<Scene key='squanxian'
 										title='权限'
 										hideTabBar
 										hideNavBar
-										component={Wquanxian}
+										component={sWquanxian}
 									></Scene>
 								</Scene>
 								{/* 用户中心 */}
@@ -589,25 +595,40 @@ const App = () => {
 									  } 
 									title="圈子"
 								>
-										<Scene key='quan'
+										<Scene key='teaquan'
 										title='社交圈'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
-										component={Quan} 
+										component={teaQuan} 
 										renderRightButton={
-											<Icon size='lg' name="plus-circle" onPress={Actions.fabu}/>
+											<Icon size='lg' name="plus-circle" onPress={()=>Actions.teafabu()}/>
 										}
 									></Scene>
-									<Scene key='fabu'
+									<Scene key='teafabu'
 										title='发布动态'
 										hideTabBar
-										titleStyle={{ color: 'white', flex: 1, textAlign: 'center',marginLeft:-30 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}
-										component={Fabu} 
-										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-										}
+										hideNavBar
+										component={teaFabu} 
 									></Scene>
+									<Scene key='twweizhi'
+										title='位置'
+										hideTabBar
+										hideNavBar
+										component={tWweizhi}
+									></Scene>
+									<Scene key='twxinqing'
+										title='心情'
+										hideTabBar
+										hideNavBar
+										component={tWxinqing}
+									></Scene>
+									<Scene key='tquanxian'
+										title='权限'
+										hideTabBar
+										hideNavBar
+										component={tWquanxian}
+									></Scene>
+						
 								</Scene>
 								{/* 用户中心 */}
 								<Scene 

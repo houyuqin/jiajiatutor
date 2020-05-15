@@ -344,7 +344,7 @@ export default class Fabu extends Component {
                                 </View>
                                 <View style={{flexDirection:'row'}}>
                                     <Text style={{fontSize:17,color:'gray'}}>{this.state.weizhi}</Text>
-                                    <Icon name='right' onPress={()=>Actions.wweizhi()}/>
+                                    <Icon name='right' onPress={()=>Actions.twweizhi()}/>
                                 </View>
                             </View>
                             <View style={styles.listontent}>
@@ -354,7 +354,7 @@ export default class Fabu extends Component {
                                 </View>
                                 <View style={{flexDirection:'row'}}>
                                     <Text style={{fontSize:17,color:'gray'}}>{this.state.wquanxian}</Text>
-                                    <Icon name='right' onPress={()=>Actions.quanxian()}/>
+                                    <Icon name='right' onPress={()=>Actions.tquanxian()}/>
                                 </View>
                                 
                             </View>
@@ -365,7 +365,7 @@ export default class Fabu extends Component {
                                 </View>
                                 <View style={{flexDirection:'row'}}>
                                     <Text style={{fontSize:17,color:'gray'}}>{this.state.wxinqing}</Text>
-                                    <Icon name='right' onPress={()=>Actions.wxinqing()}/>
+                                    <Icon name='right' onPress={()=>Actions.twxinqing()}/>
                                 </View>
                             </View>
                             <View style={styles.listontent1}>
