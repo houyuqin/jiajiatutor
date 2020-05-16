@@ -71,6 +71,8 @@ import stuFabu from './src/stuQuan/Fabu';
 import sWquanxian from './src/stuQuan/quanxian'
 import sWxinqing from './src/stuQuan/wxinqing'
 import sWweizhi from './src/stuQuan/wweizhi'
+import stuPinglun from './src/stuQuan/Pinglun'
+import teaPinglun from './src/teaQuan/Pinglun'
 
 console.disableYellowBox = true;
 const {width} = Dimensions.get('window');
@@ -220,6 +222,9 @@ const App = () => {
 										  />
 									  } 
 									title="圈子"
+									renderLeftButton={
+										<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+									}
 								>
 										<Scene key='stuquan'
 										title='社交圈'
@@ -257,6 +262,15 @@ const App = () => {
 										hideNavBar
 										component={sWquanxian}
 									></Scene>
+									<Scene key='spinglun'
+									title='全部评论'
+									titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
+									navigationBarStyle={{ backgroundColor: '#708090' }}
+									component={stuPinglun} 
+									
+								>
+                                        
+									</Scene>
 								</Scene>
 								{/* 用户中心 */}
 								<Scene 
@@ -593,6 +607,9 @@ const App = () => {
 										
 										  />
 									  } 
+									  renderLeftButton={
+										<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+									}
 									title="圈子"
 								>
 										<Scene key='teaquan'
@@ -628,6 +645,11 @@ const App = () => {
 										hideNavBar
 										component={tWquanxian}
 									></Scene>
+										<Scene key='tpinglun'
+									title='全部评论'
+									titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
+									navigationBarStyle={{ backgroundColor: '#708090' }}
+									component={teaPinglun} ></Scene>
 						
 								</Scene>
 								{/* 用户中心 */}

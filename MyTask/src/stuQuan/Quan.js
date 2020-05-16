@@ -13,12 +13,15 @@ import {
     Lightbox,
     AsyncStorage,
     FlatList,
-    Alert
+    Alert,
+    ToastAndroid,
+    TouchableHighlight
 } from 'react-native'
 import { Actions } from 'react-native-router-flux';
-import { Icon } from '@ant-design/react-native';
+import { Icon, Toast } from '@ant-design/react-native';
 import ImagePicker from 'react-native-image-picker';
 import { InputItem, List } from '@ant-design/react-native';
+import { ThemeProvider } from '@ant-design/react-native/lib/style';
 const { width } = Dimensions.get('window');
 const s = width / 640;
 
@@ -39,13 +42,12 @@ export default class Quan extends Component {
         super();
         this.state = {
             imageUrl: '',
-            data: [{ name: 'zhangsan', time: '2020-5-27 15:42', content: '222',num:3, ping: ['哈哈哈哈哈哈', '38828', 'shshhs', 'hello'] }, { name: 'zhangsan', time: '2020-4-27 15:42', content: '222' }],
-            pinglun: true,
+            data: '',
             value1: '',
-            color1: 'blue',
-            color2: 'blue',
-            color3: 'blue',
-            color4: 'blue',
+            dianzan: 0,
+            loginstd: '',
+            data1: '',
+            wusername: ''
         }
     }
 
@@ -56,73 +58,159 @@ export default class Quan extends Component {
             Alert.alert('您还未输入评论，无法提交！')
         }
         else {
+            var a = {};
+            a.num = index;
+            a.ping = this.state.value1;
+            a.username = this.state.wusername;
+            a.usernum = this.state.loginstd
+            //console.log(JSON.stringify(a))
             //fetch请求 给响应的id去添加提交内容
+            fetch(`http://148.70.183.184:8005/stuPing`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'text/plain; charset=UTF-8'
+                },
+                body: JSON.stringify(a)
+            }).then((res) => {
+                ToastAndroid.showWithGravity(
+                    "评论成功！",
+                    ToastAndroid.SHORT,
+                    ToastAndroid.CENTER
+                );
+            })
         }
     }
+
+   
+
     //点击评论图标
     add = () => {
         Alert.alert('请在下方输入评论！')
     }
-    heart1 = () => {
-        if (this.state.color1 == 'blue') {
-            this.setState({
-                color1: 'red'
-            })
-        } else {
-            this.setState({
-                color1: 'blue'
-            })
-        }
 
-    }
 
     //点击评论区内容出现选择框
-    show=()=>{
-        Alert.alert('删除','是否要删除',
-  [
-    {text:"确认删除", onPress:this.del},
-    {text:"取消", onPress:this.opntion2Selected},
-  
-  ]
-);
+    show = () => {
+        Alert.alert('删除', '是否要删除',
+            [
+                { text: "确认删除", onPress: this.del },
+                { text: "取消", onPress: this.opntion2Selected },
+
+            ]
+        );
     }
 
     //删除评论区内容
-    del=()=>{
+    del = () => {
         //fetch接口进行删除
         Alert.alert('删除成功')
     }
 
+    //点赞数增加
+    dianzan = (num, id) => {
+        if (num == null) {
+            num = 0;
+        }
+        else {
+            num = num + 1
+        }
+
+        fetch(`http://148.70.183.184:8006/wquanzi/${id}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'text/plain; charset=UTF-8'
+            },
+            body: JSON.stringify(num)
+        }).then((res) => {
+            fetch('http://148.70.183.184:8006/wquanzi', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'text/plain; charset=UTF-8'
+                },
+            }).then((res) => res.json()).then(res => {
+                this.setState({ data: res })
+            })
+            ToastAndroid.showWithGravity(
+                "点赞成功！",
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER
+            );
+        })
+
+    }
+
+
+
     //顶端背景图片的获取
     componentDidMount() {
+
         //AsyncStorage.clear()
         //页面一加载获取数据进行渲染
         AsyncStorage.getItem("UID123", (err, result) => {
             const source = { uri: '' }
             source.uri = JSON.parse(result)
-            console.log(source.uri)
+            // console.log(source.uri)
             if (source.uri === null) {
                 this.setState({ imageUrl: require('../../assets/zx/bg.jpg') })
-               // console.log(this.state.imageUrl)
+                // console.log(this.state.imageUrl)
             }
             else {
                 this.setState({ imageUrl: source })
             }
         });
+
+
+        //获取评论
+        fetch('http://148.70.183.184:8006/wquanzi', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'text/plain; charset=UTF-8'
+            },
+        }).then((res) => res.json()).then(res => {
+            this.setState({ data: res })
+        })
+
+
+        //获取谁登录以及这个人登录的名称和手机号
+        AsyncStorage.getItem('std')
+            .then((res) => {
+                this.setState({
+                    loginstd: JSON.parse(res)
+                })
+                fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        this.setState({ data1: res.data })
+                        if (this.state.data1[0].wusername == '') {
+                            this.setState({
+                                wusername: '我的昵称'
+                            })
+                        } else {
+                            this.setState({
+                                wusername: this.state.data1[0].wusername
+                            })
+                        }
+                    })
+            })
     }
     componentDidUpdate() {
-        //页面更新获取数据进行渲染
+        //AsyncStorage.clear()
+        //页面一加载获取数据进行渲染
         AsyncStorage.getItem("UID123", (err, result) => {
             const source = { uri: '' }
             source.uri = JSON.parse(result)
+            //console.log(source.uri)
             if (source.uri === null) {
                 this.setState({ imageUrl: require('../../assets/zx/bg.jpg') })
-               // console.log(this.state.imageUrl)
+                // console.log(this.state.imageUrl)
             }
             else {
                 this.setState({ imageUrl: source })
             }
         });
+
+
+
     }
     //拍照
     takephoto = () => {
@@ -150,7 +238,7 @@ export default class Quan extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <View style={styles.main}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 0 * s, marginBottom: 40 * s }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 0 * s, marginBottom: 30 * s }}>
                         <TouchableOpacity style={styles.box} onPress={() => this.takephoto()}>
                             <ImageBackground
                                 style={styles.box4}
@@ -170,18 +258,20 @@ export default class Quan extends Component {
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <View style={styles.rect}>
                                 <View style={styles.mine}>
-                                    <Image
-                                        source={require('../../assets/hyq/000.png')}
-                                        style={{ width: 70 * s, height: 70 * s }}
-                                    />
-                                    <View style={{ paddingTop: 10 * s, paddingLeft: 30 * s }}>
-                                        <Text style={{ fontSize: 22 * s }}>{item.name}</Text>
-                                        <Text>{item.time}</Text>
+                                    <View style={{ width: '20%' }}>
+                                        <Image
+                                            source={require('../../assets/hyq/000.png')}
+                                            style={{ width: 70 * s, height: 70 * s }}
+                                        />
+                                    </View>
+                                    <View style={{ width: '80%' }}>
+                                        <Text style={{ fontSize: 22 * s }}>{item.wusername == null ? 'undefined' : item.wusername}</Text>
+                                        <Text>{item.wshijian == null ? '未设置' : item.wshijian}</Text>
                                     </View>
 
                                 </View>
-                                <View style={{ paddingLeft: 130 * s, paddingTop: 10 * s }}>
-                                    <Text style={{ fontSize: 24 * s }}>{item.content}</Text>
+                                <View style={{ paddingLeft: 130 * s, paddingTop: 5 * s }}>
+                                    <Text style={{ fontSize: 24 * s }} numberOfLines={2}>{item.content ? (item.content.length > 15 ? item.content.substr(0, 14) + '...' : item.content) : ''}</Text>
                                 </View>
                                 <View style={styles.imgs}>
                                     <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
@@ -195,34 +285,23 @@ export default class Quan extends Component {
                                     <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
                                 </View>
                                 <View style={{ flexDirection: 'row', marginLeft: '65%', marginTop: 20 * s }}>
-                                    <TouchableOpacity>
-                                        <Icon
-                                            color={this.state.color1}
-                                            name="heart"
-                                            onPress={() => this.heart1()}
-                                        />
+                                    <TouchableOpacity onPress={() => this.dianzan(item.wdianzannumber, item.id)}>
+                                        <Image
+                                            onPress={() => this.dianzan(item.wdianzannumber, item.id)}
+                                            style={{ width: 30 * s, height: 30 * s }} source={require('../../assets/zx/zan.png')}>
+
+                                        </Image>
                                     </TouchableOpacity>
-<View style={{marginLeft:3*s}}><Text>{item.num==null?0:item.num}</Text></View>
+                                    <View style={{ marginLeft: 3 * s }}><Text>{item.wdianzannumber == null ? 0 : item.wdianzannumber}</Text></View>
                                     <TouchableOpacity style={{ marginLeft: 20 * s }}>
                                         <Icon
-                                            color={'blue'}
+                                            color={'#1296db'}
                                             name="message"
                                             onPress={() => this.add(index)}
                                         />
                                     </TouchableOpacity>
                                 </View>
-                                {item.ping == null ? null :
-                                    <FlatList
-                                        data={item.ping}
-                                        renderItem={({ item }) => (
-                                            <TouchableOpacity style={{ marginLeft: 130 * s, flexDirection: 'row', marginTop: 6 * s }} onPress={this.show}>
-                                             
-                                                    <Image style={{ width: 20 * s, height: 20 * s, marginTop: 3 * s }} source={require('../../assets/zx/ping.png')}></Image>
-                                                    <Text style={{ marginLeft: 8 * s }}>{item}</Text>
-                                               
-                                            </TouchableOpacity>
-                                        )}
-                                    ></FlatList>}
+                              <TouchableOpacity onPress={()=>Actions.spinglun({id:item.id})} style={{marginLeft:'55%',marginTop:10*s}}><Text style={{fontSize:15}}>查看全部评论 >></Text></TouchableOpacity>
                                 <View style={{ width: 350 * s, marginTop: 10 * s, height: 40 * s, marginLeft: 110 * s, flexDirection: 'row', borderColor: '#ddd', borderWidth: 2 }}>
                                     <View style={{ width: 290 * s, height: 40 * s }}>
                                         <InputItem
@@ -234,9 +313,9 @@ export default class Quan extends Component {
                                             }}
                                             placeholder="请输入评论内容"
                                         /></View>
-                                    <View style={{ width: 70 * s, height: 40 * s }}>
-                                        <TouchableOpacity onPress={() => this.tijiao(index)} style={{ width: 70 * s, height: 35 * s, backgroundColor: 'orange', alignItems: 'center' }}><Text style={{ color: 'white', fontSize: 15 }}>提交</Text></TouchableOpacity>
-                                    </View>
+
+                                    <TouchableHighlight style={{ width: 70 * s, height: 40 * s }} onPress={() => this.tijiao(item.id)} style={{ width: 70 * s, height: 35 * s, backgroundColor: 'orange', alignItems: 'center' }}><Text style={{ color: 'white', fontSize: 15 }}>提交</Text></TouchableHighlight>
+
                                 </View>
                             </View>
                         </View>
@@ -259,14 +338,14 @@ const styles = StyleSheet.create({
         width: 100 * s,
         height: 100 * s,
         marginLeft: 15 * s,
-        marginTop: 10 * s
+        marginTop: 8 * s
     },
     mine: {
-        width: 300 * s,
+        width: '100%',
         height: 80 * s,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        paddingLeft: 20 * s
+        paddingLeft: 20 * s,
     },
     rect: {
         width: '90%',
