@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text,View, ScrollView,Dimensions, StyleSheet, Image,TouchableOpacity, AsyncStorage} from 'react-native';
+import { Text,View, ScrollView,Dimensions, StyleSheet, Image,TouchableOpacity, AsyncStorage, Alert, ToastAndroid} from 'react-native';
 import { TextareaItem, InputItem, Icon } from '@ant-design/react-native';
 import ImagePicker from 'react-native-image-picker';
 import { Actions } from 'react-native-router-flux';
@@ -11,6 +11,7 @@ export default class Fabu extends Component {
     constructor(){
         super(...arguments);
         this.state={
+            data:[],
             loginstd:'',
             content:'',
             avatarSource:[],
@@ -24,7 +25,8 @@ export default class Fabu extends Component {
             wxinqing:'',
             wquanxian:'',
             quanzi:'',
-            weizhi:''
+            weizhi:'',
+            wusername:''
         };
         
     }
@@ -144,24 +146,6 @@ export default class Fabu extends Component {
         // }
     }
     componentDidMount(){       
-        AsyncStorage.getItem('std')
-            .then((res)=>{
-                this.setState({
-                    loginstd:JSON.parse(res)
-                })
-                var b={}
-                b.wphonenumber=this.state.loginstd
-                fetch('http://148.70.183.184:8006/wquanzi',{
-                    method:'POST',
-                    body:JSON.stringify(b)
-                })
-                    .then(res => res.text())
-                    .then((res)=>{
-                        console.log(res+'成功')
-                    }).catch((error)=>{
-                        console.log(error+'失败')
-                    })
-            })
         var date = new Date();
         var year = date.getFullYear().toString();
         var month = (date.getMonth()+1).toString();
@@ -268,32 +252,50 @@ export default class Fabu extends Component {
             })
     }
     fabu = ()=>{ 
-        AsyncStorage.getItem('std')
-            .then((res)=>{
-                this.setState({
-                    loginstd:JSON.parse(res)
-                })
-                var a={};
-                a.wphonenumber = this.state.loginstd;
-                a.content=this.state.content;
-                a.quanxian=this.state.wquanxian;
-                a.wxinqing=this.state.wxinqing;
-                a.wshijian=this.state.qiantime;
-                a.wlocal = '未写'
-                fetch(`http://148.70.183.184:8006/wquanzi/${this.state.loginstd}`,{
-                    method:'POST',
-                    body:JSON.stringify(a)
-                })
-                    .then(res => res.text())
-                    .then((res)=>{
-                        console.log(res+'成功')
-
-                    }).catch((error)=>{
-                        console.log(error+'失败')
+        if (this.state.content == '') {
+            Alert.alert('温馨提示','请完善信息！')
+        }else{
+            AsyncStorage.getItem('std')
+                .then((res)=>{
+                    this.setState({
+                        loginstd:JSON.parse(res)
                     })
+                    fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            this.setState({data:res.data})
+                            if (this.state.data[0].wusername == '') {
+                                this.setState({
+                                    wusername:'我的昵称'
+                                })
+                            }else{
+                                this.setState({
+                                    wusername:this.state.data[0].wusername
+                                })
+                            }
+                        })
+                    var a={};
+                    a.wphonenumber = this.state.loginstd;
+                    a.content=this.state.content;
+                    a.quanxian=this.state.wquanxian;
+                    a.wxinqing=this.state.wxinqing;
+                    a.wshijian=this.state.qiantime;
+                    a.wlocal = '未写'
+                    fetch('http://148.70.183.184:8006/wquanzi',{
+                        method:'POST',
+                        body:JSON.stringify(a)
+                    })
+                        .then(res => res.text())
+                        .then((res)=>{
+                            console.log(res+'成功')
 
-            })
-        // Actions.pop();
+                        }).catch((error)=>{
+                            console.log(error+'失败')
+                        })
+
+                })
+            ToastAndroid.show('发布成功',100);
+        }
     }
     render() {
         return (
