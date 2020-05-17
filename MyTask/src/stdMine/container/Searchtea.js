@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { district } from 'antd-mobile-demo-data';
 import { 
     Text, 
     View, 
@@ -13,12 +14,16 @@ import {
     Image,
     ToastAndroid
 } from 'react-native'
-import { List, Radio, } from '@ant-design/react-native';
+import { List, Radio, Picker, Provider } from '@ant-design/react-native';
+import { Actions } from 'react-native-router-flux';
+import ModalDropdown from 'react-native-modal-dropdown';
 
 const {width} = Dimensions.get('window');
 const s = width/640;
 const RadioItem = Radio.RadioItem;
 
+
+const data = require('@bang88/china-city-data');
 export default class Searchtea extends Component {
     constructor(props) {
         super(props);
@@ -33,8 +38,25 @@ export default class Searchtea extends Component {
             salary:'',
             price:'',
             request:"",
-            data:''
-        }
+            leixing:"",
+            value: [],
+          };
+        this.onPress = () => {
+          setTimeout(() => {
+            this.setState({
+              data: district,
+            });
+          }, 0);
+        //   let a = this.state.value;
+        //     a.splice(',');
+        //     console.log(String(a));
+        //     this.setState({
+        //         address:a
+        //     })
+        };
+        this.onChange = value => {
+          this.setState({ value });
+        };
     }
     getValue2 = (e)=>{
         console.log(e);
@@ -48,12 +70,12 @@ export default class Searchtea extends Component {
             class:e
         })
     }
-    getValue4 = (e)=>{
-        console.log(e);
-        this.setState({
-            address:e
-        })
-    }
+    // getValue4 = (e)=>{
+    //     console.log(e);
+    //     this.setState({
+    //         address:e
+    //     })
+    // }
     getValue5 = (e)=>{
         console.log(e);
         this.setState({
@@ -78,37 +100,15 @@ export default class Searchtea extends Component {
             let std = JSON.parse(res);
             this.setState({std:std});
         });
-        fetch("http://148.70.183.184:8000/search")
-        .then(res=>res.json())
-        .then(res=>{
-            this.setState({
-                data:res.data
-            })  
-        })
-        .then(res=>{
-            console.log(this.state.data)
-        });
-
-    }
-    delete=(num)=>{
-        fetch(`http://148.70.183.184:8000/search/${num}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'text/plain; charset=UTF-8'
-                },
-                body:JSON.stringify({id:num})
-            })
-            .then((res)=>{ 
-                if(res.status === 200){
-                    alert('删除成功！');
-                    return res.json();
-                }else{
-                    ToastAndroid('删除失败！',ToastAndroid.SHORT);
-                }
-            })
     }
     submit = ()=>{
-        console.log(this.state)
+        let a = this.state.value;
+            a.splice(',');
+            console.log(String(a));
+            this.setState({
+                address:a
+            })
+        console.log(this.state);
         let body = {
             std:this.state.std ,// 定义选中的值，如果为空字符串，则默认不选中
             name:this.state.name,
@@ -119,7 +119,8 @@ export default class Searchtea extends Component {
             time:this.state.time,
             salary:this.state.salary,
             price:this.state.price,
-            request:this.state.request
+            request:this.state.request,
+            leixing:this.state.leixing
         }
         fetch("http://148.70.183.184:8000/search",{
             method:"POST",
@@ -149,18 +150,44 @@ export default class Searchtea extends Component {
                         在对应的问题中回答并提交可视为你想要发布寻找上门家教的信息。
                         不必填写精准明确，拥有大概方位帮助教师辨别远近即可，以防被骗。
                     </Text>
+                    <TouchableOpacity 
+                        onPress={Actions.fabuguo}
+                        style={styles.cengjing}
+                    >
+                        <Text>我发布过的寻找家教信息</Text>
+                    </TouchableOpacity>
                     <Text style={styles.h}>1.请输入您孩子的姓名（此项可不真实，方便教师联系时称呼）：</Text>
                     <TextInput style={{width:'100%',backgroundColor:'#fff'}}
                     onChangeText={(Text)=>this.getValue2(Text)}/>
                     <Text style={styles.h}>2.请输入您孩子正接受教育的年级：</Text>
                     <TextInput style={{width:'100%',backgroundColor:'#fff'}}
                     onChangeText={(Text)=>this.getValue3(Text)}/>
-                    <Text style={styles.h}>3.请输入您家的家庭住址（可不详细至小区，到街道或可辨别标志物附近即可）：</Text>
-                    <TextInput style={{width:'100%',backgroundColor:'#fff'}}
-                    onChangeText={(Text)=>this.getValue4(Text)}/>
-                    <Text style={styles.h}>4.请输入您需要家教的科目：</Text>
+                    <Text style={styles.h}>3.请输入您需要家教的科目：</Text>
                     <TextInput style={{width:'100%',backgroundColor:'#fff'}}
                     onChangeText={(Text)=>this.getValue7(Text)}/>
+                    <List>
+                    <Text style={styles.h}>5.您要找的家教的类型：</Text>
+                    <RadioItem
+                        checked={this.state.leixing === "周末"}
+                        onChange={event => {
+                        if (event.target.checked) {
+                            this.setState({ leixing: "周末" });
+                        }
+                        }}
+                    >
+                        周末
+                    </RadioItem>
+                    <RadioItem
+                        checked={this.state.leixing === "其他"}
+                        onChange={event => {
+                            if (event.target.checked) {
+                                this.setState({ leixing: "其他" });
+                            }
+                        }}
+                    >
+                        其他
+                    </RadioItem>
+                </List>
                     <List>
                     <Text style={styles.h}>5.您要找的家教的性别：</Text>
                     <RadioItem
@@ -257,50 +284,34 @@ export default class Searchtea extends Component {
                     <TextInput style={{width:'100%',backgroundColor:'#fff'}}
                     onChangeText={(Text)=>this.getValue5(Text)}/>
 
-
+                    <Text style={styles.h}>请选择您家的家庭住址：</Text>
+                    {/* <TextInput style={{width:'100%',backgroundColor:'#fff'}}
+                    onChangeText={(Text)=>this.getValue4(Text)}/> */}
+                    <Provider>
+                        <View style={{ marginTop: 30 }}>
+                        <List>
+                            <Picker
+                            data={data}
+                            cols={3}
+                            value={this.state.value}
+                            onChange={this.onChange}
+                            >
+                            <List.Item arrow="horizontal" onPress={this.onPress}>
+                                省市选择
+                            </List.Item>
+                            </Picker>
+                        </List>
+                        </View>
+                    </Provider>
+                    {/* <ModalDropdown 
+                        options={['北京', '河北石家庄','河北衡水']} 
+                        style={{height:40*s,width:'40%'}}
+                    /> */}
                 <Button 
                     onPress={()=>this.submit()}
                     title="提交"
                 />
                 <View style={{height:60*s}}></View>
-                <Text style={{fontSize:24*s}}>我发布过的家教信息:</Text>
-                <FlatList
-                    data={this.state.data}
-                    renderItem={({ item }) => (
-                        <View style={{ alignItems: 'center' }} >
-                            <View style={styles.box3}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ width: '12%' }}><View style={styles.zh1}></View></View>
-                                    <View style={styles.zh2}><Text style={{ fontSize: 25, fontWeight: "bold" }}>{item.kemu}</Text></View>
-                                    <View style={styles.zh3}><Text style={{ color: '#00FF00', fontSize: 23 }}>{item.price}/小时</Text></View>
-                                    <TouchableOpacity onPress={()=>this.delete(item.id)}>
-                                        <Text 
-                                        style={{
-                                            fontSize:54*s,
-                                            marginLeft:60*s,
-                                            color:'red'
-                                            }}>
-                                                ×
-                                        </Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={{marginLeft:'12%',marginTop:'3%'}}>
-                                    <Text style={styles.zfont}>{item.addrss}</Text>
-                                </View>
-                                <View style={{marginLeft:'12%',marginTop:'3%',flexDirection:'row'}}>
-                                   <View style={{width:'20%'}}><Text style={styles.zfont}>{item.salary}</Text></View>
-                                   <View style={{width:'20%'}}><Text style={styles.zfont}>{item.time}</Text></View>
-                                   <View style={{width:'40%'}}><Text style={styles.zfont}>{item.sex}</Text></View>
-                                   <TouchableOpacity 
-                                    style={{width:'10%',marginTop:-10*s}}  onPress={()=>this.lookfor(item.id)}>
-                                       <Image style={styles.zimg} source={require('../../../assets/zx/right.png')} ></Image>
-                                   </TouchableOpacity>
-                                </View>
-                            </View>
-
-                        </View>
-                    )}
-                ></FlatList>
                 </ScrollView>
             </View>
         )
@@ -326,36 +337,11 @@ const styles = StyleSheet.create({
         backgroundColor:'#eee',
         paddingTop:10*s,
     },
-    box3: {
-        height: 190 * s,
-        width: '95%',
-        backgroundColor: 'white',
-        marginTop: 20 * s,
-        borderRadius: 10 * s
-    },
-    zh1: {
-        width: 20 * s,
-        height: 20 * s,
-        borderRadius: 10 * s,
-        backgroundColor: '#00FF00',
-        marginTop: 20 * s,
-        marginLeft: 20 * s,
-
-    },
-    zh2: {
-        width: '50%',
-        marginTop: 10 * s,
-    },
-    zh3: {
-        marginTop: 10 * s
-    },
-    zfont:{
-        fontSize:16,
-        color:'#2F4F4F'
-    },
-    zimg:{
-        width:50*s,
-        height:50*s,
-        resizeMode:'stretch'
+    cengjing:{
+        backgroundColor:'#00ff00',
+        height:40*s,
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
     }
 })

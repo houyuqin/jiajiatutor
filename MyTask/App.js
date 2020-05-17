@@ -60,8 +60,6 @@ import tWweizhi from './src/teaQuan/wweizhi'
 import tHome from './src/teaHome/tHome';
 import tContent from './src/teaHome/tContent';
 import Zhoumo from './src/teaHome/Zhoumu'
-import Other from './src/teaHome/Other'
-import Jizhao from './src/teaHome/Jizhao'
 import Fujin from './src/teaHome/Fujin'
 import Concat from './src/teaHome/Concat';
 import Searchtea from './src/stdMine/container/Searchtea';
@@ -73,6 +71,7 @@ import sWxinqing from './src/stuQuan/wxinqing'
 import sWweizhi from './src/stuQuan/wweizhi'
 import stuPinglun from './src/stuQuan/Pinglun'
 import teaPinglun from './src/teaQuan/Pinglun'
+import Fabuguo from './src/stdMine/container/Fabuguo';
 
 console.disableYellowBox = true;
 const {width} = Dimensions.get('window');
@@ -346,7 +345,7 @@ const App = () => {
 										component={WWodejiaoshi}
 									/>
 									<Scene 
-										key='searchtea' 
+										key='searchtea'  
 										title='寻找家教'
 										hideTabBar 
 										navigationBarStyle={{backgroundColor:'#708090'}}
@@ -358,6 +357,30 @@ const App = () => {
 											<View></View>
 										}
 										component={Searchtea}
+									/>
+									<Scene 
+										key='fabuguo'  
+										title='已经发布'
+										hideTabBar 
+										navigationBarStyle={{backgroundColor:'#708090'}}
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										renderRightButton={
+											<View></View>
+										}
+										component={Fabuguo}
+									/>
+									<Scene key='jobxiang'
+										title='招聘详情'
+										hideTabBar
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}										
+										component={tContent} 
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
 									/>
 									<Scene 
 										key='wzuoyepingjiaqingkuang' 
@@ -480,16 +503,19 @@ const App = () => {
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
 										}
 										/>
-									<Scene key='tjizhao'
-										title='急招家教'
+									<Scene key='goodtea'
+										title='优秀教师'
 										hideTabBar
-										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={Jizhao} 
+										hideNavBar
+										// titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										// navigationBarStyle={{ backgroundColor: '#708090' }}										
+										component={GoodTea} 
 										renderLeftButton={
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
 										}
 									/>
+									<Scene key='buy' hideTabBar component={Buy}/>
+									<Scene key='player' hideTabBar component={Player0}/>
 									<Scene key='jobxiang'
 										title='招聘详情'
 										hideTabBar
@@ -500,12 +526,13 @@ const App = () => {
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
 										}
 									/>
-									<Scene key='tother'
-										title='其他兼职'
+									<Scene key='vedio'
+										title='优秀视频'
 										hideTabBar
+										hideNavBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={Other} 
+										component={Vedio} 
 										renderLeftButton={
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
 										}

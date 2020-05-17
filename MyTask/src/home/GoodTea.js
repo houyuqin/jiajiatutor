@@ -50,7 +50,7 @@ export default class GoodTea extends Component {
         return (
             <View>
                 <View  style={styles.nav}>
-                    <Icon name="left" style={styles.left} onPress={Actions.home} />
+                    <Icon name="left" style={styles.left} onPress={Actions.pop} />
                     <Text
                         style={styles.tit}
                     >优秀教师推荐</Text>

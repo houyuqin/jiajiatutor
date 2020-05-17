@@ -1,24 +1,22 @@
 import React, { Component } from 'react'
 import { 
     Text, 
-    View ,
+    View, 
+    StyleSheet, 
     Dimensions,
     FlatList,
-    StyleSheet,
     TouchableOpacity,
-    Image, 
-    ScrollView,
+    Image,
     AsyncStorage
 } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 
-const { width, scale } = Dimensions.get('window');
-const s = width / 640;
-
-export default class tjiajiao extends Component {
-    constructor() {
-        super()
-        this.state = {
+const {width} = Dimensions.get('window');
+const s = width/640;
+export default class Fabuguo extends Component {
+    constructor(){
+        super();
+        this.state={
             data:''
         }
     }
@@ -26,18 +24,22 @@ export default class tjiajiao extends Component {
         fetch("http://148.70.183.184:8000/search")
         .then(res=>res.json())
         .then(res=>{
-            let arr=[];
-            for(var i=0;i<res.data.length;i++){
-                if(res.data[i].leixing=='周末'){
-                    arr.push(res.data[i]);
-                    this.setState({
-                        data:arr
-                    })
-                }
-            }
+            this.setState({
+                data:res.data
+            })  
         })
         .then(res=>{
             console.log(this.state.data)
+        });
+
+    }
+    componentDidUpdate(){
+        fetch("http://148.70.183.184:8000/search")
+        .then(res=>res.json())
+        .then(res=>{
+            this.setState({
+                data:res.data
+            })  
         });
     }
     lookfor=(num)=>{
@@ -53,11 +55,28 @@ export default class tjiajiao extends Component {
             });
         })
     }
+    delete=(num)=>{
+        fetch(`http://148.70.183.184:8000/search/${num}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'text/plain; charset=UTF-8'
+                },
+                body:JSON.stringify({id:num})
+            })
+            .then((res)=>{ 
+                if(res.status === 200){
+                    alert('删除成功！');
+                    return res.json();
+                }else{
+                    ToastAndroid('删除失败！',ToastAndroid.SHORT);
+                }
+            })
+    }
     render() {
         return (
             <View>
-                <ScrollView>
-                    <FlatList
+                <Text style={{fontSize:24*s}}>我发布过的家教信息:</Text>
+                <FlatList
                     data={this.state.data}
                     renderItem={({ item }) => (
                         <View style={{ alignItems: 'center' }} >
@@ -66,6 +85,16 @@ export default class tjiajiao extends Component {
                                     <View style={{ width: '12%' }}><View style={styles.zh1}></View></View>
                                     <View style={styles.zh2}><Text style={{ fontSize: 25, fontWeight: "bold" }}>{item.kemu}</Text></View>
                                     <View style={styles.zh3}><Text style={{ color: '#00FF00', fontSize: 23 }}>{item.price}/小时</Text></View>
+                                    <TouchableOpacity onPress={()=>this.delete(item.id)}>
+                                        <Text 
+                                        style={{
+                                            fontSize:54*s,
+                                            marginLeft:60*s,
+                                            color:'red'
+                                            }}>
+                                                ×
+                                        </Text>
+                                    </TouchableOpacity>
                                 </View>
                                 <View style={{marginLeft:'12%',marginTop:'3%'}}>
                                     <Text style={styles.zfont}>{item.addrss}</Text>
@@ -74,8 +103,9 @@ export default class tjiajiao extends Component {
                                    <View style={{width:'20%'}}><Text style={styles.zfont}>{item.salary}</Text></View>
                                    <View style={{width:'20%'}}><Text style={styles.zfont}>{item.time}</Text></View>
                                    <View style={{width:'40%'}}><Text style={styles.zfont}>{item.sex}</Text></View>
-                                   <TouchableOpacity style={{width:'10%',marginTop:-10*s}}  onPress={()=>this.lookfor(item.id)}>
-                                       <Image style={styles.zimg} source={require('../../assets/zx/right.png')} ></Image>
+                                   <TouchableOpacity 
+                                    style={{width:'10%',marginTop:-10*s}}  onPress={()=>this.lookfor(item.id)}>
+                                       <Image style={styles.zimg} source={require('../../../assets/zx/right.png')} ></Image>
                                    </TouchableOpacity>
                                 </View>
                             </View>
@@ -83,12 +113,10 @@ export default class tjiajiao extends Component {
                         </View>
                     )}
                 ></FlatList>
-                </ScrollView>
             </View>
         )
     }
 }
-
 const styles = StyleSheet.create({
     box3: {
         height: 190 * s,
@@ -107,7 +135,7 @@ const styles = StyleSheet.create({
 
     },
     zh2: {
-        width: '60%',
+        width: '50%',
         marginTop: 10 * s,
     },
     zh3: {

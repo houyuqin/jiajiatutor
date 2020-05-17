@@ -1,23 +1,57 @@
 import React, { Component } from 'react'
-import { Text, View ,Dimensions,FlatList,StyleSheet,TouchableOpacity,Image, AsyncStorage} from 'react-native'
+import { 
+    Text, 
+    View ,
+    Dimensions,
+    FlatList,
+    StyleSheet,
+    TouchableOpacity,
+    Image, 
+    ScrollView,
+    AsyncStorage
+} from 'react-native'
 import { Actions } from 'react-native-router-flux';
+import { district } from 'antd-mobile-demo-data';
+import { Provider, Picker, List } from '@ant-design/react-native';
+
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
 
+const data = require('@bang88/china-city-data');
 export default class tjiajiao extends Component {
     constructor() {
         super()
         this.state = {
-            data: ''
+            data:'',
+            mine:''
         }
+    this.onPress = () => {
+        setTimeout(() => {
+          this.setState({
+            data: district,
+          });
+        }, 0);
+      };
+      this.onChange = value => {
+        this.setState({ value });
+      };
     }
     componentDidMount(){
         fetch("http://148.70.183.184:8000/search")
         .then(res=>res.json())
         .then(res=>{
-            this.setState({
-                data:res.data
-            })  
+            let arr=[];
+            for(var i=0;i<res.data.length;i++){
+                if(res.data[i].addrss==this.state.mine){
+                    arr.push(res.data[i]);
+                    this.setState({
+                        data:arr
+                    })
+                }
+            }
+        })
+        .then(res=>{
+            console.log(this.state.data)
         });
     }
     lookfor=(num)=>{
@@ -36,7 +70,27 @@ export default class tjiajiao extends Component {
     render() {
         return (
             <View>
-               <FlatList
+                <ScrollView>
+                <Text style={styles.h}>请选择您家的家庭住址：</Text>
+                    {/* <TextInput style={{width:'100%',backgroundColor:'#fff'}}
+                    onChangeText={(Text)=>this.getValue4(Text)}/> */}
+                    <Provider>
+                        <View style={{ marginTop: 30 }}>
+                        <List>
+                            <Picker
+                            data={data}
+                            cols={3}
+                            value={this.state.value}
+                            onChange={this.onChange}
+                            >
+                            <List.Item arrow="horizontal" onPress={this.onPress}>
+                                省市选择
+                            </List.Item>
+                            </Picker>
+                        </List>
+                        </View>
+                    </Provider>
+                    <FlatList
                     data={this.state.data}
                     renderItem={({ item }) => (
                         <View style={{ alignItems: 'center' }} >
@@ -62,13 +116,13 @@ export default class tjiajiao extends Component {
                         </View>
                     )}
                 ></FlatList>
+                </ScrollView>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-
     box3: {
         height: 190 * s,
         width: '95%',
