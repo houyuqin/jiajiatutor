@@ -241,7 +241,12 @@ const App = () => {
 									<Scene key='stufabu'
 										title='发布动态'
 										hideTabBar
-										hideNavBar
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										
+										renderRightButton={
+											<View></View>
+										}
 										component={stuFabu} 
 									></Scene>
 									<Scene key='swweizhi'
@@ -624,7 +629,11 @@ const App = () => {
 									<Scene key='teafabu'
 										title='发布动态'
 										hideTabBar
-										hideNavBar
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}										
+										renderRightButton={
+											<View></View>
+										}
 										component={teaFabu} 
 									></Scene>
 									<Scene key='twweizhi'

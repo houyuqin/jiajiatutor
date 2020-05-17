@@ -203,54 +203,54 @@ export default class Fabu extends Component {
                 
             })
     }
-    componentDidUpdate(){
-        AsyncStorage.getItem('dongtaifabu')
-            .then((value)=>{
-                if (value == '1') {
-                    this.setState({
-                        wquanxian:'公开'
-                    })
-                }else if(value == '2'){
-                    this.setState({
-                        wquanxian:'私密'
-                    })
-                }
-            })
-            AsyncStorage.getItem('xinqingfabu')
-            .then((value)=>{
-                if (value == '1') {
-                    this.setState({
-                        wxinqing:'欢喜'
-                    })
-                }else if(value == '2'){
-                    this.setState({
-                        wxinqing:'伤感'
-                    })
-                }else if(value == '3'){
-                    this.setState({
-                        wxinqing:'激动'
-                    })
-                }else if(value == '4'){
-                    this.setState({
-                        wxinqing:'担忧'
-                    })
-                }
+    // componentDidUpdate(){
+    //     AsyncStorage.getItem('dongtaifabu')
+    //         .then((value)=>{
+    //             if (value == '1') {
+    //                 this.setState({
+    //                     wquanxian:'公开'
+    //                 })
+    //             }else if(value == '2'){
+    //                 this.setState({
+    //                     wquanxian:'私密'
+    //                 })
+    //             }
+    //         })
+    //         AsyncStorage.getItem('xinqingfabu')
+    //         .then((value)=>{
+    //             if (value == '1') {
+    //                 this.setState({
+    //                     wxinqing:'欢喜'
+    //                 })
+    //             }else if(value == '2'){
+    //                 this.setState({
+    //                     wxinqing:'伤感'
+    //                 })
+    //             }else if(value == '3'){
+    //                 this.setState({
+    //                     wxinqing:'激动'
+    //                 })
+    //             }else if(value == '4'){
+    //                 this.setState({
+    //                     wxinqing:'担忧'
+    //                 })
+    //             }
                 
-            })
-        AsyncStorage.getItem('weizhifabu')
-            .then((value)=>{
-                if (value == '1') {
-                    this.setState({
-                        weizhi:''
-                    })
-                }else if(value == '2'){
-                    this.setState({
-                        weizhi:'xianshi'
-                    })
-                }
+    //         })
+    //     AsyncStorage.getItem('weizhifabu')
+    //         .then((value)=>{
+    //             if (value == '1') {
+    //                 this.setState({
+    //                     weizhi:''
+    //                 })
+    //             }else if(value == '2'){
+    //                 this.setState({
+    //                     weizhi:'xianshi'
+    //                 })
+    //             }
                 
-            })
-    }
+    //         })
+    // }
     fabu = ()=>{ 
         if (this.state.content == '') {
             Alert.alert('温馨提示','请完善信息！')
@@ -272,29 +272,35 @@ export default class Fabu extends Component {
                                 this.setState({
                                     wusername:this.state.data[0].wusername
                                 })
+                                var a={};
+                                a.wusername = this.state.wusername;
+                                a.wphonenumber = this.state.loginstd;
+                                a.content=this.state.content;
+                                a.quanxian=this.state.wquanxian;
+                                a.wxinqing=this.state.wxinqing;
+                                a.wshijian=this.state.qiantime;
+                                a.wlocal = '未写'
+                                fetch('http://148.70.183.184:8006/wquanzi',{
+                                    method:'POST',
+                                    body:JSON.stringify(a)
+                                })
+                                    .then(res => res.text())
+                                    .then((res)=>{
+                                        console.log(res+'成功')
+
+                                    }).catch((error)=>{
+                                        console.log(error+'失败')
+                                    })
                             }
                         })
-                    var a={};
-                    a.wphonenumber = this.state.loginstd;
-                    a.content=this.state.content;
-                    a.quanxian=this.state.wquanxian;
-                    a.wxinqing=this.state.wxinqing;
-                    a.wshijian=this.state.qiantime;
-                    a.wlocal = '未写'
-                    fetch('http://148.70.183.184:8006/wquanzi',{
-                        method:'POST',
-                        body:JSON.stringify(a)
-                    })
-                        .then(res => res.text())
-                        .then((res)=>{
-                            console.log(res+'成功')
-
-                        }).catch((error)=>{
-                            console.log(error+'失败')
-                        })
+                    
+                    
 
                 })
             ToastAndroid.show('发布成功',100);
+            AsyncStorage.removeItem('dongtaifabu');
+            AsyncStorage.removeItem('xinqingfabu');
+            
         }
     }
     render() {
