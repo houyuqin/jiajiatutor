@@ -650,7 +650,7 @@ const App = () => {
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={teaQuan} 
 										renderRightButton={
-											<Icon size='lg' name="plus-circle" onPress={()=>Actions.teafabu()}/>
+											<Icon size='lg' name="plus-circle" style={{marginRight:10*s}} onPress={()=>Actions.teafabu()}/>
 										}
 									></Scene>
 									<Scene key='teafabu'

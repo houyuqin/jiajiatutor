@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text,View, ScrollView,Dimensions, StyleSheet, Image,TouchableOpacity, AsyncStorage} from 'react-native';
+import { Text,View, ScrollView,Dimensions, StyleSheet, Image,TouchableOpacity, AsyncStorage, Alert, ToastAndroid} from 'react-native';
 import { TextareaItem, InputItem, Icon } from '@ant-design/react-native';
 import ImagePicker from 'react-native-image-picker';
 import { Actions } from 'react-native-router-flux';
@@ -11,6 +11,7 @@ export default class Fabu extends Component {
     constructor(){
         super(...arguments);
         this.state={
+            data:[],
             loginstd:'',
             content:'',
             avatarSource:[],
@@ -24,7 +25,8 @@ export default class Fabu extends Component {
             wxinqing:'',
             wquanxian:'',
             quanzi:'',
-            weizhi:''
+            weizhi:'',
+            wusername:''
         };
         
     }
@@ -144,24 +146,6 @@ export default class Fabu extends Component {
         // }
     }
     componentDidMount(){       
-        AsyncStorage.getItem('std')
-            .then((res)=>{
-                this.setState({
-                    loginstd:JSON.parse(res)
-                })
-                var b={}
-                b.wphonenumber=this.state.loginstd
-                fetch('http://148.70.183.184:8006/wquanzi',{
-                    method:'POST',
-                    body:JSON.stringify(b)
-                })
-                    .then(res => res.text())
-                    .then((res)=>{
-                        console.log(res+'成功')
-                    }).catch((error)=>{
-                        console.log(error+'失败')
-                    })
-            })
         var date = new Date();
         var year = date.getFullYear().toString();
         var month = (date.getMonth()+1).toString();
@@ -219,92 +203,98 @@ export default class Fabu extends Component {
                 
             })
     }
-    componentDidUpdate(){
-        AsyncStorage.getItem('dongtaifabu')
-            .then((value)=>{
-                if (value == '1') {
-                    this.setState({
-                        wquanxian:'公开'
-                    })
-                }else if(value == '2'){
-                    this.setState({
-                        wquanxian:'私密'
-                    })
-                }
-            })
-            AsyncStorage.getItem('xinqingfabu')
-            .then((value)=>{
-                if (value == '1') {
-                    this.setState({
-                        wxinqing:'欢喜'
-                    })
-                }else if(value == '2'){
-                    this.setState({
-                        wxinqing:'伤感'
-                    })
-                }else if(value == '3'){
-                    this.setState({
-                        wxinqing:'激动'
-                    })
-                }else if(value == '4'){
-                    this.setState({
-                        wxinqing:'担忧'
-                    })
-                }
+    // componentDidUpdate(){
+    //     AsyncStorage.getItem('dongtaifabu')
+    //         .then((value)=>{
+    //             if (value == '1') {
+    //                 this.setState({
+    //                     wquanxian:'公开'
+    //                 })
+    //             }else if(value == '2'){
+    //                 this.setState({
+    //                     wquanxian:'私密'
+    //                 })
+    //             }
+    //         })
+    //         AsyncStorage.getItem('xinqingfabu')
+    //         .then((value)=>{
+    //             if (value == '1') {
+    //                 this.setState({
+    //                     wxinqing:'欢喜'
+    //                 })
+    //             }else if(value == '2'){
+    //                 this.setState({
+    //                     wxinqing:'伤感'
+    //                 })
+    //             }else if(value == '3'){
+    //                 this.setState({
+    //                     wxinqing:'激动'
+    //                 })
+    //             }else if(value == '4'){
+    //                 this.setState({
+    //                     wxinqing:'担忧'
+    //                 })
+    //             }
                 
-            })
-        AsyncStorage.getItem('weizhifabu')
-            .then((value)=>{
-                if (value == '1') {
-                    this.setState({
-                        weizhi:''
-                    })
-                }else if(value == '2'){
-                    this.setState({
-                        weizhi:'xianshi'
-                    })
-                }
+    //         })
+    //     AsyncStorage.getItem('weizhifabu')
+    //         .then((value)=>{
+    //             if (value == '1') {
+    //                 this.setState({
+    //                     weizhi:''
+    //                 })
+    //             }else if(value == '2'){
+    //                 this.setState({
+    //                     weizhi:'xianshi'
+    //                 })
+    //             }
                 
-            })
-    }
+    //         })
+    // }
     fabu = ()=>{ 
-        AsyncStorage.getItem('std')
-            .then((res)=>{
-                this.setState({
-                    loginstd:JSON.parse(res)
-                })
-                var a={};
-                a.wphonenumber = this.state.loginstd;
-                a.content=this.state.content;
-                a.quanxian=this.state.wquanxian;
-                a.wxinqing=this.state.wxinqing;
-                a.wshijian=this.state.qiantime;
-                a.wlocal = '未写'
-                fetch(`http://148.70.183.184:8006/wquanzi/${this.state.loginstd}`,{
-                    method:'POST',
-                    body:JSON.stringify(a)
-                })
-                    .then(res => res.text())
-                    .then((res)=>{
-                        console.log(res+'成功')
-
-                    }).catch((error)=>{
-                        console.log(error+'失败')
+        if (this.state.content == '') {
+            Alert.alert('温馨提示','请完善信息！')
+        }else{
+            AsyncStorage.getItem('std')
+                .then((res)=>{
+                    this.setState({
+                        loginstd:JSON.parse(res)
                     })
+                    fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            var a={};
+                            a.wusername = res.data[0].wusername;
+                            a.wphonenumber = this.state.loginstd;
+                            a.content=this.state.content;
+                            a.quanxian=this.state.wquanxian;
+                            a.wxinqing=this.state.wxinqing;
+                            a.wshijian=this.state.qiantime;
+                            a.wlocal = '未写';
+                            a.wdianzannumber=0;
+                            console.log(a)
+                            fetch('http://148.70.183.184:8006/teaquanzi',{
+                                method:'POST',
+                                body:JSON.stringify(a)
+                            })
+                                .then(res => res.text())
+                                .then((res)=>{
+                                    console.log(res+'成功')
 
-            })
-        // Actions.pop();
+                                }).catch((error)=>{
+                                    console.log(error+'失败')
+                                })
+                        })
+                })
+            ToastAndroid.show('发布成功',100);
+            AsyncStorage.removeItem('dongtaifabu');
+            AsyncStorage.removeItem('xinqingfabu');
+            Actions.pop();
+        }
     }
     render() {
         return (
-            <View>
-                <View style={{flexDirection:'row',justifyContent:'space-between',height:75*s,alignItems:'center',backgroundColor:'#708090'}}>
-                    <View style={{marginLeft:15*s}}><Icon name="left" style={{color:'black',color:'lightgray'}} onPress={Actions.pop}/></View>                    
-                    <Text style={{fontSize:19,color:'white'}}>发布动态</Text>
-                    <TouchableOpacity style={styles.fabutext} onPress={()=>this.fabu()}>
-                        <Text style={{color:'white',fontSize:16}}>发布</Text>
-                    </TouchableOpacity>
-                </View>
+                
                 <ScrollView>
                     <View style={{alignItems:'center'}}>
                         <View style={{width:'95%',backgroundColor:'white',padding:10*s,marginTop:10*s,borderTopLeftRadius:20*s,borderTopRightRadius:20*s}}>
@@ -336,7 +326,7 @@ export default class Fabu extends Component {
                                 
                             </View>
                         </View>
-                        <View style={{width:'95%'}}>
+                        <View style={{width:'95%',backgroundColor:'white',borderBottomLeftRadius:20*s,borderBottomRightRadius:20*s}}>
                             <View style={styles.listontent}>
                                 <View style={{flexDirection:'row'}}>
                                     <Icon style={{color:'#708090',padding:3*s}} name='environment'/> 
@@ -344,7 +334,7 @@ export default class Fabu extends Component {
                                 </View>
                                 <View style={{flexDirection:'row'}}>
                                     <Text style={{fontSize:17,color:'gray'}}>{this.state.weizhi}</Text>
-                                    <Icon name='right' onPress={()=>Actions.twweizhi()}/>
+                                    <Icon name='right' onPress={()=>Actions.swweizhi()}/>
                                 </View>
                             </View>
                             <View style={styles.listontent}>
@@ -354,7 +344,7 @@ export default class Fabu extends Component {
                                 </View>
                                 <View style={{flexDirection:'row'}}>
                                     <Text style={{fontSize:17,color:'gray'}}>{this.state.wquanxian}</Text>
-                                    <Icon name='right' onPress={()=>Actions.tquanxian()}/>
+                                    <Icon name='right' onPress={()=>Actions.squanxian()}/>
                                 </View>
                                 
                             </View>
@@ -365,17 +355,20 @@ export default class Fabu extends Component {
                                 </View>
                                 <View style={{flexDirection:'row'}}>
                                     <Text style={{fontSize:17,color:'gray'}}>{this.state.wxinqing}</Text>
-                                    <Icon name='right' onPress={()=>Actions.twxinqing()}/>
+                                    <Icon name='right' onPress={()=>Actions.swxinqing()}/>
                                 </View>
                             </View>
-                            <View style={styles.listontent1}>
+                            <View style={styles.listontent}>
                                 <Text style={{fontSize:18}}>当前发布时间：</Text>
-                            <Text>{this.state.qiantime}</Text>
+                                <Text>{this.state.qiantime}</Text>
                             </View>
+                            <TouchableOpacity style={styles.fabutext} onPress={()=>this.fabu()}>
+                                <Text style={{color:'white',fontSize:17}}>发布</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </ScrollView>
-            </View>
+
         )
     }
 }
@@ -390,21 +383,15 @@ const styles = StyleSheet.create({
         paddingLeft:15*s,
         paddingRight:15*s
     },
-    listontent1:{
-        flexDirection:'row',
-        width:'100%',
-        height:70*s,
-        backgroundColor:'white',
-        justifyContent:'space-between',
-        alignItems:'center',
-        paddingLeft:15*s,
-        paddingRight:15*s,
-        borderBottomLeftRadius:20*s,
-        borderBottomRightRadius:20*s
-    },
     fabutext:{
-        marginRight:10*s,
-        paddingLeft:8*s,
-        paddingRight:8*s,
+        backgroundColor:'#708090',
+        width:70*s,
+        height:40*s,
+        borderRadius:10*s,
+        marginTop:10*s,
+        marginBottom:10*s,
+        marginLeft:500*s,
+        justifyContent:'center',
+        alignItems:'center',
     }
 });
