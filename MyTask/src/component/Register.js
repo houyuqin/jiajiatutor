@@ -190,6 +190,15 @@ export default class Register extends Component {
         
         var sphone0 = /^1[34578]\d{9}$/;
         var sss = 0;
+        var ttt = 0;
+        for(var i=0;i<this.state.tea.length;i++)
+        {
+            if(this.state.tusername == this.state.tea[i].wphonenumber)
+            {
+                ttt++;
+            }
+            
+        }
         for(var i=0;i<this.state.std.length;i++)
         {
             if(this.state.susername == this.state.std[i].wphonenumber)
@@ -214,6 +223,13 @@ export default class Register extends Component {
                 sredphone:'手机号已经被注册！'
               })
         }
+        else if(ttt!= 0)
+        {
+
+            this.setState({
+                sredphone:'手机号已经被注册！'
+              })
+        }
         else if(this.state.susername == ''){
           this.setState({
             sredphone:'手机号不能为空'
@@ -228,12 +244,21 @@ export default class Register extends Component {
       tphone = () =>{
         
         var tphone0 = /^1[34578]\d{9}$/;
+        var sss = 0;
         var ttt = 0;
         for(var i=0;i<this.state.tea.length;i++)
         {
             if(this.state.tusername == this.state.tea[i].wphonenumber)
             {
                 ttt++;
+            }
+            
+        }
+        for(var i=0;i<this.state.std.length;i++)
+        {
+            if(this.state.susername == this.state.std[i].wphonenumber)
+            {
+                sss++;
             }
             
         }
@@ -247,6 +272,12 @@ export default class Register extends Component {
         //   console.log('lalla')
         }
         else if(ttt!=0)
+        {
+            this.setState({
+                tredphone:'手机号已经被注册！'
+              })
+        }
+        else if(sss!=0)
         {
             this.setState({
                 tredphone:'手机号已经被注册！'

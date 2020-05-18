@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, Dimensions, Image,TouchableOpacity, ToastAndroid, ScrollView, StyleSheet,AsyncStorage } from 'react-native'
+import { Actions } from 'react-native-router-flux';
 const {width} = Dimensions.get('window');
 const s = width/640;
 var num= [];
@@ -11,7 +12,7 @@ export default class Wodelaoshi extends Component {
             data:[],
             data1:[],
             data2:[],
-            loginstd:''
+            loginstd:'',
         }
     }
     componentDidMount(){
@@ -31,7 +32,7 @@ export default class Wodelaoshi extends Component {
                 let filterarr = num.filter((value,index) => {
                     return num.indexOf(value) === index
                 })
-                console.log(filterarr)
+                console.log("我是",filterarr);
                 filterarr.forEach((val,_idx)=>{
                     fetch(`http://148.70.183.184:8006/teamine/${val}`)
                         .then((res) => res.json())
@@ -63,6 +64,11 @@ export default class Wodelaoshi extends Component {
         }) 
         ToastAndroid.show('删除成功！',100);
     } 
+    pingjia = (idx) =>{
+        AsyncStorage.removeItem('ping');
+        AsyncStorage.setItem('ping',JSON.stringify(idx)); 
+        Actions.pingjia();
+    }
     render() {
         return (
             <ScrollView>
@@ -78,9 +84,15 @@ export default class Wodelaoshi extends Component {
                                 <Text style={{fontSize:15,color:'black',marginLeft:20*s}}>手机号：{item.wphonenumber}</Text>
                                 <Text style={{fontSize:15,color:'black',marginLeft:20*s}}>毕业于：{item.biyexuexiao}</Text>
                             </View>
-                            <TouchableOpacity  style={styles.buttoncontent} onPress={()=>this.deleteshipin(item.wphonenumber)}>
-                                <Text style={{fontSize:17,color:'white'}}>移除</Text>
-                            </TouchableOpacity>
+                            <View style={{flexDirection:'column'}}>
+                                <TouchableOpacity  style={styles.buttoncontent} onPress={()=>this.deleteshipin(item.wphonenumber)}>
+                                    <Text style={{fontSize:23*s,color:'white'}}>移除</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity  style={styles.buttoncontent} onPress={()=>this.pingjia(item.wphonenumber)}>
+                                    <Text style={{fontSize:23*s,color:'white'}}>评价</Text>
+                                </TouchableOpacity>
+                            </View>
+                            
                         </View>
                     ))
                 }
@@ -90,19 +102,21 @@ export default class Wodelaoshi extends Component {
 }
 const styles = StyleSheet.create({
     listcontent:{
-        width: 610*s,
+        width: '94%',
         height: 150*s,
-        backgroundColor: 'white', 
+        backgroundColor: 'white',
+        borderWidth:1, 
         borderRadius: 10*s,
-        margin:10*s,
+        marginLeft:20*s,
+        marginTop:20*s,
         padding:10*s,
         flexDirection:'row',
         alignItems:'center'
     },
     buttoncontent:{
-        marginLeft:160*s,
-        marginTop:-100*s,
-        width:80*s,
+        marginLeft:130*s,
+        marginTop:10*s,
+        width:100*s,
         alignItems:'center',
         backgroundColor:'#708090',
         borderRadius:10*s

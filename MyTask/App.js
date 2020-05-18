@@ -41,6 +41,10 @@ import Wyijianfankui from './src/stdMine/container/Yonghufankui'
 import shezhi from './src/stdMine/container/shezhi';
 import Gerenziliao from './src/stdMine/container/Gerenziliao';
 import tongzhi from './src/stdMine/container/tongzhi';
+import Passage from './src/stdMine/container/Passage';
+import tContentt from './src/stdMine/container/tContentt'
+import concatt from './src/stdMine/container/Concatt'
+import pingjia from './src/stdMine/container/pingjia'
 
 import TeaMine from './src/teaMine/TeaMine';
 import WFabuzuoye from './src/teaMine/teacher/Fabuzuoye';
@@ -57,6 +61,8 @@ import SwiperPage0 from './src/common/SwiperPage0';
 import tWquanxian from './src/teaQuan/quanxian'
 import tWxinqing from './src/teaQuan/wxinqing'
 import tWweizhi from './src/teaQuan/wweizhi'
+
+
 import tHome from './src/teaHome/tHome';
 import tContent from './src/teaHome/tContent';
 import Zhoumo from './src/teaHome/Zhoumu'
@@ -72,7 +78,6 @@ import sWweizhi from './src/stuQuan/wweizhi'
 import stuPinglun from './src/stuQuan/Pinglun'
 import teaPinglun from './src/teaQuan/Pinglun'
 import Fabuguo from './src/stdMine/container/Fabuguo';
-
 console.disableYellowBox = true;
 const {width} = Dimensions.get('window');
 const s = width/640;
@@ -145,7 +150,7 @@ const App = () => {
 								{/* 学习 */}
 								<Scene 
 									key='goodsPage'
-									//hideNavBar
+									
 									title='学习'
 									icon={
 										({focused})=><Image 
@@ -279,8 +284,8 @@ const App = () => {
 								{/* 用户中心 */}
 								<Scene 
 									key='userPage'
-									// hideNavBar
-									// hideDrawerButton
+									
+					
 									icon={
 										({focused})=><Image 
 										source ={focused?require('./assets/cq/wo1.png'):require('./assets/cq/wo.png')}
@@ -290,17 +295,59 @@ const App = () => {
 									  } 
 									title="我的"
 								>
+									
 									<Scene 
 										key='stdmine' 
 										title='个人中心' 
 										component={StdMine}
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{backgroundColor:'#5d93c0'}}
 										renderLeftButton={<View></View>}
 										renderRightButton={
 											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.tongzhi()}/>
 										}
 										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+									/>
+									<Scene key='jobxiangg'
+										title='招聘详情'
+										hideTabBar
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}										
+										component={tContentt} 
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+									/>
+									<Scene key='passage'
+										title='详情'
+										hideTabBar
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}										
+										component={Passage} 
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+									/>
+									<Scene key='pingjia'
+										title='我要打分'
+										hideTabBar
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}										
+										component={pingjia} 
+										renderLeftButton={
+											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										}
+									/>
+									<Scene key='concatt'
+										// title='联系我'
+										hideTabBar
+										hideNavBar
+										// titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										// navigationBarStyle={{ backgroundColor: '#708090' }}										
+										component={concatt} 
+										// renderLeftButton={
+										// <View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+									// }
 									/>
 									<Scene 
 										key='wwodeshoucang' 
@@ -330,6 +377,7 @@ const App = () => {
 										}
 										component={WWodedingdan}
 									/>
+									
 									<Scene 
 										key='wwodejiaoshi' 
 										title='我的教师'
@@ -345,7 +393,7 @@ const App = () => {
 										component={WWodejiaoshi}
 									/>
 									<Scene 
-										key='searchtea'  
+										key='searchtea' 
 										title='寻找家教'
 										hideTabBar 
 										navigationBarStyle={{backgroundColor:'#708090'}}
@@ -372,12 +420,12 @@ const App = () => {
 										}
 										component={Fabuguo}
 									/>
-									<Scene key='jobxiang'
+									<Scene key='jobxiangg'
 										title='招聘详情'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={tContent} 
+										component={tContentt} 
 										renderLeftButton={
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
 										}
@@ -503,7 +551,7 @@ const App = () => {
 											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
 										}
 										/>
-									<Scene key='goodtea'
+										<Scene key='goodtea'
 										title='优秀教师'
 										hideTabBar
 										hideNavBar
@@ -538,14 +586,15 @@ const App = () => {
 										}
 									/>
 									<Scene key='concat'
-										title='联系我'
+										// title='联系我'
 										hideTabBar
-										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}										
+										hideNavBar
+										// titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
+										// navigationBarStyle={{ backgroundColor: '#708090' }}										
 										component={Concat} 
-										renderLeftButton={
-										<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-									}
+										// renderLeftButton={
+										// <View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+									// }
 									/>
 								</Scene>
 								{/* 学习 */}
@@ -705,7 +754,7 @@ const App = () => {
 										title='个人中心' 
 										component={TeaMine}
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{backgroundColor:'#5d93c0'}}
 										renderLeftButton={<View></View>}
 										renderRightButton={
 											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.wteatongzhi()}/>

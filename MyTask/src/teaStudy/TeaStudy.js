@@ -22,20 +22,100 @@ export default class TeaStudy extends Component {
         this.state={
             data:'',
             name:'',
-            me:''
+            me:'',
+            yes:0,
+            xing1:0,
+            xing2:0,
+            xing3:0,
+            xing4:0,
+            xing5:0
         }
     }
     componentDidMount(){
         AsyncStorage.getItem('tea', (err, result) => {
             this.setState({ me: JSON.parse(result) })
        
-        fetch(`http://148.70.183.184:8006/teamine/${this.state.me}`)
-        .then(res=>res.json())
-        .then(res=>{
-            this.setState({
-                name:res.data[0].wusername
-            })
+        // fetch(`http://148.70.183.184:8006/teamine/${this.state.me}`)
+        // .then(res=>res.json())
+        // .then(res=>{
+        //     this.setState({
+        //         name:res.data[0].wusername
+        //     })
+        // })
+        fetch('http://148.70.183.184:8003/ping')
+            .then((res)=>res.json())
+            .then((res)=>{    
+                for(var i=0;i<res.length;i++)
+                {
+                    if(res[i].teacher == '18231868912')
+                    {
+                        this.setState({
+                            yes:res[i].num
+                        })
+                        if(res[i].num == 0)
+                        {
+                            this.setState({
+                                xing1:0,
+                                xing2:0,
+                                xing3:0,
+                                xing4:0,
+                                xing5:0
+                            });
+                        }
+                        else if(res[i].num == 1)
+                        {
+                            this.setState({
+                                xing1:1,
+                                xing2:0,
+                                xing3:0,
+                                xing4:0,
+                                xing5:0
+                            });
+                        }
+                        else if(res[i].num == 2)
+                        {
+                            this.setState({
+                                xing1:1,
+                                xing2:1,
+                                xing3:0,
+                                xing4:0,
+                                xing5:0
+                            });
+                        }
+                        else if(res[i].num == 3)
+                        {
+                            this.setState({
+                                xing1:1,
+                                xing2:1,
+                                xing3:1,
+                                xing4:0,
+                                xing5:0
+                            });
+                        }
+                        else if(res[i].num == 4)
+                        {
+                            this.setState({
+                                xing1:1,
+                                xing2:1,
+                                xing3:1,
+                                xing4:1,
+                                xing5:0
+                            });
+                        }
+                        else if(res[i].num == 5)
+                        {
+                            this.setState({
+                                xing1:1,
+                                xing2:1,
+                                xing3:1,
+                                xing4:1,
+                                xing5:1
+                            });
+                        }
+                    }
+                }                  
         })
+ 
     })
         
     }
@@ -55,7 +135,16 @@ export default class TeaStudy extends Component {
                         <Image style={{width:150*s,height:150*s,marginTop:70*s,marginLeft:40*s,borderRadius:75*s}} source={require('../../assets/cq/touxiang.png')}/>
                         <View style={{flexDirection:'column',marginLeft:40*s,marginTop:95*s}}>
         <Text style={{color:'white',fontSize:27*s}}>教师姓名：{this.state.name}</Text>
-                            <Text style={{color:'white',marginTop:20*s,fontSize:27*s}}>星级等级：★★★★★</Text>
+                            <View style={{color:'white',marginTop:20*s,fontSize:27*s,flexDirection:'row'}}>
+                                <Text style={{marginTop:10*s,fontSize:27*s,color:'white'}}>星级等级：</Text>
+                                <View style={{marginLeft:8*s,marginTop:11*s,flexDirection:'row'}}>
+                                    <Image style={{width:40*s,height:40*s}} source={this.state.xing1==0?require('../../assets/cq/xingxing1.png'):require('../../assets/cq/txing.png')}/> 
+                                    <Image style={{width:40*s,height:40*s}} source={this.state.xing2==0?require('../../assets/cq/xingxing1.png'):require('../../assets/cq/txing.png')}/> 
+                                    <Image style={{width:40*s,height:40*s}} source={this.state.xing3==0?require('../../assets/cq/xingxing1.png'):require('../../assets/cq/txing.png')}/> 
+                                    <Image style={{width:40*s,height:40*s}} source={this.state.xing4==0?require('../../assets/cq/xingxing1.png'):require('../../assets/cq/txing.png')}/> 
+                                    <Image style={{width:40*s,height:40*s}} source={this.state.xing5==0?require('../../assets/cq/xingxing1.png'):require('../../assets/cq/txing.png')}/> 
+                                </View>
+                            </View>
                         </View>
                         
                     </View>

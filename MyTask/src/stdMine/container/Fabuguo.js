@@ -51,7 +51,7 @@ export default class Fabuguo extends Component {
             AsyncStorage.setItem('hdetail',JSON.stringify(body))
             .then(res=>{
                 console.log(JSON.stringify(body));
-                Actions.jobxiang();
+                Actions.jobxiangg();
             });
         })
     }

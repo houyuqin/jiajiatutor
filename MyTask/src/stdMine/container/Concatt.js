@@ -39,32 +39,33 @@ export default class Concat extends Component {
         })    
     }
     componentDidMount(){     
-        AsyncStorage.getItem('hdetail')
-        .then(res=>{
-            this.setState({
-                data:JSON.parse(res)[0].name,
-                snum:JSON.parse(res)[0].std
-            })
-            // console.log("你好吗");
-            // console.log(this.state.snum);
-        });
-        AsyncStorage.getItem('tea')
+        AsyncStorage.getItem('std')
         .then(res=>{
             this.setState({
                 tnum:JSON.parse(res)
             })
             // console.log(this.state.tnum);
         });
-        
+        AsyncStorage.getItem('teaa')
+        .then(res=>{
+            this.setState({
+                data:JSON.parse(res),
+                snum:JSON.parse(res)
+            })
+            
+            console.log('我是无敌的小可爱',res)
+            // console.log(this.state.tnum);
+        });
         
         fetch('http://148.70.183.184:8003/chat')
             .then((res)=>res.json())
             .then((res)=>{    
+                // console.log()
                 for(var i=0;i<res.length;i++)
                 {
                     // console.log("asdf",res[2].teacher==this.state.tnum);
                     // console.log("asdf",this.state.tnum);
-                    if(res[i].parents == this.state.snum && res[i].teacher == this.state.tnum)
+                    if(res[i].parents == this.state.tnum && res[i].teacher == this.state.snum)
                     {
                         var mm =  res[i].content;
                         var nn = mm.split(/@@/);
@@ -72,28 +73,14 @@ export default class Concat extends Component {
                             content:nn, 
                             hh:1 
                         })
-                        // console.log("我是content",this.state.content);  
+                        
+                        console.log("我是content",this.state.content);  
                     }
                 }
-           this.fa();     
-            // this.fa();                 
-        })
-        if(this.state.hh == 0)
-        {
-            var a={}; 
-            a.parents=this.state.tnum;
-            a.teacher=this.state.snum;
-            a.content='你好';
-            fetch(`http://148.70.183.184:8003/chat${this.state.tnum}${this.state.snum}`, {
-                method: "POST",
-                headers: {
-                'Content-Type': 'text/plain; charset=UTF-8'
-                },
-                body: JSON.stringify(a)
-            }).then(function(response) { 
-                
-            });      
-        }
+              
+            this.fa();                 
+        }) 
+        
 
     }
     fa = () =>{ 
@@ -108,15 +95,15 @@ export default class Concat extends Component {
         // console.log("我是num",num);
         // console.log("我是content",this.state.content)
         //插入
-        for(var i=0;i<this.state.content.length;i++)
-        {
-            if(this.state.content[i] == '' && i%2!=0)
-            {
-                this.state.content[i] = ee;
-                uu = 1;
-            }
-        }
-        if(this.state.content.length%2==0 && uu==0)
+        // for(var i=0;i<this.state.content.length;i++)
+        // {
+        //     if(this.state.content[i] == '' && i%2!=0 && uu==0)
+        //     {
+        //         this.state.content[i] = ee;
+        //         uu = 1;
+        //     }
+        // }
+        if(this.state.content.length%2!=0)
         {
              num = num+'@@'+''+'@@'+ee;
         }
@@ -151,13 +138,15 @@ export default class Concat extends Component {
                 content : nn,   
             })
         }
-        else{
-            console.log('jijijiji');
+       
             this.setState({
                 content : nnn, 
                 kkkk:1  
             }) 
-        }
+            this.setState({
+                content : nnn, 
+                kkkk:1  
+            })
         console.log("nn",nn);
 
         
@@ -173,10 +162,10 @@ export default class Concat extends Component {
         console.log("我是oo",oo);
         var m = '13345678900'; 
         var a={}; 
-        a.parents=this.state.snum;
-        a.teacher=this.state.tnum;
+        a.parents=this.state.tnum;
+        a.teacher=this.state.snum;
         a.content=oo;
-        fetch(`http://148.70.183.184:8003/chat/${this.state.snum}/${this.state.tnum}`, {
+        fetch(`http://148.70.183.184:8003/chat/${this.state.tnum}/${this.state.snum}`, {
             method: "POST",
             headers: {
             'Content-Type': 'text/plain; charset=UTF-8'
@@ -185,14 +174,18 @@ export default class Concat extends Component {
         }).then(function(response) { 
             
         }); 
-        // console.log('这是我',this.state.content);
+        // this.fa();
+    }
+    it = () =>{
+        this.fa();
+        Actions.pop();
     }
     render() {
         return (
             <View>
                 <View style={{width:'100%',height:73*s,backgroundColor: '#708090',flexDirection:'row'}}>
-                    <TouchableOpacity onPress={Actions.pop}>
-                        <Image style={{width:35*s,height:35*s,marginTop:20*s,marginLeft:20*s}} source={require('../../assets/cq/zuo.png')}/>
+                    <TouchableOpacity onPress={()=>this.it()}>
+                        <Image style={{width:35*s,height:35*s,marginTop:20*s,marginLeft:20*s}} source={require('../../../assets/cq/zuo.png')}/>
                     </TouchableOpacity>
                     <Text style={{fontSize:26*s,marginLeft:'30%',marginTop:20*s,color:'white'}}>与{this.state.data}的对话</Text>
                 </View>
@@ -216,7 +209,7 @@ export default class Concat extends Component {
                                             {
                                                 item !=''?
 
-                                                (i%2==0?
+                                                (i%2!=0?
                                                 (widd>0? 
                                                     <Text
                                                     style={[styles.shu1,{
@@ -272,8 +265,8 @@ export default class Concat extends Component {
                         placeholder="请输入内容"
                         onChangeText={this.content}
                     />
-                    <Image style={{width:40*s,height:40*s,marginLeft:5*s,marginTop:11*s}} source={require('../../assets/cq/jia.png')}/>
-                    <Image style={{width:40*s,height:40*s,marginLeft:5*s,marginTop:11*s}} source={require('../../assets/cq/yuyin.png')}/>
+                    <Image style={{width:40*s,height:40*s,marginLeft:5*s,marginTop:11*s}} source={require('../../../assets/cq/jia.png')}/>
+                    <Image style={{width:40*s,height:40*s,marginLeft:5*s,marginTop:11*s}} source={require('../../../assets/cq/yuyin.png')}/>
                     <TouchableOpacity onPress={this.fa}>
                         <Text style={{ width: 80 * s, height: 50 * s,marginLeft:5*s, marginTop:5*s, borderRadius: 8, paddingLeft: 12 * s, fontSize: 25*s, color: 'white', paddingTop: 7 * s, backgroundColor: '#2f618b' }}>发送</Text>
                     </TouchableOpacity>
@@ -290,7 +283,7 @@ const styles = StyleSheet.create({
         paddingBottom:4*s,
         paddingLeft:10*s,
         borderRadius:10*s,
-        marginTop:20*s,
+        marginTop:10*s,
         position:'absolute',
         backgroundColor:'#2f618b',
     },
