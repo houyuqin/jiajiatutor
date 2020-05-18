@@ -15,7 +15,7 @@ export default class quanxian extends Component {
         };
     }
     baocun = ()=>{
-        AsyncStorage.setItem('dongtaifabu',JSON.stringify(this.state.part2Value),()=>{console.log('store success')});
+        AsyncStorage.setItem('dongtaifabutea',JSON.stringify(this.state.part2Value),()=>{console.log('store success')});
         Actions.pop();
     }
     render() {

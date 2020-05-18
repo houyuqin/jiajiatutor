@@ -203,54 +203,54 @@ export default class Fabu extends Component {
                 
             })
     }
-    // componentDidUpdate(){
-    //     AsyncStorage.getItem('dongtaifabu')
-    //         .then((value)=>{
-    //             if (value == '1') {
-    //                 this.setState({
-    //                     wquanxian:'公开'
-    //                 })
-    //             }else if(value == '2'){
-    //                 this.setState({
-    //                     wquanxian:'私密'
-    //                 })
-    //             }
-    //         })
-    //         AsyncStorage.getItem('xinqingfabu')
-    //         .then((value)=>{
-    //             if (value == '1') {
-    //                 this.setState({
-    //                     wxinqing:'欢喜'
-    //                 })
-    //             }else if(value == '2'){
-    //                 this.setState({
-    //                     wxinqing:'伤感'
-    //                 })
-    //             }else if(value == '3'){
-    //                 this.setState({
-    //                     wxinqing:'激动'
-    //                 })
-    //             }else if(value == '4'){
-    //                 this.setState({
-    //                     wxinqing:'担忧'
-    //                 })
-    //             }
+    componentDidUpdate(){
+        AsyncStorage.getItem('dongtaifabu')
+            .then((value)=>{
+                if (value == '1') {
+                    this.setState({
+                        wquanxian:'公开'
+                    })
+                }else if(value == '2'){
+                    this.setState({
+                        wquanxian:'私密'
+                    })
+                }
+            })
+            AsyncStorage.getItem('xinqingfabu')
+            .then((value)=>{
+                if (value == '1') {
+                    this.setState({
+                        wxinqing:'欢喜'
+                    })
+                }else if(value == '2'){
+                    this.setState({
+                        wxinqing:'伤感'
+                    })
+                }else if(value == '3'){
+                    this.setState({
+                        wxinqing:'激动'
+                    })
+                }else if(value == '4'){
+                    this.setState({
+                        wxinqing:'担忧'
+                    })
+                }
                 
-    //         })
-    //     AsyncStorage.getItem('weizhifabu')
-    //         .then((value)=>{
-    //             if (value == '1') {
-    //                 this.setState({
-    //                     weizhi:''
-    //                 })
-    //             }else if(value == '2'){
-    //                 this.setState({
-    //                     weizhi:'xianshi'
-    //                 })
-    //             }
+            })
+        AsyncStorage.getItem('weizhifabu')
+            .then((value)=>{
+                if (value == '1') {
+                    this.setState({
+                        weizhi:''
+                    })
+                }else if(value == '2'){
+                    this.setState({
+                        weizhi:'xianshi'
+                    })
+                }
                 
-    //         })
-    // }
+            })
+    }
     fabu = ()=>{ 
         if (this.state.content == '') {
             Alert.alert('温馨提示','请完善信息！')

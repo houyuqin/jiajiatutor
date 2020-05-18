@@ -155,7 +155,7 @@ export default class Fabu extends Component {
         this.setState({
             qiantime:year+'年'+month+'月'+day+'日'+' '+hour+':'+minute
         })
-        AsyncStorage.getItem('dongtaifabu')
+        AsyncStorage.getItem('dongtaifabutea')
             .then((value)=>{
                 if (value == '1') {
                     this.setState({
@@ -168,7 +168,7 @@ export default class Fabu extends Component {
                 }
                 
             })
-        AsyncStorage.getItem('xinqingfabu')
+        AsyncStorage.getItem('xinqingfabutea')
             .then((value)=>{
                 if (value == '1') {
                     this.setState({
@@ -189,7 +189,7 @@ export default class Fabu extends Component {
                 }
                 
             })
-        AsyncStorage.getItem('weizhifabu')
+        AsyncStorage.getItem('weizhifabutea')
             .then((value)=>{
                 if (value == '1') {
                     this.setState({
@@ -203,54 +203,54 @@ export default class Fabu extends Component {
                 
             })
     }
-    // componentDidUpdate(){
-    //     AsyncStorage.getItem('dongtaifabu')
-    //         .then((value)=>{
-    //             if (value == '1') {
-    //                 this.setState({
-    //                     wquanxian:'公开'
-    //                 })
-    //             }else if(value == '2'){
-    //                 this.setState({
-    //                     wquanxian:'私密'
-    //                 })
-    //             }
-    //         })
-    //         AsyncStorage.getItem('xinqingfabu')
-    //         .then((value)=>{
-    //             if (value == '1') {
-    //                 this.setState({
-    //                     wxinqing:'欢喜'
-    //                 })
-    //             }else if(value == '2'){
-    //                 this.setState({
-    //                     wxinqing:'伤感'
-    //                 })
-    //             }else if(value == '3'){
-    //                 this.setState({
-    //                     wxinqing:'激动'
-    //                 })
-    //             }else if(value == '4'){
-    //                 this.setState({
-    //                     wxinqing:'担忧'
-    //                 })
-    //             }
+    componentDidUpdate(){
+        AsyncStorage.getItem('dongtaifabutea')
+            .then((value)=>{
+                if (value == '1') {
+                    this.setState({
+                        wquanxian:'公开'
+                    })
+                }else if(value == '2'){
+                    this.setState({
+                        wquanxian:'私密'
+                    })
+                }
+            })
+            AsyncStorage.getItem('xinqingfabutea')
+            .then((value)=>{
+                if (value == '1') {
+                    this.setState({
+                        wxinqing:'欢喜'
+                    })
+                }else if(value == '2'){
+                    this.setState({
+                        wxinqing:'伤感'
+                    })
+                }else if(value == '3'){
+                    this.setState({
+                        wxinqing:'激动'
+                    })
+                }else if(value == '4'){
+                    this.setState({
+                        wxinqing:'担忧'
+                    })
+                }
                 
-    //         })
-    //     AsyncStorage.getItem('weizhifabu')
-    //         .then((value)=>{
-    //             if (value == '1') {
-    //                 this.setState({
-    //                     weizhi:''
-    //                 })
-    //             }else if(value == '2'){
-    //                 this.setState({
-    //                     weizhi:'xianshi'
-    //                 })
-    //             }
+            })
+        AsyncStorage.getItem('weizhifabutea')
+            .then((value)=>{
+                if (value == '1') {
+                    this.setState({
+                        weizhi:''
+                    })
+                }else if(value == '2'){
+                    this.setState({
+                        weizhi:'xianshi'
+                    })
+                }
                 
-    //         })
-    // }
+            })
+    }
     fabu = ()=>{ 
         if (this.state.content == '') {
             Alert.alert('温馨提示','请完善信息！')
@@ -260,7 +260,7 @@ export default class Fabu extends Component {
                     this.setState({
                         loginstd:JSON.parse(res)
                     })
-                    fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`)
+                    fetch(`http://148.70.183.184:8006/teamine/${this.state.loginstd}`)
                         .then((res) => res.json())
                         .then((res) => {
                             var a={};
@@ -287,14 +287,14 @@ export default class Fabu extends Component {
                         })
                 })
             ToastAndroid.show('发布成功',100);
-            AsyncStorage.removeItem('dongtaifabu');
-            AsyncStorage.removeItem('xinqingfabu');
+            AsyncStorage.removeItem('dongtaifabutea');
+            AsyncStorage.removeItem('xinqingfabutea');
             Actions.pop();
         }
     }
     render() {
         return (
-                
+           
                 <ScrollView>
                     <View style={{alignItems:'center'}}>
                         <View style={{width:'95%',backgroundColor:'white',padding:10*s,marginTop:10*s,borderTopLeftRadius:20*s,borderTopRightRadius:20*s}}>
@@ -334,7 +334,7 @@ export default class Fabu extends Component {
                                 </View>
                                 <View style={{flexDirection:'row'}}>
                                     <Text style={{fontSize:17,color:'gray'}}>{this.state.weizhi}</Text>
-                                    <Icon name='right' onPress={()=>Actions.swweizhi()}/>
+                                    <Icon name='right' onPress={()=>Actions.twweizhi()}/>
                                 </View>
                             </View>
                             <View style={styles.listontent}>
@@ -344,7 +344,7 @@ export default class Fabu extends Component {
                                 </View>
                                 <View style={{flexDirection:'row'}}>
                                     <Text style={{fontSize:17,color:'gray'}}>{this.state.wquanxian}</Text>
-                                    <Icon name='right' onPress={()=>Actions.squanxian()}/>
+                                    <Icon name='right' onPress={()=>Actions.tquanxian()}/>
                                 </View>
                                 
                             </View>
@@ -355,7 +355,7 @@ export default class Fabu extends Component {
                                 </View>
                                 <View style={{flexDirection:'row'}}>
                                     <Text style={{fontSize:17,color:'gray'}}>{this.state.wxinqing}</Text>
-                                    <Icon name='right' onPress={()=>Actions.swxinqing()}/>
+                                    <Icon name='right' onPress={()=>Actions.twxinqing()}/>
                                 </View>
                             </View>
                             <View style={styles.listontent}>
@@ -368,7 +368,6 @@ export default class Fabu extends Component {
                         </View>
                     </View>
                 </ScrollView>
-
         )
     }
 }

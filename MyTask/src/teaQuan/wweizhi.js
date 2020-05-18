@@ -16,7 +16,7 @@ export default class wweizhi extends Component {
         };
     }
     baocun = ()=>{
-        AsyncStorage.setItem('weizhifabu',JSON.stringify(this.state.part2Value),()=>{console.log('store success')});
+        AsyncStorage.setItem('weizhifabutea',JSON.stringify(this.state.part2Value),()=>{console.log('store success')});
         Actions.pop();
     }
     render() {

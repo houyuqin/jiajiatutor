@@ -16,7 +16,7 @@ export default class wxinqing extends Component {
         };
     }
     baocun = ()=>{
-        AsyncStorage.setItem('xinqingfabu',JSON.stringify(this.state.part2Value),()=>{console.log('store success')});
+        AsyncStorage.setItem('xinqingfabutea',JSON.stringify(this.state.part2Value),()=>{console.log('store success')});
         Actions.pop();
     }
     render() {
