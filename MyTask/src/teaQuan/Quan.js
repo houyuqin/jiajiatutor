@@ -65,7 +65,7 @@ export default class Quan extends Component {
             a.usernum = this.state.loginstd
             //console.log(JSON.stringify(a))
             //fetch请求 给响应的id去添加提交内容
-            fetch(`http://148.70.183.184:8005/stuPing`, {
+            fetch(`http://148.70.183.184:8005/teaPing`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'text/plain; charset=UTF-8'
@@ -115,14 +115,14 @@ export default class Quan extends Component {
             num = num + 1
         }
 
-        fetch(`http://148.70.183.184:8006/wquanzi/${id}`, {
+        fetch(`http://148.70.183.184:8006/teaquanzi/${id}`, {
             method: "POST",
             headers: {
                 'Content-Type': 'text/plain; charset=UTF-8'
             },
             body: JSON.stringify(num)
         }).then((res) => {
-            fetch('http://148.70.183.184:8006/wquanzi', {
+            fetch('http://148.70.183.184:8006/teaquanzi', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'text/plain; charset=UTF-8'
@@ -146,7 +146,7 @@ export default class Quan extends Component {
 
         //AsyncStorage.clear()
         //页面一加载获取数据进行渲染
-        AsyncStorage.getItem("UID123", (err, result) => {
+        AsyncStorage.getItem("UID12", (err, result) => {
             const source = { uri: '' }
             source.uri = JSON.parse(result)
             // console.log(source.uri)
@@ -161,7 +161,7 @@ export default class Quan extends Component {
 
 
         //获取评论
-        fetch('http://148.70.183.184:8006/wquanzi', {
+        fetch('http://148.70.183.184:8006/teaquanzi', {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain; charset=UTF-8'
@@ -172,12 +172,12 @@ export default class Quan extends Component {
 
 
         //获取谁登录以及这个人登录的名称和手机号
-        AsyncStorage.getItem('std')
+        AsyncStorage.getItem('tea')
             .then((res) => {
                 this.setState({
                     loginstd: JSON.parse(res)
                 })
-                fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`)
+                fetch(`http://148.70.183.184:8006/teamine/${this.state.loginstd}`)
                     .then((res) => res.json())
                     .then((res) => {
                         this.setState({ data1: res.data })
@@ -196,7 +196,7 @@ export default class Quan extends Component {
     componentDidUpdate() {
         //AsyncStorage.clear()
         //页面一加载获取数据进行渲染
-        AsyncStorage.getItem("UID123", (err, result) => {
+        AsyncStorage.getItem("UID12", (err, result) => {
             const source = { uri: '' }
             source.uri = JSON.parse(result)
             //console.log(source.uri)
@@ -226,8 +226,8 @@ export default class Quan extends Component {
                 this.setState({
                     imageUrl: source,
                 }, async () => {
-                    AsyncStorage.setItem("UID123", JSON.stringify(this.state.imageUrl.uri), () => {
-                        AsyncStorage.mergeItem("UID123", JSON.stringify(this.state.imageUrl.uri), () => {
+                    AsyncStorage.setItem("UID12", JSON.stringify(this.state.imageUrl.uri), () => {
+                        AsyncStorage.mergeItem("UID12", JSON.stringify(this.state.imageUrl.uri), () => {
                         });
                     })
                 })
