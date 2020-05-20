@@ -12,7 +12,7 @@ export default class Fabu extends Component {
         super(...arguments);
         this.state={
             data:[],
-            loginstd:'',
+            logintea:'',
             content:'',
             avatarSource:[],
             videoSource:'',
@@ -255,17 +255,17 @@ export default class Fabu extends Component {
         if (this.state.content == '') {
             Alert.alert('温馨提示','请完善信息！')
         }else{
-            AsyncStorage.getItem('std')
+            AsyncStorage.getItem('tea')
                 .then((res)=>{
                     this.setState({
-                        loginstd:JSON.parse(res)
+                        logintea:JSON.parse(res)
                     })
-                    fetch(`http://148.70.183.184:8006/teamine/${this.state.loginstd}`)
+                    fetch(`http://148.70.183.184:8006/teamine/${this.state.logintea}`)
                         .then((res) => res.json())
                         .then((res) => {
                             var a={};
                             a.wusername = res.data[0].wusername;
-                            a.wphonenumber = this.state.loginstd;
+                            a.wphonenumber = this.state.logintea;
                             a.content=this.state.content;
                             a.quanxian=this.state.wquanxian;
                             a.wxinqing=this.state.wxinqing;
