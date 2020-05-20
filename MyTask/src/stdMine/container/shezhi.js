@@ -134,11 +134,11 @@ export default class shezhi extends Component {
     }
     render() {
         return (
-            <View style={{backgroundColor:'#a3c6d9',flex:1}}>  
-                <View style={{flexDirection:'row',justifyContent:'space-between',height:75*s,alignItems:'center',backgroundColor:'white'}}>
-                    <View style={{marginLeft:15*s}}><Icon name="left" style={{color:'black'}} onPress={Actions.pop}/></View>                    
-                    <Text style={{fontSize:19}}>设置</Text>
-                    <Text style={{marginRight:15*s}} onPress={()=>this.baocun()}>保存</Text>
+            <View style={{flex:1}}>  
+                <View style={{flexDirection:'row',justifyContent:'space-between',height:75*s,alignItems:'center',backgroundColor:'#708090'}}>
+                    <View style={{marginLeft:15*s}}><Icon name="left" style={{color:'white'}} onPress={Actions.pop}/></View>                    
+                    <Text style={{fontSize:19,color:'white'}}>设置</Text>
+                    <Text style={{marginRight:15*s,color:'white'}} onPress={()=>this.baocun()}>保存</Text>
                 </View>
                 <NoticeBar marqueeProps={{ loop: true, style: { fontSize: 14, color: 'red' } }}>                    
                     Notice: students, in order to have a better experience, each of the following information is required
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
         paddingLeft:70*s,
         paddingRight:10*s,
         alignItems:'center',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
     },
     inputconent:{
         width:200*s,
