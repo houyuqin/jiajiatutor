@@ -14,7 +14,7 @@ export default class Pinglun extends Component {
 
 
     componentDidMount() {
-        fetch(`http://148.70.183.184:8005/stuPing/${this.props.id}`, {
+        fetch(`http://148.70.183.184:8005/teaPing/${this.props.id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain; charset=UTF-8'
@@ -30,7 +30,7 @@ export default class Pinglun extends Component {
         })
     }
     componentDidUpdate() {
-        fetch(`http://148.70.183.184:8005/stuPing/${this.props.id}`, {
+        fetch(`http://148.70.183.184:8005/teaPing/${this.props.id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain; charset=UTF-8'
@@ -63,7 +63,7 @@ export default class Pinglun extends Component {
         console.log(id)
         //fetch接口进行删除
        // console.log(this.state.id)
-       fetch(`http://148.70.183.184:8005/delstuPing/${id}`, {
+       fetch(`http://148.70.183.184:8005/delteaPing/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'text/plain; charset=UTF-8'
