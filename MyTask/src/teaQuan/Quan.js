@@ -251,7 +251,7 @@ export default class Quan extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-
+                <View style={{marginLeft:'84%',marginTop:'3%'}}><TouchableOpacity onPress={()=>Actions.teacom()} style={{width:80*s,borderRadius:5*s,height:30*s,backgroundColor:'#1296db'}}><Text>已发布>></Text></TouchableOpacity></View>
                 <FlatList
                     data={this.state.data}
                     renderItem={({ item, index }) => (

@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from 'react';
-import {StyleSheet,View,Text, Image, BackHandler,ToastAndroid, AsyncStorage , Dimensions} from 'react-native';
-import {Router, Overlay, Scene, Tabs, Drawer, Lightbox, Modal, Actions} from 'react-native-router-flux';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, Image, BackHandler, ToastAndroid, AsyncStorage, Dimensions } from 'react-native';
+import { Router, Overlay, Scene, Tabs, Drawer, Lightbox, Modal, Actions } from 'react-native-router-flux';
 import { Icon } from '@ant-design/react-native';
 import SplashScreen from 'react-native-splash-screen';
 import Home from './src/home/Home';
@@ -78,36 +78,38 @@ import sWweizhi from './src/stuQuan/wweizhi'
 import stuPinglun from './src/stuQuan/Pinglun'
 import teaPinglun from './src/teaQuan/Pinglun'
 import Fabuguo from './src/stdMine/container/Fabuguo';
+import stuCom from './src/stuQuan/stuCom'
+import teaCom from './src/teaQuan/teaCom'
 console.disableYellowBox = true;
-const {width} = Dimensions.get('window');
-const s = width/640;
+const { width } = Dimensions.get('window');
+const s = width / 640;
 
 const App = () => {
-	let [isLogin,setLogin] = useState(false);
+	let [isLogin, setLogin] = useState(false);
 	return (
 		<Router
-			backAndroidHandler={()=>{
-				if(Actions.currentScene == 'login'){
+			backAndroidHandler={() => {
+				if (Actions.currentScene == 'login') {
 					// console.log('11');
 					Actions.reset('login');
-					if(new Date().getTime()-now<2000){
+					if (new Date().getTime() - now < 2000) {
 						BackHandler.exitApp();
-					}else{
-						ToastAndroid.show('确定要退出吗',100);
+					} else {
+						ToastAndroid.show('确定要退出吗', 100);
 						now = new Date().getTime();
 						return true;
 					}
-				}else {
-					if(Actions.currentScene == 'home'){
+				} else {
+					if (Actions.currentScene == 'home') {
 						// console.log('22');
-						if(new Date().getTime()-now<2000){
+						if (new Date().getTime() - now < 2000) {
 							BackHandler.exitApp();
-						}else{
-							ToastAndroid.show('确定要退出吗',100);
+						} else {
+							ToastAndroid.show('确定要退出吗', 100);
 							now = new Date().getTime();
 							return true;
 						}
-					}else{
+					} else {
 						Actions.pop();
 						return true;
 					}
@@ -119,50 +121,50 @@ const App = () => {
 					{/* 学生端 */}
 					<Lightbox key="lightbox">
 						<Scene key="root">
-							<Tabs 
+							<Tabs
 								key='tabbar'
 								hideNavBar
 								activeTintColor="#2f618b"
 								inactiveTintColor="#707070"
-								tabBarStyle={{backgroundColor:'#e0e0e0'}}
+								tabBarStyle={{ backgroundColor: '#e0e0e0' }}
 							>
 								{/* Home栏 */}
 								<Scene key='homePage'
 									title='首页'
 									hideNavBar
 									icon={
-										({focused})=><Image 
-										source={focused?require('./assets/cq/cshou1.png'):require('./assets/cq/cshou.png')}
-										style={{width:25,height:25}}
-										
-										  />
-									  }  
+										({ focused }) => <Image
+											source={focused ? require('./assets/cq/cshou1.png') : require('./assets/cq/cshou.png')}
+											style={{ width: 25, height: 25 }}
+
+										/>
+									}
 								>
-									<Scene key='home'  component={Home}/>
+									<Scene key='home' component={Home} />
 									<Scene key='ad' hideTabBar component={Ad} />
-									<Scene key='course' hideTabBar component={Course}/>
-									<Scene key='question' hideTabBar component={Question}/>
-									<Scene key='goodtea' hideTabBar component={GoodTea}/>
-									<Scene key='buy' hideTabBar component={Buy}/>
-									<Scene key='player' hideTabBar component={Player0}/>
-									<Scene key='vedio' hideTabBar component={Vedio}/>
+									<Scene key='course' hideTabBar component={Course} />
+									<Scene key='question' hideTabBar component={Question} />
+									<Scene key='goodtea' hideTabBar component={GoodTea} />
+									<Scene key='buy' hideTabBar component={Buy} />
+									<Scene key='player' hideTabBar component={Player0} />
+									<Scene key='vedio' hideTabBar component={Vedio} />
 								</Scene>
 								{/* 学习 */}
-								<Scene 
+								<Scene
 									key='goodsPage'
-									
+
 									title='学习'
 									icon={
-										({focused})=><Image 
-										source={focused?require('./assets/cq/shu1.png'):require('./assets/cq/shu.png')}
-										style={{width:23,height:23}}
-										
-										  />
-									  }
-									renderLeftButton={
-										<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										({ focused }) => <Image
+											source={focused ? require('./assets/cq/shu1.png') : require('./assets/cq/shu.png')}
+											style={{ width: 23, height: 23 }}
+
+										/>
 									}
-									
+									renderLeftButton={
+										<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
+									}
+
 								>
 									<Scene key='Stustudy' hideNavBar component={Study}></Scene>
 									<Scene key='jihua'
@@ -219,27 +221,27 @@ const App = () => {
 									key='quanzi'
 									// initial
 									icon={
-										({focused})=><Image 
-										source={focused?require('./assets/cq/quan1.png'):require('./assets/cq/quan.png')}
-										style={{width:35,height:35}}
-										
-										  />
-									  } 
+										({ focused }) => <Image
+											source={focused ? require('./assets/cq/quan1.png') : require('./assets/cq/quan.png')}
+											style={{ width: 35, height: 35 }}
+
+										/>
+									}
 									title="圈子"
 									renderLeftButton={
-										<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 									}
 								>
-										<Scene key='stuquan'
+									<Scene key='stuquan'
 										title='社交圈'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
-										component={stuQuan} 
+										component={stuQuan}
 										renderLeftButton={
 											<View></View>
 										}
 										renderRightButton={
-											<Icon size='lg' name="plus-circle" style={{marginRight:10*s}} onPress={()=>Actions.stufabu()}/>
+											<Icon size='lg' name="plus-circle" style={{ marginRight: 10 * s }} onPress={() => Actions.stufabu()} />
 										}
 									></Scene>
 									<Scene key='stufabu'
@@ -247,11 +249,11 @@ const App = () => {
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
-										
+
 										renderRightButton={
 											<View></View>
 										}
-										component={stuFabu} 
+										component={stuFabu}
 									></Scene>
 									<Scene key='swweizhi'
 										title='位置'
@@ -272,70 +274,77 @@ const App = () => {
 										component={sWquanxian}
 									></Scene>
 									<Scene key='spinglun'
-									title='全部评论'
-									titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
-									navigationBarStyle={{ backgroundColor: '#708090' }}
-									component={stuPinglun} 
-									
-								>
-                                        
-									</Scene>
+										title='全部评论'
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={stuPinglun}
+
+									></Scene>
+									<Scene key='stucom'
+										title='我的发布'
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={stuCom}
+
+									></Scene>
+
+
 								</Scene>
 								{/* 用户中心 */}
-								<Scene 
+								<Scene
 									key='userPage'
-									
-					
+
+
 									icon={
-										({focused})=><Image 
-										source ={focused?require('./assets/cq/wo1.png'):require('./assets/cq/wo.png')}
-										style={{width:25,height:25}}
-										
-										  />
-									  } 
+										({ focused }) => <Image
+											source={focused ? require('./assets/cq/wo1.png') : require('./assets/cq/wo.png')}
+											style={{ width: 25, height: 25 }}
+
+										/>
+									}
 									title="我的"
 								>
-									
-									<Scene 
-										key='stdmine' 
-										title='个人中心' 
+
+									<Scene
+										key='stdmine'
+										title='个人中心'
 										component={StdMine}
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={<View></View>}
 										renderRightButton={
-											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.tongzhi()}/>
+											<Icon style={{ color: 'white', marginRight: 10 * s, marginLeft: 10 * s }} name="bell" onPress={() => Actions.tongzhi()} />
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 									/>
 									<Scene key='jobxiangg'
 										title='招聘详情'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={tContentt} 
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={tContentt}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
 									/>
 									<Scene key='passage'
 										title='详情'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={Passage} 
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={Passage}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
 									/>
 									<Scene key='pingjia'
 										title='我要打分'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={pingjia} 
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={pingjia}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
 									/>
 									<Scene key='concatt'
@@ -344,77 +353,77 @@ const App = () => {
 										hideNavBar
 										// titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										// navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={concatt} 
-										// renderLeftButton={
-										// <View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										component={concatt}
+									// renderLeftButton={
+									// <View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
 									// }
 									/>
-									<Scene 
-										key='wwodeshoucang' 
+									<Scene
+										key='wwodeshoucang'
 										hideTabBar
-										title='我的收藏' 
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										title='我的收藏'
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={WWodeshoucang}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 									/>
-									<Scene 
-										key='wwodedingdan' 
+									<Scene
+										key='wwodedingdan'
 										hideTabBar
-										title='我的订单' 
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										title='我的订单'
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 										component={WWodedingdan}
 									/>
-									
-									<Scene 
-										key='wwodejiaoshi' 
+
+									<Scene
+										key='wwodejiaoshi'
 										title='我的教师'
-										hideTabBar 
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										hideTabBar
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 										component={WWodejiaoshi}
 									/>
-									<Scene 
-										key='searchtea' 
+									<Scene
+										key='searchtea'
 										title='寻找家教'
-										hideTabBar 
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										hideTabBar
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 										component={Searchtea}
 									/>
-									<Scene 
-										key='fabuguo'  
+									<Scene
+										key='fabuguo'
 										title='已经发布'
-										hideTabBar 
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										hideTabBar
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
@@ -424,35 +433,35 @@ const App = () => {
 										title='招聘详情'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={tContentt} 
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={tContentt}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
 									/>
-									<Scene 
-										key='wzuoyepingjiaqingkuang' 
-										title='作业评价情况' 
+									<Scene
+										key='wzuoyepingjiaqingkuang'
+										title='作业评价情况'
 										hideTabBar
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 										component={Wjiaoshipingjia}
 									/>
-									<Scene 
-										key='wyijianfankui' 
-										title='意见反馈' 
+									<Scene
+										key='wyijianfankui'
+										title='意见反馈'
 										hideTabBar
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
@@ -460,7 +469,7 @@ const App = () => {
 									/>
 									<Scene
 										key="wshezhi"
-										title='设置' 
+										title='设置'
 										hideTabBar
 										hideNavBar
 										component={shezhi}
@@ -468,7 +477,7 @@ const App = () => {
 									<Scene
 										key="wgerenziliao"
 										hideTabBar
-										title='个人资料' 
+										title='个人资料'
 										hideNavBar
 										component={Gerenziliao}
 									/>
@@ -477,29 +486,29 @@ const App = () => {
 										title='通知'
 										component={tongzhi}
 										hideTabBar
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 									/>
 								</Scene>
-								
+
 							</Tabs>
 						</Scene>
 					</Lightbox>
 					{/* 教师端 */}
 					<Lightbox key="lightbox1">
 						<Scene key="root">
-							<Tabs 
+							<Tabs
 								key='tabbar'
 								hideNavBar
 								activeTintColor="#2f618b"
 								inactiveTintColor="#707070"
-								tabBarStyle={{backgroundColor:'#e0e0e0'}}
+								tabBarStyle={{ backgroundColor: '#e0e0e0' }}
 							>
 								{/* Home栏 */}
 								<Scene key='homePage'
@@ -512,13 +521,13 @@ const App = () => {
 									// 	/>
 									// }
 									icon={
-										({focused})=><Image 
-										source={focused?require('./assets/cq/cshou1.png'):require('./assets/cq/cshou.png')}
-										style={{width:25,height:25}}
-										
-										  />
-									  }      
-									
+										({ focused }) => <Image
+											source={focused ? require('./assets/cq/cshou1.png') : require('./assets/cq/cshou.png')}
+											style={{ width: 25, height: 25 }}
+
+										/>
+									}
+
 								>
 									<Scene key='thome'
 										title='首页'
@@ -532,46 +541,46 @@ const App = () => {
 										title='附近家教'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}	
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
-										}									
-										component={Fujin} 
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
+										}
+										component={Fujin}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
 									/>
 									<Scene key='tzhoumo'
 										title='周末家教'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={Zhoumo} 
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={Zhoumo}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										/>
-										<Scene key='goodtea'
+									/>
+									<Scene key='goodtea'
 										title='优秀教师'
 										hideTabBar
 										hideNavBar
 										// titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										// navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={GoodTea} 
+										component={GoodTea}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
 									/>
-									<Scene key='buy' hideTabBar component={Buy}/>
-									<Scene key='player' hideTabBar component={Player0}/>
+									<Scene key='buy' hideTabBar component={Buy} />
+									<Scene key='player' hideTabBar component={Player0} />
 									<Scene key='jobxiang'
 										title='招聘详情'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={tContent} 
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={tContent}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
 									/>
 									<Scene key='vedio'
@@ -579,10 +588,10 @@ const App = () => {
 										hideTabBar
 										hideNavBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={Vedio} 
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={Vedio}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
 									/>
 									<Scene key='concat'
@@ -591,126 +600,126 @@ const App = () => {
 										hideNavBar
 										// titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -20 }}
 										// navigationBarStyle={{ backgroundColor: '#708090' }}										
-										component={Concat} 
-										// renderLeftButton={
-										// <View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										component={Concat}
+									// renderLeftButton={
+									// <View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
 									// }
 									/>
 								</Scene>
 								{/* 学习 */}
-								<Scene 
+								<Scene
 									key='goodsPage'
 									// hideNavBar
 									title='教学'
 									icon={
-										({focused})=><Image 
-										source={focused?require('./assets/cq/shu1.png'):require('./assets/cq/shu.png')}
-										style={{width:23,height:23}}
-										
-										  />
-									  } 
-									
+										({ focused }) => <Image
+											source={focused ? require('./assets/cq/shu1.png') : require('./assets/cq/shu.png')}
+											style={{ width: 23, height: 23 }}
+
+										/>
+									}
+
 								>
-									<Scene key="teastudy" component={TeaStudy} hideNavBar/>
-									<Scene 
-										key='give' 
+									<Scene key="teastudy" component={TeaStudy} hideNavBar />
+									<Scene
+										key='give'
 										title='布置作业'
-										hideTabBar 
-										hideDrawerButton 
+										hideTabBar
+										hideDrawerButton
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 										component={Give}
 									/>
-									<Scene 
-										
+									<Scene
+
 										key='video'
-										hideTabBar 
+										hideTabBar
 										title='上传视频'
-										hideDrawerButton 
+										hideDrawerButton
 										component={Videotea}
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 									/>
-									<Scene 
-										key="teatask"  
-										hideTabBar 
+									<Scene
+										key="teatask"
+										hideTabBar
 										title="批改作业"
-										hideDrawerButton 
+										hideDrawerButton
 										component={TeaTask}
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 									/>
-									<Scene 
+									<Scene
 										key="teacontent"
-										title="批改作业"  
-										hideTabBar 
-										hideDrawerButton 
+										title="批改作业"
+										hideTabBar
+										hideDrawerButton
 										component={Content}
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
-									/>		
+									/>
 								</Scene>
 								{/* 圈子 */}
 								<Scene
 									key='quanzi'
 									icon={
-										({focused})=><Image 
-										source={focused?require('./assets/cq/quan1.png'):require('./assets/cq/quan.png')}
-										style={{width:35,height:35}}
-										
-										  />
-									  } 
-									  renderLeftButton={
-										<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+										({ focused }) => <Image
+											source={focused ? require('./assets/cq/quan1.png') : require('./assets/cq/quan.png')}
+											style={{ width: 35, height: 35 }}
+
+										/>
+									}
+									renderLeftButton={
+										<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 									}
 									title="圈子"
 								>
-										<Scene key='teaquan'
+									<Scene key='teaquan'
 										title='社交圈'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
-										component={teaQuan} 
+										component={teaQuan}
 										renderRightButton={
-											<Icon size='lg' name="plus-circle" style={{marginRight:10*s}} onPress={()=>Actions.teafabu()}/>
+											<Icon size='lg' name="plus-circle" style={{ marginRight: 10 * s }} onPress={() => Actions.teafabu()} />
 										}
 									></Scene>
 									<Scene key='teafabu'
 										title='发布动态'
 										hideTabBar
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
-										navigationBarStyle={{ backgroundColor: '#708090' }}										
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderRightButton={
 											<View></View>
 										}
-										component={teaFabu} 
+										component={teaFabu}
 									></Scene>
 									<Scene key='twweizhi'
 										title='位置'
@@ -730,90 +739,97 @@ const App = () => {
 										hideNavBar
 										component={tWquanxian}
 									></Scene>
-										<Scene key='tpinglun'
-									title='全部评论'
-									titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
-									navigationBarStyle={{ backgroundColor: '#708090' }}
-									component={teaPinglun} ></Scene>
-						
+									<Scene key='tpinglun'
+										title='全部评论'
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={teaPinglun} ></Scene>
+									<Scene key='teacom'
+										title='我的发布'
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={teaCom}
+
+									></Scene>
+
 								</Scene>
 								{/* 用户中心 */}
-								<Scene 
+								<Scene
 									key='userPage'
 									icon={
-										({focused})=><Image 
-										source={focused?require('./assets/cq/wo1.png'):require('./assets/cq/wo.png')}
-										style={{width:25,height:25}}
-										
-										  />
-									  } 
+										({ focused }) => <Image
+											source={focused ? require('./assets/cq/wo1.png') : require('./assets/cq/wo.png')}
+											style={{ width: 25, height: 25 }}
+
+										/>
+									}
 									title="我的"
 								>
-									<Scene 
-										key='teamine' 
-										title='个人中心' 
+									<Scene
+										key='teamine'
+										title='个人中心'
 										component={TeaMine}
 										titleTextColor='white'
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={<View></View>}
 										renderRightButton={
-											<Icon style={{color:'white',marginRight:10*s,marginLeft:10*s}} name="bell" onPress={()=>Actions.wteatongzhi()}/>
+											<Icon style={{ color: 'white', marginRight: 10 * s, marginLeft: 10 * s }} name="bell" onPress={() => Actions.wteatongzhi()} />
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 									/>
 									<Scene
 										key="wgerenziliao"
-										title='个人资料' 
+										title='个人资料'
 										hideNavBar
 										component={WteaGerenziliao}
 									/>
-									<Scene 
-										key='wteawodeshouyi' 
-										title='我的收益' 
-										navigationBarStyle={{backgroundColor:'#708090'}}
+									<Scene
+										key='wteawodeshouyi'
+										title='我的收益'
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={Wwodeshouyi}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 									/>
-									<Scene 
-										key='wteawodexuesheng' 
-										title='我的学生' 
-										navigationBarStyle={{backgroundColor:'#708090'}}
+									<Scene
+										key='wteawodexuesheng'
+										title='我的学生'
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 										component={WWodexuesheng}
 									/>
-									<Scene 
-										key='wteafabuzuoye' 
-										title='发布作业' 
-										navigationBarStyle={{backgroundColor:'#708090'}}
+									<Scene
+										key='wteafabuzuoye'
+										title='发布作业'
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={WFabuzuoye}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 									/>
-									<Scene 
-										key='wteayijianfankui' 
-										title='意见反馈' 
-										navigationBarStyle={{backgroundColor:'#708090'}}
+									<Scene
+										key='wteayijianfankui'
+										title='意见反馈'
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
@@ -821,7 +837,7 @@ const App = () => {
 									/>
 									<Scene
 										key="wteashezhi"
-										title='设置' 
+										title='设置'
 										hideNavBar
 										component={Teashezhi}
 									/>
@@ -829,32 +845,32 @@ const App = () => {
 										key="wteatongzhi"
 										title='通知'
 										component={Wteatongzhi}
-										navigationBarStyle={{backgroundColor:'#708090'}}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
 										renderLeftButton={
-											<View style={{marginLeft:15*s}}><Icon name="left" onPress={Actions.pop}/></View>
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										titleStyle={{flex:1,textAlign:'center',color:'white'}}
+										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
 										renderRightButton={
 											<View></View>
 										}
 									/>
 								</Scene>
-								
+
 							</Tabs>
 						</Scene>
 					</Lightbox>
-					<Scene key="swiperPage0" initial={!isLogin} component={SwiperPage0}/>
-					<Scene key="swiperPage"  component={SwiperPage}/>
-					<Scene key="login" component={Login}/>
-					<Scene key="register" component={Register}/>
-					<Scene key="spassword" component={Spassword}/>
-					<Scene key="tpassword" component={Tpassword}/>
+					<Scene key="swiperPage0" initial={!isLogin} component={SwiperPage0} />
+					<Scene key="swiperPage" component={SwiperPage} />
+					<Scene key="login" component={Login} />
+					<Scene key="register" component={Register} />
+					<Scene key="spassword" component={Spassword} />
+					<Scene key="tpassword" component={Tpassword} />
 				</Modal>
 			</Overlay>
 		</Router>
 	);
 };
 
-	
+
 
 export default App;
