@@ -14,7 +14,7 @@ import {
     Image,
     ToastAndroid
 } from 'react-native'
-import { List, Radio, Picker, Provider } from '@ant-design/react-native';
+import { List, Radio, Picker, DatePicker, Provider } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
 import ModalDropdown from 'react-native-modal-dropdown';
 
@@ -22,8 +22,8 @@ const {width} = Dimensions.get('window');
 const s = width/640;
 const RadioItem = Radio.RadioItem;
 
-
 const data = require('@bang88/china-city-data');
+
 export default class Searchtea extends Component {
     constructor(props) {
         super(props);
@@ -46,7 +46,7 @@ export default class Searchtea extends Component {
             this.setState({
               data: district,
             });
-          }, 0);
+          }, 500);
         //   let a = this.state.value;
         //     a.splice(',');
         //     console.log(String(a));
@@ -143,19 +143,49 @@ export default class Searchtea extends Component {
     }
     render() {
         return (
-            <View>
-                <ScrollView>
+            <View style={{flex:1}}>
+                <TouchableOpacity 
+                    onPress={Actions.fabuguo}
+                    style={styles.cengjing}
+                >
+                    <Text>我发布过的寻找家教信息</Text>
+                </TouchableOpacity>
+                {/* <View style={{height:180*s}}> */}
+                <Text style={styles.h}>请选择您家的家庭住址：</Text>
+                    <Provider style={{height:30*s}}>
+                        <View style={{
+                            width: '100%',
+                            height: 40 * s,
+                            marginTop: 20 * s,
+                            marginBottom:69*s,
+                            borderWidth: 2,
+                            borderColor: '#3fcccb'
+                        }}>
+                            <List>
+                                <Picker
+                                    data={data}
+                                    cols={3}
+                                    value={this.state.value}
+                                    onChange={this.onChange}
+                                >
+                                <List.Item 
+                                    arrow="horizontal" 
+                                    onPress={this.onPress}
+                                >
+                                    省市选择
+                                </List.Item>
+                                </Picker>
+                            </List>
+                        </View>
+                    </Provider>
+                {/* </View> */}
+                {/* <ScrollView>
                     <Text style={styles.tit}>
                         请输入您想寻找家教的要求，
                         在对应的问题中回答并提交可视为你想要发布寻找上门家教的信息。
                         不必填写精准明确，拥有大概方位帮助教师辨别远近即可，以防被骗。
                     </Text>
-                    <TouchableOpacity 
-                        onPress={Actions.fabuguo}
-                        style={styles.cengjing}
-                    >
-                        <Text>我发布过的寻找家教信息</Text>
-                    </TouchableOpacity>
+                    
                     <Text style={styles.h}>1.请输入您孩子的姓名（此项可不真实，方便教师联系时称呼）：</Text>
                     <TextInput style={{width:'100%',backgroundColor:'#fff'}}
                     onChangeText={(Text)=>this.getValue2(Text)}/>
@@ -221,6 +251,7 @@ export default class Searchtea extends Component {
                         男女不限
                     </RadioItem>
                 </List>
+                
                 <List>
                     <Text style={styles.h}>6.您要找的家教的时间：</Text>
                     <RadioItem
@@ -283,36 +314,42 @@ export default class Searchtea extends Component {
                     <Text style={styles.h}>9.其他要求：</Text>
                     <TextInput style={{width:'100%',backgroundColor:'#fff'}}
                     onChangeText={(Text)=>this.getValue5(Text)}/>
-
                     <Text style={styles.h}>请选择您家的家庭住址：</Text>
-                    {/* <TextInput style={{width:'100%',backgroundColor:'#fff'}}
-                    onChangeText={(Text)=>this.getValue4(Text)}/> */}
-                    <Provider>
-                        <View style={{ marginTop: 30 }}>
-                        <List>
-                            <Picker
-                            data={data}
-                            cols={3}
-                            value={this.state.value}
-                            onChange={this.onChange}
-                            >
-                            <List.Item arrow="horizontal" onPress={this.onPress}>
-                                省市选择
-                            </List.Item>
-                            </Picker>
-                        </List>
+                    <Provider style={{height:30*s}}>
+                        <View style={{
+                            width: '100%',
+                            height: 69 * s,
+                            marginTop: 20 * s,
+                            marginBottom:60*s,
+                            borderWidth: 2,
+                            borderColor: '#3fcccb'
+                        }}>
+                            <List>
+                                <Picker
+                                    data={data}
+                                    // cols={3}
+                                    value={this.state.value}
+                                    onChange={this.onChange}
+                                    mode={'dropdown'}
+                                >
+                                <List.Item 
+                                    arrow="horizontal" 
+                                    // onPress={this.onPress}
+                                    // onChange={this.onChange}
+                                >
+                                    省市选择
+                                </List.Item>
+                                </Picker>
+                            </List>
                         </View>
                     </Provider>
-                    {/* <ModalDropdown 
-                        options={['北京', '河北石家庄','河北衡水']} 
-                        style={{height:40*s,width:'40%'}}
-                    /> */}
                 <Button 
                     onPress={()=>this.submit()}
                     title="提交"
                 />
                 <View style={{height:60*s}}></View>
-                </ScrollView>
+                
+                </ScrollView> */}
             </View>
         )
     }
@@ -345,3 +382,25 @@ const styles = StyleSheet.create({
         alignItems:'center',
     }
 })
+                    {/* <ModalDropdown 
+                        options={['北京', '河北石家庄','河北衡水']} 
+                        style={{height:40*s,width:'40%'}}
+                    /> */}
+                    {/* <Provider style={{height:30*s}}>
+                    <View style={{
+                            width: '100%',
+                            height: 69 * s,
+                            marginTop: 20 * s,
+                            borderBottomWidth: 3,
+                            borderBottomColor: '#3fcccb'
+                        }}>
+                        <List>
+                            <DatePicker
+                                value={this.state.value}
+                                onChange={this.onChange}
+                            >
+                                <List.Item arrow="horizontal"  >发布时间:</List.Item>
+                            </DatePicker>
+                        </List>
+                    </View>
+                </Provider> */}
