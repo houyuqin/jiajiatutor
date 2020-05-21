@@ -8,7 +8,8 @@ import {
     TouchableOpacity,
     Image, 
     ScrollView,
-    AsyncStorage
+    AsyncStorage,
+    Button
 } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 import { district } from 'antd-mobile-demo-data';
@@ -23,29 +24,32 @@ export default class tjiajiao extends Component {
         super()
         this.state = {
             data:'',
-            mine:''
+            mine:'',
+            value:[]
         }
-    this.onPress = () => {
-        setTimeout(() => {
-          this.setState({
-            data: district,
-          });
-        }, 0);
-      };
       this.onChange = value => {
         this.setState({ value });
       };
     }
-    componentDidMount(){
+    select = ()=>{
+        let a = this.state.value;
+        a.join(",");
+        let b = '{"'+a[0]+'","'+a[1]+'","'+a[2]+'"}';
+        console.log(b);
         fetch("http://148.70.183.184:8000/search")
         .then(res=>res.json())
         .then(res=>{
             let arr=[];
             for(var i=0;i<res.data.length;i++){
-                if(res.data[i].addrss==this.state.mine){
+                if(res.data[i].address==b){
                     arr.push(res.data[i]);
                     this.setState({
                         data:arr
+                    })
+                }
+                else{
+                    this.setState({
+                        data:''
                     })
                 }
             }
@@ -69,27 +73,40 @@ export default class tjiajiao extends Component {
     }
     render() {
         return (
-            <View>
-                <ScrollView>
+            <View style={{flex:1}}>
                 <Text style={styles.h}>请选择您家的家庭住址：</Text>
-                    {/* <TextInput style={{width:'100%',backgroundColor:'#fff'}}
-                    onChangeText={(Text)=>this.getValue4(Text)}/> */}
-                    <Provider>
-                        <View style={{ marginTop: 30 }}>
-                        <List>
-                            <Picker
-                            data={data}
-                            cols={3}
-                            value={this.state.value}
-                            onChange={this.onChange}
-                            >
-                            <List.Item arrow="horizontal" onPress={this.onPress}>
-                                省市选择
-                            </List.Item>
-                            </Picker>
-                        </List>
+                    <Provider style={{height:30*s}}>
+                        <View style={{
+                            width: '100%',
+                            height: 40 * s,
+                            marginTop: 20 * s,
+                            marginBottom:69*s,
+                            borderWidth: 2,
+                            borderColor: '#3fcccb'
+                        }}>
+                            <List>
+                                <Picker
+                                    data={data}
+                                    cols={3}
+                                    value={this.state.value}
+                                    onChange={this.onChange}
+                                >
+                                <List.Item 
+                                    arrow="horizontal" 
+                                >
+                                    省市选择
+                                </List.Item>
+                                </Picker>
+                            </List>
                         </View>
                     </Provider>
+                    <Button 
+                        onPress={()=>this.select()}
+                        title="筛选"
+                    />
+                {/* </View> */}
+                <View style={styles.bott}>
+                <ScrollView>
                     <FlatList
                     data={this.state.data}
                     renderItem={({ item }) => (
@@ -117,6 +134,7 @@ export default class tjiajiao extends Component {
                     )}
                 ></FlatList>
                 </ScrollView>
+                </View>
             </View>
         )
     }
@@ -154,5 +172,14 @@ const styles = StyleSheet.create({
         width:50*s,
         height:50*s,
         resizeMode:'stretch'
+    },
+    h:{
+        fontSize: 24*s,
+        backgroundColor:'#eee',
+        paddingTop:10*s,
+    },
+    bott:{
+        width:'100%',
+        height:860*s
     }
 })

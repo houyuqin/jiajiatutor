@@ -39,7 +39,7 @@ export default class Searchtea extends Component {
             price:'',
             request:"",
             leixing:"",
-            value: [],
+            value: []
           };
         this.onPress = () => {
           setTimeout(() => {
@@ -47,15 +47,9 @@ export default class Searchtea extends Component {
               data: district,
             });
           }, 500);
-        //   let a = this.state.value;
-        //     a.splice(',');
-        //     console.log(String(a));
-        //     this.setState({
-        //         address:a
-        //     })
         };
         this.onChange = value => {
-          this.setState({ value });
+          this.setState({ value })
         };
     }
     getValue2 = (e)=>{
@@ -103,17 +97,13 @@ export default class Searchtea extends Component {
     }
     submit = ()=>{
         let a = this.state.value;
-            a.splice(',');
-            console.log(String(a));
-            this.setState({
-                address:a
-            })
+            a.join(',');
         console.log(this.state);
         let body = {
-            std:this.state.std ,// 定义选中的值，如果为空字符串，则默认不选中
+            std:this.state.std,
             name:this.state.name,
             class:this.state.class,
-            address:this.state.address,
+            address:a,
             kemu:this.state.kemu,
             sex:this.state.sex,
             time:this.state.time,
@@ -150,7 +140,6 @@ export default class Searchtea extends Component {
                 >
                     <Text>我发布过的寻找家教信息</Text>
                 </TouchableOpacity>
-                {/* <View style={{height:180*s}}> */}
                 <Text style={styles.h}>请选择您家的家庭住址：</Text>
                     <Provider style={{height:30*s}}>
                         <View style={{
@@ -170,7 +159,7 @@ export default class Searchtea extends Component {
                                 >
                                 <List.Item 
                                     arrow="horizontal" 
-                                    onPress={this.onPress}
+                                    // onPress={this.onPress}
                                 >
                                     省市选择
                                 </List.Item>
@@ -178,8 +167,8 @@ export default class Searchtea extends Component {
                             </List>
                         </View>
                     </Provider>
-                {/* </View> */}
-                {/* <ScrollView>
+                <View style={styles.bott}>
+                <ScrollView>
                     <Text style={styles.tit}>
                         请输入您想寻找家教的要求，
                         在对应的问题中回答并提交可视为你想要发布寻找上门家教的信息。
@@ -314,47 +303,23 @@ export default class Searchtea extends Component {
                     <Text style={styles.h}>9.其他要求：</Text>
                     <TextInput style={{width:'100%',backgroundColor:'#fff'}}
                     onChangeText={(Text)=>this.getValue5(Text)}/>
-                    <Text style={styles.h}>请选择您家的家庭住址：</Text>
-                    <Provider style={{height:30*s}}>
-                        <View style={{
-                            width: '100%',
-                            height: 69 * s,
-                            marginTop: 20 * s,
-                            marginBottom:60*s,
-                            borderWidth: 2,
-                            borderColor: '#3fcccb'
-                        }}>
-                            <List>
-                                <Picker
-                                    data={data}
-                                    // cols={3}
-                                    value={this.state.value}
-                                    onChange={this.onChange}
-                                    mode={'dropdown'}
-                                >
-                                <List.Item 
-                                    arrow="horizontal" 
-                                    // onPress={this.onPress}
-                                    // onChange={this.onChange}
-                                >
-                                    省市选择
-                                </List.Item>
-                                </Picker>
-                            </List>
-                        </View>
-                    </Provider>
                 <Button 
                     onPress={()=>this.submit()}
                     title="提交"
                 />
                 <View style={{height:60*s}}></View>
                 
-                </ScrollView> */}
+                </ScrollView>
+                </View>
             </View>
         )
     }
 }
 const styles = StyleSheet.create({
+    bott:{
+        width:'100%',
+        height:850*s
+    },
     tit:{
         fontSize:26*s,
         marginTop:10*s,
