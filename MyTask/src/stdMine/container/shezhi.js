@@ -87,8 +87,10 @@ export default class shezhi extends Component {
             } else if (response.customButton) {
               console.log('custom:', response.customButton);
             } else { 
+                console.log(response)
                 const source={uri:response.uri};
-                const file={uri: response.uri, type: 'multipart/form-data', name: 'image.png'};
+                const file={uri: response.uri, type: response.type, name: response.fileName};
+                console.log(file);
                 formData.append('image', file);
                 console.log(JSON.stringify(formData))
                 this.setState({
@@ -108,7 +110,7 @@ export default class shezhi extends Component {
         a.weixinnumber=this.state.txtValue3 || this.state.weixinnumber;
         a.wclass=this.state.txtValue4 || this.state.wclass;
         a.wschool=this.state.txtValue5 || this.state.wschool;
-        // a.stdtouxiang = this.state.wimage;
+        a.stdtouxiang = this.state.wimage;
         AsyncStorage.getItem('std')
         .then((res)=>{
             this.setState({
@@ -117,7 +119,9 @@ export default class shezhi extends Component {
             fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`,{
                 method: "POST",
                 headers: {
-                'Content-Type': 'text/plain; charset=UTF-8;multipart/form-data'
+                    'Accept': 'application/json', 
+                    'x-access-token': '',
+                    'Content-Type': 'text/plain; charset=UTF-8;multipart/form-data'
                 },
                 body: JSON.stringify(a)
             })
@@ -232,7 +236,8 @@ const styles = StyleSheet.create({
         opacity:0.8,
         marginTop:-33*s,
         color:'gray',
-        backgroundColor:'white'
+        backgroundColor:'white',
+        paddingLeft:12*s
     },
     buttontouxiang:{
         width:100*s,

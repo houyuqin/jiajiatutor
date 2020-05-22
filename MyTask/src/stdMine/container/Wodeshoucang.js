@@ -40,7 +40,7 @@ export default class Wodeshoucang extends Component {
             <ScrollView>
                 {
                     this.state.data.map((item)=>(
-                        <View style={{marginTop:20*s,width:600*s,marginLeft:20*s,backgroundColor:'white',padding:10*s,borderRadius:10*s}}>
+                        <View style={{marginTop:20*s,width:600*s,marginLeft:20*s,backgroundColor:'white',padding:10*s,borderRadius:10*s,borderColor:'#708090',borderWidth:2*s}}>
                             <View style={{flexDirection:'row',marginBottom:10*s}}>
                                 <Text style={{fontSize:17,width:200*s}}>{item.class} vedio</Text>
                                 <TouchableOpacity onPress={()=>this.deleteshipin(item.id)} style={{marginLeft:300*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}>

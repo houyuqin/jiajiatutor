@@ -96,6 +96,8 @@ const styles = StyleSheet.create({
         borderRadius:10*s,
         opacity:0.8,
         margin:10*s,
-        padding:10*s
+        padding:10*s,
+        borderColor:'#708090',
+        borderWidth:2*s
     }
 })
