@@ -96,7 +96,9 @@ const styles = StyleSheet.create({
         margin:10*s,
         padding:10*s,
         flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
+        borderColor:'#708090',
+        borderWidth:2*s
     },
     buttoncontent:{
         marginLeft:160*s,

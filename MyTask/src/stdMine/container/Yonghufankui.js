@@ -56,7 +56,7 @@ export default class Yonghufankui extends Component {
                         });
                     }}
                     placeholderTextColor='#C0C0C0' 
-                    style={{width:620*s,marginLeft:10*s,marginTop:10*s,borderWidth:2*s,borderColor:'rgb(250,198,101)'}} 
+                    style={{width:620*s,marginLeft:10*s,marginTop:10*s,borderWidth:2*s,borderColor:'#708090'}} 
                     rows={8} 
                     count={300} 
                 />
@@ -72,11 +72,11 @@ export default class Yonghufankui extends Component {
                     }}
                     placeholder="请输入邮箱"
                     placeholderTextColor='#C0C0C0'
-                    style={{borderWidth:2*s,borderColor:'rgb(250,198,101)',backgroundColor:'white',marginRight:10*s}}
+                    style={{borderWidth:2*s,borderColor:'#708090',backgroundColor:'white',marginRight:10*s}}
                 >
                     联系方式
                 </InputItem>
-                <TouchableOpacity onPress={()=>this.showModal()} style={{width:400*s,height:70*s,borderRadius:20*s,alignItems:'center',justifyContent:'center',marginTop:30*s,marginLeft:100*s,backgroundColor:'rgb(250,198,101)',borderWidth:2*s,borderColor:'rgb(250,198,101)'}}>
+                <TouchableOpacity onPress={()=>this.showModal()} style={{width:400*s,height:70*s,borderRadius:20*s,alignItems:'center',justifyContent:'center',marginTop:30*s,marginLeft:100*s,backgroundColor:'#708090',borderWidth:2*s,borderColor:'#708090'}}>
                     <Text>发送</Text>
                 </TouchableOpacity>
             </View>
