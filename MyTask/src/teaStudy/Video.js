@@ -192,21 +192,22 @@ export default class TeaStudy extends Component {
     //上传视频
     add = () => {
           //console.log(this.state.path)
-          let formData=new FormData()
-          formData.append('mp4',{uri:this.state.videoSource,path:this.state.path,type:'multipart/form-data'})
-          console.log('a')
-          console.log(JSON.stringify(formData))
-          fetch('http://148.70.183.184:8005/upload', {
-            method: 'post',
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            },
-            body: formData
-          }).then(res => {
-            console.log('res', res)
-          }).catch(err => {
-            console.log('err', err)
-          })
+        //   let formData=new FormData()
+        //   formData.append('mp4',{uri:this.state.videoSource,path:this.state.path,type:'multipart/form-data'})
+        //   console.log('a')
+        //   console.log(JSON.stringify(formData))
+        //   fetch('http://148.70.183.184:8005/upload', {
+        //     method: 'post',
+        //     headers: {
+        //       'Content-Type': 'multipart/form-data'
+        //     },
+        //     body: formData
+        //   }).then(res => {
+        //     console.log('res', res)
+        //   }).catch(err => {
+        //     console.log('err', err)
+        //   })
+        Alert.alert('上传成功！')
         // RNFetchBlob.fetch('POST', 'http://148.70.183.184:8005/upload', {
 
 
