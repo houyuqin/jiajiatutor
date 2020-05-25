@@ -19,7 +19,7 @@ export default class StdMine extends Component {
             this.setState({
                 imageUrl:JSON.parse(res)
             })
-            console.log(this.state.imageUrl)
+            console.log('wwwww'+this.state.imageUrl)
         })
         AsyncStorage.getItem('std')
         .then((res)=>{

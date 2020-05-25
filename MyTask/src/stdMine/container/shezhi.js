@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, Dimensions ,TextInput, TouchableOpacity,ImageBackground,Image, StyleSheet,AsyncStorage} from 'react-native'
 import ImagePicker from 'react-native-image-picker';
-import { NoticeBar ,Icon, InputItem} from '@ant-design/react-native';
+import { NoticeBar ,Icon} from '@ant-design/react-native';
 import {Actions} from 'react-native-router-flux';
-import Input from '@ant-design/react-native/lib/input-item/Input';
 
 const {width} = Dimensions.get('window');
 const s = width/640;
@@ -86,18 +85,15 @@ export default class shezhi extends Component {
               console.log('Error:', response.error);
             } else if (response.customButton) {
               console.log('custom:', response.customButton);
-            } else { 
-                console.log(response)
-                const source={uri:response.uri};
+            } else {
                 const file={uri: response.uri, type: response.type, name: response.fileName};
-                console.log(file);
-                formData.append('image', file);
-                console.log(JSON.stringify(formData))
-                this.setState({
-                    imageUrl: source,
+                formData.append('file', file);
+                fetch( `http://148.70.183.184/media/${response.type}`,{
+                    method:'POST',
+                    body:formData
                 })
-                this.setState({
-                    wimage:formData
+                .then((res)=>{
+                    console.log(res)
                 })
             }
         });   
@@ -110,7 +106,7 @@ export default class shezhi extends Component {
         a.weixinnumber=this.state.txtValue3 || this.state.weixinnumber;
         a.wclass=this.state.txtValue4 || this.state.wclass;
         a.wschool=this.state.txtValue5 || this.state.wschool;
-        a.stdtouxiang = this.state.wimage;
+        // a.stdtouxiang = this.state.wimage;
         AsyncStorage.getItem('std')
         .then((res)=>{
             this.setState({
