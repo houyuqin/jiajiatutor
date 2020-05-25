@@ -11,7 +11,7 @@ import {
     StyleSheet,
     Dimensions
   } from 'react-native';
-import { myFetch } from '../utils';
+// import { myFetch } from '../utils';
 import { Actions } from 'react-native-router-flux';
 import NaviBar from 'react-native-pure-navigation-bar';
 

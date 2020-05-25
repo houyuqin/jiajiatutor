@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { Icon } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
-import { myFetch } from '../utils';
+// import { myFetch } from '../utils';
 import NaviBar from 'react-native-pure-navigation-bar';
 
 const {width,scale} = Dimensions.get('window');
