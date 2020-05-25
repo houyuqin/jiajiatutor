@@ -245,7 +245,7 @@ export default class Quan extends Component {
                                 source={this.state.imageUrl}>
 
                                 <View style={styles.box2}>
-                                    <Image style={styles.box3} source={require('../../assets/hyq/001.png')}></Image>
+                                    <Image style={styles.box3} source={require('../../assets/hyq/000.png')}></Image>
                                 </View>
                             </ImageBackground>
                         </TouchableOpacity>
