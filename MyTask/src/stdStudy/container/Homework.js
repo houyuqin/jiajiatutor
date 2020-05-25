@@ -185,7 +185,7 @@ export default class Homework extends Component {
                             renderItem={({ item, index }) => (
                                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                     <View style={styles.uncom}>
-                                        <ImageBackground source={require('../../../assets/zx/z7.jpg')} style={styles.img}>
+                                        <ImageBackground source={require('../../../assets/zx/lun4.jpg')} style={styles.img}>
                                             <View><Text style={styles.renwu1}>任务{item.id}</Text></View>
                                             <View><Text style={styles.renwu2}>题目：{item.title}</Text></View>
                                             <View><Text style={styles.renwu2}>科目类型:{item.kemu}</Text></View>

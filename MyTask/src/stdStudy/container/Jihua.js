@@ -78,13 +78,13 @@ export default class Jihua extends Component {
                 <View style={{ height: 320 * s }}>
                     <Carousel autoplay infinite>
                         <View style={styles.lunbo}>
-                            <Image style={styles.lunimg} source={require('../../../assets/zx/z6.jpg')}></Image>
+                            <Image style={styles.lunimg} source={require('../../../assets/zx/lun3.jpg')}></Image>
                         </View>
                         <View style={styles.lunbo}>
-                            <Image style={styles.lunimg} source={require('../../../assets/zx/z5.jpg')}></Image>
+                            <Image style={styles.lunimg} source={require('../../../assets/zx/lun2.jpg')}></Image>
                         </View>
                         <View style={styles.lunbo}>
-                            <Image style={styles.lunimg} source={require('../../../assets/zx/z4.jpg')}></Image>
+                            <Image style={styles.lunimg} source={require('../../../assets/zx/lun1.jpg')}></Image>
                         </View>
                     </Carousel>
                 </View>
@@ -134,7 +134,7 @@ export default class Jihua extends Component {
                 </View>
                 {/* 对勾 */}
                 <TouchableOpacity onPress={this.add} style={{ justifyContent: 'center', alignItems: 'center',marginTop:20*s,marginBottom:20*s }}>
-                    <Image style={{ resizeMode: 'stretch', height: 60 * s, width: 60 * s }} source={require('../../img/z8.png')}></Image>
+                    <Image style={{ resizeMode: 'stretch', height: 60 * s, width: 60 * s }} source={require('../../../assets/zx/z8.png')}></Image>
                 </TouchableOpacity>
                <View style={{justifyContent:'center',alignItems:'center'}}>
                <TouchableOpacity style={styles.tab} onPress={()=>Actions.Myjihua({'usr':this.state.usr})}><View><Text style={{fontSize:22}}>查看我的计划>></Text></View></TouchableOpacity>
