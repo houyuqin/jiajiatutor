@@ -14,12 +14,14 @@ export default class Pinglun extends Component {
 
 
     componentDidMount() {
+       // console.log('a')
         fetch(`http://148.70.183.184:8005/stuPing/${this.props.id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'text/plain; charset=UTF-8'
             },
         }).then((res) => res.json()).then(res => {
+           // console.log(res)
             if (res.data != '') {
                 this.setState({ data: res.data })
                
@@ -51,8 +53,7 @@ export default class Pinglun extends Component {
         Alert.alert('删除', '是否要删除',
             [
                 { text: "确认删除", onPress: this.del(id) },
-                { text: "取消", onPress: this.opntion2Selected },
-
+              
             ]
         );
     }
