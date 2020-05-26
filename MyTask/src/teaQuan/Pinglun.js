@@ -91,7 +91,7 @@ export default class Pinglun extends Component {
                             <View style={{ width: '90%' }}>
                                 <TouchableOpacity style={{  flexDirection: 'row', marginTop: 6 * s, width: '100%' }} onPress={()=>this.show(item.id)}>
                                     <Image style={{ width: 40 * s, height: 40 * s, marginTop: 3 * s }} source={require('../../assets/zx/ping.png')}></Image>
-                                    <Text style={{ fontSize: 25, marginLeft: 10 * s }}>{item.username}:</Text>
+                                    <Text style={{ fontSize: 25, marginLeft: 10 * s }}>{item.username==''?item.usernum:item.username}:</Text>
                                     <View style={{ paddingRight: 20 * s }}><Text style={{ marginLeft: 18 * s, fontSize: 25 }}>{item.ping}</Text></View>
                                 </TouchableOpacity>
                             </View>

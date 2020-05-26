@@ -91,15 +91,12 @@ export default class Quan extends Component {
 
     //点击评论区内容出现选择框
     show = () => {
-        Alert.alert('标题内容','正文内容',
-        [{text:"我知道了", onPress:this.confirm}]
-      );
-    }
-    aaa=()=>{
-        ToastAndroid.showWithGravity(
-            "取消删除！",
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER
+        Alert.alert('删除', '是否要删除',
+            [
+                { text: "确认删除", onPress: this.del },
+                { text: "取消", onPress: this.opntion2Selected },
+
+            ]
         );
     }
 
@@ -197,21 +194,17 @@ export default class Quan extends Component {
             })
     }
     componentDidUpdate() {
-        //AsyncStorage.clear()
-        //页面一加载获取数据进行渲染
-        AsyncStorage.getItem("UID12", (err, result) => {
-            const source = { uri: '' }
-            source.uri = JSON.parse(result)
-            //console.log(source.uri)
-            if (source.uri === null) {
-                this.setState({ imageUrl: require('../../assets/zx/bg.jpg') })
-                // console.log(this.state.imageUrl)
-            }
-            else {
-                this.setState({ imageUrl: source })
-            }
-        });
-
+        
+        //获取评论
+        fetch('http://148.70.183.184:8006/teaquanzi', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'text/plain; charset=UTF-8'
+            },
+        }).then((res) => res.json()).then(res => {
+            this.setState({ data: res })
+        })
+       
 
 
     }

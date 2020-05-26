@@ -94,7 +94,7 @@ export default class Quan extends Component {
         Alert.alert('删除', '是否要删除',
             [
                 { text: "确认删除", onPress: this.del },
-               // { text: "取消", onPress: this.opntion2Selected },
+                { text: "取消", onPress: this.opntion2Selected },
 
             ]
         );
@@ -144,6 +144,38 @@ export default class Quan extends Component {
     //顶端背景图片的获取
     componentDidMount() {
 
+        //获取评论
+        fetch('http://148.70.183.184:8006/wquanzi', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'text/plain; charset=UTF-8'
+            },
+        }).then((res) => res.json()).then(res => {
+            this.setState({ data: res })
+        })
+
+
+          //获取谁登录以及这个人登录的名称和手机号
+          AsyncStorage.getItem('std')
+          .then((res) => {
+              this.setState({
+                  loginstd: JSON.parse(res)
+              })
+              fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`)
+                  .then((res) => res.json())
+                  .then((res) => {
+                      this.setState({ data1: res.data })
+                      if (this.state.data1[0].wusername == '') {
+                          this.setState({
+                              wusername: '我的昵称'
+                          })
+                      } else {
+                          this.setState({
+                              wusername: this.state.data1[0].wusername
+                          })
+                      }
+                  })
+          })
         //AsyncStorage.clear()
         //页面一加载获取数据进行渲染
         AsyncStorage.getItem("UID123", (err, result) => {
@@ -160,6 +192,11 @@ export default class Quan extends Component {
         });
 
 
+
+      
+    }
+    componentDidUpdate() {
+        
         //获取评论
         fetch('http://148.70.183.184:8006/wquanzi', {
             method: 'GET',
@@ -169,46 +206,6 @@ export default class Quan extends Component {
         }).then((res) => res.json()).then(res => {
             this.setState({ data: res })
         })
-
-
-        //获取谁登录以及这个人登录的名称和手机号
-        AsyncStorage.getItem('std')
-            .then((res) => {
-                this.setState({
-                    loginstd: JSON.parse(res)
-                })
-                fetch(`http://148.70.183.184:8006/stdmine/${this.state.loginstd}`)
-                    .then((res) => res.json())
-                    .then((res) => {
-                        this.setState({ data1: res.data })
-                        if (this.state.data1[0].wusername == '') {
-                            this.setState({
-                                wusername: '我的昵称'
-                            })
-                        } else {
-                            this.setState({
-                                wusername: this.state.data1[0].wusername
-                            })
-                        }
-                    })
-            })
-    }
-    componentDidUpdate() {
-        //AsyncStorage.clear()
-        //页面一加载获取数据进行渲染
-        AsyncStorage.getItem("UID123", (err, result) => {
-            const source = { uri: '' }
-            source.uri = JSON.parse(result)
-            //console.log(source.uri)
-            if (source.uri === null) {
-                this.setState({ imageUrl: require('../../assets/zx/bg.jpg') })
-                // console.log(this.state.imageUrl)
-            }
-            else {
-                this.setState({ imageUrl: source })
-            }
-        });
-
 
 
     }
