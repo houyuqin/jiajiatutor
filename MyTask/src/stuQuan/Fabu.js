@@ -273,7 +273,7 @@ export default class Fabu extends Component {
                             a.wlocal = '未写';
                             a.wdianzannumber=0;
                             console.log(a)
-                            fetch('http://148.70.183.184:8006/wquanzi',{
+                            fetch('http://148.70.183.184:8006/wwquanzi',{
                                 method:'POST',
                                 body:JSON.stringify(a)
                             })
