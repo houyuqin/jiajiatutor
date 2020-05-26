@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList, TouchableOpacity, Dimensions, Image,Alert } from 'react-native'
+import { Text, View, FlatList, TouchableOpacity, ToastAndroid,Dimensions, Image,Alert } from 'react-native'
 const { width } = Dimensions.get('window');
 const s = width / 640;
 export default class Pinglun extends Component {
@@ -52,19 +52,27 @@ export default class Pinglun extends Component {
         this.setState({id:id})
         Alert.alert('删除', '是否要删除',
             [
-                { text: "确认删除", onPress: this.del(id) },
-              
+                { text: "确认删除", onPress: this.del},
+                { text: "取消", onPress: this.a },
+
             ]
         );
     }
 
+    a=()=>{
+        ToastAndroid.showWithGravity(
+            "取消删除！",
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER
+        );
+    }
     
     //删除评论区内容
     del = (id) => {
         console.log(id)
         //fetch接口进行删除
        // console.log(this.state.id)
-       fetch(`http://148.70.183.184:8005/delstuPing/${id}`, {
+       fetch(`http://148.70.183.184:8005/delstuPing/${this.state.id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'text/plain; charset=UTF-8'

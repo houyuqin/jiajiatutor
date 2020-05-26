@@ -94,7 +94,7 @@ export default class Quan extends Component {
         Alert.alert('删除', '是否要删除',
             [
                 { text: "确认删除", onPress: this.del },
-                { text: "取消", onPress: this.opntion2Selected },
+               // { text: "取消", onPress: this.opntion2Selected },
 
             ]
         );

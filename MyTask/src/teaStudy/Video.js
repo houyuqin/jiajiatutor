@@ -22,7 +22,7 @@ import Video from 'react-native-video';
 // 导入 Silder组件
 import Slider from '@react-native-community/slider';
 // 屏幕方向锁定: 他需要改变 原来Android文件代码，当然适配两端的话，IOS也是需要更改的。
-import Orientation from 'react-native-orientation';
+//import Orientation from 'react-native-orientation';
 const { width, scale } = Dimensions.get('window');
 const s = width / 640;
 let screenWidth = Dimensions.get('window').width;
@@ -129,25 +129,25 @@ export default class TeaStudy extends Component {
     _onStartShouldSetResponder(e) {
         // console.log(e);
     }
-    componentDidMount() {
-        var initial = Orientation.getInitialOrientation();
-        //console.log(initial)
-        if (initial === 'PORTRAIT') {
-            // console.log('是竖屏');
-        } else {
-            //console.log('如果是横屏，就将其旋转过来');
-            Orientation.lockToPortrait();
-        }
-    }
-    componentDidUpdate() {
-        var initial = Orientation.getInitialOrientation();
-        if (initial === 'PORTRAIT') {
-            // console.log('是竖屏');
-        } else {
-            //console.log('如果是横屏，就将其旋转过来');
-            Orientation.lockToPortrait();
-        }
-    }
+    // componentDidMount() {
+    //     var initial = Orientation.getInitialOrientation();
+    //     //console.log(initial)
+    //     if (initial === 'PORTRAIT') {
+    //         // console.log('是竖屏');
+    //     } else {
+    //         //console.log('如果是横屏，就将其旋转过来');
+    //         Orientation.lockToPortrait();
+    //     }
+    // }
+    // componentDidUpdate() {
+    //     var initial = Orientation.getInitialOrientation();
+    //     if (initial === 'PORTRAIT') {
+    //         // console.log('是竖屏');
+    //     } else {
+    //         //console.log('如果是横屏，就将其旋转过来');
+    //         Orientation.lockToPortrait();
+    //     }
+    // }
     //选择科目
     selected(data) {
         this.setState({ initId: data.id, initItem: data.item })

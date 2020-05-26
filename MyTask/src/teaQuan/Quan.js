@@ -91,12 +91,15 @@ export default class Quan extends Component {
 
     //点击评论区内容出现选择框
     show = () => {
-        Alert.alert('删除', '是否要删除',
-            [
-                { text: "确认删除", onPress: this.del },
-                { text: "取消", onPress: this.opntion2Selected },
-
-            ]
+        Alert.alert('标题内容','正文内容',
+        [{text:"我知道了", onPress:this.confirm}]
+      );
+    }
+    aaa=()=>{
+        ToastAndroid.showWithGravity(
+            "取消删除！",
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER
         );
     }
 
