@@ -36,35 +36,13 @@ export default class Ques extends Component {
                 }
             })
 
-        if (this.state.show == true) {
-            fetch("http://148.70.183.184:8006/teamine")
-            .then(res=>res.json())
-            .then(res=>{
-                this.setState({
-                    data2:res
-                })
-                for (let i = 0; i < this.state.data2.length; i++) {
-                    if (this.state.data2[i].dianzanshu === 5) {
-                        fetch(`http://148.70.183.184:8006/wujinyadeteamine/${this.state.data2[i].dianzanshu}`)
-                            .then(res=>res.json())
-                            .then(res=>{
-                                this.setState({
-                                    data1:res
-                                })
-                            })
-                    }
-                    
-                }
-            })
-        }else{
-            fetch("http://148.70.183.184:8006/teamine")
+        fetch("http://148.70.183.184:8006/teamine")
             .then(res=>res.json())
             .then(res=>{
                 this.setState({
                     data1:res
                 })
             })
-        }
     }
     componentDidUpdate(){
         if (this.state.show == true) {
