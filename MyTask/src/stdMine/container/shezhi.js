@@ -88,7 +88,7 @@ export default class shezhi extends Component {
             } else {
                 const file={uri: response.uri, type: response.type, name: response.fileName};
                 formData.append('file', file);
-                fetch( `http://148.70.183.184/media/${response.type}`,{
+                fetch( `http://148.70.183.184:8006/media/${response.type}`,{
                     method:'POST',
                     body:formData
                 })

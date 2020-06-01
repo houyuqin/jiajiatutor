@@ -1,0 +1,154 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+ul,li{
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+a:link{
+    color: blueviolet;
+}
+a:visited{
+    color: blueviolet;
+}
+a:hover{
+    color: rgb(17, 89, 138);
+}
+a:active{
+    color: aqua;
+}
+html,body{
+	width:100%;
+	height:100%;
+}
+body{
+    background-color:#eee;
+}
+#root{
+    overflow: hidden;
+    height: 100%;
+}
+.cc1{
+    height:100%;
+    width: 100%;
+    background: url('/img/wujinya.jpg') center center no-repeat;
+    background-size: cover;
+}
+.cc4{
+    height: 50%;
+    width: 40%;
+    margin-left: 50%;
+    margin-top: 50px;
+    background-color: white;
+    opacity: 0.8;
+    border-radius: 5%;
+    padding-bottom: 2%;
+}
+.cc2{
+    height:70px;
+    width: 100%;
+    padding-left: 50px;
+    padding-top:80px;
+    font-size:40px;
+    color:black;
+}
+.cdeng{
+    border-radius:8px;
+    box-shadow:2px 2px 2px rgb(187, 184, 184);
+    width: 200px;
+    height: 50px;
+    margin-left: 150px;
+    border-radius: 7px;
+    border: none;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    background-color: #ff9900;
+    float: left;
+    cursor: pointer;
+}
+.c1{
+    height:35px;
+    width:87px;
+    border-top-left-radius:5px;
+    border-bottom-left-radius:5px;
+    padding-left: 10px;
+    padding-top: 5px;
+    background-color:#ff9900;
+    box-shadow:2px 2px 2px rgb(187, 184, 184);
+    font-size:20px;
+    margin-left:70px;
+    border-left:1px solid rgb(211, 203, 203);
+    border-top:1px solid rgb(211, 203, 203);
+    border-bottom:1px solid rgb(211, 203, 203);
+    margin-top:30px;
+    color: rgb(255, 253, 253);
+    font-weight: 300;
+    float:left;
+}
+.c2{
+    padding-left:3px;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
+    box-shadow:2px 2px 2px rgb(187, 184, 184);
+    font-size:16px;
+    border:1px solid rgb(211, 203, 203);
+    height:40px;
+    width:300px;
+    margin-top:30px;
+    float:left;
+    outline: none;
+}
+.c22{
+    padding-left:3px;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
+    box-shadow:2px 2px 2px rgb(187, 184, 184);
+    font-size:16px;
+    border:1px solid rgb(211, 203, 203);
+    height:40px;
+    width:140px;
+    margin-top:10px;
+    float:left;
+    outline: none;
+}
+.c3{
+    height:35px;
+    width:80px;
+    border-top-left-radius:5px;
+    border-bottom-left-radius:5px;
+    padding-left: 18px;
+    padding-top: 5px;
+    background-color:#ff9900;
+    box-shadow:2px 2px 2px rgb(187, 184, 184);
+    font-size:20px;
+    margin-left:70px;
+    border-left:1px solid rgb(211, 203, 203);
+    border-top:1px solid rgb(211, 203, 203);
+    border-bottom:1px solid rgb(211, 203, 203);
+    margin-top:30px;
+    color: rgb(255, 253, 253);
+    font-weight: 300;
+    float:left;
+}
+.c33{
+    height:35px;
+    width:80px;
+    border-top-left-radius:5px;
+    border-bottom-left-radius:5px;
+    padding-left: 18px;
+    padding-top: 5px;
+    background-color:#ff9900;
+    box-shadow:2px 2px 2px rgb(187, 184, 184);
+    font-size:20px;
+    margin-left:70px;
+    border-left:1px solid rgb(211, 203, 203);
+    border-top:1px solid rgb(211, 203, 203);
+    border-bottom:1px solid rgb(211, 203, 203);
+    margin-top:10px;
+    color: rgb(255, 253, 253);
+    font-weight: 300;
+    float:left;
+}
