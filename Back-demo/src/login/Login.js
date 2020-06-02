@@ -52,7 +52,7 @@ export default class Todolist extends Component {
         var mm = this.state.n.n1*1000+this.state.n.n2*100+this.state.n.n3*10+this.state.n.n4
         console.log(mm);
         console.log(this.state.code);
-        if(this.state.code !== mm && this.state.code !== '')
+        if(this.state.code != mm && this.state.code != '')
         {
             this.setState({
                 stdcode:'验证码输入错误'
@@ -85,7 +85,7 @@ export default class Todolist extends Component {
             
             console.log(this.state.num);
             console.log(this.state.pwd);
-            if(this.state.num === this.state.std[i].wphonenumber && this.state.pwd === this.state.std[i].pwd && this.state.code === mm)
+            if(this.state.num == this.state.std[i].wphonenumber && this.state.pwd == this.state.std[i].pwd && this.state.code == mm)
             {
                 console.log(window.location);
                 console.log("登录成功");
