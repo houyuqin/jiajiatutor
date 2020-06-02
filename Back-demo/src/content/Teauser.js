@@ -97,7 +97,7 @@ export default class Ques extends Component {
                         <Flex style={{float:'right',marginTop:12,marginRight:20,color:'#ff9900'}}>
                             <Flex.Item>
                                 <AgreeItem data-seed="logId" onChange={()=>this.add()}>
-                                    优秀教师排名
+                                    优秀教师推荐
                                 </AgreeItem>
                             </Flex.Item>
                         </Flex>
