@@ -24,7 +24,7 @@ export default class Ad extends Component {
                     <Icon name='left' style={{paddingLeft:20*s}} onPress={Actions.pop}/>
                     <Text style={{color:'white',fontSize:20,marginLeft:250*s}}>广告</Text>
                 </View>
-                <ScrollView>
+                <ScrollView >
                 <View style={styles.imgs}>
                     <Image source={require('../../assets/hyq/guanggao1.jpg')} 
                         alt=''
@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
     imgs:{
         width:'100%',
         flexDirection:'column',
-        flexWrap:'wrap'
+        flexWrap:'wrap',
+        paddingBottom:80*s
     },
     img:{
         width:'100%',

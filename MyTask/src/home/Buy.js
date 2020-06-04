@@ -149,7 +149,7 @@ export default class Buy extends Component {
                     </View>
                     
                     <View style={styles.imgs}>
-                    <Text style={{fontSize:30*s,marginTop:20*s}}>第三方支付</Text>
+                        <Text style={{fontSize:17*s}}>第三方支付</Text>
                         <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img}/>
                         <Image source={require('../../assets/hyq/wechat.jpg')} style={styles.img}/>
                         <Image source={require('../../assets/hyq/zhifubao.jpg')} style={styles.img}/>
@@ -183,14 +183,17 @@ const styles = StyleSheet.create({
         backgroundColor:'rgb(110, 177, 224)'
     },
     img:{
-        width:80*s,
-        height:80*s
+        width:40*s,
+        height:40*s,
+        margin:8*s,
+        borderRadius:5*s
     },
     imgs:{
         flexDirection:'row',
-        justifyContent:'space-between',
-        paddingLeft:20*s,
-        paddingRight:20*s
+        // justifyContent:'space-between',
+        paddingLeft:350*s,
+        paddingRight:20*s,
+        alignItems:'center'
     },
     nav:{
         width:'100%',

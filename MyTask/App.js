@@ -278,6 +278,9 @@ const App = () => {
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={stuPinglun}
+										renderRightButton={
+											<View></View>
+										}
 
 									></Scene>
 									<Scene key='stucom'
@@ -285,7 +288,9 @@ const App = () => {
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={stuCom}
-
+										renderRightButton={
+											<View></View>
+										}
 									></Scene>
 
 

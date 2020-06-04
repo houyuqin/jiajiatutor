@@ -29,13 +29,13 @@ export default class Jihuacontent extends Component {
     render() {
         return (
             <View>
-               <View style={{ width: '95%', backgroundColor: 'white', marginTop: 20 * s, marginLeft: 15 * s, borderRadius: 10, paddingTop: 20 * s, paddingLeft: 30 * s, paddingBottom: 20 * s }}>
+               <View style={{ width: '95%', backgroundColor: 'white', marginTop: 20 * s, marginLeft: 15 * s, borderRadius: 10, paddingTop: 20 * s, paddingLeft: 30 * s, paddingBottom: 20 * s ,borderColor:'#708090',borderWidth:2*s }}>
                         <FlatList
                             data={this.state.content}
                             renderItem={({ item }) => (
                                 <View>
-                                    <View style={{ width: '90%', borderColor: 'rgb(204, 202, 202)', borderWidth: 1 }}>
-              <Text style={{fontSize:25}}>我的计划：</Text>
+                                    <View style={{ width: '90%' }}>
+                                        <Text style={{fontSize:25}}>我的计划：</Text>
                                         <Text style={{ fontSize: 22, marginTop: 20 * s }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.jihua}</Text>
                                     </View>
                                 </View>

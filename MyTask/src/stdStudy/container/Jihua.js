@@ -89,7 +89,7 @@ export default class Jihua extends Component {
                     </Carousel>
                 </View>
                 {/* 标题 */}
-                <View style={styles.jihua}><Text style={{ fontSize: 22 }}>我的计划</Text></View>
+                <View style={styles.jihua}><Text style={{ fontSize: 22 }}>制定计划</Text></View>
                 {/* 日期选择 */}
                 {/* <View style={styles.date}> */}
 
@@ -156,7 +156,8 @@ const styles = StyleSheet.create({
     jihua: {
         height: 50 * s,
         width: '100%',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginLeft:10*s
     },
     date: {
         width: '100%',
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
     plan: {
         width: '100%',
         height: 50 * s,
-      marginTop:30*s,
+        marginTop:30*s,
         justifyContent: 'center',
         alignItems: 'center',
  
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         height:40*s,
         width:250*s,
-        borderColor:'#3fcccb',
+        borderColor:'#708090',
         borderWidth:3,
         borderRadius:10*s,
         marginBottom:30*s

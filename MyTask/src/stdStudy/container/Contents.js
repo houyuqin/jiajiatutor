@@ -59,20 +59,21 @@ export default class Content extends Component {
 const styles = StyleSheet.create({
   box:
   {
-    width: '90%',
-    borderColor: 'red',
-    borderWidth: 2,
+    width: '95%',
+    borderColor: '#708090',
+    borderWidth: 1*s,
     borderRadius: 10 * s,
+    marginTop:10*s,
     paddingTop: 20 * s,
     paddingBottom: 10 * s,
     backgroundColor:'white'
   },
   font: {
-    fontSize: 28
+    fontSize: 20
   },
   font1: {
-    fontSize: 28,
-    marginTop:30*s
+    fontSize: 23,
+    marginTop:20*s
   },
   box1:{
     width:'80%',

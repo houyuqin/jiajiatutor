@@ -192,13 +192,13 @@ export default class Homework extends Component {
                                             <View><Text style={styles.renwu2}>完成时间:{new Date(item.endtime).getFullYear() + '-' + (new Date(item.endtime).getMonth() + 1) + '-' + new Date(item.endtime).getDate() + ' ' + new Date(item.endtime).getHours() + ':' + new Date(item.endtime).getMinutes() + ':' + new Date(item.endtime).getSeconds()}</Text></View>
                                             <View><Text style={styles.renwu2}>发布教师:{item.author}</Text></View>
                                             <View style={{ flex: 1., flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => this.addCom(item.id)}>
+                                                <TouchableOpacity onPress={() => this.addCom(item.id)} style={{width:'55%'}}>
                                                     <View style={{ flexDirection: 'row' }}>
                                                         <Image style={styles.img1} source={require('../../../assets/zx/submit.png')}></Image>
                                                         <Text style={styles.fon}>提交</Text>
                                                     </View>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity style={styles.btn} onPress={() => { Actions.content({ 'contentId': item.id }) }}><View style={styles.btn1}><Text style={styles.xiangqing}>查看详情>></Text></View></TouchableOpacity>
+                                                <TouchableOpacity style={styles.btn} onPress={() => { Actions.content({ 'contentId': item.id }) }}><View style={styles.btn1}><Text style={styles.xiangqing}>去完成>></Text></View></TouchableOpacity>
                                             </View>
                                         </ImageBackground>
 
@@ -215,10 +215,10 @@ export default class Homework extends Component {
                             renderItem={({ item, index }) => (
                                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                     <View style={styles.ccbox}>
-                                        <View style={{ width: '50%' }}><Text style={{ fontSize: 28 }}>{item.id}----{item.title}</Text></View>
-                                        <View style={{ width: '30%' }}><TouchableOpacity style={styles.ccbtn} onPress={() => Actions.contents({ 'contentId': item.id })}><View><Text style={styles.xiangqing}>查看详情>></Text></View></TouchableOpacity></View>
-                                        <View style={{ width: '10%' }}><TouchableOpacity onPress={() => this.display()}><Image style={styles.ccimg} source={require('../../../assets/zx/z6.png')}></Image></TouchableOpacity></View>
-                                        <View style={{ width: '5%' }}><TouchableOpacity onPress={() => this.dele1(item.id)}><Image style={styles.ccimg} source={require('../../../assets/zx/z7.png')}></Image></TouchableOpacity></View>
+                                        <View style={{ width: '65%' }}><Text style={{ fontSize: 20 }}>{item.id}----{item.title}</Text></View>
+                                        <View style={{ width: '23%' }}><TouchableOpacity style={styles.ccbtn} onPress={() => Actions.contents({ 'contentId': item.id })}><View><Text style={styles.xiangqing}>查看详情>></Text></View></TouchableOpacity></View>
+                                        <View style={{ width: '5%' }}><TouchableOpacity onPress={() => this.display()}><Image style={styles.ccimg} source={require('../../../assets/zx/z6.png')}></Image></TouchableOpacity></View>
+                                        <View style={{ width: '7%' }}><TouchableOpacity onPress={() => this.dele1(item.id)}><Image style={styles.ccimg} source={require('../../../assets/zx/z7.png')}></Image></TouchableOpacity></View>
                                     </View>
                                 </View>
 
@@ -244,8 +244,8 @@ const styles = StyleSheet.create({
         width: '95%',
         height: 370 * s,
         marginTop: 30 * s,
-        borderWidth: 3,
-        borderColor: '#3fcccb',
+        borderWidth: 1,
+        borderColor: '#708090',
         borderRadius: 10,
     },
     renwu1: {
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     xiangqing: {
-        fontSize: 20,
+        fontSize: 18,
         //color:'white',   
     },
     fon: {
@@ -298,17 +298,18 @@ const styles = StyleSheet.create({
     // 设置完成款里面的样式
     ccbox: {
         flexDirection: 'row',
-        borderColor: '#3fcccb',
-        borderWidth: 3,
+        borderColor: '#708090',
+        borderWidth: 1,
         borderRadius: 10,
         height: 80 * s,
         width: '97%',
         marginTop: 10 * s,
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingLeft:10*s
     },
     ccimg: {
-        width: 40 * s,
-        height: 40 * s
+        width: 30 * s,
+        height: 30 * s
     },
     ccbtn: {
         // width: 180 * s,

@@ -80,10 +80,10 @@ export default class stuFabu extends Component {
                             renderItem={({ item, index }) => (
                                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                     <View style={styles.ccbox}>
-                                      <View style={{marginTop:10*s}}><Text style={{fontSize:22}}>发布时间：{item.wshijian==''?new Date():item.wshijian}</Text></View>
-                                      <View style={{marginTop:10*s}}><Text style={{fontSize:22}}>发布心情:{item.wxinqing==''?'好':item.wxinqing}</Text></View>
+                                      <View style={{marginTop:10*s}}><Text style={{fontSize:20}}>发布时间：{item.wshijian==''?new Date():item.wshijian}</Text></View>
+                                      <View style={{marginTop:10*s}}><Text style={{fontSize:20}}>发布心情:{item.wxinqing==''?'好':item.wxinqing}</Text></View>
                                       <View style={{marginTop:10*s}}>
-                                      <Text style={{fontSize:22}}>发布内容:{item.content==''?'未定':item.content}</Text>
+                                      <Text style={{fontSize:20}}>发布内容:{item.content==''?'未定':item.content}</Text>
                                      
                                       </View>
                                       <TouchableHighlight style={{height:30*s,width:30*s,marginLeft:'90%',marginBottom:10*s}}  onPress={()=>this.del(item.id)}>
@@ -108,11 +108,11 @@ const styles = StyleSheet.create({
     // 设置完成款里面的样式
     ccbox: {
         flexDirection: 'column',
-        borderColor: '#3fcccb',
-        borderWidth: 3,
+        borderColor: '#708090',
+        borderWidth: 1,
         borderRadius: 10,
-paddingLeft:10*s,
-        width: '97%',
+        paddingLeft:10*s,
+        width: '95%',
         marginTop: 10 * s,
     
     },

@@ -88,7 +88,7 @@ export default class Content extends Component {
                 <Text style={styles.font}>题目：{item.title}</Text>
                 <Text style={styles.font}>内容：</Text>
                 <Text style={styles.font}> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{item.content}</Text>
-                <Text style={{marginTop:20*s,fontSize:26}}>我的答案：</Text>
+                <Text style={{marginTop:20*s,fontSize:23}}>我的答案：</Text>
                 <Text style={styles.font}>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{item.daan == undefined ?'还未提交，请提交': item.daan }</Text>
               </View>
               <View style={styles.box1}>
@@ -117,19 +117,20 @@ const styles = StyleSheet.create({
   box:
   {
     marginTop:20*s,
-    width: '90%',
-    borderColor: 'rgb(125, 179, 201)',
-    borderWidth: 2,
+    width: '95%',
+    borderColor: '#708090',
+    borderWidth: 1,
     borderRadius: 10 * s,
     paddingTop: 20 * s,
     paddingBottom: 10 * s,
+    paddingLeft: 10 * s,
     backgroundColor:'white'
   },
   font: {
-    fontSize: 28
+    fontSize: 20
   },
   box1:{
-    width:'80%',
+    width:'95%',
     marginTop:30*s
   },
   tijiao:{

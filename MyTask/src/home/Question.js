@@ -65,7 +65,7 @@ export default class Question extends Component{
                 </View>
             <ScrollView>
                 <List>
-                    <Text style={styles.h}>1.您是否有过家教？</Text>
+                    <Text style={styles.h}>1.您是否有过家教？<Text style={{color:'red'}}>*</Text></Text>
                     <RadioItem
                         checked={this.state.one === "有过家教"}
                         onChange={event => {
@@ -88,7 +88,7 @@ export default class Question extends Component{
                     </RadioItem>
                 </List>
                 <List style={{ marginTop:5*s }}>
-                    <Text style={styles.h}>2.您的家教补习的科目？</Text>
+                    <Text style={styles.h}>2.您的家教补习的科目？<Text style={{color:'red'}}>*</Text></Text>
                     <RadioItem
                         checked={this.state.two === '薄弱的科目'}
                         onChange={event => {
@@ -121,7 +121,7 @@ export default class Question extends Component{
                     </RadioItem>
                 </List>
                 <List style={{ marginTop:5*s }}>
-                    <Text style={styles.h}>3.您希望家教教师的学历？</Text>
+                    <Text style={styles.h}>3.您希望家教教师的学历？<Text style={{color:'red'}}>*</Text></Text>
                     <RadioItem
                         checked={this.state.three === '学历至少本科'}
                         onChange={event => {
@@ -154,7 +154,7 @@ export default class Question extends Component{
                     </RadioItem>
                 </List>
                 <List style={{ marginTop:5*s }}>
-                    <Text style={styles.h}>4.您有在辅导机构补习上课吗？</Text>
+                    <Text style={styles.h}>4.您有在辅导机构补习上课吗？<Text style={{color:'red'}}>*</Text></Text>
                     <RadioItem
                         checked={this.state.four === '有'}
                         onChange={event => {

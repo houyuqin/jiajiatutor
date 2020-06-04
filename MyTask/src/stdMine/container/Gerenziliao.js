@@ -106,7 +106,7 @@ export default class Gerenziliao extends Component {
 const styles = StyleSheet.create({
     listcontent:{
         height:80*s,
-        fontSize:18,
+        fontSize:20,
         color:'rgb(57, 83, 122)'
     }
 })

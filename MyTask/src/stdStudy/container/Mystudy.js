@@ -46,14 +46,12 @@ export default class Mystudy extends Component {
 }
 const styles=StyleSheet.create({
   box:{
-    width:'100%',
+    width:'95%',
     height:80*s,
     flexDirection:"row",
     flex:1,
-    borderColor:'white',
-    borderWidth:2,
-   
-    alignItems:'center'
+    alignItems:'center',
+    marginLeft:'2.5%'
     
   },
   img:{

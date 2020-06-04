@@ -106,16 +106,16 @@ const styles = StyleSheet.create({
         height: 150*s,
         backgroundColor: 'white',
         borderWidth:1, 
+        borderColor:'#708090',
         borderRadius: 10*s,
         marginLeft:20*s,
         marginTop:20*s,
         padding:10*s,
         flexDirection:'row',
-        alignItems:'center'
     },
     buttoncontent:{
         marginLeft:130*s,
-        marginTop:10*s,
+        marginBottom:10*s,
         width:100*s,
         alignItems:'center',
         backgroundColor:'#708090',

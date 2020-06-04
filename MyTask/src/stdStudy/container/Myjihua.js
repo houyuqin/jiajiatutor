@@ -49,11 +49,12 @@ del=(e)=>{
                 <FlatList
                     data={this.state.jihua}
                     renderItem={({ item, index }) => (
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
                             <View style={{
-                                width: '90%', backgroundColor: 'white', marginTop: 20 * s,
-                                borderRadius: 10, paddingLeft: 30 * s, paddingBottom: 30 * s
+                                width: '95%', backgroundColor: 'white', marginTop: 20 * s,
+                                borderRadius: 10, paddingLeft: 30 * s, paddingBottom: 30 * s,
+                                borderColor:'#708090',borderWidth:2*s 
                             }}>
                                 <View style={styles.box}><Text style={styles.font}>计划{item.id}</Text></View>
                                 <View style={styles.box}><Text style={styles.font}>开始时间：{new Date(item.starttime).getFullYear() + '-' + (new Date(item.starttime).getMonth() + 1) + '-' + new Date(item.starttime).getDate() + ' ' + new Date(item.starttime).getHours() + ':' + new Date(item.starttime).getMinutes() + ':' + new Date(item.starttime).getSeconds()}</Text></View>
@@ -83,7 +84,7 @@ del=(e)=>{
 
 const styles = StyleSheet.create({
     font: {
-        fontSize: 22
+        fontSize: 20
     },
     box: {
         marginTop: 10 * s

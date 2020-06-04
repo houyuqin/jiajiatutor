@@ -198,11 +198,16 @@ export default class Home extends Component {
                                 <Text style={styles.tch}>目前职业：物理教师</Text>
                             </View>
                             </View>
-                            <Button title='了解更多>>>' onPress={Actions.goodtea} />
+                            <TouchableOpacity onPress={Actions.goodtea}  style={{backgroundColor:'white',height:47*s,justifyContent:'center',alignItems:'center'}}>
+                                <Text style={{color:'#708090'}}>了解更多>>></Text>
+                            </TouchableOpacity>
+                            {/* <Button title='了解更多>>>' onPress={Actions.goodtea} /> */}
                         </View>
                         <View style={styles.ooo}>
                             <Image style={styles.ved} source={require('../../assets/hyq/vedio00.png')}/>
-                            <Button title='了解更多>>>' onPress={Actions.vedio}/>
+                            <TouchableOpacity onPress={Actions.vedio} style={{backgroundColor:'white',height:47*s,justifyContent:'center',alignItems:'center'}}>
+                                <Text style={{color:'#708090'}}>了解更多>>></Text>
+                            </TouchableOpacity>
                         </View>
                     </Tabs>
                 </View>
@@ -223,9 +228,11 @@ const styles = StyleSheet.create({
     },
     tea:{
         width:200*s,
-        height: 300*s,
+        height: 250*s,
         marginLeft:40*s,
-        marginRight:40*s
+        marginRight:40*s,
+        marginTop:25*s,
+        marginBottom:25*s
     },
     ved:{
         width:'100%',

@@ -56,7 +56,7 @@ export default class GoodTea extends Component {
                     >优秀教师推荐</Text>
                 </View>
                 <ScrollView>
-                <View>
+                <View style={{paddingBottom:80*s}}>
                     {
                         this.state.data.map(item=>(
                             <View style={styles.one}>
@@ -85,14 +85,14 @@ export default class GoodTea extends Component {
 }
 const styles = StyleSheet.create({
     one:{
-        width:'90%',
-        marginLeft:'5%',
+        width:'95%',
+        marginLeft:'2%',
         height:300*s,
         flexDirection:'row',
         borderRadius: 30*s,
         borderColor: '#000',
         borderWidth: 1,
-        marginBottom:20*s
+        marginTop:20*s
     },
     tch:{
         color:'#4a83bc',

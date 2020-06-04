@@ -14,7 +14,7 @@ import {
     Image,
     ToastAndroid
 } from 'react-native'
-import { List, Radio, Picker, DatePicker, Provider } from '@ant-design/react-native';
+import { List, Radio, Picker, DatePicker, Provider,NoticeBar } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
 import ModalDropdown from 'react-native-modal-dropdown';
 
@@ -134,13 +134,17 @@ export default class Searchtea extends Component {
     render() {
         return (
             <View style={{flex:1}}>
+                <NoticeBar marqueeProps={{ loop: true, style: { fontSize: 14, color: 'red' } }}>                    
+                    请输入您想寻找家教的要求，在对应的问题中回答并提交可视为你想要发布寻找上门家教的信息。不必填写精准明确，拥有大概方位帮助教师辨别远近即可，以防被骗。
+                </NoticeBar>
                 <TouchableOpacity 
                     onPress={Actions.fabuguo}
                     style={styles.cengjing}
                 >
                     <Text>我发布过的寻找家教信息</Text>
                 </TouchableOpacity>
-                <Text style={styles.h}>请选择您家的家庭住址：</Text>
+                
+                {/* <Text style={styles.h}>请选择您家的家庭住址：</Text> */}
                     <Provider style={{height:30*s}}>
                         <View style={{
                             width: '100%',
@@ -161,7 +165,7 @@ export default class Searchtea extends Component {
                                     arrow="horizontal" 
                                     // onPress={this.onPress}
                                 >
-                                    省市选择
+                                    请选择您家的家庭住址
                                 </List.Item>
                                 </Picker>
                             </List>
@@ -169,23 +173,17 @@ export default class Searchtea extends Component {
                     </Provider>
                 <View style={styles.bott}>
                 <ScrollView>
-                    <Text style={styles.tit}>
-                        请输入您想寻找家教的要求，
-                        在对应的问题中回答并提交可视为你想要发布寻找上门家教的信息。
-                        不必填写精准明确，拥有大概方位帮助教师辨别远近即可，以防被骗。
-                    </Text>
-                    
-                    <Text style={styles.h}>1.请输入您孩子的姓名（此项可不真实，方便教师联系时称呼）：</Text>
+                    <Text style={styles.h}>1.请输入您孩子的姓名：<Text style={{color:'red'}}>*</Text></Text>
                     <TextInput style={{width:'100%',backgroundColor:'#fff'}}
                     onChangeText={(Text)=>this.getValue2(Text)}/>
-                    <Text style={styles.h}>2.请输入您孩子正接受教育的年级：</Text>
+                    <Text style={styles.h}>2.请输入您孩子正接受教育的年级：<Text style={{color:'red'}}>*</Text></Text>
                     <TextInput style={{width:'100%',backgroundColor:'#fff'}}
                     onChangeText={(Text)=>this.getValue3(Text)}/>
-                    <Text style={styles.h}>3.请输入您需要家教的科目：</Text>
+                    <Text style={styles.h}>3.请输入您需要家教的科目：<Text style={{color:'red'}}>*</Text></Text>
                     <TextInput style={{width:'100%',backgroundColor:'#fff'}}
                     onChangeText={(Text)=>this.getValue7(Text)}/>
                     <List>
-                    <Text style={styles.h}>5.您要找的家教的类型：</Text>
+                    <Text style={styles.h}>5.您要找的家教的类型：<Text style={{color:'red'}}>*</Text></Text>
                     <RadioItem
                         checked={this.state.leixing === "周末"}
                         onChange={event => {
@@ -208,7 +206,7 @@ export default class Searchtea extends Component {
                     </RadioItem>
                 </List>
                     <List>
-                    <Text style={styles.h}>5.您要找的家教的性别：</Text>
+                    <Text style={styles.h}>5.您要找的家教的性别：<Text style={{color:'red'}}>*</Text></Text>
                     <RadioItem
                         checked={this.state.sex === "男"}
                         onChange={event => {
@@ -242,7 +240,7 @@ export default class Searchtea extends Component {
                 </List>
                 
                 <List>
-                    <Text style={styles.h}>6.您要找的家教的时间：</Text>
+                    <Text style={styles.h}>6.您要找的家教的时间：<Text style={{color:'red'}}>*</Text></Text>
                     <RadioItem
                         checked={this.state.time === "长期"}
                         onChange={event => {
@@ -265,7 +263,7 @@ export default class Searchtea extends Component {
                     </RadioItem>
                 </List>
                 <List>
-                    <Text style={styles.h}>7.您预计的工资结算间隔：</Text>
+                    <Text style={styles.h}>7.您预计的工资结算间隔：<Text style={{color:'red'}}>*</Text></Text>
                     <RadioItem
                         checked={this.state.salary === "周结"}
                         onChange={event => {
@@ -297,7 +295,7 @@ export default class Searchtea extends Component {
                         次结(不计时间，补课完成结算)
                     </RadioItem>
                 </List>
-                    <Text style={styles.h}>8.请输入您预计薪资（按小时结算，输入阿拉伯数字即可）：</Text>
+                    <Text style={styles.h}>8.请输入您预计薪资（按小时结算，输入阿拉伯数字即可）：<Text style={{color:'red'}}>*</Text></Text>
                     <TextInput style={{width:'100%',backgroundColor:'#fff'}}
                     onChangeText={(Text)=>this.getValue6(Text)}/>
                     <Text style={styles.h}>9.其他要求：</Text>
@@ -347,25 +345,3 @@ const styles = StyleSheet.create({
         alignItems:'center',
     }
 })
-                    {/* <ModalDropdown 
-                        options={['北京', '河北石家庄','河北衡水']} 
-                        style={{height:40*s,width:'40%'}}
-                    /> */}
-                    {/* <Provider style={{height:30*s}}>
-                    <View style={{
-                            width: '100%',
-                            height: 69 * s,
-                            marginTop: 20 * s,
-                            borderBottomWidth: 3,
-                            borderBottomColor: '#3fcccb'
-                        }}>
-                        <List>
-                            <DatePicker
-                                value={this.state.value}
-                                onChange={this.onChange}
-                            >
-                                <List.Item arrow="horizontal"  >发布时间:</List.Item>
-                            </DatePicker>
-                        </List>
-                    </View>
-                </Provider> */}

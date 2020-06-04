@@ -77,6 +77,7 @@ export default class Vedio extends Component {
                     this.state.data.map(item=>(
                         <View
                         style={styles.out}>
+                            <Text style={{fontSize:18,marginLeft:10*s,marginBottom:10*s}}>{item.name}</Text>
                             <TouchableOpacity 
                                 onPress={()=>{
                                     let a={vedio:item.vedio};
@@ -90,7 +91,7 @@ export default class Vedio extends Component {
                                 <Video 
                                     // source={require('../../assets/hyq/ch1.mp4')}
                                     source={{uri:'http://148.70.183.184:8000/vedio'+item.vedio}}
-                                    style={{width:'100%',height:400*s}}
+                                    style={{width:'100%',height:400*s,marginBottom:20*s}}
                                     paused={true}
                                     volume={0} 
                                     muted
@@ -109,18 +110,19 @@ export default class Vedio extends Component {
                             /> */}
                             <View style={{flexDirection:'row',alignContent:'center',paddingLeft:50*s}}>
                                 <View
-                                style={styles.price}
+                                // style={styles.price}
                                 >
-                                    <Text style={{fontSize:30*s,color:'red'}}>￥{item.price}</Text>
+                                    {/* <Text style={{fontSize:30*s,color:'red'}}>￥{item.price}</Text> */}
                                 </View>
                                 <Button 
                                 style={styles.save}
                                 onPress={()=>this.love(item.vedio,item.price,item.class)}>
-                                    <Text>收藏</Text>
+                                    <Text  style={{color:'white'}}>收藏</Text>
                                 </Button> 
                                 <Button style={styles.bu} onPress={()=>this.buy(item.price,item.name,item.vedio,item.class)}>
 
-                                                <Text>购买</Text>
+                                    <Text style={{color:'white'}}>购买</Text>
+                                    <Text style={{fontSize:23*s,color:'red'}}>￥{item.price}</Text>
                                 </Button> 
                             </View>
                         </View>
@@ -136,21 +138,23 @@ export default class Vedio extends Component {
 const styles = StyleSheet.create({
     bu:{
         marginBottom:10*s,
-        marginLeft:30*s,
-        width:150*s,
-        height:70*s,
+        width:180*s,
+        height:50*s,
         fontSize:20*s,
         textAlign:'center',
-        borderRadius:10*s,
-        backgroundColor:'rgb(110, 157, 204)'
+        borderTopRightRadius:40*s,
+        borderBottomRightRadius:40*s,
+        backgroundColor:'#708090'
     },
     save:{
         marginBottom:10*s,
-        marginLeft:30*s,
-        width:150*s,
-        height:70*s,
+        marginLeft:200*s,
+        width:180*s,
+        marginRight:-8*s,
+        height:50*s,
         backgroundColor:'rgb(110, 157, 204)',
-        borderRadius:10*s,
+        borderTopLeftRadius:40*s,
+        borderBottomLeftRadius:40*s
     },
     price:{
         width:150*s,
@@ -164,6 +168,7 @@ const styles = StyleSheet.create({
     out:{
         width:'98%',
         marginTop:15*s,
+        paddingTop:15*s,
         marginLeft:'1%',
         borderRadius:20*s,
         borderColor:'rgb(174, 177, 179)',
