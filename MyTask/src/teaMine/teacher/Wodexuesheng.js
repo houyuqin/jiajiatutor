@@ -70,10 +70,10 @@ export default class Wodexuesheng extends Component {
                         <View style={styles.listcontent} key={item.wphonenumber}>
                             <Image style={{width:100*s,height:110*s,marginLeft:10*s}} source={item.stdtouxiang}/>
                             <View>
-                                <View style={{flexDirection:'row',marginLeft:20*s}}>
-                                    <Text style={{fontSize:19,color:'black'}}>{item.wusername}</Text>
-                                    <Text style={{fontSize:15,color:'black',marginTop:5*s,marginLeft:5*s}}>{item.wclass}</Text>
-                                </View>
+                               
+                                <Text style={{fontSize:19,color:'black',marginLeft:20*s}}>姓名：{item.wusername}    </Text>
+                                <Text style={{fontSize:15,color:'black',marginLeft:20*s}}>班级：{item.wclass}</Text>
+                            
                                 <Text style={{fontSize:15,color:'black',marginLeft:20*s}}>手机号：{item.wphonenumber}</Text>
                                 <Text style={{fontSize:15,color:'black',marginLeft:20*s}}>学校：{item.wschool}</Text>
                             </View>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         borderColor:'#708090',
-        borderWidth:2*s
+        borderWidth:1
     },
     buttoncontent:{
         marginLeft:160*s,

@@ -116,54 +116,39 @@ export default class TeaStudy extends Component {
     render() {
         return (
             <View>
-
-                {/* <NaviBar
-                    style={{ color: 'white', backgroundColor: 'black' }}
-                    backgroundColor='black'
-                    color='white'
-                    title={'批改作业'}
-                    onLeft={() => Actions.teatask()}
-                /> */}
                 <View>
 
                     <View style={{ width: '95%', backgroundColor: 'white', marginTop: 20 * s, marginLeft: 15 * s, borderRadius: 10, paddingTop: 20 * s, paddingLeft: 30 * s, paddingBottom: 20 * s }}>
                         <FlatList
                             data={this.state.data}
                             renderItem={({ item }) => (
-                                <View>
-                                    <View style={{ width: '90%', borderColor: 'rgb(204, 202, 202)', borderWidth: 1 }}>
-                                    <Text style={{ fontSize: 25, marginTop: 20 * s }}>作业内容：</Text>
-                                        <Text style={{ fontSize: 22 }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.content}</Text>
-                                        <Text style={{ fontSize: 25, marginTop: 20 * s }}>学生答案：</Text>
-                                        <Text style={{ fontSize: 22, marginTop: 20 * s }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.daan}</Text>
-                                        <Text style={{ fontSize: 25, marginTop: 20 * s }}>我的评价：</Text>
-                                        <Text style={{ fontSize: 22, marginTop: 20 * s }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.pingjia==null?'还未评价':item.pingjia}</Text>
-                                    </View>
+                                <View style={{ width: '95%'}}>
+                                    <Text style={{ fontSize: 22, marginTop: 5 * s }}>作业内容：</Text>
+                                    <Text style={{ fontSize: 20 }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.content}</Text>
+                                    <Text style={{ fontSize: 22,  }}>学生答案：</Text>
+                                    <Text style={{ fontSize: 20, }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.daan}</Text>
+                                    <Text style={{ fontSize: 22, }}>我的评价：</Text>
+                                    <Text style={{ fontSize: 20, }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.pingjia==null?'还未评价':item.pingjia}</Text>
                                 </View>
                             )}
                         ></FlatList>
                     </View>
                     <View style={{ width: '95%', height: 400 * s, backgroundColor: 'white', marginLeft: 15 * s, marginTop: 30 * s, borderRadius: 10, paddingTop: 20 * s, paddingLeft: 30 * s }}>
-                        <Text style={{ fontSize: 25 }}>教师评语:</Text>
-                        <View style={{ width: '80%', height: 240 * s, marginLeft: 60 * s, borderWidth: 1, marginTop: 10 * s, borderColor: 'rgb(204, 202, 202)', flexDirection: 'row', }}>
-
-
+                        <Text style={{ fontSize: 22 }}>教师评语:</Text>
+                        <View style={{ width: '95%', height: 240 * s, borderWidth: 1, borderColor: 'rgb(204, 202, 202)', marginTop:20*s}}>
                             <TextInput
-                                style={{ marginLeft: 10 * s, marginTop: -190 * s }}
                                 multiline={true}
                                 placeholder="请输入评语"
+                                placeholderTextColor='gray'
                                 onChangeText={this.pingjia}
                             />
 
                         </View>
-                        <View style={{ flexDirection: 'row', }}>
-                            <TouchableOpacity onPress={() => this.tijiao()}>
-                                <Text style={{ width: 75 * s, height: 45 * s, marginTop: 20 * s, marginLeft: 440 * s, borderRadius: 10, paddingLeft: 12 * s, fontSize: 14, color: 'white', paddingTop: 7 * s, backgroundColor: '#2f618b' }}>提交</Text>
-                            </TouchableOpacity>
-                            {/* <TouchableOpacity onPress={() => this.shanchu()}>
-                                <Text style={{ width: 75 * s, height: 45 * s, marginTop: 20 * s, marginLeft: 10 * s, borderRadius: 10, paddingLeft: 12 * s, fontSize: 14, color: 'white', paddingTop: 7 * s, backgroundColor: '#2f618b' }}>删除</Text>
-                            </TouchableOpacity> */}
-                        </View>
+
+                        <TouchableOpacity style={styles.wujinyatijiao} onPress={() => this.tijiao()}>
+                                <Text style={{color:'white',fontSize:18}}>提交</Text>
+                        </TouchableOpacity>
+                         
                     </View>
                 </View>
             </View>
@@ -171,5 +156,14 @@ export default class TeaStudy extends Component {
     }
 }
 const styles = StyleSheet.create({
-
+    wujinyatijiao:{
+        width:80*s,
+        height:50*s,
+        backgroundColor:'#708090',
+        borderRadius:10*s,
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:20*s,
+        marginLeft:450*s
+    }
 })

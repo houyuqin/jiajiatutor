@@ -69,6 +69,6 @@ const styles = StyleSheet.create({
         margin:10*s,
         padding:10*s,
         borderColor:'#708090',
-        borderWidth:2*s
+        borderWidth:1
     }
 })

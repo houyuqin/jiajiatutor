@@ -87,14 +87,12 @@ export default class Pinglun extends Component {
                 <FlatList
                     data={this.state.data}
                     renderItem={({ item, index }) => (
-                        <View style={{ flex: 1, alignItems: 'center' }}>
-                            <View style={{ width: '90%' }}>
-                                <TouchableOpacity style={{  flexDirection: 'row', marginTop: 6 * s, width: '100%' }} onPress={()=>this.show(item.id)}>
-                                    <Image style={{ width: 40 * s, height: 40 * s, marginTop: 3 * s }} source={require('../../assets/zx/ping.png')}></Image>
-                                    <Text style={{ fontSize: 25, marginLeft: 10 * s }}>{item.username==''?item.usernum:item.username}:</Text>
-                                    <View style={{ paddingRight: 20 * s }}><Text style={{ marginLeft: 18 * s, fontSize: 25 }}>{item.ping}</Text></View>
-                                </TouchableOpacity>
-                            </View>
+                        <View style={{ flex: 1, alignItems: 'center' ,marginTop:10*s}}>
+                            <TouchableOpacity style={{  flexDirection: 'row', marginTop: 6 * s, width: '95%' }} onPress={()=>this.show(item.id)}>
+                                    <Image style={{ width: 30 * s, height: 30 * s, marginTop: 3 * s }} source={require('../../assets/zx/ping.png')}></Image>
+                                    <Text style={{ fontSize: 18, marginLeft: 10 * s }}>{item.username==''?item.usernum:item.username}:</Text>
+                                    <View style={{ paddingRight: 20 * s ,width:460*s}}><Text style={{ marginLeft: 18 * s, fontSize: 18 }}>{item.ping}</Text></View>
+                            </TouchableOpacity>
                         </View>
                     )}
                 ></FlatList>

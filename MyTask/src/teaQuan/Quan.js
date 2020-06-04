@@ -280,7 +280,7 @@ export default class Quan extends Component {
                                     <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
                                     <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
                                 </View>
-                                <View style={{ flexDirection: 'row', marginLeft: '65%', marginTop: 20 * s }}>
+                                <View style={{ flexDirection: 'row', marginLeft: '73%', marginTop: 20 * s }}>
                                     <TouchableOpacity onPress={() => this.dianzan(item.wdianzannumber, item.id)}>
                                         <Image
                                             onPress={() => this.dianzan(item.wdianzannumber, item.id)}
@@ -297,9 +297,9 @@ export default class Quan extends Component {
                                         />
                                     </TouchableOpacity>
                                 </View>
-                              <TouchableOpacity onPress={()=>Actions.tpinglun({id:item.id})} style={{marginLeft:'55%',marginTop:10*s}}><Text style={{fontSize:15}}>查看全部评论 >></Text></TouchableOpacity>
-                                <View style={{ width: 350 * s, marginTop: 10 * s, height: 40 * s, marginLeft: 110 * s, flexDirection: 'row', borderColor: '#ddd', borderWidth: 2 }}>
-                                    <View style={{ width: 290 * s, height: 40 * s }}>
+                              <TouchableOpacity onPress={()=>Actions.tpinglun({id:item.id})} style={{marginLeft:'68%',marginTop:10*s}}><Text style={{fontSize:15}}>查看全部评论 >></Text></TouchableOpacity>
+                                <View style={{ width: 400 * s, marginTop: 10 * s, height: 40 * s, marginLeft: 110 * s, flexDirection: 'row', borderColor: '#ddd', borderWidth: 1 }}>
+                                    <View style={{ width: 340 * s, height: 40 * s }}>
                                         <InputItem
                                             style={{ marginBottom: 20 * s }}
                                             onChange={value => {
@@ -308,6 +308,7 @@ export default class Quan extends Component {
                                                 });
                                             }}
                                             placeholder="请输入评论内容"
+                                            placeholderTextColor='gray'
                                         /></View>
 
                                     <TouchableHighlight style={{ width: 70 * s, height: 40 * s }} onPress={() => this.tijiao(item.id)} style={{ width: 70 * s, height: 35 * s, backgroundColor: 'orange', alignItems: 'center' }}><Text style={{ color: 'white', fontSize: 15 }}>提交</Text></TouchableHighlight>
@@ -325,6 +326,7 @@ export default class Quan extends Component {
 }
 const styles = StyleSheet.create({
     imgs: {
+        width:'90%',
         flexDirection: 'row',
         flexWrap: 'wrap',
         paddingLeft: 100 * s,
@@ -344,7 +346,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20 * s,
     },
     rect: {
-        width: '90%',
+        width: '95%',
         marginTop: 20 * s,
         // height:200*s,
         paddingBottom: 20 * s,

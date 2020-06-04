@@ -14,6 +14,7 @@ import {
     Alert
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { Icon } from '@ant-design/react-native';
 const {width,scale} = Dimensions.get('window');
 const t=width;
 const s = width / 640;
@@ -192,7 +193,8 @@ export default class Concat extends Component {
             <View>
                 <View style={{width:'100%',height:73*s,backgroundColor: '#708090',flexDirection:'row'}}>
                     <TouchableOpacity onPress={Actions.pop}>
-                        <Image style={{width:35*s,height:35*s,marginTop:20*s,marginLeft:20*s}} source={require('../../assets/cq/zuo.png')}/>
+                        <Icon style={{width:35*s,height:35*s,marginTop:20*s,marginLeft:20*s}} name='left'/>
+                        {/* <Image style={{width:35*s,height:35*s,marginTop:20*s,marginLeft:20*s}} source={require('../../assets/cq/zuo.png')}/> */}
                     </TouchableOpacity>
                     <Text style={{fontSize:26*s,marginLeft:'30%',marginTop:20*s,color:'white'}}>与{this.state.data}的对话</Text>
                 </View>
@@ -270,6 +272,7 @@ export default class Concat extends Component {
                             elevation: 2,
                         }}
                         placeholder="请输入内容"
+                        placeholderTextColor='gray'
                         onChangeText={this.content}
                     />
                     <Image style={{width:40*s,height:40*s,marginLeft:5*s,marginTop:11*s}} source={require('../../assets/cq/jia.png')}/>

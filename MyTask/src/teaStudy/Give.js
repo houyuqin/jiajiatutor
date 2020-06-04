@@ -139,46 +139,40 @@ export default class TeaStudy extends Component {
     }
     render() {
         return (
-            <View style={{height:'100%',backgroundColor:'#e4e3e3'}}>
-                {/* <NaviBar
-                    style={{ color: 'white', backgroundColor: 'black' }}
-                    backgroundColor='black'
-                    color='white'
-                    title={'布置作业'}
-                    onLeft={() => Actions.teastudy()}
-                /> */}
-                <View>
-                    <View style={{
-                        width: '95%', height: 415 * s, backgroundColor: 'white', marginTop: 20 * s, marginLeft: 15 * s,
-                        borderRadius: 10, paddingTop: 20 * s, paddingLeft: 30 * s
-                    }}>
-                        <View style={{ width: '96%', height: 65 * s, borderBottomWidth: 1, marginTop: 10 * s, borderBottomColor: 'rgb(204, 202, 202)', flexDirection: 'row', }}>
+            <View style={{height:'100%',backgroundColor:'#e4e3e3',flex:1}}>
+                
+                <View style={{
+                        width: '95%', height: 945 * s, backgroundColor: 'white', marginTop: 20 * s, marginLeft: 15 * s,
+                        borderRadius: 10, paddingTop: 20 * s, paddingLeft: 30 * s,paddingBottom:50*s
+                }}>
+                        <View style={{ width: '96%', height: 65 * s, borderBottomWidth: 1*s, marginTop: 10 * s, borderBottomColor: 'rgb(204, 202, 202)', flexDirection: 'row', }}>
                             <Text style={{ fontSize: 27*s }}>任务科目：</Text>
                             <View style={{ width: '70%', height: 80 * s, marginTop: -10 * s, paddingLeft: 20 * s, fontSize: 17 }}>
                                 <TextInput
                                 style={{fontSize:25*s}}
                                     placeholder="请输入任务科目"
+                                    placeholderTextColor='gray'
                                     onChangeText={this.kemu}
                                 />
                             </View>
                         </View>
-                        <View style={{ width: '96%', height: 65 * s, borderBottomWidth: 1, marginTop: 25 * s, borderBottomColor: 'rgb(204, 202, 202)', flexDirection: 'row', }}>
+                        <View style={{ width: '96%', height: 65 * s, borderBottomWidth: 1*s, marginTop: 25 * s, borderBottomColor: 'rgb(204, 202, 202)', flexDirection: 'row', }}>
                             <Text style={{ fontSize: 27*s }}>任务题目：</Text>
                             <View style={{ width: '70%', height: 80 * s, marginTop: -10 * s, paddingLeft: 20 * s, fontSize: 17 }}>
                                 <TextInput
                                     style={{fontSize:25*s}}
                                     placeholder="请输入任务题目"
+                                    placeholderTextColor='gray'
                                     onChangeText={this.title}
                                 />
                             </View>
                         </View>
-                        <Provider >
+                        <Provider>
                             <View >
                                 <List style={{width:'96%',height:68*s}}>
                                     <DatePicker
                                         value={this.state.value}
                                         onChange={this.onChange}
-                                       
                                     >
                                         <List.Item arrow="horizontal" style={{marginLeft: -22 * s, height:72* s, marginTop: 0* s }}><Text style={{fontSize:27*s}}>发布时间：</Text></List.Item>
                                     </DatePicker>
@@ -186,7 +180,7 @@ export default class TeaStudy extends Component {
                             </View>
 
                             <View>
-                                <List style={{width:'97%'}}>
+                                <List style={{width:'97%',height:68*s}}>
                                     <DatePicker
                                         value={this.state.value1}
                                         minDate={new Date()}
@@ -197,35 +191,29 @@ export default class TeaStudy extends Component {
                                     </DatePicker>
                                 </List>
                             </View>
-                            <View style={{ width: '90%', height: 70 * s, marginLeft:0*s,marginTop:20*s, flexDirection: 'row', }}>
-                                <Text style={{ fontSize: 27*s }}>发布人：{this.state.name}</Text>
+                            <View style={{ width: '90%', height: 68 * s, marginLeft:0*s,marginTop:30*s, flexDirection: 'row', }}>
+                                    <Text style={{ fontSize: 27*s }}>发布人：         {this.state.name}</Text>
+                            </View>
+                            <Text style={{ fontSize: 27*s }}>发布内容:</Text>
+                            <View style={{ width: '95%', height: 240 * s, borderWidth: 1, marginTop: 10 * s, borderColor: 'rgb(204, 202, 202)', flexDirection: 'row', }}>
+
+
+                                <TextInput
+                                    style={{ marginLeft: 10 * s, fontSize: 23*s,marginTop: -190 * s }}
+                                    multiline={true}
+                                    placeholder="请输入内容"
+                                    placeholderTextColor='gray'
+                                    onChangeText={this.content}
+                                />
+
                             </View>
                         </Provider>
-
-
-
                         
-
-                    </View>
-                    <View style={{ width: '95%', height: 420 * s, backgroundColor: 'white', marginTop: 20 * s, marginLeft: 15 * s, borderRadius: 10, paddingTop: 20 * s, paddingLeft: 30 * s }}>
-                        <Text style={{ fontSize: 27*s }}>内容:</Text>
-                        <View style={{ width: '80%', height: 240 * s, marginLeft: 60 * s, borderWidth: 1, marginTop: 10 * s, borderColor: 'rgb(204, 202, 202)', flexDirection: 'row', }}>
-
-
-                            <TextInput
-                                style={{ marginLeft: 10 * s, fontSize: 23*s,marginTop: -190 * s }}
-                                multiline={true}
-                                placeholder="请输入内容"
-                                onChangeText={this.content}
-                            />
-
-                        </View>
-
                         <TouchableOpacity onPress={this.fabu}>
                             <Text style={{ width: 80 * s, height: 50 * s, marginTop: 30 * s, marginLeft: 440 * s, borderRadius: 8, paddingLeft: 12 * s, fontSize: 25*s, color: 'white', paddingTop: 7 * s, backgroundColor: '#2f618b' }}>发布</Text>
                         </TouchableOpacity>
-                    </View>
 
+                        
 
                 </View>
             </View>

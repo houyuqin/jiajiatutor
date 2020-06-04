@@ -64,7 +64,7 @@ export default class tHome extends Component {
                         </Carousel>
 
                         <View style={styles.box1}>
-                            <View style={{ width: '25%', marginLeft: 20 * s }}>
+                            <View style={{ width: '25%', marginLeft: 40 * s }}>
                                 <TouchableOpacity onPress={() => Actions.tfujin()} style={[styles.box2, { backgroundColor: '#00FA9A' }]}>
                                     <Image style={styles.img} source={require('../../assets/zx/tlocation.png')}></Image>
                                 </TouchableOpacity>
@@ -136,14 +136,14 @@ const styles = StyleSheet.create({
     },
     box: {
         height: 340 * s,
-        width: '95%',
+        width: '100%',
 
     },
     box1: {
         height: 160 * s,
         backgroundColor: 'white',
         flexDirection: 'row',
-        paddingTop: 30 * s
+        paddingTop: 30 * s,
     },
     box2: {
         height: 80 * s,

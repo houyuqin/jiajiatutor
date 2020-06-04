@@ -748,13 +748,21 @@ const App = () => {
 										title='全部评论'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
-										component={teaPinglun} ></Scene>
+										component={teaPinglun} 
+										renderRightButton={
+											<View></View>
+										}
+									>
+
+									</Scene>
 									<Scene key='teacom'
 										title='我的发布'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={teaCom}
-
+										renderRightButton={
+											<View></View>
+										}
 									></Scene>
 
 								</Scene>

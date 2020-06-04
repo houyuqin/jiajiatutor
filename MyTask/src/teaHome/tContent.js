@@ -33,9 +33,10 @@ export default class tContent extends Component {
                       <View><Text style={styles.hfont}>具体要求：{this.state.data.request}</Text></View>
                   </View></View>
                <View style={{flexDirection:'row'}}>
-                   <TouchableOpacity onPress={()=>Actions.pop()} style={[styles.tab,{marginLeft:50*s}]}><Text style={styles.font}>返回</Text></TouchableOpacity>
+                   <View style={{width:'40%'}}></View>
+                   {/* <TouchableOpacity onPress={()=>Actions.pop()} style={[styles.tab,{marginLeft:50*s}]}><Text style={styles.font}>返回</Text></TouchableOpacity> */}
                    <TouchableOpacity onPress={()=>Actions.concat()} style={[styles.tab,{marginLeft:40*s}]}><Text style={styles.font}>联系我</Text></TouchableOpacity>
-                   <TouchableOpacity style={[styles.tab,{marginLeft:60*s,width:180*s}]}><Text style={styles.font}>投递简历</Text></TouchableOpacity>
+                   <TouchableOpacity style={[styles.tab,{marginLeft:20*s,width:160*s}]}><Text style={styles.font}>投递简历</Text></TouchableOpacity>
                </View>
             </View>
         )
@@ -43,12 +44,14 @@ export default class tContent extends Component {
 }
 const styles=StyleSheet.create({
     hfont:{
-        fontSize:23
+        fontSize:20
     },
     box:{
-        width:'90%',
+        width:'95%',
         backgroundColor:'white',
-       
+        borderRadius:10*s,
+        borderColor:'#708090',
+        borderWidth:1,
         marginTop:20*s,
         paddingLeft:20*s,
         paddingTop:30*s,

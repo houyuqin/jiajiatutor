@@ -72,7 +72,7 @@ export default class Vedio extends Component {
                     >优秀视频推荐</Text>
                 </View>
                 <ScrollView>
-                <View>
+                <View style={{paddingBottom:80*s}}>
                 {
                     this.state.data.map(item=>(
                         <View

@@ -74,14 +74,14 @@ export default class tjiajiao extends Component {
     render() {
         return (
             <View style={{flex:1}}>
-                <Text style={styles.h}>请选择您家的家庭住址：</Text>
+                {/* <Text style={styles.h}>请选择您家的家庭住址：</Text> */}
                     <Provider style={{height:30*s}}>
                         <View style={{
                             width: '100%',
                             height: 40 * s,
                             marginTop: 20 * s,
                             marginBottom:69*s,
-                            borderWidth: 2,
+                            borderWidth: 1,
                             borderColor: '#3fcccb'
                         }}>
                             <List>
@@ -94,7 +94,7 @@ export default class tjiajiao extends Component {
                                 <List.Item 
                                     arrow="horizontal" 
                                 >
-                                    省市选择
+                                    请选择您家的家庭住址
                                 </List.Item>
                                 </Picker>
                             </List>

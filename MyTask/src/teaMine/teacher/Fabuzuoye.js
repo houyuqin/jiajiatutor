@@ -43,16 +43,16 @@ export default class Fabuzuoye extends Component {
             <ScrollView>
                 {
                     this.state.data.map((item)=>(
-                        <View style={{width:610*s,height:170*s,fontSize:18,padding:10*s,margin:12*s,borderRadius:10*s,backgroundColor:'white'}} key={item.id}>
+                        <View style={{width:610*s,height:170*s,fontSize:18,padding:10*s,margin:12*s,borderRadius:10*s,backgroundColor:'white',borderColor:'#708090',borderWidth:1}} key={item.id}>
                             <Text style={{fontSize:18}}>任务编号：{item.id}</Text>
-                            <Text style={{wordWrap:'break-word'}}>科目：{item.kemu}</Text>
+                            <Text style={{wordWrap:'break-word',fontSize:18}}>科目：{item.kemu}</Text>
                             <Text></Text>
                             <View style={{borderLeftStyle:'solid',paddingLeft:5*s,borderLeftWidth:5*s,flexDirection:'row'}}>
-                                <Text style={{fontSize:15}}>发布了任务名为</Text>
-                                <Text style={{color:'red',fontSize:15}}>{item.title}</Text> 
-                                <Text>的任务作业</Text>
+                                <Text style={{fontSize:15,marginTop:5*s}}>发布了任务名为</Text>
+                                <Text style={{color:'red',fontSize:20}}>{item.title}</Text> 
+                                <Text style={{fontSize:15,marginTop:5*s}}>的任务作业</Text>
                             </View>
-                            <Text style={{color:'gray',fontSize:15,marginLeft:300*s}}>{item.endtime}</Text>
+                            <Text style={{fontSize:15,marginLeft:310*s}}>{item.endtime}</Text>
                             <TouchableOpacity onPress={()=>this.del(item.id)} style={{marginLeft:500*s,marginTop:-140*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text style={{fontSize:17,color:'white'}}>删除</Text></TouchableOpacity>
                         </View>
                     ))

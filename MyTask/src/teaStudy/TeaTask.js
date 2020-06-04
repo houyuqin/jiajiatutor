@@ -68,10 +68,10 @@ export default class TeaStudy extends Component {
                                     borderRadius: 10, paddingLeft: 30 * s, flexDirection: 'row'
                                 }}>
                                     <View style={{ width: '90%', height: 180 * s, justifyContent: 'center' }}>
-                                        <Text style={{ fontSize: 22 }}>题目：</Text>
-                                        <Text style={{ fontSize: 22 }}>截止时间：</Text>
-                                        <Text style={{ fontSize: 22 }}>提交人：</Text>
-                                        <Text style={{ fontSize: 22 }}>评价状态：</Text>
+                                        <Text style={{ fontSize: 20 }}>题目：{item.title}</Text>
+                                        <Text style={{ fontSize: 20 }}>截止时间：{item.endtime}</Text>
+                                        <Text style={{ fontSize: 20 }}>提交人：{item.name}</Text>
+                                        <Text style={{ fontSize: 20 }}>评价状态：{item.pingjia}</Text>
                                     </View>
                                     <View style={{ width: '10%', height: 180 * s, justifyContent: 'center' }}>
                                         <Image style={{ width: 40 * s, height: 40 * s, }} source={require('../../assets/cq/you.png')} />
