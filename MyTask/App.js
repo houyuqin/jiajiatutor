@@ -341,6 +341,7 @@ const App = () => {
 										renderLeftButton={
 											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
+									
 									/>
 									<Scene key='pingjia'
 										title='我要打分'
@@ -410,14 +411,15 @@ const App = () => {
 										key='searchtea'
 										title='寻找家教'
 										hideTabBar
-										navigationBarStyle={{ backgroundColor: '#708090' }}
-										renderLeftButton={
-											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
-										}
-										titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
-										renderRightButton={
-											<View></View>
-										}
+										hideNavBar
+										// navigationBarStyle={{ backgroundColor: '#708090' }}
+										// renderLeftButton={
+										// 	<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
+										// }
+										// titleStyle={{ flex: 1, textAlign: 'center', color: 'white' }}
+										// renderRightButton={
+										// 	<View></View>
+										// }
 										component={Searchtea}
 									/>
 									<Scene
@@ -443,6 +445,9 @@ const App = () => {
 										renderLeftButton={
 											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
+										// renderRightButton={
+										// 	<View></View>
+										// }
 									/>
 									<Scene
 										key='wzuoyepingjiaqingkuang'

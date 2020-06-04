@@ -14,7 +14,7 @@ import {
     Image,
     ToastAndroid
 } from 'react-native'
-import { List, Radio, Picker, DatePicker, Provider,NoticeBar } from '@ant-design/react-native';
+import { List, Radio, Picker, DatePicker, Provider,NoticeBar, Icon } from '@ant-design/react-native';
 import { Actions } from 'react-native-router-flux';
 import ModalDropdown from 'react-native-modal-dropdown';
 
@@ -134,25 +134,29 @@ export default class Searchtea extends Component {
     render() {
         return (
             <View style={{flex:1}}>
+                <View style={{flexDirection:'row',height:73*s,backgroundColor:'#708090',justifyContent:'space-around',alignItems:'center'}}>
+                    <Icon name='left' onPress={Actions.pop}/>
+                    <View style={{width:'80%',alignItems:'center'}}><Text style={{color:'white',fontSize:19}}>寻找家教</Text></View>
+                    <Icon name='menu' onPress={Actions.fabuguo}/>
+                </View>
                 <NoticeBar marqueeProps={{ loop: true, style: { fontSize: 14, color: 'red' } }}>                    
                     请输入您想寻找家教的要求，在对应的问题中回答并提交可视为你想要发布寻找上门家教的信息。不必填写精准明确，拥有大概方位帮助教师辨别远近即可，以防被骗。
                 </NoticeBar>
-                <TouchableOpacity 
+                {/* <TouchableOpacity 
                     onPress={Actions.fabuguo}
                     style={styles.cengjing}
                 >
                     <Text>我发布过的寻找家教信息</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 
                 {/* <Text style={styles.h}>请选择您家的家庭住址：</Text> */}
                     <Provider style={{height:30*s}}>
                         <View style={{
                             width: '100%',
                             height: 40 * s,
-                            marginTop: 20 * s,
+                            
                             marginBottom:69*s,
-                            borderWidth: 2,
-                            borderColor: '#3fcccb'
+                            
                         }}>
                             <List>
                                 <Picker

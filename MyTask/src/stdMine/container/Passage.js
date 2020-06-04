@@ -99,7 +99,7 @@ export default class tContent extends Component {
                     与张三的对话
                 </Text>
                <View style={{flexDirection:'row'}}>
-                   <TouchableOpacity onPress={()=>Actions.pop()} style={[styles.tab,{marginLeft:50*s}]}><Text style={styles.font}>返回</Text></TouchableOpacity>
+                   {/* <TouchableOpacity onPress={()=>Actions.pop()} style={[styles.tab,{marginLeft:50*s}]}><Text style={styles.font}>返回</Text></TouchableOpacity> */}
                    <TouchableOpacity onPress={()=>Actions.concatt()} style={[styles.tab,{marginLeft:40*s}]}><Text style={styles.font}>消息</Text></TouchableOpacity>
                    
                </View>

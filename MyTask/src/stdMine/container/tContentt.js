@@ -33,7 +33,7 @@ export default class tContent extends Component {
                       <View><Text style={styles.hfont}>具体要求：{this.state.data.request}</Text></View>
                   </View></View>
                <View style={{flexDirection:'row'}}>
-                   <TouchableOpacity onPress={()=>Actions.pop()} style={[styles.tab,{marginLeft:50*s}]}><Text style={styles.font}>返回</Text></TouchableOpacity>
+                   {/* <TouchableOpacity onPress={()=>Actions.pop()} style={[styles.tab,{marginLeft:50*s}]}><Text style={styles.font}>返回</Text></TouchableOpacity> */}
                    <TouchableOpacity onPress={()=>Actions.passage()} style={[styles.tab,{marginLeft:40*s}]}><Text style={styles.font}>消息</Text></TouchableOpacity>
                    
                </View>
@@ -46,7 +46,7 @@ const styles=StyleSheet.create({
         fontSize:23
     },
     box:{
-        width:'90%',
+        width:'95%',
         backgroundColor:'white',
        
         marginTop:20*s,

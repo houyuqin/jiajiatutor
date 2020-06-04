@@ -75,7 +75,7 @@ export default class Fabuguo extends Component {
     render() {
         return (
             <View>
-                <Text style={{fontSize:24*s}}>我发布过的家教信息:</Text>
+                {/* <Text style={{fontSize:24*s}}>我发布过的家教信息:</Text> */}
                 <FlatList
                     data={this.state.data}
                     renderItem={({ item }) => (
