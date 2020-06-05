@@ -80,6 +80,7 @@ import teaPinglun from './src/teaQuan/Pinglun'
 import Fabuguo from './src/stdMine/container/Fabuguo';
 import stuCom from './src/stuQuan/stuCom'
 import teaCom from './src/teaQuan/teaCom'
+import WebView from './src/stdStudy/WebView';
 console.disableYellowBox = true;
 const { width } = Dimensions.get('window');
 const s = width / 640;
@@ -197,6 +198,12 @@ const App = () => {
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
 										component={MyStudy} ></Scene>
+									<Scene key='webview'
+										title='自我练习'
+										hideTabBar
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={WebView} ></Scene>
 									<Scene key='video'
 										title='上传视频'
 										hideTabBar
@@ -341,7 +348,7 @@ const App = () => {
 										renderLeftButton={
 											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-									
+
 									/>
 									<Scene key='pingjia'
 										title='我要打分'
@@ -445,9 +452,9 @@ const App = () => {
 										renderLeftButton={
 											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
-										// renderRightButton={
-										// 	<View></View>
-										// }
+									// renderRightButton={
+									// 	<View></View>
+									// }
 									/>
 									<Scene
 										key='wzuoyepingjiaqingkuang'
@@ -753,7 +760,7 @@ const App = () => {
 										title='全部评论'
 										titleStyle={{ color: 'white', flex: 1, textAlign: 'center' }}
 										navigationBarStyle={{ backgroundColor: '#708090' }}
-										component={teaPinglun} 
+										component={teaPinglun}
 										renderRightButton={
 											<View></View>
 										}
