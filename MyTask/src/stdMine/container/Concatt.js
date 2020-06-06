@@ -67,7 +67,9 @@ export default class Concat extends Component {
                     // console.log("asdf",this.state.tnum);
                     if(res[i].parents == this.state.tnum && res[i].teacher == this.state.snum)
                     {
+                        
                         var mm =  res[i].content;
+                        console.log("我是mm",res[i]);
                         var nn = mm.split(/@@/);
                         this.setState({
                             content:nn, 
@@ -214,7 +216,8 @@ export default class Concat extends Component {
                                                     <Text
                                                     style={[styles.shu1,{
                                                         width:t/18 * item.length+8,
-                                                        marginLeft:20*s
+                                                        marginLeft:20*s,
+                                                        
                                                     }]}
                                                     >{item}</Text> 
                                                     :
@@ -284,7 +287,6 @@ const styles = StyleSheet.create({
         paddingLeft:10*s,
         borderRadius:10*s,
         marginTop:10*s,
-        position:'absolute',
         backgroundColor:'#2f618b',
     },
     shu2:{
@@ -294,7 +296,7 @@ const styles = StyleSheet.create({
         paddingBottom:4*s,
         paddingLeft:10*s,   
         borderRadius:10*s,
-        marginTop:70*s,
+        marginTop:10*s,
         backgroundColor:'white',
     }
 })

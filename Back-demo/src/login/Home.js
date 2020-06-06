@@ -6,6 +6,7 @@ import Ques from '../content/Ques'
 import Info from '../content/Info'
 import Returnu from '../content/Returnu'
 import Teauser from '../content/Teauser'
+import tea from '../content/tea'
 import Stduser from '../content/Stduser'
 import Infohis from '../content/Infohistory'
 
@@ -34,6 +35,11 @@ export default class Todoinput extends Component {
                                 视频推荐
                             </li></Link>
 
+                            <Link to='/tea'>
+                            <li style={{height:50,fontSize:30,textAlign:'center'}}>
+                                优秀教师推荐
+                            </li></Link>
+                            
                             <Link to='/question'>
                             <li style={{height:50,fontSize:30,textAlign:'center'}}>
                                 问卷情况
@@ -62,6 +68,7 @@ export default class Todoinput extends Component {
                             <Route path='/vedio' component={Vediorcm}/>
                             <Route path='/question' component={Ques}/>
                             <Route path='/returnu' component={Returnu}/>
+                            <Route path='/tea' component={tea}/>
                             <Route path='/std' component={Stduser}/>
                             <Route exact path='/info' component={Info}/>
                             <Route exact path='/infohis' component={Infohis}/>

@@ -39,61 +39,22 @@ export default class Ques extends Component {
         fetch("http://148.70.183.184:8006/teamine")
             .then(res=>res.json())
             .then(res=>{
-                this.setState({
-                    data1:res
-                })
-            })
-    }
-    componentDidUpdate(){
-        if (this.state.show == true) {
-            fetch("http://148.70.183.184:8006/teamine")
-            .then(res=>res.json())
-            .then(res=>{
-                this.setState({
-                    data2:res
-                })
-                for (let i = 0; i < this.state.data2.length; i++) {
-                    if (this.state.data2[i].dianzanshu === 5) {
-                        fetch(`http://148.70.183.184:8006/wujinyadeteamine/${this.state.data2[i].dianzanshu}`)
-                            .then(res=>res.json())
-                            .then(res=>{
-                                this.setState({
-                                    data1:res
-                                })
-                            })
+                for (let i = 0; i < res.length; i++) {
+                    if (res[i].dianzanshu === 5) {
+                        this.setState({
+                            data1:res
+                        })
                     }
-                    
-                }
+            }
+                
             })
-        }else{
-            fetch("http://148.70.183.184:8006/teamine")
-            .then(res=>res.json())
-            .then(res=>{
-                this.setState({
-                    data1:res
-                })
-            })
-        }
     }
-    add = ()=>{
-        this.setState({
-            count:++this.state.count,
-        })
-        if (this.state.count%2 === 0) {
-            this.setState({
-                show:false
-            })
-        }else{
-            this.setState({
-                show:true
-            })
-        }
-    }
+    
     render(){
         return(
                 <div>
                     <div style={{marginTop:20,marginLeft:10,marginBottom:20,paddingBottom:20}}>
-                        <h2 style={{float:'left'}}>教师列表</h2>
+                        <h2 style={{float:'left'}}>优秀教师推荐</h2>
                         {/* <Flex style={{float:'right',marginTop:12,marginRight:20,color:'#ff9900'}}>
                             <Flex.Item>
                                 <AgreeItem data-seed="logId" onChange={()=>this.add()}>

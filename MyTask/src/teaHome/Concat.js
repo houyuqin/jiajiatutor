@@ -76,7 +76,7 @@ export default class Concat extends Component {
                         // console.log("我是content",this.state.content);  
                     }
                 }
-           this.fa();     
+        //    this.fa();     
             // this.fa();                 
         })
         if(this.state.hh == 0)
@@ -186,6 +186,92 @@ export default class Concat extends Component {
         }).then(function(response) { 
             
         }); 
+        this.setState({
+            shuru: ''
+        }) 
+        // console.log('这是我',this.state.content);
+    }
+    fa1 = () =>{ 
+        //组合成@@
+        var num = this.state.content[0];
+        for(var i=1;i<this.state.content.length;i++)
+        {
+            num = num +'@@'+this.state.content[i];
+        }
+        var ee = this.state.shuru;
+        var uu = 0;
+        // console.log("我是num",num);
+        // console.log("我是content",this.state.content)
+        //插入
+        for(var i=0;i<this.state.content.length;i++)
+        {
+            if(this.state.content[i] == '' && i%2!=0)
+            {
+                this.state.content[i] = ee;
+                uu = 1;
+            }
+        }
+        if(this.state.content.length%2==0 && uu==0)
+        {
+             num = num+'@@'+''+'@@'+ee;
+        }
+        else{
+            num = num+'@@'+ee+'@@'+'';
+        }
+        // console.log("nn.",num);
+        console.log("nn.length",num.length);
+        
+        // console.log("我是numm",this.state.content);
+        //判断长度
+        var nnn = num.split(/@@/);
+        var nn =[];
+        console.log("nnn",nnn);
+        if(num.length>50)
+        {
+            for(var i=0;i<nnn.length;i++)
+            {
+                if(nnn[i+4])
+                {
+                    nn.push(nnn[i+4])
+                    console.log("我执行了");
+                }
+                else if(nnn[i+4] == '')
+                {
+                    nn.push(nnn[i+4])
+                    console.log("我执行");
+                }
+                
+            }
+            this.setState({
+                content : nn,   
+            })
+        }
+        else{
+            console.log('jijijiji');
+            this.setState({
+                content : nnn, 
+                kkkk:1  
+            }) 
+        }
+        console.log("nn",nn);
+
+        
+        console.log("我是kkkk",this.state.kkkk);
+        console.log("我是content",this.state.content);
+        //再次合成@@
+        var oo=this.state.content[0];
+        for(var i=1;i<this.state.content.length;i++)
+        {
+            oo = oo +'@@'+this.state.content[i];
+        }
+        console.log("我是content",this.state.content);
+        console.log("我是oo",oo);
+        var m = '13345678900'; 
+        var a={}; 
+        a.parents=this.state.snum;
+        a.teacher=this.state.tnum;
+        a.content=oo;
+       
         // console.log('这是我',this.state.content);
     }
     render() {
@@ -226,7 +312,7 @@ export default class Concat extends Component {
                                                         marginLeft:20*s
                                                     }]}
                                                     >{item}</Text> 
-                                                    :
+                                                    : 
                                                     <Text
                                                     style={[styles.shu1,{
                                                         
