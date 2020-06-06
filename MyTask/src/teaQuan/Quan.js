@@ -47,7 +47,8 @@ export default class Quan extends Component {
             dianzan: 0,
             loginstd: '',
             data1: '',
-            wusername: ''
+            wusername: '',
+            quanzitupian:'',
         }
     }
 
@@ -192,6 +193,13 @@ export default class Quan extends Component {
                         }
                     })
             })
+
+        AsyncStorage.getItem('wujinyateaquanzitupian')
+            .then((res)=>{
+                this.setState({
+                    quanzitupian:JSON.parse(res)
+                })
+            })
     }
     componentDidUpdate() {
         
@@ -205,6 +213,12 @@ export default class Quan extends Component {
             this.setState({ data: res })
         })
        
+        AsyncStorage.getItem('wujinyateaquanzitupian')
+        .then((res)=>{
+            this.setState({
+                quanzitupian:JSON.parse(res)
+            })
+        })
 
 
     }
@@ -270,15 +284,11 @@ export default class Quan extends Component {
                                     <Text style={{ fontSize: 24 * s }} numberOfLines={2}>{item.content ? (item.content.length > 15 ? item.content.substr(0, 14) + '...' : item.content) : ''}</Text>
                                 </View>
                                 <View style={styles.imgs}>
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
-                                    <Image source={require('../../assets/hyq/qq.jpg')} style={styles.img} />
+                                    {
+                                        this.state.quanzitupian.map((item,index)=>(
+                                            <Image source={{uri:item.uri}} style={styles.img}/>
+                                        ))
+                                    }
                                 </View>
                                 <View style={{ flexDirection: 'row', marginLeft: '73%', marginTop: 20 * s }}>
                                     <TouchableOpacity onPress={() => this.dianzan(item.wdianzannumber, item.id)}>

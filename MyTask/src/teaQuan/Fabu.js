@@ -60,15 +60,15 @@ export default class Fabu extends Component {
             }else if (response.error) {
                 console.log(response.error);
             }else {
-                // console.log('Response = ', response); // 选择或拍摄的照片数据对象
                 let source = { uri: response.uri };
-                // You can also display the image using data:
-                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
                 this.setState({
                     avatarSource: [...this.state.avatarSource,source],
                     clickstate:false,
                     count:this.state.count+1
                 });
+                AsyncStorage.setItem('wujinyateaquanzitupian',JSON.stringify(this.state.avatarSource),()=>{console.log('store success')})
+
             }
         });
         
