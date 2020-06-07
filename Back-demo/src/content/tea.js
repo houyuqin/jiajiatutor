@@ -7,7 +7,7 @@ export default class Ques extends Component {
         super();
         this.state={
             data:[],
-            data1:[],
+            dataa:[],
             data2:[],
             show: false,
             count:0,
@@ -39,14 +39,20 @@ export default class Ques extends Component {
         fetch("http://148.70.183.184:8006/teamine")
             .then(res=>res.json())
             .then(res=>{
+                console.log(res);
                 for (let i = 0; i < res.length; i++) {
-                    if (res[i].dianzanshu === 5) {
+                    if(res[i].dianzanshu ==5 ){
+
+                    fetch(`http://148.70.183.184:8006/wujinyadeteamine/${res[i].dianzanshu}`)
+                    .then(res=>res.json())
+                    .then(res=>{
                         this.setState({
-                            data1:res
+                            dataa:res
                         })
-                    }
+                    })
+                }
             }
-                
+             console.log(this.state.dataa);   
             })
     }
     
@@ -65,7 +71,7 @@ export default class Ques extends Component {
                     </div>
                     <br/>
                     {
-                        this.state.data1.map((item,idx)=>(
+                        this.state.dataa.map((item,idx)=>(
                             <div key={idx} style={{height:40,borderBottom:'1px solid black',paddingTop:15,fontSize:18,marginLeft:15}}>
                                 <p style={{position:'relative'}}>账号：{item.wphonenumber}
                                     <span style={{marginLeft:10,position:'absolute',left:220}}>姓名：{item.wusername}</span>
