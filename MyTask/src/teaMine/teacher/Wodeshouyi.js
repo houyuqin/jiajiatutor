@@ -27,6 +27,42 @@ export default class Wodeshouyi extends Component {
                 this.setState({data1:res.data})
             })
     }
+    componentDidUpdate(){   
+        fetch('http://148.70.183.184:8000/vedio')
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({data:res.data})
+            })
+        fetch('http://148.70.183.184:8000/bought')
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({data1:res.data})
+            })
+    }
+    del = (idx)=>{
+        fetch('http://148.70.183.184:8000/vedio',{
+            method: 'DELETE',
+            body:JSON.stringify({id:idx})
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+            })
+         
+        ToastAndroid.show('删除成功！',100);
+    }
+    del1 = (idx)=>{
+        fetch(`http://148.70.183.184:8000/bought/${idx}`,{
+            method: 'DELETE',
+            body:JSON.stringify({time:idx})
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+            })
+         
+        ToastAndroid.show('删除成功！',100);
+    }
     render() {
         return (
             <View style={{flex:1}}>
@@ -38,7 +74,7 @@ export default class Wodeshouyi extends Component {
                                     <Text style={{fontSize:18,color:'black'}}>{item.name}:</Text>
                                     <Text style={{fontSize:18,color:'black'}}>科目：{item.class}</Text>
                                     <Text>价格：{'￥'+item.price}</Text>
-                                    <TouchableOpacity onPress={()=>this.del(item.time)} style={{marginLeft:510*s,marginTop:-90*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text  style={{fontSize:17,color:'white'}}>删除</Text></TouchableOpacity>
+                                    <TouchableOpacity onPress={()=>this.del(item.id)} style={{marginLeft:510*s,marginTop:-90*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text  style={{fontSize:17,color:'white'}}>删除</Text></TouchableOpacity>
                                 </View>  
                             ))
                         }       

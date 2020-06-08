@@ -363,6 +363,17 @@ export default class Register extends Component {
                 }).then(function(response) { 
                     // do sth
                 }); 
+                fetch('http://148.70.183.184:8006/stdjiashoujihao',{
+                    method: "POST",
+                    headers: {
+                    'Content-Type': 'text/plain; charset=UTF-8'
+                    },
+                    body: this.state.susername
+                })
+                .then(res=>res.json())
+                .then(res=>{
+                    console.log(res)
+                })
                 ToastAndroid.show("注册成功，请登录！",ToastAndroid.SHORT);
                 setTimeout(()=>{
                     Actions.login();
@@ -388,6 +399,17 @@ export default class Register extends Component {
                 }).then(function(response) { 
                     // do sth
                 }); 
+                fetch('http://148.70.183.184:8006/teajiashoujihao',{
+                    method: "POST",
+                    headers: {
+                    'Content-Type': 'text/plain; charset=UTF-8'
+                    },
+                    body: this.state.susername
+                })
+                .then(res=>res.json())
+                .then(res=>{
+                    console.log(res)
+                })
                 ToastAndroid.show("注册成功，请登录！",ToastAndroid.SHORT);
 
                 setTimeout(()=>{

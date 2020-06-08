@@ -38,13 +38,14 @@ export default class Wodexuesheng extends Component {
                                 this.setState({
                                     data:[...this.state.data,val]
                                 })  
-
+                
                             })
                         })
                 })
             })  
         })
     }
+   
     deleteshipin=(idx)=>{
         AsyncStorage.getItem('tea')
         .then((res)=>{
@@ -68,7 +69,7 @@ export default class Wodexuesheng extends Component {
                 {
                     this.state.data.map((item)=>(
                         <View style={styles.listcontent} key={item.wphonenumber}>
-                            <Image style={{width:100*s,height:110*s,marginLeft:10*s}} source={item.stdtouxiang}/>
+                            <Image style={{width:100*s,height:110*s,marginLeft:10*s}} source={require('../../../assets/wjy/img/000.jpg')}/>
                             <View>
                                
                                 <Text style={{fontSize:19,color:'black',marginLeft:20*s}}>姓名：{item.wusername}    </Text>

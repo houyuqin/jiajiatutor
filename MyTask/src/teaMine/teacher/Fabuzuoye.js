@@ -28,6 +28,21 @@ export default class Fabuzuoye extends Component {
                 })                
         })
     } 
+    componentDidUpdate(){
+        AsyncStorage.getItem('tea')
+        .then((res)=>{
+            this.setState({
+                logintea:JSON.parse(res)
+            })
+            fetch(`http://148.70.183.184:8005/fabu/${this.state.logintea}`)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({ 
+                        data: res.data 
+                    });
+                })                
+        })
+    } 
     del=(idx)=>{
         fetch(`http://148.70.183.184:8005/delzuoye/${idx}`, {
                 method: 'DELETE',
