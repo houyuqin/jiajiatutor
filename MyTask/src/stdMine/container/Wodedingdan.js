@@ -86,7 +86,7 @@ export default class Wodedingdan extends Component {
                                     <Text>价格：{'￥'+item.price}</Text>
                                     <Text>订单时间：{item.time}</Text>
                                     <TouchableOpacity onPress={()=>this.del(item.time)} style={{marginLeft:500*s,marginTop:-85*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text  style={{fontSize:17,color:'white'}}>删除</Text></TouchableOpacity>
-                                    <TouchableOpacity onPress={Actions.buy} style={{marginLeft:500*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text>去支付</Text></TouchableOpacity>
+                                    <TouchableOpacity onPress={()=>Actions.buy()} style={{marginLeft:500*s,marginTop:10*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text  style={{fontSize:17,color:'white'}}>去支付</Text ></TouchableOpacity>
                                 </View>  
                             ))
                         }
