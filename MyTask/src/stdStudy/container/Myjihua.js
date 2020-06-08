@@ -28,6 +28,18 @@ export default class Myjihua extends Component {
                 this.setState({ jihua: res.data })
             })
     }
+    componentDidUpdate() {
+        fetch(`http://148.70.183.184:8005/getjihua/${this.props.usr}`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'text/plain; charset=UTF-8'
+            },
+
+        }).then((res) => res.json())
+            .then((res) => {
+                this.setState({ jihua: res.data })
+            })
+    }
 
 del=(e)=>{
     fetch(`http://148.70.183.184:8005/deljihua/${e}`, {
