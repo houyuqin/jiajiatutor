@@ -68,7 +68,6 @@ export default class Fabu extends Component {
                     count:this.state.count+1
                 });
                 AsyncStorage.setItem('wujinyateaquanzitupian',JSON.stringify(this.state.avatarSource),()=>{console.log('store success')})
-
             }
         });
         
@@ -330,7 +329,7 @@ export default class Fabu extends Component {
                             <View style={styles.listontent}>
                                 <View style={{flexDirection:'row'}}>
                                     <Icon style={{color:'#708090',padding:3*s}} name='environment'/> 
-                                    <Text style={{fontSize:18}}>所在位置:</Text>
+                                    <Text style={{fontSize:18}}>地点:</Text>
                                 </View>
                                 <View style={{flexDirection:'row'}}>
                                     <Text style={{fontSize:17,color:'gray'}}>{this.state.weizhi}</Text>

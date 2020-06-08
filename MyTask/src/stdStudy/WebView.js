@@ -9,7 +9,7 @@ export default class webView extends Component {
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center' }}>
-                <WebView source={{ uri: 'http://www.ygjj.com/D445683.html' }} style={{ height: 200, width: 450 }} />
+                <WebView source={{ uri: 'http://www.ygjj.com/D445683.html' }} style={{ height: 200, width: 475 }} />
             </View>
         )
     }

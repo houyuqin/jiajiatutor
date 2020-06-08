@@ -48,7 +48,7 @@ export default class Quan extends Component {
             loginstd: '',
             data1: '',
             wusername: '',
-            quanzitupian:'',
+            quanzitupian:[],
         }
     }
 
@@ -199,6 +199,7 @@ export default class Quan extends Component {
                 this.setState({
                     quanzitupian:JSON.parse(res)
                 })
+                console.log(this.state.quanzitupian)
             })
     }
     componentDidUpdate() {
@@ -284,6 +285,7 @@ export default class Quan extends Component {
                                     <Text style={{ fontSize: 24 * s }} numberOfLines={2}>{item.content ? (item.content.length > 15 ? item.content.substr(0, 14) + '...' : item.content) : ''}</Text>
                                 </View>
                                 <View style={styles.imgs}>
+                                    <Text>11</Text>
                                     {
                                         this.state.quanzitupian.map((item,index)=>(
                                             <Image source={{uri:item.uri}} style={styles.img}/>
