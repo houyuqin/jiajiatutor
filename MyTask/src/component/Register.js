@@ -372,7 +372,7 @@ export default class Register extends Component {
                 })
                 .then(res=>res.json())
                 .then(res=>{
-                    console.log(res)
+                    // console.log(res)
                 })
                 ToastAndroid.show("注册成功，请登录！",ToastAndroid.SHORT);
                 setTimeout(()=>{
@@ -408,7 +408,7 @@ export default class Register extends Component {
                 })
                 .then(res=>res.json())
                 .then(res=>{
-                    console.log(res)
+                    // console.log(res)
                 })
                 ToastAndroid.show("注册成功，请登录！",ToastAndroid.SHORT);
 

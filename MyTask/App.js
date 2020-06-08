@@ -359,6 +359,9 @@ const App = () => {
 										renderLeftButton={
 											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
+										renderRightButton={
+											<View></View>
+										}
 									/>
 									<Scene key='concatt'
 										// title='联系我'

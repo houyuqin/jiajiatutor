@@ -627,6 +627,7 @@ export default class tContent extends Component {
                     // do sth
             }); 
         }
+        Actions.pop();
     }
 
     render() {

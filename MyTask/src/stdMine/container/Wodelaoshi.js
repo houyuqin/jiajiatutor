@@ -47,6 +47,37 @@ export default class Wodelaoshi extends Component {
             })  
         }) 
     }
+    componentDidUpdate(){
+        AsyncStorage.getItem('std')
+        .then((res)=>{
+            this.setState({
+                loginstd:JSON.parse(res)
+            })
+            fetch(`http://148.70.183.184:8000/selecttea/${this.state.loginstd}`)
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({ data1: res.data });
+                this.state.data1.forEach((val,index)=>{
+                    num[index]=val.teaphone
+                    return num
+                })
+                let filterarr = num.filter((value,index) => {
+                    return num.indexOf(value) === index
+                })
+                filterarr.forEach((val,_idx)=>{
+                    fetch(`http://148.70.183.184:8006/teamine/${val}`)
+                        .then((res) => res.json())
+                        .then((res) => {
+                            res.data.forEach((val,_idx)=>{   
+                                this.setState({
+                                    data:[...this.state.data,val]
+                                })   
+                            })
+                        })
+                })
+            })  
+        }) 
+    }
     deleteshipin=(idx)=>{
         AsyncStorage.getItem('std')
         .then((res)=>{
@@ -75,7 +106,7 @@ export default class Wodelaoshi extends Component {
                 {
                     this.state.data.map((item)=>(
                         <View style={styles.listcontent} key={item.wphonenumber}>
-                            <Image style={{width:100*s,height:110*s,marginLeft:10*s}} source={item.teatouxiang}/>
+                            <Image style={{width:100*s,height:110*s,marginLeft:10*s}} source={require('../../../assets/wjy/img/111.jpg')}/>
                             <View>
                                 <View style={{flexDirection:'row',marginLeft:20*s}}>
                                     <Text style={{fontSize:19,color:'black'}}>{item.wusername}</Text>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, Dimensions,AsyncStorage, ToastAndroid, StyleSheet, ScrollView} from 'react-native'
 import { Tabs } from '@ant-design/react-native';
+import { Actions } from 'react-native-router-flux';
 const wtabs = [
     { title: '未支付' },
     { title: '已支付' },
@@ -17,6 +18,24 @@ export default class Wodedingdan extends Component {
         }
     }
     componentDidMount(){ 
+        AsyncStorage.getItem('std')
+        .then((res)=>{
+            this.setState({
+                loginstd:JSON.parse(res)
+            })
+            fetch(`http://148.70.183.184:8000/tobuy/${this.state.loginstd}`)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({data:res.data})
+                })
+            fetch(`http://148.70.183.184:8000/bought/${this.state.loginstd}`)
+                .then((res) => res.json())
+                .then((res) => {
+                    this.setState({data1:res.data})
+                })
+        })  
+    }
+    componentDidUpdate(){ 
         AsyncStorage.getItem('std')
         .then((res)=>{
             this.setState({
@@ -67,6 +86,7 @@ export default class Wodedingdan extends Component {
                                     <Text>价格：{'￥'+item.price}</Text>
                                     <Text>订单时间：{item.time}</Text>
                                     <TouchableOpacity onPress={()=>this.del(item.time)} style={{marginLeft:500*s,marginTop:-85*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text  style={{fontSize:17,color:'white'}}>删除</Text></TouchableOpacity>
+                                    <TouchableOpacity onPress={Actions.buy} style={{marginLeft:500*s,width:80*s,alignItems:'center',backgroundColor:'#708090',borderRadius:10*s}}><Text>去支付</Text></TouchableOpacity>
                                 </View>  
                             ))
                         }
