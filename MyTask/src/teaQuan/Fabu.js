@@ -188,19 +188,7 @@ export default class Fabu extends Component {
                 }
                 
             })
-        AsyncStorage.getItem('weizhifabutea')
-            .then((value)=>{
-                if (value == '1') {
-                    this.setState({
-                        weizhi:''
-                    })
-                }else if(value == '2'){
-                    this.setState({
-                        weizhi:'xianshi'
-                    })
-                }
-                
-            })
+    
     }
     componentDidUpdate(){
         AsyncStorage.getItem('dongtaifabutea')
@@ -236,19 +224,7 @@ export default class Fabu extends Component {
                 }
                 
             })
-        AsyncStorage.getItem('weizhifabutea')
-            .then((value)=>{
-                if (value == '1') {
-                    this.setState({
-                        weizhi:''
-                    })
-                }else if(value == '2'){
-                    this.setState({
-                        weizhi:'xianshi'
-                    })
-                }
-                
-            })
+      
     }
     fabu = ()=>{ 
         if (this.state.content == '') {
@@ -326,16 +302,7 @@ export default class Fabu extends Component {
                             </View>
                         </View>
                         <View style={{width:'95%',backgroundColor:'white',borderBottomLeftRadius:20*s,borderBottomRightRadius:20*s}}>
-                            <View style={styles.listontent}>
-                                <View style={{flexDirection:'row'}}>
-                                    <Icon style={{color:'#708090',padding:3*s}} name='environment'/> 
-                                    <Text style={{fontSize:18}}>地点:</Text>
-                                </View>
-                                <View style={{flexDirection:'row'}}>
-                                    <Text style={{fontSize:17,color:'gray'}}>{this.state.weizhi}</Text>
-                                    <Icon name='right' onPress={()=>Actions.twweizhi()}/>
-                                </View>
-                            </View>
+                           
                             <View style={styles.listontent}>
                                 <View style={{flexDirection:'row'}}>
                                     <Icon style={{color:'#708090',padding:3*s}} name='user'/> 

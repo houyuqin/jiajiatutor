@@ -60,7 +60,6 @@ import teaFabu from './src/teaQuan/Fabu';
 import SwiperPage0 from './src/common/SwiperPage0';
 import tWquanxian from './src/teaQuan/quanxian'
 import tWxinqing from './src/teaQuan/wxinqing'
-import tWweizhi from './src/teaQuan/wweizhi'
 
 
 import tHome from './src/teaHome/tHome';
@@ -74,7 +73,6 @@ import stuQuan from './src/stuQuan/Quan';
 import stuFabu from './src/stuQuan/Fabu';
 import sWquanxian from './src/stuQuan/quanxian'
 import sWxinqing from './src/stuQuan/wxinqing'
-import sWweizhi from './src/stuQuan/wweizhi'
 import stuPinglun from './src/stuQuan/Pinglun'
 import teaPinglun from './src/teaQuan/Pinglun'
 import Fabuguo from './src/stdMine/container/Fabuguo';
@@ -262,12 +260,7 @@ const App = () => {
 										}
 										component={stuFabu}
 									></Scene>
-									<Scene key='swweizhi'
-										title='位置'
-										hideTabBar
-										hideNavBar
-										component={sWweizhi}
-									></Scene>
+								
 									<Scene key='swxinqing'
 										title='心情'
 										hideTabBar
@@ -741,12 +734,7 @@ const App = () => {
 										}
 										component={teaFabu}
 									></Scene>
-									<Scene key='twweizhi'
-										title='位置'
-										hideTabBar
-										hideNavBar
-										component={tWweizhi}
-									></Scene>
+								
 									<Scene key='twxinqing'
 										title='心情'
 										hideTabBar
