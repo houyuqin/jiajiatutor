@@ -42,14 +42,14 @@ export default class StdMine extends Component {
             })
         })
     }
-    componentDidUpdate(){
-        AsyncStorage.getItem('url')
-        .then((res)=>{
-            this.setState({
-                imageUrl:JSON.parse(res)
-            })
-        })
-    }
+    // componentDidUpdate(){
+    //     AsyncStorage.getItem('url')
+    //     .then((res)=>{
+    //         this.setState({
+    //             imageUrl:JSON.parse(res)
+    //         })
+    //     })
+    // }
     wexitapp = ()=>{
         Actions.login();
         AsyncStorage.removeItem('url');

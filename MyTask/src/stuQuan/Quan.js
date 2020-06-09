@@ -48,7 +48,7 @@ export default class Quan extends Component {
             loginstd: '',
             data1: '',
             wusername: '',
-            quanzitupian:'',
+            quanzitupian:[],
         }
     }
 
@@ -193,11 +193,18 @@ export default class Quan extends Component {
         });
 
         
+      
         AsyncStorage.getItem('wujinyaquanzitupian')
             .then((res)=>{
-                this.setState({
-                    quanzitupian:JSON.parse(res)
-                })
+                if (res == null) {
+                    this.setState({
+                        quanzitupian:[{uri:'https://www.baidu.com/link?url=s41Db_Tkv693mDt8sM8K76pOHt11ph8z1Uti71fTNOc533zng826AJZOYQwEzNlNRm9UQVzgE1EdQkHuE8fpahyAPBuks52wrsOtUh4Hl5sghqmN9VGy3DdKcpOuhe81nCyT7omg8pxkpREPVhHKYNt3IDSedGzeMLkF-D0seP5_sTtbTQsP5YRvueb2wVfCbHQqaLR5fvxqe2tBSMjM9hCaopiaDT2oEEKIyqmsF8Mu313XZ9YhD6HsHrNGThtcQMplwc6_lIBpcrrhWpedCePrJCdOWWZ1X9xW3tIpHpjY1yyVDtRxpPFFzPT0uGzx8fZGEgzLRx3EEZvNbdFDV65ZhrL0NmGU7zDK2hllvR7Vi1RT-yaJ72apWem2O5GQbeeOnfQPIWF4-jMcz88dlFhCE3HwIY4vs95hZSvo6Mde3UWnUWosNYFPjU2mlRuMfCk1LHp3o2BBp23hMnHJmaR76P8eDR-fr864Um9vpwhmxutwGryHyHDRcT7CD67tNCMvAGwy6qWezdm4MoDUFamh0K83eUMResXcKGIYpUm9E6xMvCUn8yW5Q4UI68S6Q2j7nsR-6BHf16jakaaJRzcfoSvx2uJlViDqlrcMYRa&timg=https%3A%2F%2Fss0.bdstatic.com%2F94oJfD_bAAcT8t7mm9GUKT-xh_%2Ftimg%3Fimage%26quality%3D100%26size%3Db4000_4000%26sec%3D1591690037%26di%3D7a58c70d4e301519ba9c614c4dc330ab%26src%3Dhttp%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg&click_t=1591690040185&s_info=1349_576&wd=&eqid=f3d8fa6c00004e24000000025edf4335'}]
+                    })
+                }else{
+                    this.setState({
+                        quanzitupian:JSON.parse(res)
+                    })
+                }
             })
                   
     }
@@ -214,9 +221,15 @@ export default class Quan extends Component {
         })
         AsyncStorage.getItem('wujinyaquanzitupian')
         .then((res)=>{
-            this.setState({
-                quanzitupian:JSON.parse(res)
-            })
+            if (res == null) {
+                this.setState({
+                    quanzitupian:[{uri:'https://www.baidu.com/link?url=s41Db_Tkv693mDt8sM8K76pOHt11ph8z1Uti71fTNOc533zng826AJZOYQwEzNlNRm9UQVzgE1EdQkHuE8fpahyAPBuks52wrsOtUh4Hl5sghqmN9VGy3DdKcpOuhe81nCyT7omg8pxkpREPVhHKYNt3IDSedGzeMLkF-D0seP5_sTtbTQsP5YRvueb2wVfCbHQqaLR5fvxqe2tBSMjM9hCaopiaDT2oEEKIyqmsF8Mu313XZ9YhD6HsHrNGThtcQMplwc6_lIBpcrrhWpedCePrJCdOWWZ1X9xW3tIpHpjY1yyVDtRxpPFFzPT0uGzx8fZGEgzLRx3EEZvNbdFDV65ZhrL0NmGU7zDK2hllvR7Vi1RT-yaJ72apWem2O5GQbeeOnfQPIWF4-jMcz88dlFhCE3HwIY4vs95hZSvo6Mde3UWnUWosNYFPjU2mlRuMfCk1LHp3o2BBp23hMnHJmaR76P8eDR-fr864Um9vpwhmxutwGryHyHDRcT7CD67tNCMvAGwy6qWezdm4MoDUFamh0K83eUMResXcKGIYpUm9E6xMvCUn8yW5Q4UI68S6Q2j7nsR-6BHf16jakaaJRzcfoSvx2uJlViDqlrcMYRa&timg=https%3A%2F%2Fss0.bdstatic.com%2F94oJfD_bAAcT8t7mm9GUKT-xh_%2Ftimg%3Fimage%26quality%3D100%26size%3Db4000_4000%26sec%3D1591690037%26di%3D7a58c70d4e301519ba9c614c4dc330ab%26src%3Dhttp%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg&click_t=1591690040185&s_info=1349_576&wd=&eqid=f3d8fa6c00004e24000000025edf4335'}]
+                })
+            }else{
+                this.setState({
+                    quanzitupian:JSON.parse(res)
+                })
+            }
         })
 
     }

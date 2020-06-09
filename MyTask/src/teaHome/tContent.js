@@ -33,10 +33,10 @@ export default class tContent extends Component {
                       <View><Text style={styles.hfont}>具体要求：{this.state.data.request}</Text></View>
                   </View></View>
                <View style={{flexDirection:'row'}}>
-                   <View style={{width:'40%'}}></View>
+                   <View style={{width:'65%'}}></View>
                    {/* <TouchableOpacity onPress={()=>Actions.pop()} style={[styles.tab,{marginLeft:50*s}]}><Text style={styles.font}>返回</Text></TouchableOpacity> */}
                    <TouchableOpacity onPress={()=>Actions.concat()} style={[styles.tab,{marginLeft:40*s}]}><Text style={styles.font}>联系我</Text></TouchableOpacity>
-                   <TouchableOpacity style={[styles.tab,{marginLeft:20*s,width:160*s}]}><Text style={styles.font}>投递简历</Text></TouchableOpacity>
+                   {/* <TouchableOpacity style={[styles.tab,{marginLeft:20*s,width:160*s}]}><Text style={styles.font}>投递简历</Text></TouchableOpacity> */}
                </View>
             </View>
         )
