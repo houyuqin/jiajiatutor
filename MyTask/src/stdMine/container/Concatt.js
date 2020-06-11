@@ -75,7 +75,7 @@ export default class Concat extends Component {
                             content:nn, 
                             hh:1 
                         })
-                        
+                        console.log("wujinya",res);  
                         console.log("我是content",this.state.content);  
                     }
                 }
@@ -189,7 +189,7 @@ export default class Concat extends Component {
                     <TouchableOpacity onPress={()=>this.it()}>
                         <Image style={{width:35*s,height:35*s,marginTop:20*s,marginLeft:20*s}} source={require('../../../assets/cq/zuo.png')}/>
                     </TouchableOpacity>
-                    <Text style={{fontSize:26*s,marginLeft:'30%',marginTop:20*s,color:'white'}}>与{this.state.data}的对话</Text>
+                    <Text style={{fontSize:26*s,marginLeft:'20%',marginTop:20*s,color:'white'}}>与{this.state.data}的对话</Text>
                 </View>
                 <View style={{width:'100%',height:'87.8%',backgroundColor:'#e0e0e0'}}>
                     {/* <Text
@@ -265,7 +265,8 @@ export default class Concat extends Component {
                             borderRadius:14*s,
                             elevation: 2,
                         }}
-                        placeholder="请输入内容"
+                        placeholder="请输入内容"z
+                        placeholderTextColor='gray'
                         onChangeText={this.content}
                     />
                     <Image style={{width:40*s,height:40*s,marginLeft:5*s,marginTop:11*s}} source={require('../../../assets/cq/jia.png')}/>
