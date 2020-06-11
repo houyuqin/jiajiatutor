@@ -35,6 +35,23 @@ export default class Five extends Component {
                 }
             })
     }
+    selecttea=(phone)=>{
+        let a={stdphone:this.state.username,teaphone:phone};
+        fetch("http://148.70.183.184:8000/selectclass",{
+            method:"POST",
+            headers:{
+                'Content-Type': 'text/plain',
+            },
+            body:JSON.stringify(a)
+        }).then((res)=>{ 
+            if(res.status === 200){
+                alert('选择教师成功!');
+                return res.json();
+            }else{
+                alert('您已选择该教师！');
+            }
+        });
+    }
     render() {
         return (
             <View>
