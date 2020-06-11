@@ -23,6 +23,8 @@ import Player0 from './src/home/Player0';
 import Question from './src/home/Question';
 import Vedio from './src/home/Vedio';
 import Buy from './src/home/Buy';
+import Five from './src/home/Five'
+
 import Study from './src/stdStudy/container/Study'
 import jihua from './src/stdStudy/container/Jihua'
 import Homework from './src/stdStudy/container/Homework'
@@ -67,6 +69,7 @@ import tContent from './src/teaHome/tContent';
 import Zhoumo from './src/teaHome/Zhoumu'
 import Fujin from './src/teaHome/Fujin'
 import Concat from './src/teaHome/Concat';
+import tFive from './src/teaHome/Five'
 import Searchtea from './src/stdMine/container/Searchtea';
 
 import stuQuan from './src/stuQuan/Quan';
@@ -130,7 +133,7 @@ const App = () => {
 								{/* Home栏 */}
 								<Scene key='homePage'
 									title='首页'
-									hideNavBar
+									// hideNavBar
 									icon={
 										({ focused }) => <Image
 											source={focused ? require('./assets/cq/cshou1.png') : require('./assets/cq/cshou.png')}
@@ -139,14 +142,25 @@ const App = () => {
 										/>
 									}
 								>
-									<Scene key='home' component={Home} />
-									<Scene key='ad' hideTabBar component={Ad} />
-									<Scene key='course' hideTabBar component={Course} />
-									<Scene key='question' hideTabBar component={Question} />
-									<Scene key='goodtea' hideTabBar component={GoodTea} />
-									<Scene key='buy' hideTabBar component={Buy} />
-									<Scene key='player' hideTabBar component={Player0} />
-									<Scene key='vedio' hideTabBar component={Vedio} />
+									<Scene key='home' hideNavBar component={Home} />
+									<Scene key='ad' hideNavBar hideTabBar component={Ad} />
+									<Scene key='course' hideNavBar hideTabBar component={Course} />
+									<Scene key='question' hideNavBar hideTabBar component={Question} />
+									<Scene key='goodtea' hideNavBar hideTabBar component={GoodTea} />
+									<Scene key='buy' hideNavBar hideTabBar component={Buy} />
+									<Scene key='player' hideNavBar hideTabBar component={Player0} />
+									<Scene key='vedio' hideNavBar hideTabBar component={Vedio} />
+									<Scene key='five'
+										title='五星教师'
+										hideTabBar
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={Five}
+										renderLeftButton={
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
+										}
+									>
+									</Scene>
 								</Scene>
 								{/* 学习 */}
 								<Scene
@@ -550,6 +564,17 @@ const App = () => {
 											<View></View>
 										}
 										component={tHome} />
+									<Scene key='tfive'
+										title='五星教师'
+										hideTabBar
+										titleStyle={{ color: 'white', flex: 1, textAlign: 'center', marginLeft: -30 }}
+										navigationBarStyle={{ backgroundColor: '#708090' }}
+										component={tFive} 
+										renderLeftButton={
+											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
+										}
+										
+									></Scene>
 									<Scene key='tfujin'
 										title='附近家教'
 										hideTabBar
@@ -559,9 +584,7 @@ const App = () => {
 											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
 										}
 										component={Fujin}
-										renderLeftButton={
-											<View style={{ marginLeft: 15 * s }}><Icon name="left" onPress={Actions.pop} /></View>
-										}
+										
 									/>
 									<Scene key='tzhoumo'
 										title='周末家教'

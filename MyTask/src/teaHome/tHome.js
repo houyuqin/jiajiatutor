@@ -83,10 +83,10 @@ export default class tHome extends Component {
                                 <View><Text style={styles.font}>优秀视频</Text></View>
                             </View>
                             <View style={{ width: '25%' }}>
-                                <TouchableOpacity onPress={() => Actions.goodtea()} style={[styles.box2, { backgroundColor: '#FF0000' }]}>
+                                <TouchableOpacity onPress={() => Actions.tfive()} style={[styles.box2, { backgroundColor: '#FF0000' }]}>
                                     <Image style={styles.img} source={require('../../assets/zx/tother.png')}></Image>
                                 </TouchableOpacity>
-                                <View><Text style={styles.font}>优秀教师</Text></View>
+                                <View><Text style={styles.font}>五星教师</Text></View>
                             </View>
                         </View>
                     </View>

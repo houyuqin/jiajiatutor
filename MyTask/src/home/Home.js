@@ -17,6 +17,7 @@ const {width,scale} = Dimensions.get('window');
 const s = width / 640;
 const tabs = [
     {title:'教师推荐'},
+    {title:'五星教师'},
     {title:'视频推荐'}
 ]
 export default class Home extends Component {
@@ -179,7 +180,6 @@ export default class Home extends Component {
                         <Text>美术</Text>
                     </TouchableOpacity> 
                 </View>
-
                 {/* 广告 */}
                 <TouchableOpacity onPress={Actions.ad}>
                     <Image source={require('../../assets/hyq/add.jpg')} style={styles.ad} />
@@ -203,6 +203,23 @@ export default class Home extends Component {
                             </TouchableOpacity>
                             {/* <Button title='了解更多>>>' onPress={Actions.goodtea} /> */}
                         </View>
+
+                        <View style={styles.ooo}>
+                            <View style={{flexDirection:'row'}}>
+                            <Image style={styles.tea} source={require('../../assets/hyq/000.png')}/>   
+                            <View style={{paddingTop:50*s}}>
+                                <Text style={styles.tch}>姓名：陈永达</Text>
+                                <Text style={styles.tch}>年龄：20</Text>
+                                <Text style={styles.tch}>毕业院校：河北师范大学</Text>
+                                <Text style={styles.tch}>目前职业：化学教师</Text>
+                            </View>
+                            </View>
+                            <TouchableOpacity onPress={Actions.five}  style={{backgroundColor:'white',height:47*s,justifyContent:'center',alignItems:'center'}}>
+                                <Text style={{color:'#708090'}}>了解更多>>></Text>
+                            </TouchableOpacity>
+                            {/* <Button title='了解更多>>>' onPress={Actions.goodtea} /> */}
+                        </View>
+                        
                         <View style={styles.ooo}>
                             <Image style={styles.ved} source={require('../../assets/hyq/vedio00.png')}/>
                             <TouchableOpacity onPress={Actions.vedio} style={{backgroundColor:'white',height:47*s,justifyContent:'center',alignItems:'center'}}>
